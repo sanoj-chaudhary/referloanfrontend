@@ -1,0 +1,580 @@
+/* ++++++++++++++++ For Mobile ++++++++++++++++ */
+
+@media (min-width:320px) and (max-width:640px) {
+    .heroSection {
+        min-height: auto;
+        padding: 30px 0;
+    }
+    .heroSection .heroContent .topArea .left h1 {
+        font-size: 25px;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .header-form-area {
+        margin-top: 28px;
+    }
+    .heroSection .heroContent .topArea .img-box{
+        display: none;
+    }
+
+    .header-form-area ul.nav-tabs li button.nav-link {
+        font-weight: 600;
+        font-size: 13px;
+        padding: 9px 13px;
+        border-radius: 6px 6px 0 0;
+    }
+
+    .header-form-area .loan-form-area {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        column-gap: 0;
+    }
+    .header-form-area .loanType {
+        flex: 0 0 48%;
+        margin-bottom: 11px;
+    }
+    .header-form-area .tab-content {
+        height: auto;
+    }
+    .header-form-area .search-button {
+        width: 100%;
+    }
+    
+    .cardAndLoan_section .flip-card-back{
+        display: none;
+    }
+
+    .cardAndLoan_section .flip-card:hover .flip-card-inner, .cardAndLoan_section .flip-card:focus .flip-card-inner {
+        transform: none;
+    }
+    .cardAndLoan_section .flip-card {
+        max-width: 50%;
+        height: 110px;
+    }
+    .cardAndLoan_section .flip-card-front .icon-box img {
+        height: 35px;
+    }
+    .cardAndLoan_section .flip-card-front .icon-box {
+        height: 52px!important;
+        width: 52px!important;
+    }
+    .cardAndLoan_section .flip-card:nth-child(even) .flip-card-front, .cardAndLoan_section .second-row .flip-card:nth-child(odd) .flip-card-front {
+        background: #ffffff;
+    }
+
+    .financiallyArea .item_pnl {
+        width: 100%;
+        display: flex;
+        padding-top: 25px;
+        overflow: scroll;
+        flex-wrap: wrap;
+    }
+    .financiallyArea .item_col {
+        flex: 0 0 50%;
+        padding: 12px;
+        background: #fff!important;
+    }
+    .financiallyArea .item_col p {
+        color: #333;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .financiallyArea .item_col .item-img {
+        height: 50px;
+    }
+    .financiallyArea .item_col .item-img img{
+        height: 100%;
+    }
+    .referSection {
+        width: 100%;
+        background-color: #eff7fd;
+        margin: 35px 0;
+        padding: 30px 5px 30px;
+    }
+
+    .referSection .feature_area {
+        flex-direction: column;
+    }
+    .referSection .feature_area .feature_box .icon-box {
+        width: 80px;
+    }
+    .referSection .feature_area .feature_box {
+        flex: 1;
+        display: flex;
+        margin-bottom: 10px;
+    }
+    .referSection .feature_area .feature_box .content_box {
+        padding: 12px;
+    }
+    .referSection .feature_area .feature_box .icon-box {
+        width: 70px;
+        height: 70px;
+        margin: 10px 0 0px 10px;
+        border-radius: 6px;
+        box-sizing: border-box;
+    }
+    .referSection .feature_area .feature_box .content_box{
+        flex: 1;
+    }
+    .referSection .feature_area .feature_box .icon-box img {
+        height: 40px;
+        width: auto;
+    }
+
+    .aboutSection {
+        padding: 35px 0;
+        flex-direction: column;
+    }
+    .aboutCol .inner {
+        max-width: 87%;
+    }
+    .aboutCol .inner img {
+        max-height: 130px;
+        margin-top: -60px;
+    }
+
+    .workCol .inner {
+        max-width: 87%;
+        width: 100%;
+        float: left;
+        margin-left: 26px;
+        position: relative;
+        height: 100%;
+        margin-top: 50px;
+    }
+
+    .workCol .inner img {
+        max-height: 150px;
+        margin-top: -47px;
+    }
+
+    .voxNews li{
+        width: 175px;
+        height: 70px;
+    }
+
+    #news_slide{
+        height: 125px;
+    }
+    .vdoArea li:first-child{
+        display: block;
+    }
+       .vdoArea li{
+        display: none;
+    }
+
+    .testimaolSlider{
+        display: none;
+    }
+    .testimaolSlider ul{
+        overflow: scroll;
+    }
+    .testimaolSlider li{
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .getApp{
+        height: auto;
+        margin-top: 0;
+    }
+
+    .getApp .left {
+        max-width: 100%;
+        overflow: hidden;
+        padding: 30px;
+        font-size: 32px;
+    }  
+    .getApp .right {
+       display: none;
+    }
+    .buttonArea img {
+        height: 40px;
+    }
+    .getApp .left::after,  .getApp .left::before{
+        display: none;
+    }
+
+    .footerNav {
+        flex-wrap: wrap;
+    }
+    .footerNav ul {
+        max-width: 100%;
+        padding: 20px 10px;
+        flex: auto;
+    }
+    .footerContentArea {
+        flex-direction: column;
+    }
+    .footerContentArea .subscribeArea {
+        padding: 35px 10px 0;
+    }
+    .fot-top-bar {
+        height: auto;
+    }
+    .fot-top-bar .innerBar {
+        flex-direction: column-reverse;
+    }
+    .fot-top-bar .socialArea {
+        column-gap: 5px;
+        margin: 0;
+    }
+    .fot-top-bar .socialArea ul.socialIcon li a {
+        padding: 0 12px;
+        font-size: 21px;
+    }
+    .fot-top-bar .socialArea .emailBox {
+        padding: 0 10px;
+        font-size: 14px;
+        flex: 1;
+        min-height: 57px;
+    }
+    .fot-top-bar .socialArea .emailBox i {
+        font-size: 20px;
+        margin-right: 5px;
+    }
+    .footerMenu-Btn {
+        border-width: 1px 1px 0 1px;
+        padding: 13px 25px;
+        font-size: 15px;
+        width: 100%;
+        text-align: left;
+    }
+    .footerMenu-Btn i {
+        margin-left: 10px;
+        float: right;
+        margin-top: 4px;
+    }
+    .footer-card-area {
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    /* inner Pages css */
+
+    .content_with_img_section {
+        flex-direction: column;
+    }
+    .content_with_img_section .content_box {
+        width: 100%;
+    }
+    .content_with_img_section .img_box{
+        display: none;
+    }
+    .content_section , .content_with_img_section{
+        padding: 15px 0;
+    }
+    table.table_cards_Table{
+        margin-top: 15px;
+    }
+
+    .content_section h2 {
+        width: 100%;
+        font-size: 21px;
+    }
+
+    .city__Section{
+        padding: 20px 0;
+    }
+
+    .city__Section h2 {
+        font-size: 22px;
+    }
+    .city__Section p {
+        font-size: 18px;
+    }
+
+    .city__Section .city_container .inner_box {
+        width: 33%;
+    }
+
+    .city__Section .city_container .city_box .icon-box img {
+        height: 50px;
+        width: auto;
+    }
+
+    .city__Section .city_container .city_box {
+        height: 110px;
+    }
+
+    .city__Section .city_container .city_box .icon-title {
+        font-size: 11px;
+    }
+
+    .detail_card_Area {
+        flex-direction: column;
+    }
+
+    .detail_card_Area .detail_card {
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .detail_card_Area .detail_card h2 {
+        font-size: 24px;
+    }
+
+    .detail_card_Area .detail_card .img_pnl img {
+        height: 220px;
+    }
+
+    .detail_card_Area {
+        row-gap: 20px;
+    }
+    .faqSetion .faq_row {
+        flex-direction: column-reverse;
+    }
+
+    .faqSetion .faqAccordion {
+        width: 100%;
+    }
+
+    .faqSetion .faqImg {
+        width: 100%;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .faqSetion .faqImg img {
+        width: auto;
+        height: 110px;
+        margin-top: -20px;
+    }
+
+    #loanForm_container .form_cont , #loanForm_container .fld_area{
+        flex-direction: column;
+    }
+
+    #loanForm_container .detail_area {
+        margin-top: 20px;
+    }
+    .card_content_pnl {
+        row-gap: 35px;
+    }
+    .card_content_pnl .cnt_pnl .content_box {
+        padding: 20px;
+    }
+    .card_content_pnl .cnt_pnl .content_box h2 {
+        font-size: 21px;
+    }
+
+    .card_content_pnl .cnt_pnl {
+        flex-direction: column;
+    }
+    .card_content_pnl .cnt_pnl .mobile_frame, .card_content_pnl .cnt_pnl:nth-child(even) .mobile_frame {
+background-image: none;
+        padding: 20px 10px;
+        margin: 0;
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        box-sizing: border-box;
+        align-items: flex-end;
+    }
+    .card_content_pnl .cnt_pnl:nth-child(even) {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .innerHeader .innerTab_head .nav-tabs {
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        max-width: max-content;
+        overflow: scroll;
+    }
+
+    .apply-card-bg .stepRow ul , .reward_Area{
+        flex-direction: column;
+        row-gap: 10px;
+    }
+
+    .apply_loan_form_area .innerContainer .formPnl .form_row {
+        flex-direction: column;
+        row-gap: 10px;
+    }
+
+    .apply_loan_form_area {
+        padding: 20px 0;
+    }
+
+    .apply_loan_form_area .innerContainer>* {
+        width: 100%!important;
+    }
+
+    .apply_loan_form_area .innerContainer {
+        flex-direction: column;
+    }
+
+    .apply_loan_form_area .innerContainer .formPnl {
+        padding: 10px 0 10px;
+    }
+    .date_MainPnl input {
+        width: 100%;
+    }
+
+    .apply_loan_form_area .innerContainer {
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
+    .apply_loan_form_area .innerContainer:last-child {
+        margin-bottom: 0px;
+    }
+
+    .about_container .about_inner {
+        flex-direction: column;
+    }
+     .about_container .about_inner>* {
+        width: 100%!important;
+    }
+
+    .about_container .about_inner .left_col h2 {
+        font-size: 21px;
+        padding-bottom: 15px;
+    }
+    
+    .about_container .about_inner .join_col {
+        margin-top: 20px;
+    }
+    .vision_section .inner_col {
+        padding-bottom: 20px;
+    }
+
+    .vision_section {
+        flex-direction: column;
+    }
+
+    .vision_section .inner_col h2 {
+        font-weight: 500;
+        margin-bottom: 10px;
+        font-size: 21px;
+    }
+
+    .values_section .imgPnl {
+        display: none;
+    }
+
+    .values_section .contentPnl {
+        word-break: break-all;
+        width: 100%;
+    }
+
+    .activities_section h2 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .activities_section h2 {
+        font-size: 18px;
+    }
+
+    .activities_section p {
+        font-size: 19px;
+        font-weight: 400;
+        letter-spacing: 0;
+        padding-top: 7px;
+    }
+
+    .activities_section .activities_row {
+        flex-direction: column;
+        padding: 25px 0 0;
+    }
+    .activities_section .activities_row>* {
+       width: 100%!important;
+    }
+
+    .activities_section .activities_row .activities_col h2 {
+        font-size: 16px;
+    }
+    .activities_section .activities_row .activities_col h2 span {
+        max-width: 40px;
+        width: 100%;
+        height: 40px;
+        font-size: 17px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 42px;
+        margin-right: 10px;
+    }
+    .activities_section .activities_row .activities_col ul {
+        margin: 10px  0 0 67px;
+    }
+
+    .activities_section .activities_row .activities_col li {
+        font-size: 14px;
+        padding: 2px 0;
+    }
+
+    .activities_section .activities_row .activities_col p {
+        font-size: 16px;
+        padding: 10px 0 0 50px;
+    }
+
+    .activities_section .activities_row .activities_col {
+        padding-bottom: 30px;
+    }
+
+    .activities_section .activities_row .activities_col:last-child{
+        padding-bottom:0!important
+    }
+
+    .benefits_area h2 {
+        font-size: 25px;
+    }
+
+    .benefits_area .benefitBox {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .benefitBox .imgPnl {
+        height: 230px;
+    }
+
+    .benefits_area .benefitBox .contentPnl {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .contact_container .contact_inner h2 {
+        width: 100%;
+        font-size: 24px;
+    }
+
+    .contactPnl {
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    .contactPnl .topSection {
+        width: 100%;
+        height: 115px;
+    } 
+
+    .contact_map_area {
+        row-gap: 20px;
+        flex-direction: column;
+    }  
+     .contact_map_area > *{
+        width: 100%!important;
+    }  
+}
+
+
+/* ++++++++++++++++ For ipad ++++++++++++++++ */
+
+@media (min-width:992px) and (max-width:1440px) {
+
+}
+
+
+/* ++++++++++++++++ For ipad ++++++++++++++++ */
+
+@media (max-width:992px) {
+  
+}
+
+@media (min-width:768px) and (max-width:1200px) {
+  
+}
