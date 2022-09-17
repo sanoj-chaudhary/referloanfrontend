@@ -1,0 +1,293 @@
+
+* {box-sizing: border-box;}
+header{
+    padding: 0px 0px;
+    margin: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: #ffff;
+    box-shadow: rgb(0 0 0 / 5%) 0px 1px 2px 0px;
+    flex-direction: column;
+    min-height: 75px;
+    height: 100%;
+    justify-content: center;
+}
+.navBarContainer {
+    padding: 0;
+    width: 100%;
+}
+
+.navContainer  .navbar-toggler {
+    color: rgba(0,0,0,.55);
+    border-color: rgba(0,0,0,.1);
+    width: 48px;
+    align-items: center;
+    text-align: center;
+    padding: 5px 0;
+}
+.container-fluid.navContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+#navbarSupportedContent {
+    flex: 1;
+    width: auto;
+    margin: auto;
+    display: flex!important;
+    padding: 0 40px;
+    height: 75px;
+}
+#navbarSupportedContent ul {
+    height: 100%;
+}
+div#navbarSupportedContent>ul>li>a {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(28 28 28 / 90%);
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    height: 100%;   
+}
+
+.logoSection {
+    width: 184px;
+    box-sizing: inherit;
+    height: auto;
+}
+.logoSection img{
+    height: 100%;
+    box-sizing: inherit;
+    max-width: max-content;
+    width: 100%;
+}
+header .customContainer {
+    height: 100%;
+    /* max-width: 1200px; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header .signInSection a {
+    background-color: var(--primaryColor);
+    color: #fff;
+    font-size: 17px;
+    width: 100%;
+    border: none;
+    height: 100%;
+    border-radius: 4px;
+    height: 47px;
+    padding: 11px 14px;
+}
+nav.navbar.navbar-expand-lg.navbar-light.navBarContainer {
+    padding: 0;
+    height: 100%;
+}
+.nav-item.dropdown:hover .flyout_Menu_container{
+ display: block;
+}
+.flyout_Menu_container {
+    height: 100%;
+    margin: auto;
+    width: 850px;
+    position: absolute;
+    top: 75px;
+    display: none;
+}
+
+.flyout_Menu_container ul {
+    border: 1px solid #e9e9e9;
+    border-top: 0;
+}
+
+.flyout_Menu_container .subMenu_Container{
+    background: #fff;
+    padding: 0;
+}
+
+.flyout_Menu_container .subMenu_Container li {
+    width: 100%;
+    color: #fff;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+
+}
+.flyout_Menu_container .subMenu_Container li span {
+    width: 30px;
+    height: 30px;
+    background: #a3e9e2;
+    float: right;
+    margin-right: -9px;
+    margin-top: -4px;
+    text-align: center;
+    padding: 0;
+    line-height: 30px;
+}
+.flyout_Menu_container ul {
+    min-height: 510px;
+}
+.flyout_Menu_container > ul {
+    width:300px;
+    background-color:#224490;
+    position:relative;
+    overflow:visible;
+    
+}
+.flyout_Menu_container > ul > li, .flyout_Menu_container > ul > li > ul li {
+    display: block;
+    height: fit-content;
+}
+.flyout_Menu_container  ul  li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 7px 12px 7px 12px;
+    border-top: 1px solid #e9e9e9;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.flyout_Menu_container > ul > li:hover {
+    background-color:#e4f1ff;
+}
+
+.flyout_Menu_container > ul > li > ul {
+    display:none;
+    position:absolute;
+    right:-300px;
+    top:0;
+    width:300px;
+    background: #fff;
+    padding: 0;
+}
+.flyout_Menu_container > ul > li:hover > ul {
+    display:block;
+    padding: 0;
+}
+
+.flyout_Menu_container  li:hover > ul {
+    display: block;
+    padding: 0;
+    height: 100%;
+}
+.flyout_Menu_container > ul > li > ul >li:hover {
+    background-color:#e4f1ff;
+}
+.flyout_Menu_container > ul > li > ul > li > ul {
+    display:none;
+    position:absolute;
+    right:-300px;
+    top:0;
+    width:300px;
+    background: #fff;
+    padding: 0;
+}
+.flyout_Menu_container > ul > li > ul > li:hover ul {
+    display:block;
+    margin: 0;
+    padding: 0;
+}
+.flyout_Menu_container > ul > li > ul > li > ul > li:hover {
+    background-color:#e4f1ff;
+}
+.flyout_Menu_container > ul > li > ul > li ul li ul li {
+    border-bottom:1px dotted #fff;
+    padding:20px;
+}
+
+
+
+    
+/* ++++++++++++++++ For Mobile ++++++++++++++++ */
+
+@media (min-width:320px) and (max-width:640px) {
+    #navbarSupportedContent{
+        display: none!important;
+    }  
+    #navbarSupportedContent.navbar-collapse.collapse.show{
+        display: block!important;
+    position: absolute;
+    top: 76px;
+    background: #ffffff;
+    width: 100%;
+    margin: 0;
+    left: 0;
+    padding: 10px 10px 20px;
+            box-shadow: rgb(0 0 0 / 5%) 0px 1px 2px 0px;
+            height: 450px;
+            overflow: scroll;
+    }
+
+    header .signInSection a {
+        background-color: var(--primaryColor);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 10px 9px;
+        border: none;
+        height: 100%;
+        border-radius: 4px;
+    }
+
+    div#navbarSupportedContent>ul>li>a {
+        padding: 5px 15px;
+        justify-content: space-between;
+    }
+
+    div#navbarSupportedContent>ul>li>a {
+        padding: 8px 2px;
+        height: auto;
+    }
+    .flyout_Menu_container {
+        position: relative;
+        top: 0;
+        display: none;
+        width: 100%;
+    }
+    .flyout_Menu_container .subMenu_Container {
+        width: 100%;
+        background: #fffdf8;
+        min-height: auto;
+        border: 1px solid #e9e9e9;
+    }
+    .flyout_Menu_container > ul > li > ul, .flyout_Menu_container > ul > li > ul > li > ul {
+        display: none;
+        position: relative;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: #fff;
+        padding: 0;
+        border: 0;
+    }
+    .flyout_Menu_container > ul > li:hover, .flyout_Menu_container > ul > li > ul >li:hover{
+        background-color: inherit;
+    }
+    .flyout_Menu_container > ul > li:hover > ul {
+        display: block;
+        background: #fff6e8;
+        margin: 10px;
+        max-width: 100%;
+        box-sizing: border-box;
+        width: auto;
+        min-height: auto;
+        border: 1px solid #fbe8d9;
+
+    }
+
+    .flyout_Menu_container ul li a {
+        border-top: 1px solid #ffffff;
+    }
+    .flyout_Menu_container ul {
+        min-height: auto;
+    }
+}
