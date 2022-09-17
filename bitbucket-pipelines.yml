@@ -18,4 +18,4 @@ pipelines:
                 SSH_KEY: $MY_SSH_KEY
                 MODE: "command"
                 PORT: "7822"
-                COMMAND: "cd /www/wwwroot/app.referloan.in/ && ./pull.sh" # path to a script in your repository
+                COMMAND: "cd /www/wwwroot/app.referloan.in/ && ./pull.sh" # path to a script in your repository 
