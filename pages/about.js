@@ -11,7 +11,7 @@ export default function About() {
             <p>
                 When navigating between pages, we want to persist page state (input
                 values, scroll position, etc) for a Single-Page Application (SPA)
-                experience.
+                experience. the faith
             </p>
             <p>
                 This layout pattern will allow for state persistence because the React
