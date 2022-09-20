@@ -44,6 +44,7 @@ export default function Header(children) {
             <link href={ '/css/styles.css' } rel={ 'stylesheet' } />
             <link href={ '/css/menu.css' } rel={ 'stylesheet' } />
             <link href={ '/css/media.css' } rel={ 'stylesheet' } />
+            <link href={ '/css/innerPages.css' } rel={ 'stylesheet' } />
         </Head>
     )
 }

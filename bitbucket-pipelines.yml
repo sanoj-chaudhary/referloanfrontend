@@ -1,0 +1,21 @@
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+
+image: atlassian/default-image:latest
+
+pipelines:
+  branches:
+    develop:
+      - step:
+          deployment: staging
+          script:
+            - pipe: atlassian/ssh-run:0.4.1
+              variables:
+                SSH_USER: "root"
+                SERVER: "103.19.88.158"
+                SSH_KEY: $MY_SSH_KEY
+                MODE: "command"
+                PORT: "7822"
+                COMMAND: "cd /www/wwwroot/app.referloan.in/ && ./pull.sh" # path to a script in your repository 
