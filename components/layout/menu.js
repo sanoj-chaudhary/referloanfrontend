@@ -20,10 +20,6 @@ const Menu = () => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <div className="menuBar"></div>
               <ul className="navbar-nav">
-                <li className="nav-item">
-                  <Link href="/about" target="_blank" className="nav-link" > About Us
-                  </Link>
-                </li>
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
