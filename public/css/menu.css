@@ -61,6 +61,7 @@ div#navbarSupportedContent>ul>li>a {
     width: 184px;
     box-sizing: inherit;
     height: auto;
+    cursor: pointer;
 }
 .logoSection img{
     height: 100%;

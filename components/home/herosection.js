@@ -7,28 +7,33 @@ import Image from 'next/image'
 const herosection = () => {
       return (
             <section className="heroSection">
-                  <div className='container'>
-                        <div className='row'>
-                              <div className='col-sm-6'>
-                                    <h1 className='left'>The easy way to compare and get personal loans</h1>
-                                    <div className='pointwrapper'>
-                                          <Image src={loanwicon} height={25} width={30} alt="" />
-                                          <h3>Loans upto<br /> ₹ 100K available</h3>
-
-                                          <Image src={inserticon} height={25} width={30} alt="" />
-                                          <h3>Lowest<br />interest rates</h3>
-
-                                          <Image src={loantermicon} height={25} width={30} alt="" />
-                                          <h3>Flexible <br /> loan termse</h3>
+                  <div className="container">
+                        <div className="heroContent">
+                              <div className="topArea">
+                                    <div className="left">
+                                          <h1>The easy way to compare and get personal loans</h1>
+                                          <div className="pointsArea">
+                                                <ul>
+                                                      <li>
+                                                            <img src="/images/loan-w-icon.png" alt="" />
+                                                                  <h3>Loans upto<br /> ₹ 100K available</h3>
+                                                      </li>
+                                                      <li>
+                                                            <img src="/images/interst-icon.png" alt="" />
+                                                                  <h3>Lowest<br />interest rates</h3>
+                                                      </li>
+                                                      <li>
+                                                            <img src="/images/loan-term-icon.png" alt="" />
+                                                                  <h3>Flexible <br /> loan termse</h3>
+                                                      </li>
+                                                </ul>
+                                          </div>
+                                    </div>
+                                    <div className="img-box">
+                                          <img src="/images/hd-img.png" alt="" />
                                     </div>
                               </div>
-
-                              <div className='col-sm-6 d-flex justify-content-end'>
-                                    <Image src={hdimg} height={255} width={200} alt="" />
-                              </div>
-                        </div>
-
-                        <div className='row'>
+                              {/* <!-- .header-form-area --> */}
                               <div className="header-form-area">
                                     <ul className="nav nav-tabs" id="myTab" role="tablist">
                                           <li className="nav-item" role="presentation">
@@ -48,37 +53,28 @@ const herosection = () => {
                                           <div className="tab-pane fade show active" id="loan" role="tabpanel" aria-labelledby="home-tab">
                                                 <form action="">
                                                       <div className="loan-form-area">
+                                                            <div className="loanType">
+                                                                  <select>
+                                                                        <option value='1' selected>Type of loan </option>
+                                                                        <option value='2' >Normal</option>
+                                                                        <option value='3'>Hard</option>
+                                                                        <option value='5'>Expert</option>
+                                                                  </select>
+                                                            </div>
 
-                                                            <div className='row'>
-
-                                                                  <div className='col-sm-2'>
-                                                                        <select className="form-control shadow-0">
-                                                                              <option value="" selected>Type of loan </option>
-                                                                              <option value="">Normal</option>
-                                                                              <option value="">Hard</option>
-                                                                              <option value="">Expert</option>
-                                                                        </select>
-                                                                  </div>
-
-                                                                  <div className='col-sm-2'>
-                                                                        <input className="form-control shadow-0" type="text" placeholder="Company Name" value='' />
-                                                                  </div>
-
-                                                                  <div className='col-sm-4 loanType salary_slidecontainer'>
-                                                                        <label>Salary <div className="amount__box"><span>₹</span> 85K</div></label>
-                                                                        <input type="range" min="1" max="100" value="50" className="slider" id="myRange" />
-                                                                  </div>
-
-                                                                  <div className='col-sm-2'>
-                                                                        <input className="form-control shadow-0" value='' type="text" placeholder="Pincode" />
-                                                                  </div>
-
-                                                                  <div className='col-sm-2'>
-                                                                        <div className="search-button">
-                                                                              <button type="button">Search</button>
-                                                                        </div>
-                                                                  </div>
-
+                                                            <div className="loanType">
+                                                                  <input type="text" placeholder="Company Name" />
+                                                            </div>
+                                                            <div className="loanType ">
+                                                                  <label>Salary <div className="amount__box"><span>₹</span> 85K</div></label>
+                                                                  
+                                                                  <input type="range"  value="50" calassName="form-range" min="0" max="1" step="0.5"  />
+                                                            </div>
+                                                            <div className="loanType">
+                                                                  <input type="text" placeholder="Pincode" />
+                                                            </div>
+                                                            <div className="search-button">
+                                                                  <button type="button">Search</button>
                                                             </div>
                                                       </div>
                                                 </form>
