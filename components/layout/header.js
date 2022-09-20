@@ -1,6 +1,7 @@
 import Head from "next/head"
 import { useRouter } from 'next/router';
-
+// import "~slick-carousel/slick/slick.css"; 
+// import "~slick-carousel/slick/slick-theme.css";
 export default function Header(children) {
     const router = useRouter();
     const title = 'Referloan: ' + (children.title || 'Apply for Loans, Credit Card, Insurance and Investment');
@@ -30,7 +31,7 @@ export default function Header(children) {
             <meta name={ 'distribution' } content={ 'Global' } />
             <meta name={ 'audience' } content={ 'All' } />
             <meta name={ 'revisit-after' } content={ '3 days' } />
-            <meta name={ 'Robots' } content={ 'INDEX,FOLLOW' } />
+            <meta name={ 'Robots' } content={ 'INDEX,NOFOLLOW' } />
             <meta name={ 'country' } content={ 'India' } />
 
             {/* Favicon */ }
@@ -38,6 +39,7 @@ export default function Header(children) {
 
             {/* Core theme CSS (includes Bootstrap) */ }
             <link href={ 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' } rel={ 'stylesheet' } />
+            <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 
             {/* core Custom css */ }
             <link href={ '/css/global.css' } rel={ 'stylesheet' } />

@@ -18,7 +18,7 @@ const contact = () => {
                         <div className="item-col">
                             <div className="topSection red">
                                 <div className="imgBox">
-                                    <img src="assets/images/telephone-icon.png" alt="" />
+                                    <img src="/images/telephone-icon.png" alt="" />
                                 </div>
                                 <div className="noArea">
                                     <span>Telephone</span>
@@ -32,7 +32,7 @@ const contact = () => {
                         <div className="item-col">
                             <div className="topSection green">
                                 <div className="imgBox">
-                                    <img src="assets/images/whatsapp-icon.png" alt="" />
+                                    <img src="/images/whatsapp-icon.png" alt="" />
                                 </div>
                                 <div className="noArea">
                                     <span>Whatsapp</span>
@@ -46,7 +46,7 @@ const contact = () => {
                         <div className="item-col">
                             <div className="topSection blue">
                                 <div className="imgBox">
-                                    <img src="assets/images/email-icon.png" alt="" />
+                                    <img src="/images/email-icon.png" alt="" />
                                 </div>
                                 <div className="noArea">
                                     <span>Mail us</span>

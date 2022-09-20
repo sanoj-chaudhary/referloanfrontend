@@ -559,6 +559,10 @@ background-image: none;
      .contact_map_area > *{
         width: 100%!important;
     }  
+
+    .navContainer a img{
+        width: 132px;
+    }
 }
 
 
