@@ -61,19 +61,19 @@ const about = () => {
                     <div className="values_section">
                         <div className="contentPnl">
                             <h2 className="headingBlue">ReferLoan Values</h2>
-                            <p><span>Ethics:</span> RLbelieveactionsspeaklouderthanwords.RLbelieveinworkingethi
-                                callyandfairlywithallitsusers.WhenRLtalkaboutvalues,theyarenotjustincorporatedinitswork
-                                environment,butalsolivesbeyondwork</p>
-                            <p><span>Knowledge:</span> RLhire,respectandcherishpeoplewhoarehighlyknowledgeable,learned,
-                                experiencedandskilledintheirfield.RLbelieveknowledgeableresourceis not only an asset but also
+                            <p><span>Ethics:</span> RL believe actions speak louder than words.RL believe in working 
+                            ethically and fairly with all its users. When RL talk about values, they are not just incorporated in its work
+                                environment,but also lives beyond work</p>
+                            <p><span>Knowledge:</span> RL hire,respect and cherish people who are highly knowledgeable,learned,
+                                experienced and skilled in their field.RL believe knowledgeable resource is not only an asset but also
                                 its users, who are a part of RL family </p>
-                            <p><span>Forward Thinking:</span> ReferLoanbelieveitisthedrivingforcetothinkbeyondthehorizons </p>
-                            <p><span>Service:</span> ReferLoanputitselfinitsuser"sshoe,sothatRLbetterunderstandtheirneeds </p>
-                            <p><span>Respect:</span> ReferLoanbelieveallhumanbeingareequal,andtheydeserveequal
-                                respectirrespectiveoftheirposition,financialstatus,raceorethnicity.RLtreat others, theway
-                                RLexpect othersto treat itself. </p>
-                            <p><span>Quality:</span> ReferLoanbelieve,AjobwhichlacksthehighestqualityRLexpectfromit,isa
-                                jobhalfdone.Whenitcomestoqualityofwork - RLDONOT COMPROMISE </p>
+                            <p><span>Forward Thinking:</span> Refer Loan believe it is the driving force to think beyond the horizons </p>
+                            <p><span>Service:</span> ReferLoan put itself in its user"shoe,so that RL better understand their needs </p>
+                            <p><span>Respect:</span> ReferLoan believe all human being are equal,and they deserve equal
+                                respect irrespective of their position,financial status,race o rethnicity.RL treat others, the way
+                                RL expect others to treat itself. </p>
+                            <p><span>Quality:</span> ReferLoan believe,A job which lacks the highest quality RL expect from it, is a
+                                job half done.When it comes to quality of work - RL DONOT COMPROMISE </p>
                         </div>
                         {/* <!-- img --> */}
                         <div className="imgPnl">
