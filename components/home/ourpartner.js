@@ -1,6 +1,9 @@
 import Carousel from "react-slick";
 
-export default function ourpartner() {
+import { useEffect } from "react";
+import axios from 'axios'
+
+const ourPartner = ({ partners = [] }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -12,19 +15,36 @@ export default function ourpartner() {
     arrows: false,
     cssEase: "linear"
   };
+
+
+  const getPartner = async()=>
+{
+  const res = await axios.get('http://localhost:3000/api/partner');
+  const data = await res.data;
+  console.log(data)
+}
+  useEffect(() => {
+    getPartner();
+  }, []);
+
   return (
     <section className="partnerArea">
       <div className="container">
         <h2 className="heading text-center">Our partners</h2>
         <p>from across the industry</p>
+       
+       
+       
         <Carousel {...settings}>
-          <div className="slickItem"><img src="/images/ptn-logo1.png" alt="" /></div>
-          <div className="slickItem"><img src="/images/ptn-logo2.png" alt="" /></div>
-          <div className="slickItem"><img src="/images/ptn-logo3.png" alt="" /></div>
-          <div className="slickItem"><img src="/images/ptn-logo4.png" alt="" /></div>
-          <div className="slickItem"><img src="/images/ptn-logo5.png" alt="" /></div>
+          <div className="slickItem"><img src="" alt="" /> </div>
+      
+
         </Carousel>
       </div>
     </section>
   );
 }
+
+export default ourPartner
+
+
