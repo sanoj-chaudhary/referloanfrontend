@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   switch (req.method) {
     case "GET":
       return await getPartner(req, res);
-    case "POST":
+    case "GET":
       return await getVideo(req, res);
     case "POST":
       return await getTestimonial(req, res);
@@ -20,6 +20,7 @@ export default async function handler(req, res) {
       return res.status(400).send("Method not allowed");
   }
 }
+
 
 const getPartner = async (req, res) => {
   try {
