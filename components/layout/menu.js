@@ -11,23 +11,17 @@ const Menu = () => {
               aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
-            <Link href="/" target="_blank" className="logoSection"><img
-              src="https://qa.referloan.in/assets/images/top-logo.png" alt="" title=" referloan " />
+            <Link href="/" target="_blank" className="logoSection"><a><img
+              src="https://qa.referloan.in/assets/images/top-logo.png" alt="" title=" referloan " /></a>
             </Link>
-            {/* <a className="logoSection"
-              href="https://qa.referloan.in?utm_source=direct_visitors&amp;utm_medium=self&amp;utm_campaign=&amp;utm_id=">
-               </a> */}
+          
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <div className="menuBar"></div>
               <ul className="navbar-nav">
-                <li className="nav-item">
-                  <Link href="/about" target="_blank" className="nav-link" > About Us
-                  </Link>
-                </li>
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    {/* <!-- <span className="material-icons">real_estate_agent</span> --> */}
+                   
                     Products </a>
                   <div className="flyout_Menu_container">
                     <ul className="subMenu_Container">

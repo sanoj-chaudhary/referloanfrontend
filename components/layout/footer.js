@@ -90,7 +90,7 @@ const Footer = () => {
                         <div className="footerLinks">
                             <h2>ReferLoan links</h2>
                             <ul>
-                                <li><a href="#" title="About">About</a></li>
+                                <li><a href="about" title="About">About</a></li>
                                 <li><a href="#" title="Careers">Careers</a></li>
                                 <li><a href="#" title="Blog">Blog</a></li>
                                 <li><a href="#" title="Contact">Contact</a></li>
@@ -134,9 +134,9 @@ const Footer = () => {
                     <div className="copyRight_inner">
                         <span>Copyright 2022 © Referloan.in.</span>
                         <span>
-                            <a href="#">Privacy Policy</a>
-                            <a href="#">Faq's</a>
-                            <a href="#">Terms and Conditions</a>
+                            <a href="privacy-policy">Privacy Policy</a>
+                            <a href="faq">Faq's</a>
+                            <a href="terms-and-conditions">Terms and Conditions</a>
                         </span>
                     </div>
                 </div>
