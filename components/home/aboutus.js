@@ -15,7 +15,7 @@ const aboutus = () => {
         <div className="inner">
           <h2 className="heading">Join Us </h2>
           <p>As a leading fintech company, we are all about providing quick, affordable, and reliable loans to our customers all over the world</p>
-          <a href="" className="blackBtn">Read More</a>
+          <Link href="/joinus"><a className="blackBtn">Read More</a></Link>
           <div className="imgBox"><img src="/images/work-img.png" alt="" /></div>
         </div>
       </div>
