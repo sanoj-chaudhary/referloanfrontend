@@ -9,15 +9,15 @@ const about = () => {
 
             </Head>
             {/* <!-- Hero Section --> */}
-            <section class="about_container">
-                <div class="container">
-                    <div class="about_inner">
-                        <div class="left_col">
+            <section className="about_container">
+                <div className="container">
+                    <div className="about_inner">
+                        <div className="left_col">
                             <h2>Refer Loan is India’s largest Digital marketplace for loans & credit cards</h2>
                             <p>Short say" Refer Loan" is a digital platform which works as intermediary between different Banks
                                 and NBFC for providing various services in Loans, Insurance, Investments, Credit Card etc..</p>
                         </div>
-                        <div class="join_col">
+                        <div className="join_col">
                             <h2>Join Us</h2>
                             <p>As a leading fintech company, we are all about providing quick, affordable, and reliable loans to
                                 our customers all over
@@ -27,8 +27,8 @@ const about = () => {
                     </div>
                 </div>
             </section>
-            <section class="section_pad innerpage_bg">
-                <div class="container">
+            <section className="section_pad innerpage_bg">
+                <div className="container">
                     <p>
                         Refer Loan claims to be proudly connected with more than 175+ Financial Institutions for different
                         verticals. In Refer Loan leads are collected through App or Site and Refer Loan team sends them to the
@@ -37,9 +37,9 @@ const about = () => {
                     <p>Refer Loan is a recognized Start Up and M/s Durga Finvest Pvt Ltd is the sister concern of Refer Loan.
                     </p>
                     {/* <!-- vision_section --> */}
-                    <div class="vision_section">
-                        <div class="inner_col">
-                            <h2 class="headingBlue">Vision of ReferLoan</h2>
+                    <div className="vision_section">
+                        <div className="inner_col">
+                            <h2 className="headingBlue">Vision of ReferLoan</h2>
                             <p>Refer Loan in Short "RL" wider objective is to serve the unmet financial needs of those section
                                 of population which is either not covered by Digital Fintech Platform or not satisfied with its
                                 uses. RL Ultimate goal is to be as Global Digital Platform and be a Leading Fintech Concern
@@ -47,8 +47,8 @@ const about = () => {
                                 outstanding technology and expert talent pool. Vision of Refer Loan is to be number one Fintech
                                 in India in Financial Sector within next 5 year.</p>
                         </div>
-                        <div class="inner_col">
-                            <h2 class="headingBlue">Mission Of ReferLoan </h2>
+                        <div className="inner_col">
+                            <h2 className="headingBlue">Mission Of ReferLoan </h2>
                             <p>RL mission is to gain the trust and confidence of our users through crystal clear communication,
                                 reasonable and objective guidance, together with a genuine concern for their long term and
                                 comprehensive financial growth. In RL People usually say,</p>
@@ -58,9 +58,9 @@ const about = () => {
 
 
                     {/* <!-- values_section --> */}
-                    <div class="values_section">
-                        <div class="contentPnl">
-                            <h2 class="headingBlue">ReferLoan Values</h2>
+                    <div className="values_section">
+                        <div className="contentPnl">
+                            <h2 className="headingBlue">ReferLoan Values</h2>
                             <p><span>Ethics:</span> RLbelieveactionsspeaklouderthanwords.RLbelieveinworkingethi
                                 callyandfairlywithallitsusers.WhenRLtalkaboutvalues,theyarenotjustincorporatedinitswork
                                 environment,butalsolivesbeyondwork</p>
@@ -76,18 +76,18 @@ const about = () => {
                                 jobhalfdone.Whenitcomestoqualityofwork - RLDONOT COMPROMISE </p>
                         </div>
                         {/* <!-- img --> */}
-                        <div class="imgPnl">
+                        <div className="imgPnl">
                             <img src="/images/value-img.png" alt="" />
                         </div>
                     </div>
 
                     {/* <!-- activities_section --> */}
-                    <div class="activities_section">
+                    <div className="activities_section">
                         <h2>ACTIVITIES COVERED BY REFER LOAN</h2>
                         <p>We cover almost every financial option like:</p>
                         {/* <!-- activities-row --> */}
-                        <div class="activities_row">
-                            <div class="activities_col">
+                        <div className="activities_row">
+                            <div className="activities_col">
                                 <h2><span>01</span> Lots of LOAN option which provide you finances at fast pace</h2>
                                 <ul>
                                     <li>Personal Loan</li>
@@ -99,7 +99,7 @@ const about = () => {
                                 <p>And many more loan options available by ReferLoan</p>
                             </div>
                             {/* <!-- 02 --> */}
-                            <div class="activities_col">
+                            <div className="activities_col">
                                 <h2><span>02</span> Choose your INSURANCE which can protect you or your product.</h2>
                                 <ul>
                                     <li>Vehicle Insurance (car, two-wheeler, etc.)</li>
@@ -111,8 +111,8 @@ const about = () => {
                                 <p>And many more Insurance options available by ReferLoan </p>
                             </div>
                         </div>
-                        <div class="activities_row">
-                            <div class="activities_col">
+                        <div className="activities_row">
+                            <div className="activities_col">
                                 <h2><span>03</span> Lots of CREDIT CARD option suits your life style</h2>
                                 <ul>
                                     <li>Travel Credit card</li>
@@ -123,7 +123,7 @@ const about = () => {
                                 <p>And many more credit card with all Bank options available by ReferLoan</p>
                             </div>
                             {/* <!-- 02 --> */}
-                            <div class="activities_col">
+                            <div className="activities_col">
                                 <h2><span>04</span> Best INVESTMENT Plans which ease up your retired life.</h2>
                                 <ul>
                                     <li>SIP</li>
@@ -135,8 +135,8 @@ const about = () => {
                                     with more Banks and NBFCs and more products. </p>
                             </div>
                         </div>
-                        <div class="activities_row">
-                            <div class="activities_col">
+                        <div className="activities_row">
+                            <div className="activities_col">
                                 <h2><span>05</span> ReferLoan also do provide Information about Subsidy provided By Government
                                     of India or Any particular State Government to get full benefits out of it like</h2>
                                 <ul>
@@ -157,15 +157,15 @@ const about = () => {
 
 
                     {/* <!-- benefits_area --> */}
-                    <div class="benefits_area">
+                    <div className="benefits_area">
                         <h2>The Benefits of Applying for finances needs by ReferLoan</h2>
 
-                        <div class="benefitBox">
-                            <div class="imgPnl">
+                        <div className="benefitBox">
+                            <div className="imgPnl">
                                 <img src="/images/benefit-img.png" alt="" />
                             </div>
 
-                            <div class="contentPnl">
+                            <div className="contentPnl">
                                 <ul>
                                     <li>ReferLoan tied up with more than 175+ financial Institutions, along with 345+ financial
                                         products where the end user
