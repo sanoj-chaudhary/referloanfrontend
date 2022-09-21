@@ -7,11 +7,11 @@ export default async function handler(req, res) {
     case "GET":      
       if(req.query.component=='category')
       {
-        return await getPartner(req, res);
+        return await getCategoryBySlug(req, res);
       }
       if(req.query.component=='page')
       {
-        return await getTestimonial(req, res);
+        return await getPageBySlug(req, res);
       }
 
     default:
@@ -20,28 +20,18 @@ export default async function handler(req, res) {
 }
 
 
-const getPartner = async (req, res) => {
+const getCategoryBySlug = async (req, res) => {
   try {
-    const results = await pool.query("SELECT * FROM `partners` WHERE `is_active` = '1' ");
+    const results = await pool.query("SELECT * FROM `pages` ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
   }
 };
 
-const getVideo = async (req, res) => {
+const getPageBySlug = async (req, res) => {
   try {
-    const results = await pool.query("SELECT * FROM `videos` WHERE `is_active` = '1' ");
-    return res.status(200).json(results);
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-};
-
-const getTestimonial = async (req, res) => {
-  try {
-    const results = await pool.query("SELECT * FROM `testimonials` WHERE `is_active` = '1' ");
-    return res.status(200).json(results);
+    const results = await pool.query("SELECT * FROM `pages`
   } catch (error) {
     return res.status(500).json({ error });
   }
