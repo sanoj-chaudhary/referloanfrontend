@@ -16,15 +16,15 @@ const herosection = () => {
                                                 <ul>
                                                       <li>
                                                             <img src="/images/loan-w-icon.png" alt="" />
-                                                                  <h3>Loans upto<br /> ₹ 100K available</h3>
+                                                            <h3>Loans upto<br /> ₹ 100K available</h3>
                                                       </li>
                                                       <li>
                                                             <img src="/images/interst-icon.png" alt="" />
-                                                                  <h3>Lowest<br />interest rates</h3>
+                                                            <h3>Lowest<br />interest rates</h3>
                                                       </li>
                                                       <li>
                                                             <img src="/images/loan-term-icon.png" alt="" />
-                                                                  <h3>Flexible <br /> loan termse</h3>
+                                                            <h3>Flexible <br /> loan termse</h3>
                                                       </li>
                                                 </ul>
                                           </div>
@@ -65,10 +65,9 @@ const herosection = () => {
                                                             <div className="loanType">
                                                                   <input type="text" placeholder="Company Name" />
                                                             </div>
-                                                            <div className="loanType ">
+                                                            <div className="loanType salary_slidecontainer">
                                                                   <label>Salary <div className="amount__box"><span>₹</span> 85K</div></label>
-                                                                  
-                                                                  <input type="range"  value="50" calassName="form-range" min="0" max="1" step="0.5"  />
+                                                                  <input type="range" min="1" max="100" value="50" className="slider" id="myRange" />
                                                             </div>
                                                             <div className="loanType">
                                                                   <input type="text" placeholder="Pincode" />
