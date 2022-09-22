@@ -31,7 +31,7 @@ const getCategoryBySlug = async (req, res) => {
 
 const getPageBySlug = async (req, res) => {
   try {
-    const results = await pool.query("SELECT * FROM `pages`
+    const results = await pool.query("SELECT * FROM `pages` ");
   } catch (error) {
     return res.status(500).json({ error });
   }

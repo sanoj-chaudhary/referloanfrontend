@@ -7,15 +7,19 @@ export default async function handler(req, res) {
     case "GET":      
       if(req.query.component=='partner')
       {
-        return await getPartner(req, res);
+        return await getAllPartner(req, res);
       }
       if(req.query.component=='testimonial')
       {
-        return await getTestimonial(req, res);
+        return await getAllTestimonial(req, res);
       }
       if(req.query.component=='video')
       {
-        return await getVideo(req, res);
+        return await getAllVideo(req, res);
+      }
+      if(req.query.component=='headermenu')
+      {
+        return await getHeaderMenu(req, res);
       }
       if(req.query.component=='footerlink')
       {
@@ -27,7 +31,7 @@ export default async function handler(req, res) {
 }
 
 
-const getPartner = async (req, res) => {
+const getAllPartner = async (req, res) => {
   try {
     const results = await pool.query("SELECT * FROM `partners` WHERE `is_active` = '1' ");
     return res.status(200).json(results);
@@ -36,7 +40,7 @@ const getPartner = async (req, res) => {
   }
 };
 
-const getVideo = async (req, res) => {
+const getAllVideo = async (req, res) => {
   try {
     const results = await pool.query("SELECT * FROM `videos` WHERE `is_active` = '1' ");
     return res.status(200).json(results);
@@ -45,11 +49,43 @@ const getVideo = async (req, res) => {
   }
 };
 
-const getTestimonial = async (req, res) => {
+const getAllTestimonial = async (req, res) => {
   try {
     const results = await pool.query("SELECT * FROM `testimonials` WHERE `is_active` = '1' ");
     return res.status(200).json(results);
   } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const getHeaderMenu = async (req, res) => {
+  try 
+  {
+    const results1 =  await pool.query("SELECT id,name,icon FROM `menu_types` ");
+    
+    results1.forEach(function(result1)
+    {
+       const menu_id  =    result1['id'];
+       const results2 =    pool.query("SELECT * FROM `menus` LEFT JOIN `categories` ON categories.id = menus.cat_id WHERE `type1` = "+menu_id+" AND `page_id` = '0' AND `is_active` = '1' ");
+
+       results2.forEach(function(result2)
+       {
+        const cat_id    =   results2['id'];
+        const results3  =   pool.query("SELECT * FROM `menus` LEFT JOIN `pages` ON pages.id = menus.page_id WHERE `type1` = "+menu_id+" AND `cat_id` = "+cat_id+" AND `is_active` = '1' ");
+    
+        results3.forEach(function(result3)
+        {
+            const page_id    =  result3['id'];
+            const page_name  =  result3['post_title'];    
+        });
+       })
+    
+    })
+
+    return res.status(200).json(results1);
+  } 
+  catch (error) 
+  {
     return res.status(500).json({ error });
   }
 };
