@@ -20,7 +20,7 @@ const index = () => {
       <AboutUs />
       <Ourpartner />
       <Ourvideo />
-      <Testimonial />
+      <Testimonial slice={3} />
       <Getapp />
    
     </>

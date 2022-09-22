@@ -83,7 +83,7 @@ const Footer = () => {
                         <div className="growArea">
                             <h2>Save, Fastest Loan &amp; Grow</h2>
                             <p>Our goal at Refer Loan is to provide access to personal loans and education loan, car loan, home loan at insight competitive interest rates. We are the loan provider, you can use our loan product.</p>
-                            <img src="assets/images/logo.png" alt="" className="footerlogo" />
+                            <img src="/images/logo.png" alt="" className="footerlogo" />
                         </div>
 
                         {/* <!-- link Area --> */}

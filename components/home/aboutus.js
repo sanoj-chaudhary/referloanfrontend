@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const aboutus = () => {
+const aboutUs = () => {
   return (
     <section className="aboutSection">
       <div className="aboutCol">
@@ -23,4 +23,4 @@ const aboutus = () => {
   )
 }
 
-export default aboutus
+export default aboutUs
