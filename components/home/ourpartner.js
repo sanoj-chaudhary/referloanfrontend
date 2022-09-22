@@ -1,5 +1,6 @@
 import Carousel from "react-slick";
 import React, { useEffect, useState } from "react";
+import Image from 'next/image'
 
 
 function Partner() 
@@ -16,7 +17,7 @@ function Partner()
     cssEase: "linear"
   };
   
-  const [data, setData] = useState(null)
+  const [data, setData]         = useState(null)
   const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -30,7 +31,7 @@ function Partner()
   }, [])
 
   if (isLoading) return <p>Loading...</p>
-  if (!data) return <p>No profile data</p>
+  if (!data) return <p>No partner data</p>
 
   return (
     <section className="partnerArea">
@@ -40,7 +41,7 @@ function Partner()
                 
         <Carousel {...settings}>   
           {data.map((value, key) => (
-              <div className="slickItem"><img src={value.logo_path}  /></div>
+              <div className="slickItem"><Image src={'/uploads/partner/'+value.logo_path} layout='fill' /></div>
           ))}
         </Carousel>
       </div>

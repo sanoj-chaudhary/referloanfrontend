@@ -25,7 +25,7 @@ export default testimonialSlice.reducer;
 // Thunks
 export const fetchTestimonial = createAsyncThunk('testimonial', async () => {
   try {
-    const res = await axios.get('http://localhost:3000/api/testimonial');
+    const res = await axios.get('api/testimonial');
     return res.data;
   }
   catch(err) {
