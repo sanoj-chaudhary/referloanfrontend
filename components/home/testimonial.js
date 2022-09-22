@@ -15,9 +15,9 @@ const testimonial = (props) => {
     <section>
       <div className="container">
         <div className=" testimaolSlider">
-          <h2 className={ ('heading',props.classes)}>What Client say about<br />our Services
-           <Link href="/testi-monial"><a  title="See More" className="seeBtn orangeBtn float-end">See More &nbsp;<span className="material-icons float-end">east</span></a>
-           </Link>
+          <h2 className={('heading', props.classes)}>What Client say about<br />our Services
+            <Link href="/testi-monial"><a title="See More" className="seeBtn orangeBtn float-end">See More &nbsp;<span className="material-icons float-end">east</span></a>
+            </Link>
           </h2>
           <ul className="testimaolSlider-container">
             {testimonial.slice(0, props.slice).map((testimonial) => (
