@@ -1,9 +1,9 @@
 import Carousel from "react-slick";
+import React, { useEffect, useState } from "react";
 
-import { useEffect } from "react";
-import axios from 'axios'
 
-const ourPartner = ({ partners = [] }) => {
+function Partner() 
+{
   const settings = {
     dots: false,
     infinite: true,
@@ -15,36 +15,38 @@ const ourPartner = ({ partners = [] }) => {
     arrows: false,
     cssEase: "linear"
   };
+  
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(false)
 
-
-  const getPartner = async()=>
-{
-  const res = await axios.get('http://localhost:3000/api/partner');
-  const data = await res.data;
-  console.log(data)
-}
   useEffect(() => {
-    getPartner();
-  }, []);
+    setLoading(true)
+    fetch('/api/partner')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
+
+  if (isLoading) return <p>Loading...</p>
+  if (!data) return <p>No profile data</p>
 
   return (
     <section className="partnerArea">
       <div className="container">
         <h2 className="heading text-center">Our partners</h2>
         <p>from across the industry</p>
-       
-       
-       
-        <Carousel {...settings}>
-          <div className="slickItem"><img src="" alt="" /> </div>
-      
-
+                
+        <Carousel {...settings}>   
+          {data.map((value, key) => (
+              <div className="slickItem"><img src={value.logo_path}  /></div>
+          ))}
         </Carousel>
       </div>
     </section>
-  );
+  )
 }
 
-export default ourPartner
-
+export default Partner
 
