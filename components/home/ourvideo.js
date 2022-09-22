@@ -6,24 +6,24 @@ const ourvideo = () => {
         <ul className="vdoArea">
           <li>
             <div className="videBox">
-              <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY">
+              <iframe src="https://www.youtube.com/embed/ajNe3kO1s3I">
               </iframe>
             </div>
-            <p>How To Earn Money During Lockdown Period // 100%Real // Make Money Online //</p>
+            <p>Leverage the Benefits of Freelancing with ReferLoan</p>
           </li>
           <li>
             <div className="videBox">
-              <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY">
+              <iframe src="https://www.youtube.com/embed/0MZuznXHeD0">
               </iframe>
             </div>
-            <p>How To Earn Money During Lockdown Period // 100%Real // Make Money Online //</p>
+            <p>How to Start a Business with Zero Investment</p>
           </li>
           <li>
             <div className="videBox">
-              <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY">
+              <iframe src="https://www.youtube.com/embed/vyJ1OdWFo-U">
               </iframe>
             </div>
-            <p>How To Earn Money During Lockdown Period // 100%Real // Make Money Online //</p>
+            <p>Liberate Yourself Financially, with ReferLoan</p>
           </li>
         </ul>
       </div>
