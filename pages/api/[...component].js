@@ -25,6 +25,20 @@ export default async function handler(req, res) {
       {
         return await getFooterLink(req, res);
       }
+      if(req.query.component[0]=='category')
+      {
+        if(req.query.component[1])
+        {
+          return await getCategoryBySlug(req, res);
+        }
+      }
+      if(req.query.component[0]=='page')
+      {
+        if(req.query.component[1])
+        {
+          return await getPageBySlug(req, res);
+        }
+      }
     default:
       return res.status(400).send("Method not allowed");
   }
@@ -106,6 +120,26 @@ const getFooterLink = async (req, res) => {
   } 
   catch (error) 
   {
+    return res.status(500).json({ error });
+  }
+};
+
+const getCategoryBySlug = async (req, res) => {
+  try {
+    const slug = req.query.component[1];
+    const results = await pool.query("SELECT * FROM `pages` WHERE `post_slug` = '"+slug+"' ");
+    return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const getPageBySlug = async (req, res) => {
+  try {
+    const slug = req.query.component[1];
+    const results = await pool.query("SELECT * FROM `pages` WHERE `post_slug` = '"+slug+"' ");
+    return res.status(200).json(results);
+  } catch (error) {
     return res.status(500).json({ error });
   }
 };
