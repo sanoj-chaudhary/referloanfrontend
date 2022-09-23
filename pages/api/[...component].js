@@ -83,9 +83,29 @@ const getAllTestimonial = async (req, res) => {
 const getHeaderMenu = async (req, res) => {
   try 
   {
-    const results1 =  await db.query("SELECT id,name,icon FROM `menu_types` ");
+    let results1;
+    let menu_id;
+    let results2;
+    let temp;
+    
+    const menus = await db.query('SELECT id,name,icon FROM `menu_types` ');
+    for ( let i in menus ) 
+    {
+      
+      
+      menu_id = menus[i].id;
+      //menus[i].id = db.query( '...' );
+      if ( menu_id )
+      {
+          results2 =     await db.query("SELECT menus.id,menus.cat_id,categories.name,categories.slug,categories.full_url FROM `menus` LEFT JOIN `categories` ON categories.id = menus.cat_id WHERE menus.type1 = '"+menu_id+"' AND menus.page_id = '0' AND menus.is_active = '1' ");
+      }
+       // menus[i].modules = db.query( '...' );
+    }
+        
+    
+    
 
-    return res.status(200).json(results1);
+    return res.status(200).json(results2);
   } 
   catch (error) 
   {
