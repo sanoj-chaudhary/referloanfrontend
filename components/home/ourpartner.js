@@ -27,6 +27,7 @@ function Partner()
         setData(data)
         setLoading(false)
       })
+      
   }, [])
 
   if (isLoading) return <p>Loading...</p>
@@ -40,7 +41,7 @@ function Partner()
                 
         <Carousel {...settings}>   
           {data.map((value, key) => (
-              <div className="slickItem"><img src={value.logo_path}  /></div>
+              <div className="slickItem"><img src={`/mages/${value.logo_path}`}  /></div>
           ))}
         </Carousel>
       </div>

@@ -5,6 +5,7 @@ export default async function handler(req, res) {
   switch (req.method) 
   {
     case "GET":      
+    console.log(req.query.component)
       if(req.query.component=='partner')
       {
         return await getAllPartner(req, res);
@@ -107,7 +108,9 @@ const getHeaderMenu = async (req, res) => {
 const getFooterLink = async (req, res) => {
   try 
   {
-    const results1 = await pool.query("SELECT * FROM `settings` where `name` = 'footer_link' ");
+
+  
+    // const results1 = await pool.query("SELECT * FROM `settings` where `name` = 'footer_link' ");
    // const withoutFirstAndLast = results1.slice(1, -1);
    // const withoutFirstAndLast  = "1","2","3","4","5","6","7","8","22","24";
   //  const results2 = await pool.query("SELECT id,post_title FROM `pages` where `id` IN ("+withoutFirstAndLast+") ");
@@ -115,7 +118,8 @@ const getFooterLink = async (req, res) => {
    // const withoutFirstAndLast = str.slice(1, -1);
     //SELECT * FROM `pages` where `id` IN (SELECT value FROM `settings` where `name` = 'footer_link');
     
-    const results2 = await pool.query('SELECT id,post_title FROM `pages` where `id` IN ("1","2","3","4","5","6","7","8","22","24","25","43","44","137","138") ');
+    const results2 = await pool.query('SELECT id,post_title FROM `pages` where `id` IN ("1","2","3","4","5","6","7","8","22","24","25","43","44","137","138")');
+    // console.log(json(results2))
     return res.status(200).json(results2);
   } 
   catch (error) 
