@@ -83,21 +83,25 @@ const getAllTestimonial = async (req, res) => {
 const getHeaderMenu = async (req, res) => {
   try 
   {
-    let results1;
+    let menus;
     let menu_id;
     let results2;
     let temp;
     
-    const menus = await db.query('SELECT id,name,icon FROM `menu_types` ');
-    for ( let i in menus ) 
+    const menutypes = await db.query('SELECT id,name,icon FROM `menu_types` ');
+    for ( let i in menutypes ) 
     {
+      menu_id = menutypes[i].id;
+
+      //temp[i]['id'] = menu_id;
       
-      
-      menu_id = menus[i].id;
-      //menus[i].id = db.query( '...' );
       if ( menu_id )
       {
-          results2 =     await db.query("SELECT menus.id,menus.cat_id,categories.name,categories.slug,categories.full_url FROM `menus` LEFT JOIN `categories` ON categories.id = menus.cat_id WHERE menus.type1 = '"+menu_id+"' AND menus.page_id = '0' AND menus.is_active = '1' ");
+          menus =     await db.query("SELECT menus.id,menus.cat_id,categories.name,categories.slug,categories.full_url FROM `menus` LEFT JOIN `categories` ON categories.id = menus.cat_id WHERE menus.type1 = '"+menu_id+"' AND menus.page_id = '0' AND menus.is_active = '1' ");
+          for ( let j in menus ) 
+          {
+
+          }
       }
        // menus[i].modules = db.query( '...' );
     }
@@ -105,7 +109,7 @@ const getHeaderMenu = async (req, res) => {
     
     
 
-    return res.status(200).json(results2);
+    return res.status(200).json(menus);
   } 
   catch (error) 
   {
