@@ -83,33 +83,39 @@ const getAllTestimonial = async (req, res) => {
 const getHeaderMenu = async (req, res) => {
   try 
   {
-    let menus;
+    let category;
+    let page;
     let menu_id;
-    let results2;
-    let temp;
+    let cat_id;
+    let temp = [];
     
-    const menutypes = await db.query('SELECT id,name,icon FROM `menu_types` ');
-    for ( let i in menutypes ) 
+    const menus = await db.query('SELECT id,name,icon FROM `menu_types` ');
+    for ( let i in menus ) 
     {
-      menu_id = menutypes[i].id;
+      menu_id             =   menus[i].id;
 
-      //temp[i]['id'] = menu_id;
-      
+      temp.push(menus[i]);
+
       if ( menu_id )
       {
-          menus =     await db.query("SELECT menus.id,menus.cat_id,categories.name,categories.slug,categories.full_url FROM `menus` LEFT JOIN `categories` ON categories.id = menus.cat_id WHERE menus.type1 = '"+menu_id+"' AND menus.page_id = '0' AND menus.is_active = '1' ");
-          for ( let j in menus ) 
+          category =     await db.query("SELECT menus.id,menus.cat_id,categories.name,categories.slug,categories.full_url FROM `menus` LEFT JOIN `categories` ON categories.id = menus.cat_id WHERE menus.type1 = '"+menu_id+"' AND menus.page_id = '0' AND menus.is_active = '1' ");
+          
+          for ( let j in category ) 
           {
+              menus[i]['category'] = category[j];
+            
+              cat_id = category[j].cat_id;
 
+              if ( cat_id )
+              {
+                 page  =   await db.query("SELECT menus.id,menus.cat_id,pages.post_title,pages.post_slug,pages.full_url FROM `menus` LEFT JOIN `pages` ON pages.id = menus.page_id WHERE menus.type1 = '"+menu_id+"' AND menus.cat_id = '"+cat_id+"' AND menus.is_active = '1' ");
+                 
+              }
           }
       }
-       // menus[i].modules = db.query( '...' );
     }
-        
-    
-    
 
-    return res.status(200).json(menus);
+    return res.status(200).json(temp);
   } 
   catch (error) 
   {
