@@ -90,28 +90,28 @@ const getHeaderMenu = async (req, res) => {
     let temp = [];
     
     const menus = await db.query('SELECT id,name,icon FROM `menu_types` ');
-    for ( let i in menus ) 
+    
+    if ( menus )
     {
-      menu_id             =   menus[i].id;
-
-      temp.push(menus[i]);
-
-      if ( menu_id )
+      for ( let i in menus ) 
       {
-          category =     await db.query("SELECT menus.id,menus.cat_id,categories.name,categories.slug,categories.full_url FROM `menus` LEFT JOIN `categories` ON categories.id = menus.cat_id WHERE menus.type1 = '"+menu_id+"' AND menus.page_id = '0' AND menus.is_active = '1' ");
-          
+        menu_id   =   menus[i].id;
+        temp[i]   =   menus[i];
+
+        category  =  await db.query("SELECT menus.id,menus.cat_id,categories.name,categories.slug,categories.full_url FROM `menus` LEFT JOIN `categories` ON categories.id = menus.cat_id WHERE menus.type1 = '"+menu_id+"' AND menus.page_id = '0' AND menus.is_active = '1' ");
+        
+        if ( category )
+        {
           for ( let j in category ) 
           {
-              menus[i]['category'] = category[j];
-            
-              cat_id = category[j].cat_id;
-
-              if ( cat_id )
-              {
-                 page  =   await db.query("SELECT menus.id,menus.cat_id,pages.post_title,pages.post_slug,pages.full_url FROM `menus` LEFT JOIN `pages` ON pages.id = menus.page_id WHERE menus.type1 = '"+menu_id+"' AND menus.cat_id = '"+cat_id+"' AND menus.is_active = '1' ");
-                 
-              }
+              cat_id              =   category[j].cat_id;
+              temp[i]['category'] =   category;
+              
+              page  =  await db.query("SELECT menus.id,menus.cat_id,pages.post_title,pages.post_slug,pages.full_url FROM `menus` LEFT JOIN `pages` ON pages.id = menus.page_id WHERE menus.type1 = '"+menu_id+"' AND menus.cat_id = '"+cat_id+"' AND menus.is_active = '1' ");
+              category[j]['page'] = page;
           }
+        } 
+
       }
     }
 
