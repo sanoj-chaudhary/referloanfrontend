@@ -104,8 +104,8 @@ const getHeaderMenu = async (req, res) => {
         {
           for ( let j in category ) 
           {
-              cat_id              =   category[j].cat_id;
-              temp[i]['category'] =   category;
+              cat_id               =   category[j].cat_id;
+              menus[i]['category'] =   category;
               
               page  =  await db.query("SELECT menus.id,menus.cat_id,pages.post_title,pages.post_slug,pages.full_url FROM `menus` LEFT JOIN `pages` ON pages.id = menus.page_id WHERE menus.type1 = '"+menu_id+"' AND menus.cat_id = '"+cat_id+"' AND menus.is_active = '1' ");
               category[j]['page'] = page;
