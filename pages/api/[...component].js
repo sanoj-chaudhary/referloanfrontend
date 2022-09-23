@@ -26,6 +26,10 @@ export default async function handler(req, res) {
       {
         return await getFooterLink(req, res);
       }
+      if(req.query.component=='footerlink2')
+      {
+        return await getFooterLink2(req, res);
+      }
       if(req.query.component[0]=='category')
       {
         if(req.query.component[1])
@@ -128,9 +132,28 @@ const getFooterLink = async (req, res) => {
   {
     const results1            =   await db.query("SELECT * FROM `settings` where `name` = 'footer_link' ");
     const withoutFirstAndLast =   results1[0]['value'].slice(1, -1);
-    const results2            =   await db.query('SELECT id,post_title FROM `pages` where `id` IN ('+withoutFirstAndLast+') ');
+    const results2            =   await db.query('SELECT id,post_title,post_slug,full_url FROM `pages` where `id` IN ('+withoutFirstAndLast+') ');
 
     return res.status(200).json(results2);
+  } 
+  catch (error) 
+  {
+    return res.status(500).json({ error });
+  }
+};
+
+const getFooterLink2 = async (req, res) => {
+  try 
+  {
+    var temp = {'loan':[],'cc':[]};
+
+    const results1    =   await db.query("SELECT id,post_title,post_slug,full_url FROM `pages` where pages.post_master = '1' AND pages.is_active = '1' AND pages.id IN (1,2,3,4,5,6) ");
+    const results2    =   await db.query("SELECT id,post_title,post_slug,full_url FROM `pages` where pages.post_master = '2' AND pages.is_active = '1' AND pages.id IN (141,138,142,144,140,147) ");
+   
+    temp['loan'].push(results1);
+    temp['cc'].push(results2);
+    
+    return res.status(200).json(temp);
   } 
   catch (error) 
   {
