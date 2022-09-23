@@ -1,4 +1,4 @@
-import { pool } from "../../config/db";
+import { db } from "../../config/db";
 
 export default async function handler(req, res) {
  
@@ -54,7 +54,7 @@ export default async function handler(req, res) {
 
 const getAllPartner = async (req, res) => {
   try {
-    const results = await pool.query("SELECT * FROM `partners` WHERE `is_active` = '1' ");
+    const results = await db.query("SELECT * FROM `partners` WHERE `is_active` = '1' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
@@ -63,7 +63,7 @@ const getAllPartner = async (req, res) => {
 
 const getAllVideo = async (req, res) => {
   try {
-    const results = await pool.query("SELECT * FROM `videos` WHERE `is_active` = '1' ");
+    const results = await db.query("SELECT * FROM `videos` WHERE `is_active` = '1' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
@@ -72,7 +72,7 @@ const getAllVideo = async (req, res) => {
 
 const getAllTestimonial = async (req, res) => {
   try {
-    const results = await pool.query("SELECT * FROM `testimonials` WHERE `is_active` = '1' ");
+    const results = await db.query("SELECT * FROM `testimonials` WHERE `is_active` = '1' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
@@ -82,26 +82,7 @@ const getAllTestimonial = async (req, res) => {
 const getHeaderMenu = async (req, res) => {
   try 
   {
-    const results1 =  await pool.query("SELECT id,name,icon FROM `menu_types` ");
-    
-    // results1.forEach(function(result1)
-    // {
-    //    const menu_id  =    result1['id'];
-    //    const results2 =    pool.query("SELECT * FROM `menus` LEFT JOIN `categories` ON categories.id = menus.cat_id WHERE `type1` = "+menu_id+" AND `page_id` = '0' AND `is_active` = '1' ");
-
-      //  results2.forEach(function(result2)
-      //  {
-      //   const cat_id    =   results2['id'];
-      //   const results3  =   pool.query("SELECT * FROM `menus` LEFT JOIN `pages` ON pages.id = menus.page_id WHERE `type1` = "+menu_id+" AND `cat_id` = "+cat_id+" AND `is_active` = '1' ");
-    
-      //   results3.forEach(function(result3)
-      //   {
-      //       const page_id    =  result3['id'];
-      //       const page_name  =  result3['post_title'];    
-      //   });
-      //  })
-    
-   // })
+    const results1 =  await db.query("SELECT id,name,icon FROM `menu_types` ");
 
     return res.status(200).json(results1);
   } 
@@ -114,11 +95,11 @@ const getHeaderMenu = async (req, res) => {
 const getFooterLink = async (req, res) => {
   try 
   {
-    const results1            =   await pool.query("SELECT * FROM `settings` where `name` = 'footer_link' ");
+    const results1            =   await db.query("SELECT * FROM `settings` where `name` = 'footer_link' ");
    
     const withoutFirstAndLast =   results1[0]['value'].slice(1, -1);
    
-    const results2            =   await pool.query('SELECT id,post_title FROM `pages` where `id` IN ('+withoutFirstAndLast+') ');
+    const results2            =   await db.query('SELECT id,post_title FROM `pages` where `id` IN ('+withoutFirstAndLast+') ');
 
     return res.status(200).json(results2);
   } 
@@ -131,7 +112,7 @@ const getFooterLink = async (req, res) => {
 const getCategoryBySlug = async (req, res) => {
   try {
     const slug = req.query.component[1];
-    const results = await pool.query("SELECT * FROM `pages` WHERE `post_slug` = '"+slug+"' ");
+    const results = await db.query("SELECT * FROM `pages` WHERE `post_slug` = '"+slug+"' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
@@ -141,7 +122,7 @@ const getCategoryBySlug = async (req, res) => {
 const getPageBySlug = async (req, res) => {
   try {
     const slug = req.query.component[1];
-    const results = await pool.query("SELECT * FROM `pages` WHERE `post_slug` = '"+slug+"' ");
+    const results = await db.query("SELECT * FROM `pages` WHERE `post_slug` = '"+slug+"' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
@@ -151,7 +132,7 @@ const getPageBySlug = async (req, res) => {
 const getBankBySlug = async (req, res) => {
   try {
     const slug = req.query.component[1];
-    const results = await pool.query("SELECT * FROM `pages` WHERE `post_slug` = '"+slug+"' ");
+    const results = await db.query("SELECT * FROM `pages` WHERE `post_slug` = '"+slug+"' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });

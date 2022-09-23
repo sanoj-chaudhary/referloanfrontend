@@ -1,6 +1,6 @@
 import mysql from "serverless-mysql";
 
-const pool = mysql({
+const db = mysql({
   config: {
     host: "localhost",
     user: "root",
@@ -10,4 +10,4 @@ const pool = mysql({
   },
 });
 
-export { pool };
+export { db };
