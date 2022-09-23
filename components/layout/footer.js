@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import vcard from './../../public/images/v-card.png'
 import aecard from './../../public/images/ae-card.png'
 import mcard from './../../public/images/m-card.png'
@@ -92,10 +93,10 @@ const Footer = () => {
                         <div className="footerLinks">
                             <h2>ReferLoan links</h2>
                             <ul>
-                                <li><a href="about" title="About">About</a></li>
+                                <li><Link href="/about"><a title="About">About</a></Link></li>
                                 <li><a href="#" title="Careers">Careers</a></li>
                                 <li><a href="#" title="Blog">Blog</a></li>
-                                <li><a href="#" title="Contact">Contact</a></li>
+                                <li><Link href="/contact"><a title="Contact">Contact</a></Link></li>
                                 <li><a href="#" title="Investors">Investors</a></li>
                             </ul>
                         </div>
@@ -124,7 +125,7 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className="mad-in-india">
-                            <Image className="footerIndialogo" src={indicard} alt="" width="40px" height="40px" />
+                            <Image className="footerIndialogo" src={indicard} width="40px" height="40px" />
                             <span className="made-india">Made In India</span>
 
                         </div>
@@ -136,10 +137,12 @@ const Footer = () => {
                     <div className="copyRight_inner">
                         <span>Copyright 2022 © Referloan.in.</span>
                         <span>
-                            <a href="privacy-policy">Privacy Policy</a>
-                            <a href="faq">Faq's</a>
-                            <a href="terms-and-conditions">Terms and Conditions</a>
-                        </span>
+                            <Link href="/privacy-policy"><a title="Privacy Policy">Privacy Policy</a></Link>
+                            <Link href="/faq"><a title="Faq's">Faq's</a></Link>
+                            <Link href="/terms-and-conditions"><a title="Terms and Conditions">Terms and Conditions</a></Link>
+                            <Link href="/app-privacy-policy"><a title="App Privacy Policy">App Privacy Policy</a></Link>
+                            <Link href="/franchise-map"><a title="Our Franchises">Our Franchises</a></Link>
+                       </span>
                     </div>
                 </div>
             </div>
