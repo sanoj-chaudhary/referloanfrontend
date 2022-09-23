@@ -6,26 +6,26 @@ import mcard from './../../public/images/m-card.png'
 import rpcard from './../../public/images/rp-card.png'
 import mescard from './../../public/images/mes-card.png'
 import indicard from './../../public/images/ind-flag.png'
-import { useEffect,useState } from "react"
+import { useEffect, useState } from "react"
 import axios from 'axios'
 
 const Footer = () => {
     const [menu, setMenu] = useState([]);
     const [temp, setTemp] = useState(1);
- 
-    const getFooterMenu = async ()=>{
+
+    const getFooterMenu = async () => {
         try {
             const res = await axios.get('/api/footerlink');
             const data = await res.data;
             setMenu(data)
         }
-        catch(err) {
+        catch (err) {
             console.log(err)
         }
     }
     useEffect(() => {
         getFooterMenu();
-      }, [])
+    }, [])
 
     function footerMenu() {
         var x = document.getElementById("footerNav");
@@ -46,7 +46,7 @@ const Footer = () => {
             <div className="fot-top-bar">
                 <div className="container">
                     <div className="innerBar">
-                   
+
                         {/* <!-- <a href="#"> MOST SEARCHED LINKS <i className="fas fa-angle-down"></i></a> --> */}
                         <button className="footerMenu-Btn" id="footerBtn" onClick={footerMenu}>MOST SEARCHED LINKS <i className="fas fa-angle-down"></i></button>
 
@@ -70,12 +70,12 @@ const Footer = () => {
                     <div id="footerNav">
                         <div className="footerNav">
                             <ul>
-                            {menu.map((value) => (
-                                <li><Link href="#" ><a ><span className="material-icons">east</span>{value.post_title}</a></Link></li>
-                            ))}
-                          </ul>
+                                {menu.map((value) => (
+                                    <li><Link href="#" ><a ><span className="material-icons">east</span>{value.post_title}</a></Link></li>
+                                ))}
+                            </ul>
 
-                      
+
                         </div>
                     </div>
 
@@ -141,7 +141,7 @@ const Footer = () => {
                             <Link href="/terms-and-conditions"><a title="Terms and Conditions">Terms and Conditions</a></Link>
                             <Link href="/app-privacy-policy"><a title="App Privacy Policy">App Privacy Policy</a></Link>
                             <Link href="/franchise-map"><a title="Our Franchises">Our Franchises</a></Link>
-                       </span>
+                        </span>
                     </div>
                 </div>
             </div>
