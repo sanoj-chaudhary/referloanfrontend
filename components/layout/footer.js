@@ -9,7 +9,6 @@ import indicard from './../../public/images/ind-flag.png'
 import { useEffect,useState } from "react"
 import axios from 'axios'
 
-import Link from 'next/link'
 const Footer = () => {
     const [menu, setMenu] = useState([]);
     const [temp, setTemp] = useState(1);
