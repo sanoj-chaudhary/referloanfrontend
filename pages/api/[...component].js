@@ -5,6 +5,7 @@ export default async function handler(req, res) {
   switch (req.method) 
   {
     case "GET":      
+    console.log(req.query.component)
       if(req.query.component=='partner')
       {
         return await getAllPartner(req, res);
@@ -95,10 +96,8 @@ const getHeaderMenu = async (req, res) => {
 const getFooterLink = async (req, res) => {
   try 
   {
-    const results1            =   await db.query("SELECT * FROM `settings` where `name` = 'footer_link' ");
-   
+    const results1            =   await pool.query("SELECT * FROM `settings` where `name` = 'footer_link' ");
     const withoutFirstAndLast =   results1[0]['value'].slice(1, -1);
-   
     const results2            =   await db.query('SELECT id,post_title FROM `pages` where `id` IN ('+withoutFirstAndLast+') ');
 
     return res.status(200).json(results2);
