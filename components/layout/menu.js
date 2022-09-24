@@ -19,13 +19,10 @@ const Menu = () => {
     <li className="nav-item dropdown">
       <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-
         {item.name}</a>
       <div className="flyout_Menu_container">
         <ul className="subMenu_Container">
-          <div className="flyout_Menu_container">
-            <ul className="subMenu_Container">
-
+          
               {item.category.map((value)=>(
                  <li className="">
                  <a tabIndex="-1" href="#">{value.name}
@@ -34,15 +31,12 @@ const Menu = () => {
                    </span>
                  </a>
                  <ul className="">
-
                   <SubMenu data={value.page} />
                   </ul>
                </li>  
-
               ))}
             </ul>
-          </div>
-        </ul>
+         
       </div>
     </li>
   ))
