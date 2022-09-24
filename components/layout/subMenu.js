@@ -1,4 +1,4 @@
-import React from 'react'
+import Link from 'next/link'
 
 const subMenu = (props) => {
 
@@ -6,7 +6,7 @@ const subMenu = (props) => {
   const items = props.data.map((item) => (
 
     item.post_title != null
-      ? (<li className=""><a tabIndex="-1" href="#">{item.post_title}</a></li>)
+      ? (<li className=""><Link href={item.full_url}><a tabIndex="-1" >{item.post_title}</a></Link></li>)
       : null
     
   ))
