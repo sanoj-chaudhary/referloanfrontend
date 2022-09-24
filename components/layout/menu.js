@@ -1,5 +1,49 @@
 import Link from 'next/link'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import SubMenu from './subMenu'
 const Menu = () => {
+  const [header, setHeader] = useState([]);
+
+  const getHeaderMenu = async () => {
+    const res = await axios.get('api/headermenu');
+    setHeader(res.data)
+  }
+
+  useEffect(() => {
+    getHeaderMenu();
+    console.log(header);
+  }, [])
+
+  const items = header.map((item) => (
+    <li className="nav-item dropdown">
+      <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {item.name}</a>
+      <div className="flyout_Menu_container">
+        <ul className="subMenu_Container">
+          
+              {item.category.map((value)=>(
+                 <li className="">
+                 <a tabIndex="-1" href="#">{value.name}
+                   <span className="material-icons">
+                     chevron_right
+                   </span>
+                 </a>
+                 <ul className="">
+                  <SubMenu data={value.page} />
+                  </ul>
+               </li>  
+              ))}
+            </ul>
+         
+      </div>
+    </li>
+  ))
+
+
+
+
   return (
     <header className='headerWrapper'>
       <div className="customContainer">
@@ -14,70 +58,12 @@ const Menu = () => {
             <Link href="/" target="_blank" className="logoSection"><a><img
               src="https://qa.referloan.in/assets/images/top-logo.png" alt="" title=" referloan " /></a>
             </Link>
-          
+
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <div className="menuBar"></div>
               <ul className="navbar-nav">
-                <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                   
-                    Products </a>
-                  <div className="flyout_Menu_container">
-                    <ul className="subMenu_Container">
+                {items}
 
-                      <li className="">
-                        <a tabIndex="-1" href="#">Personal Loan
-                          <span className="material-icons">
-                            chevron_right
-                          </span>
-                        </a>
-
-                        <ul className="">
-                          <li className=""><a tabIndex="-1" href="#">Pre-advice</a></li>
-                          <li className=""><a href="#">Strategy & Technical</a></li>
-                          <li className=""><a href="#">Research</a></li>
-                          <li className="">
-                            <a href="#">APL & Products
-                              <span className="material-icons">
-                                chevron_right
-                              </span>
-                            </a>
-
-                            <ul className="parent">
-                              <li>
-                                <a href="#">
-                                  Approved Product List
-                                </a>
-                              </li>
-                              <li ><a href="#">Model Portfolios</a></li>
-                              <li ><a href="#">Non-approved Products</a></li>
-                            </ul>
-                          </li>
-                          <li className=""><a href="#">Implementation</a></li>
-                          <li className=""><a href="#">Review</a></li>
-                          <li className=""><a href="#">Execution Only</a></li>
-                        </ul>
-                      </li>
-                      <li ><a href="#">Gold Loan</a></li>
-                      <li ><a href="#">Business Loan</a></li>
-                      <li ><a href="#">Education Loan</a></li>
-                      <li ><a href="#">Home Loan</a></li>
-                      <li ><a href="#">Bajaj Finserv Home Loan</a></li>
-                      <li ><a href="#">ICICI Bank Business Loan Overdraft</a></li>
-                      <li ><a href="#">Tata Capital Used Car Loan</a></li>
-                      <li ><a href="#">Bajaj Housing Finance Loan Against Property</a></li>
-
-                    </ul>
-                  </div>
-                </li>
-                <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    {/* <!-- <span className="material-icons">school</span> --> */}
-                    Knowledge Center
-                  </a>
-                </li>
                 <li className="nav-item"><a className="nav-link" target="_blank"
                   href="https://qa.referloan.in/zero-investment-franchise?utm_source=direct_visitors&amp;utm_medium=self&amp;utm_campaign=&amp;utm_id=">
                   {/* <!-- <span className="material-icons">apartment</span>  --> */}

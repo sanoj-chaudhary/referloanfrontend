@@ -569,16 +569,26 @@ background-image: none;
 /* ++++++++++++++++ For ipad ++++++++++++++++ */
 
 @media (min-width:992px) and (max-width:1440px) {
-
+   
 }
 
 
 /* ++++++++++++++++ For ipad ++++++++++++++++ */
 
 @media (max-width:992px) {
-  
+    .footerNav ul {
+        grid-template-columns: repeat(2,1fr);
+    }
 }
 
 @media (min-width:768px) and (max-width:1200px) {
-  
+    .footerNav ul {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+/* ++++++++++++++++ For mobile ++++++++++++++++ */
+@media (min-width:300px) and (max-width:576px) {
+    .footerNav ul {
+        grid-template-columns: repeat(1,1fr);
+    }
 }

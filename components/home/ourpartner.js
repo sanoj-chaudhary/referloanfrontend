@@ -1,6 +1,7 @@
 import Carousel from "react-slick";
 import React, { useEffect, useState } from "react";
 import Image from 'next/image'
+import axios from "axios";
 
 
 function Partner() 
@@ -11,27 +12,24 @@ function Partner()
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 3000,
-    autoplaySpeed: 3000,
+    speed: 2000,
+    autoplaySpeed: 2000,
     arrows: false,
     cssEase: "linear"
   };
   
-  const [data, setData]         = useState(null)
-  const [isLoading, setLoading] = useState(false)
+  const [data, setData] = useState([])
+
+  const getPartner = async ()=>{
+  const res = await axios.get('/api/partner');
+  const result = await res.data;
+  setData(result)
+  }
 
   useEffect(() => {
-    setLoading(true)
-    fetch('/api/partner')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
+    getPartner()
   }, [])
-
-  if (isLoading) return <p>Loading...</p>
-  if (!data) return <p>No partner data</p>
+ 
 
   return (
     <section className="partnerArea">
@@ -41,13 +39,12 @@ function Partner()
                 
         <Carousel {...settings}>   
           {data.map((value, key) => (
-              <div className="slickItem"><Image src={'/uploads/partner/'+value.logo_path} layout='fill' /></div>
+            <div className="slickItem"><Image src={'/uploads/partner/'+value.logo_path} layout='fill' /></div>
           ))}
         </Carousel>
       </div>
     </section>
   )
+
 }
-
 export default Partner
-

@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
-
+import axios from "axios";
 
 function ourVideo() {
-  const [data, setData]         = useState(null)
-  const [isLoading, setLoading] = useState(false)
+  const [data, setData] = useState(null)
 
+  const getVideo = async ()=>{
+    const res = await axios.get('/api/video');
+    setData(res.data)
+  }
   useEffect(() => {
-    setLoading(true)
-    fetch('/api/video')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
+    getVideo()
+      
   }, [])
 
-  if (isLoading) return <p>Loading...</p>
   if (!data) return <p>No video data</p>
 
   return (
