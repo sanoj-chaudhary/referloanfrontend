@@ -106,7 +106,7 @@ const Footer = () => {
                             <h2> Loan </h2>
                             <ul>
                                {loan.map((item)=>(
-                                <li><Link href={item.full_url} ><a  title="About">{item.post_title}</a></Link></li>
+                                <li key={item.id}><Link href={item.full_url} ><a  title="About">{item.post_title}</a></Link></li>
                                ))}
                             </ul>
                         </div>
@@ -116,7 +116,7 @@ const Footer = () => {
                             <h2>Credit Cards</h2>
                             <ul>
                             {cc.map((element)=>(
-                                <li><Link href={element.full_url} ><a  title="About">{element.post_title}</a></Link></li>
+                                <li key={element.id}><Link href={element.full_url} ><a  title="About">{element.post_title}</a></Link></li>
                                ))}
                             </ul>
                         </div>
