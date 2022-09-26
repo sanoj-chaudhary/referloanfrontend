@@ -21,7 +21,7 @@ function ourVideo() {
       <div className="container">
         <ul className="vdoArea">
           {data.map((value, key) => (
-              <li>
+              <li key={key}>
                 <div className="videBox">
                   <iframe src={value.embedded_code}></iframe>
                 </div>

@@ -11,7 +11,9 @@ import axios from 'axios'
 
 const Footer = () => {
     const [menu, setMenu] = useState([]);
-    const [temp, setTemp] = useState(1);
+    const [loan, setLoan] = useState([]);
+    const [cc, setCc] = useState([]);
+    
 
     const getFooterMenu = async () => {
         try {
@@ -23,8 +25,17 @@ const Footer = () => {
             console.log(err)
         }
     }
+
+    const getFooterMenu2 = async () => {
+        const res = await axios.get('/api/footerlink2');
+        const data = await res.data;
+        console.log(data.cc);
+        setLoan(data.loan[0]);
+        setCc(data.cc[0]);
+    }
     useEffect(() => {
         getFooterMenu();
+        getFooterMenu2();
     }, [])
 
     function footerMenu() {
@@ -35,12 +46,13 @@ const Footer = () => {
             element.classList.remove('tooglrIcon');
 
         } else {
-            console.log(menu)
+            
             x.style.display = "block";
             var element = document.getElementById('footerBtn');
             element.classList.add('tooglrIcon');
         }
     }
+    
     return (
         <footer className='footerWrapper'>
             <div className="fot-top-bar">
@@ -71,8 +83,9 @@ const Footer = () => {
                         <div className="footerNav">
                             <ul>
                                 {menu.map((value) => (
-                                    <li><Link href={value.full_url} ><a ><span className="material-icons">east</span>{value.post_title}</a></Link></li>
+                                    <li key={value.id}><Link href={value.full_url} ><a><span className="material-icons">east</span>{value.post_title}</a></Link></li>
                                 ))}
+                                console.log(value.full_url);
                             </ul>
 
 
@@ -90,23 +103,21 @@ const Footer = () => {
 
                         {/* <!-- link Area --> */}
                         <div className="footerLinks">
-                            <h2>ReferLoan links</h2>
+                            <h2> Loan </h2>
                             <ul>
-                                <li><Link href="/about"><a title="About">About</a></Link></li>
-                                <li><a href="#" title="Careers">Careers</a></li>
-                                <li><a href="#" title="Blog">Blog</a></li>
-                                <li><Link href="/contact"><a title="Contact">Contact</a></Link></li>
-                                <li><a href="#" title="Investors">Investors</a></li>
+                               {loan.map((item)=>(
+                                <li key={item.id}><Link href={item.full_url} ><a  title="About">{item.post_title}</a></Link></li>
+                               ))}
                             </ul>
                         </div>
+
+                        
                         <div className="footerLinks">
                             <h2>Credit Cards</h2>
                             <ul>
-                                <li><a href="#" title="About">HDFC Credit Card</a></li>
-                                <li><a href="#" title="Careers">Kotak Mahindra Credit Card</a></li>
-                                <li><a href="#" title="Blog">Blog</a></li>
-                                <li><a href="#" title="Contact">Contact</a></li>
-                                <li><a href="#" title="Investors">Investors</a></li>
+                            {cc.map((element)=>(
+                                <li key={element.id}><Link href={element.full_url} ><a  title="About">{element.post_title}</a></Link></li>
+                               ))}
                             </ul>
                         </div>
 
