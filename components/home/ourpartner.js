@@ -39,7 +39,7 @@ function Partner()
                 
         <Carousel {...settings}>   
           {data.map((value, key) => (
-            <div className="slickItem"><Image src={'/uploads/partner/'+value.logo_path} layout='fill' /></div>
+            <div key={key} className="slickItem"><Image src={'/uploads/partner/'+value.logo_path} layout='fill' /></div>
           ))}
         </Carousel>
       </div>

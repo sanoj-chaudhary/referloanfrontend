@@ -71,7 +71,7 @@ const Footer = () => {
                         <div className="footerNav">
                             <ul>
                                 {menu.map((value) => (
-                                    <li><Link href={value.full_url} ><a ><span className="material-icons">east</span>{value.post_title}</a></Link></li>
+                                    <li key={value.id}><Link href={value.full_url} ><a><span className="material-icons">east</span>{value.post_title}</a></Link></li>
                                 ))}
                             </ul>
 
