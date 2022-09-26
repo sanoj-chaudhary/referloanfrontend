@@ -6,13 +6,13 @@ const Menu = () => {
   const [header, setHeader] = useState([]);
 
   const getHeaderMenu = async () => {
-    const res = await axios.get('api/headermenu');
-    setHeader(res.data)
+    const res = await axios.get('/api/headermenu');
+    const data = res.data;
+    setHeader(data)
   }
 
   useEffect(() => {
-    getHeaderMenu();
-    console.log(header);
+    getHeaderMenu();    
   }, [])
 
   const items = header.map((item) => (
