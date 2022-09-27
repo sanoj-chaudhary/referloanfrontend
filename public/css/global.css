@@ -300,3 +300,23 @@ table.table_cards_Table td b {
         font-size: 14px;
     }
 }
+
+/* Added by sanoj  27/09/2002*/
+@import "~floating-labels";
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.form-error{
+    color: red;
+    font-size: 12px;
+}
