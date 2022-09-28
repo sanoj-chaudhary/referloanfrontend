@@ -8,9 +8,9 @@ function ourVideo() {
     const res = await axios.get('/api/video');
     setData(res.data)
   }
+
   useEffect(() => {
     getVideo()
-      
   }, [])
 
   if (!data) return <p>No video data</p>
