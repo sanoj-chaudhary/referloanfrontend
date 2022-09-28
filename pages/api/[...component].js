@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   switch (req.method) 
   {
     case "GET":      
-    console.log(req.query.component)
+    console.log(req.query.component[0])
       if(req.query.component=='partner')
       {
         return await getAllPartner(req, res);
@@ -174,7 +174,8 @@ const getCategoryBySlug = async (req, res) => {
 const getPageBySlug = async (req, res) => {
   try {
     const slug = req.query.component[1];
-    const results = await db.query("SELECT * FROM `pages` WHERE `post_slug` = '"+slug+"' ");
+    console.log(slug)
+    const results = await db.query("SELECT post_content FROM `pages` WHERE `post_slug` = '"+slug+"' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
