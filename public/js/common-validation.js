@@ -1,3 +1,4 @@
+
 $('.numberonly').on('keypress change', function (e) {
   var charCode = (e.which) ? e.which : event.keyCode
   if (String.fromCharCode(charCode).match(/[^0-9]/g))
@@ -18,7 +19,7 @@ $(document).on('keypress', '.onlyalphabetsspace', function (event) {
 });
 
 // Using custom test method ifsc code validation
-const IFSC_CARD_REGEX                     =   "^[A-Z]{4}0[A-Z0-9]{6}$";
+const IFSC_CODE_REGEX                     =   "^[A-Z]{4}0[A-Z0-9]{6}$";
 const REQUIRED_ERROR_MESSAGE              =   "Required Field";
 const IFSC_INVALID_FORMAT_ERROR_MESSAGE   =   "Invalid ifsc code.";
 
@@ -30,7 +31,7 @@ function isValidIfsc(message) {
       return createError({ path, message: message ?? REQUIRED_ERROR_MESSAGE });
     }
 
-    if (!value.match(IFSC_CARD_REGEX)) {
+    if (!value.match(IFSC_CODE_REGEX)) {
       return createError({
         path,
         message: message ?? IFSC_INVALID_FORMAT_ERROR_MESSAGE
