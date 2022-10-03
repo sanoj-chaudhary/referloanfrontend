@@ -1,10 +1,29 @@
-import loanwicon from './../../public/images/loan-w-icon.png'
-import inserticon from './../../public/images/interst-icon.png'
-import loantermicon from './../../public/images/loan-term-icon.png'
-import hdimg from './../../public/images/hd-img.png'
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import {useState,useEffect} from 'react'
+import FormGroup from '@mui/material/FormGroup';
 
 import Image from 'next/image'
+import axios from 'axios'
+import { Radio } from '@mui/material'
+import FormLabel from '@mui/material/FormLabel';
+import RadioGroup from '@mui/material/RadioGroup';
 const herosection = () => {
+const [loans,setLoan] = useState([]);
+
+const getLoan = async ()=>{
+     const res = await axios.get('api/getpagebycatid/1');
+     const data =  await res.data;
+     setLoan(res.data);
+     
+}
+
+useEffect(() => {
+      getLoan();
+      console.log(loans); 
+}, []);
+
+
       return (
             <section className="heroSection">
                   <div className="container">
@@ -54,27 +73,37 @@ const herosection = () => {
                                                 <form action="">
                                                       <div className="loan-form-area">
                                                             <div className="loanType">
-                                                                  <select>
-                                                                        <option value='1' selected>Type of loan </option>
-                                                                        <option value='2' >Normal</option>
-                                                                        <option value='3'>Hard</option>
-                                                                        <option value='5'>Expert</option>
-                                                                  </select>
+                                                           <select>
+                                                            {loans.map((item) =>(
+                                                                  <option value={item.id}>{item.post_title}</option>
+                                                            ))}
+                                                           </select>
                                                             </div>
-
                                                             <div className="loanType">
-                                                                  <input type="text" placeholder="Company Name" />
-                                                            </div>
-                                                            <div className="loanType salary_slidecontainer">
-                                                                  <label>Salary <div className="amount__box"><span>₹</span> 85K</div></label>
-                                                                  <input type="range" min="1" max="100" value="50" className="slider" id="myRange" />
+                                                            <input type="text" placeholder="Salary" />
                                                             </div>
                                                             <div className="loanType">
                                                                   <input type="text" placeholder="Pincode" />
                                                             </div>
+                                                                  <div>
+                                                                  <FormControl>
+                                                                        <FormLabel id="demo-row-radio-buttons-group-label">Employee Type</FormLabel>
+                                                                        <RadioGroup
+                                                                        row
+                                                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                                                        name="row-radio-buttons-group"
+                                                                        >
+                                                                        <FormControlLabel value="salaried" control={<Radio />} label="Salaried" />
+                                                                        <FormControlLabel value="self-employed" control={<Radio />} label="Self Employed " />
+                                                                        
+                                                                        </RadioGroup>
+                                                                  </FormControl>
+                                                                  </div>
+                                                                 
                                                             <div className="search-button">
                                                                   <button type="button">Search</button>
                                                             </div>
+
                                                       </div>
                                                 </form>
                                           </div>
