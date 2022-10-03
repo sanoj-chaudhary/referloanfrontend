@@ -1,6 +1,6 @@
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import {useState,useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import FormGroup from '@mui/material/FormGroup';
 
 import Image from 'next/image'
@@ -9,19 +9,57 @@ import { Radio } from '@mui/material'
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 const herosection = () => {
-const [loans,setLoan] = useState([]);
+      const [loans, setLoan] = useState([]);
+      const [formData, setFormData] = useState({
+            product_id:'',
+            pincode:'',
+            emp_type:'salaried',
+            salary:'',
+            turnover:'',
+            bank_id:'',
+            category:'loan'
+      })
 
-const getLoan = async ()=>{
-     const res = await axios.get('api/getpagebycatid/1');
-     const data =  await res.data;
-     setLoan(res.data);
-     
-}
+        const handleChange = (e) => {
+            setFormData({
+            ...formData,
 
-useEffect(() => {
-      getLoan();
-      console.log(loans); 
-}, []);
+      // Trimming any whitespace
+      [e.target.name]: e.target.value.trim()
+    });
+  };
+
+  const onSubmit = async () =>{
+
+      // console.log(formData)
+//     const response = await axios('http://127.0.0.1:3000/api/getcontentbysearch',{
+//       method:'POST',
+//       data:{"category" :"loan/cc",
+// 	"product_id":"15",
+// 	"pincode":"110043",
+//     "emp_type":"salaried",
+// 	"loan_amount":"50000",
+// 	"salary":"10000",
+//     "turnover":"10000",
+//     "bank_id":"15"},
+//       headers: {
+//             'Content-Type': 'application/json'
+//           }
+//     })
+
+let result = await axios.post("http://127.0.0.1:3000/api/getcontentbysearch", formData);
+    result = await result.data;
+    console.log(result);
+  }
+      const getLoan = async () => {
+            const res = await axios.get('api/getpagebycatid/1');
+            const data = await res.data;
+            setLoan(res.data);
+      }
+
+      useEffect(() => {
+            getLoan();
+      }, []);
 
 
       return (
@@ -73,35 +111,40 @@ useEffect(() => {
                                                 <form action="">
                                                       <div className="loan-form-area">
                                                             <div className="loanType">
-                                                           <select>
-                                                            {loans.map((item) =>(
-                                                                  <option value={item.id}>{item.post_title}</option>
-                                                            ))}
-                                                           </select>
+                                                                  <select name='product_id' onChange={handleChange}>
+                                                                        {loans.map((item) => (
+                                                                              <option value={item.id}>{item.post_title}</option>
+                                                                        ))}
+                                                                  </select>
                                                             </div>
+                                                            
                                                             <div className="loanType">
-                                                            <input type="text" placeholder="Salary" />
+                                                                  <input name='pincode' type="text" placeholder="Pincode" onChange={handleChange} />
                                                             </div>
-                                                            <div className="loanType">
-                                                                  <input type="text" placeholder="Pincode" />
-                                                            </div>
-                                                                  <div>
+                                                            <div>
                                                                   <FormControl>
                                                                         <FormLabel id="demo-row-radio-buttons-group-label">Employee Type</FormLabel>
                                                                         <RadioGroup
-                                                                        row
-                                                                        aria-labelledby="demo-row-radio-buttons-group-label"
-                                                                        name="row-radio-buttons-group"
+                                                                              row
+                                                                              aria-labelledby="demo-row-radio-buttons-group-label"
+                                                                              value={formData.emp_type}
+                                                                              onChange={handleChange}
                                                                         >
-                                                                        <FormControlLabel value="salaried" control={<Radio />} label="Salaried" />
-                                                                        <FormControlLabel value="self-employed" control={<Radio />} label="Self Employed " />
-                                                                        
+                                                                              <FormControlLabel name='emp_type' value="salaried" control={<Radio />} label="Salaried"  />
+                                                                              <FormControlLabel name='emp_type' value="self-employed" control={<Radio />} label="Self Employed "  />
+
                                                                         </RadioGroup>
                                                                   </FormControl>
-                                                                  </div>
-                                                                 
+                                                            </div>
+                                                            <div className="loanType">
+                                                                 {formData.emp_type === 'salaried'   &&  <input name='salary' type="text" placeholder="Salary" onChange={handleChange}  />}
+                                                                  {formData.emp_type === 'self-employed'&& <input name='turnover' type="text" placeholder="Turn Over" onChange={handleChange}  />
+                                                                  }
+                                                                  
+                                                            </div>
+
                                                             <div className="search-button">
-                                                                  <button type="button">Search</button>
+                                                                  <button onClick={onSubmit} type="button">Search</button>
                                                             </div>
 
                                                       </div>
