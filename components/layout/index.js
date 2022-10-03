@@ -3,7 +3,7 @@ import Menu from './menu'
 import Footer from "./footer"
 import Script from "next/script"
 import 'bootstrap/dist/css/bootstrap.css'
-import 'floating-labels/dist/floating-labels.css'
+
 export default function Layout(props) {
   return (<>
     <Header { ...props } ></Header>

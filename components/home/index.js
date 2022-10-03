@@ -22,7 +22,6 @@ const index = () => {
       <Ourvideo />
       <Testimonial slice={3} />
       <Getapp />
-   
     </>
   )
 }
