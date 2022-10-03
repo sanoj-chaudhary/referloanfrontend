@@ -8,6 +8,7 @@ import Ourpartner from "./ourpartner"
 import Ourvideo from './ourvideo'
 import Testimonial from "./testimonial"
 import Getapp from './getapp'
+import Form from './../form/testform'
 const index = () => {
  
   return (
@@ -22,6 +23,7 @@ const index = () => {
       <Ourvideo />
       <Testimonial slice={3} />
       <Getapp />
+      <Form />
     </>
   )
 }
