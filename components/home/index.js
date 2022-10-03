@@ -8,7 +8,7 @@ import Ourpartner from "./ourpartner"
 import Ourvideo from './ourvideo'
 import Testimonial from "./testimonial"
 import Getapp from './getapp'
-import Form from './../form/testform'
+import Form from './../form/basicDetails'
 const index = () => {
  
   return (
