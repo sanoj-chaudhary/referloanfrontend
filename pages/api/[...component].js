@@ -243,16 +243,20 @@ const getContentBySearch = async (req, res) => {
 
     // Dummy data
     const data       =  {
-                        0:{"bank_name" :"bank 1",
-                        "interest":"10",
-                        "fee":"10000"},
-                        1:{"bank_name" :"bank 2",
-                        "interest":"15",
-                        "fee":"15000"},
-                        2:{"bank_name" :"bank 3",
-                        "interest":"20",
-                        "fee":"20000"}
-                       };
+                        "status":true,
+                        "data":
+                        {
+                          0:{"bank_name" :"bank 1",
+                          "interest":"10",
+                          "fee":"10000"},
+                          1:{"bank_name" :"bank 2",
+                          "interest":"15",
+                          "fee":"15000"},
+                          2:{"bank_name" :"bank 3",
+                          "interest":"20",
+                          "fee":"20000"}
+                        }
+                      };
     
     return res.status(200).json(data);
   } catch (error) {
