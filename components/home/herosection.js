@@ -11,46 +11,28 @@ import RadioGroup from '@mui/material/RadioGroup';
 const herosection = () => {
       const [loans, setLoan] = useState([]);
       const [formData, setFormData] = useState({
-            product_id:'',
-            pincode:'',
-            emp_type:'salaried',
-            salary:'',
-            turnover:'',
-            bank_id:'',
-            category:'loan'
+            product_id: '',
+            pincode: '',
+            emp_type: 'salaried',
+            salary: '',
+            turnover: '',
+            bank_id: '',
+            category: 'loan'
       })
 
-        const handleChange = (e) => {
+      const handleChange = (e) => {
             setFormData({
-            ...formData,
+                  ...formData,
+                  [e.target.name]: e.target.value.trim()
+            });
+      };
 
-      // Trimming any whitespace
-      [e.target.name]: e.target.value.trim()
-    });
-  };
-
-  const onSubmit = async () =>{
-
-      // console.log(formData)
-//     const response = await axios('http://127.0.0.1:3000/api/getcontentbysearch',{
-//       method:'POST',
-//       data:{"category" :"loan/cc",
-// 	"product_id":"15",
-// 	"pincode":"110043",
-//     "emp_type":"salaried",
-// 	"loan_amount":"50000",
-// 	"salary":"10000",
-//     "turnover":"10000",
-//     "bank_id":"15"},
-//       headers: {
-//             'Content-Type': 'application/json'
-//           }
-//     })
-
-let result = await axios.post("http://127.0.0.1:3000/api/getcontentbysearch", formData);
-    result = await result.data;
-    console.log(result);
-  }
+      const onSubmit = async () => {
+            let result = await axios.post("http://127.0.0.1:3000/api/getcontentbysearch", formData);
+            result = await result.data;
+            console.log(result);
+      }
+      
       const getLoan = async () => {
             const res = await axios.get('api/getpagebycatid/1');
             const data = await res.data;
@@ -117,7 +99,7 @@ let result = await axios.post("http://127.0.0.1:3000/api/getcontentbysearch", fo
                                                                         ))}
                                                                   </select>
                                                             </div>
-                                                            
+
                                                             <div className="loanType">
                                                                   <input name='pincode' type="text" placeholder="Pincode" onChange={handleChange} />
                                                             </div>
@@ -130,17 +112,17 @@ let result = await axios.post("http://127.0.0.1:3000/api/getcontentbysearch", fo
                                                                               value={formData.emp_type}
                                                                               onChange={handleChange}
                                                                         >
-                                                                              <FormControlLabel name='emp_type' value="salaried" control={<Radio />} label="Salaried"  />
-                                                                              <FormControlLabel name='emp_type' value="self-employed" control={<Radio />} label="Self Employed "  />
+                                                                              <FormControlLabel name='emp_type' value="salaried" control={<Radio />} label="Salaried" />
+                                                                              <FormControlLabel name='emp_type' value="self-employed" control={<Radio />} label="Self Employed " />
 
                                                                         </RadioGroup>
                                                                   </FormControl>
                                                             </div>
                                                             <div className="loanType">
-                                                                 {formData.emp_type === 'salaried'   &&  <input name='salary' type="text" placeholder="Salary" onChange={handleChange}  />}
-                                                                  {formData.emp_type === 'self-employed'&& <input name='turnover' type="text" placeholder="Turn Over" onChange={handleChange}  />
+                                                                  {formData.emp_type === 'salaried' && <input name='salary' type="text" placeholder="Salary" onChange={handleChange} />}
+                                                                  {formData.emp_type === 'self-employed' && <input name='turnover' type="text" placeholder="Turn Over" onChange={handleChange} />
                                                                   }
-                                                                  
+
                                                             </div>
 
                                                             <div className="search-button">
