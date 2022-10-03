@@ -14,6 +14,10 @@ export default async function handler(req, res) {
       {
         return await getAllTestimonial(req, res);
       }
+      if(req.query.component=='allcategory')
+      {
+        return await getAllCategory(req, res);
+      }
       if(req.query.component=='video')
       {
         return await getAllVideo(req, res);
@@ -51,6 +55,14 @@ export default async function handler(req, res) {
           return await getBankBySlug(req, res);
         }
       }
+      if(req.query.component[0]=='getpagebycatid')
+      {
+        if(req.query.component[1])
+        {
+          return await getPagesByCatId(req, res);
+        }
+      }
+      
     default:
       return res.status(400).send("Method not allowed");
   }
@@ -78,6 +90,15 @@ const getAllVideo = async (req, res) => {
 const getAllTestimonial = async (req, res) => {
   try {
     const results = await db.query("SELECT * FROM `testimonials` WHERE `is_active` = '1' ");
+    return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const getAllCategory = async (req, res) => {
+  try {
+    const results = await db.query("SELECT * FROM `categories` WHERE `is_active` = '1' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
@@ -186,6 +207,16 @@ const getBankBySlug = async (req, res) => {
   try {
     const slug = req.query.component[1];
     const results = await db.query("SELECT * FROM `pages` WHERE `post_slug` = '"+slug+"' ");
+    return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const getPagesByCatId = async (req, res) => {
+  try {
+    const slug = req.query.component[1];
+    const results = await db.query("SELECT id,post_master,post_title,post_slug,full_url FROM `pages` WHERE `post_master` = '"+slug+"' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
