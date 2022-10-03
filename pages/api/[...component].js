@@ -62,6 +62,12 @@ export default async function handler(req, res) {
           return await getPagesByCatId(req, res);
         }
       }
+    case "POST": 
+      if(req.query.component=='getcontentbysearch')
+      {
+        return await getContentBySearch(req, res);
+      }  
+
       
     default:
       return res.status(400).send("Method not allowed");
@@ -218,6 +224,37 @@ const getPagesByCatId = async (req, res) => {
     const slug = req.query.component[1];
     const results = await db.query("SELECT id,post_master,post_title,post_slug,full_url FROM `pages` WHERE `post_master` = '"+slug+"' ");
     return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const getContentBySearch = async (req, res) => {
+  try {
+    const category    =   req.body.category;
+    const product_id  =   req.body.product_id;
+    const pincode     =   req.body.pincode;
+    const emp_type    =   req.body.emp_type;
+    
+    const loan_amount =   req.body.loan_amount;
+    const salary      =   req.body.salary;
+    const turnover    =   req.body.turnover;
+    const bank_id     =   req.body.bank_id;
+
+    // Dummy data
+    const data       =  {
+                        0:{"bank_name" :"bank 1",
+                        "interest":"10",
+                        "fee":"10000"},
+                        1:{"bank_name" :"bank 2",
+                        "interest":"15",
+                        "fee":"15000"},
+                        2:{"bank_name" :"bank 3",
+                        "interest":"20",
+                        "fee":"20000"}
+                       };
+    
+    return res.status(200).json(data);
   } catch (error) {
     return res.status(500).json({ error });
   }
