@@ -28,7 +28,7 @@ console.log(product.data)
 
 export async function getServerSideProps(context) {
   let formData = context.query;
-  let result = await axios.post("http://127.0.0.1:3000/api/getcontentbysearch", formData);
+  let result = await axios.post(`${process.env.APP_URL}/getcontentbysearch`, formData);
   let product = await result.data;
   return { props: { product } }
 }
