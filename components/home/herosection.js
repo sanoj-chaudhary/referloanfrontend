@@ -1,14 +1,15 @@
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useState, useEffect } from 'react'
-import FormGroup from '@mui/material/FormGroup';
 
-import Image from 'next/image'
 import axios from 'axios'
 import { Radio } from '@mui/material'
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
+import { useRouter, withRouter } from 'next/router'
+import Filterproduct from '../../pages/filter-product';
 const herosection = () => {
+      const router = useRouter()
       const [loans, setLoan] = useState([]);
       const [formData, setFormData] = useState({
             product_id: '',
@@ -28,11 +29,13 @@ const herosection = () => {
       };
 
       const onSubmit = async () => {
-            let result = await axios.post("http://127.0.0.1:3000/api/getcontentbysearch", formData);
-            result = await result.data;
-            console.log(result);
+
+            router.push({
+                  pathname: `/filter-product`,
+                  query: formData
+            })
       }
-      
+
       const getLoan = async () => {
             const res = await axios.get('api/getpagebycatid/1');
             const data = await res.data;
@@ -143,4 +146,5 @@ const herosection = () => {
       )
 }
 
-export default herosection
+
+export default withRouter(herosection);
