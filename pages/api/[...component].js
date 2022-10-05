@@ -55,7 +55,9 @@ export default async function handler(req, res) {
       if (req.query.component == 'getcontentbysearch') {
         return await getContentBySearch(req, res);
       }
-
+      if (req.query.component == 'apistructurebyapiid') {
+        return await getApiDataStructureByApiId(req, res);
+      }
 
     default:
       return res.status(400).send("Method not allowed");
@@ -229,28 +231,160 @@ const getContentBySearch = async (req, res) => {
           "bank_name": "bank 1",
           "interest": "10",
           "fee": "10000",
-          'api_id':'1'
+          'api_id': '1'
         },
         1: {
           "bank_id": "2",
           "bank_name": "bank 2",
           "interest": "20",
           "fee": "20000",
-          'api_id':'21'
+          'api_id': '21'
         },
         2: {
           "bank_id": "3",
           "bank_name": "bank 3",
           "interest": "30",
           "fee": "30000",
-          'api_id':'31'
+          'api_id': '31'
         },
         3: {
           "bank_id": "4",
           "bank_name": "bank 4",
           "interest": "40",
           "fee": "40000",
-          'api_id':'12'
+          'api_id': '12'
+        }
+      }
+    };
+
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const getApiDataStructureByApiId = async (req, res) => {
+  try {
+    const api_id = req.body.api_id;
+
+    // Dummy data
+    const data = {
+      "status": true,
+      "section":
+      {
+        "step1": {
+          "column": {
+            "column1": {
+              "field_name": "First Name",
+              "param_name": "first_name",
+              "is_required": true,
+              "is_visible": "1",
+              "type": "text",
+              "is_header": false,
+              "pattern": "/[^a-zA-Z ]/g",
+              'options': ""
+            },
+            "column2": {
+              "field_name": "Last Name",
+              "param_name": "last_name",
+              "is_required": false,
+              "is_visible": true,
+              "type": "text",
+              "is_header": false,
+              "pattern": "/[^a-zA-Z ]/g",
+              'options': ""
+            },
+            "column3": {
+              "field_name": "Email Id",
+              "param_name": "email",
+              "is_required": true,
+              "is_visible": true,
+              "type": "text",
+              "is_header": false,
+              "pattern": "",
+              'options': ""
+            },
+            "column4": {
+              "field_name": "Phone No", 
+              "param_name": "phone",
+              "is_required": true,
+              "is_visible": true,
+              "type": "text",
+              "is_header": false,
+              "pattern": "/[^0-9]/g",
+              'options': ""
+            }
+          },
+          "url": "http://127.0.0.1:3000/api/getdatabyapiid1"
+        },
+        "step2": {
+          "column": {
+            "column1": {
+              "field_name": "Company Name",
+              "param_name": "company_name",
+              "is_required": true,
+              "is_visible": true,
+              "type": "text",
+              "is_header": false,
+              "pattern": "/[^a-zA-Z]/g",
+              'options': ""
+            },
+            "column2": {
+              "field_name": "Address",
+              "param_name": "address",
+              "is_required": true,
+              "is_visible": true,
+              "type": "textarea",
+              "is_header": false,
+              "pattern": "/[^A-Za-z0-9 ().,-]/g",
+              'options': ""
+            },
+            "column3": {
+              "field_name": "State",
+              "param_name": "state",
+              "is_required": true,
+              "is_visible": true,
+              "type": "select",
+              "is_header": false,
+              "pattern": "",
+              'options': {
+                "0" :{
+                  "id": "1",
+                  "name": "Raj"
+                },
+                "1":{
+                  "id": "2",
+                  "name": "Pan"
+                }
+              }
+            }
+          },
+          "url": "http://127.0.0.1:3000/api/getdatabyapiid2"
+        },
+        "step3": {
+          "column": {
+            "column1": {
+              "field_name": "Salary",
+              "param_name": "salary",
+              "is_required": true,
+              "is_visible": true,
+              "type": "text",
+              "is_header": false,
+              "pattern": "/[^0-9]/g",
+              'options': ""
+            },
+            "column2": {
+              "field_name": "Loan Amount",
+              "param_name": "loan_amt",
+              "is_required": true,
+              "is_visible": true,
+              "type": "text",
+              "is_header": false,
+              "pattern": "/[^0-9]/g",
+              'options': ""
+            }
+          },
+          "url": "http://127.0.0.1:3000/api/getdatabyapiid3"
         }
       }
     };
