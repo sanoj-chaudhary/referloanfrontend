@@ -19,8 +19,8 @@
     font-style: normal;
     font-weight: 400;
     src: url(https://fonts.gstatic.com/s/materialicons/v139/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
-  }
-  
+}
+
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
@@ -118,7 +118,8 @@ p {
     padding: 0;
     margin: 0;
 }
-p + p {
+
+p+p {
     margin-top: 10px;
     margin-bottom: 5px;
 }
@@ -307,16 +308,25 @@ table.table_cards_Table td b {
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
-.form-error{
+.form-error {
     color: red;
     font-size: 12px;
+}
+
+/* Added by sanoj 05/10/2002 for error page */
+.error404 {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+   margin: auto;
+   padding: 100px 0;
 }
