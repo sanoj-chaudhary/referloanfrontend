@@ -1,78 +1,32 @@
+import React, {useEffect} from 'react'
+import axios from 'axios';
+import { Link } from '@material-ui/core';
 
-import TextField from '@material-ui/core/TextField';
-import {FormControl} from '@material-ui/core';
-import {FormLabel} from '@material-ui/core';
-import {RadioGroup} from '@material-ui/core';
-import {FormControlLabel} from '@material-ui/core';
-import {Radio} from '@material-ui/core';
-
-const apply = () => {
+const formData = ({ param }) => {
+ 
+console.log(param.data)
+  
   return (
     <>
-      <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="female"
-          name="radio-buttons-group"
-        >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
-        </RadioGroup>
+      <div className='productlistwrapper' >
 
-        <TextField name="name" label="Name" />
-        
-      </FormControl>
+      {Object.keys(param.data || {}).map((index, item) => {
+                return (<div>test{param.data[item]['section']}</div>);
+              })}
 
-      <div class="row px-0">
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="name" label="Name" />
-        </div>
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="email" label="Email Id" />
-        </div>
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="phone" label="Phone No" />
-        </div>
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="adhar" label="Adhaar Card" />
-        </div>
       </div>
-
-      <div class="row px-0">
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="address1" label="Gender" />
-        </div>
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="address2" label="Address 2" />
-        </div>
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="state" label="State" />
-        </div>
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="pincode" label="Pincode" />
-        </div>
-      </div>
-
-      <div class="row px-0">
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="address1" label="Address 1" />
-        </div>
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="address2" label="Address 2" />
-        </div>
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="state" label="State" />
-        </div>
-        <div class="col-sm-4 col-md-2 col-lg-2 pb-3">
-          <TextField name="pincode" label="Pincode" />
-        </div>
-      </div>
-
-
     </>
   )
 }
 
-export default apply
+export async function getServerSideProps(context) {
+  let formData = context.query;
+  let result = await axios.post(`${process.env.APP_URL}/apistructurebyapiid`, formData);
+  let param = await result.data;
+  return { props: { param } }
+}
+
+export default formData
+
+
+
