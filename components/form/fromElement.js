@@ -8,9 +8,11 @@ import {
     useField,
     useFormik
 } from 'formik';
-
+import Button from '@mui/material/Button';
 export function Form(props) {
+//    console.log(props)
     return (
+        
         <Formik
             {...props}
         >
@@ -21,20 +23,21 @@ export function Form(props) {
 }
 
 export function TextField(props) {
-    const { name, label, placeholder, ...rest } = props
+    const {placeholder,label,name,type,options,...rest } = props
+
     return (
         <>
-            {label && <label for={name}>{label}</label>}
+       {label && <label for={name}>{label}</label>}
             <Field
                 className="form-control"
-                type="text"
+                type={type}
                 name={name}
                 id={name}
                 placeholder={placeholder || ""} 
                 {...rest}
             />
             <ErrorMessage name={name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} />
-        </>
+      </>
     )
 }
 
@@ -46,10 +49,11 @@ export function SelectField(props) {
             <Field
                 as="select"
                 id={name}
-                name={name}
+                className="form-control"
+                // name={name}
             >
                 <option value="" >Choose...</option>
-                {options.map((optn, index) => <option value={optn.value} label={optn.label || optn.value} />)}
+                {options.map((optn, index) => <option value={optn.id} label={optn.name || optn.value} />)}
             </Field>
             <ErrorMessage name={name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} />
         </>
@@ -61,6 +65,6 @@ export function SubmitButton(props){
     const { isSubmitting } = useFormikContext();
     
     return (
-        <button type="submit" {...rest} disabled={isSubmitting}>{title}</button>
+        <Button variant="contained" type="submit"  {...rest} disabled={isSubmitting}>{title}</Button>
     )
 }
