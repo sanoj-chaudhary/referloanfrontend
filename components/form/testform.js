@@ -37,7 +37,7 @@ const formSchema = {
   {
     "step1": {
       "column": {
-        "column1": {
+        "first_name": {
           "field_name": "First Name",
           "name": "first_name",
           "label": "First Name",
@@ -48,7 +48,7 @@ const formSchema = {
           "pattern": "/[^a-zA-Z ]/g",
           'options': ""
         },
-        "column2": {
+        "last_name": {
           "label": "Last Name",
           "field_name": "Last Name",
           "name": "last_name",
@@ -59,7 +59,7 @@ const formSchema = {
           "pattern": "/[^a-zA-Z ]/g",
           'options': ""
         },
-        "column3": {
+        "email": {
           "label": "Email Id",
           "name": "email",
           "is_required": true,
@@ -69,7 +69,7 @@ const formSchema = {
           "pattern": "",
           'options': ""
         },
-        "column4": {
+        "phone": {
           "label": "Phone No",
           "name": "phone",
           "is_required": true,
@@ -84,7 +84,7 @@ const formSchema = {
     },
     "step2": {
       "column": {
-        "column1": {
+        "company_name": {
           "field_name": "Company Name",
           "name": "company_name",
           "is_required": true,
@@ -94,17 +94,17 @@ const formSchema = {
           "pattern": "/[^a-zA-Z]/g",
           'options': ""
         },
-        "column2": {
+        "address": {
           "field_name": "Address",
           "name": "address",
           "is_required": true,
           "is_visible": true,
-          "type": "textarea",
+          "type": "text",
           "is_header": false,
           "pattern": "/[^A-Za-z0-9 ().,-]/g",
           'options': ""
         },
-        "column3": {
+        "state": {
           "field_name": "State",
           "name": "state",
           "is_required": true,
@@ -112,16 +112,16 @@ const formSchema = {
           "type": "select",
           "is_header": false,
           "pattern": "",
-          'options': {
-            "0": {
+          'options':[
+           {
               "id": "1",
               "name": "Raj"
             },
-            "1": {
+            {
               "id": "2",
               "name": "Pan"
             }
-          }
+          ]
         }
       },
       "url": "http://127.0.0.1:3000/api/getdatabyapiid2"
@@ -138,7 +138,7 @@ const formSchema = {
           "pattern": "/[^0-9]/g",
           'options': ""
         },
-        "column2": {
+        "loan_amt": {
           "field_name": "Loan Amount",
           "name": "loan_amt",
           "is_required": true,
@@ -157,12 +157,15 @@ function testForm(props) {
   console.log("data:" + props.data);
   const [formData, setFormData] = useState({});
   const [validationSchema, setValidationSchema] = useState({});
+  const [step1, setStep1] = useState(true)
+  const [step2, setStep2] = useState(false)
 
   useEffect(() => {
-    initForm(formSchema);
+    initForm1(formSchema);
+    
   }, []);
 
-  const initForm = (formSchema) => {
+  const initForm1 = (formSchema) => {
     let _formData = {};
     let _validationSchema = {};
 
@@ -170,7 +173,7 @@ function testForm(props) {
       _formData[key] = "";
 
       if (formSchema.section.step1.column[key].type === "text") {
-        _validationSchema[key] = Yup.string();
+        _validationSchema[key] = Yup.string().required();
       } else if (formSchema.section.step1.column[key].type === "email") {
         _validationSchema[key] = Yup.string().email()
       } else if (formSchema.section.step1.column[key].type === "select") {
@@ -183,6 +186,33 @@ function testForm(props) {
     }
 
     setFormData(_formData);
+
+    console.log(_validationSchema)
+    setValidationSchema(Yup.object().shape({ ..._validationSchema }));
+  }
+  const initForm2 = (formSchema) => {
+    let _formData = {};
+    let _validationSchema = {};
+
+    for (var key of Object.keys(formSchema.section.step2.column)) {
+      _formData[key] = "";
+
+      if (formSchema.section.step2.column[key].type === "text") {
+        _validationSchema[key] = Yup.string().required();
+      } else if (formSchema.section.step2.column[key].type === "email") {
+        _validationSchema[key] = Yup.string().email()
+      } else if (formSchema.section.step2.column[key].type === "select") {
+        _validationSchema[key] = Yup.string().oneOf(formSchema.section.step2.column[key].options.map(o => o.value));
+      }
+
+      if (formSchema.section.step2.column[key].required) {
+        _validationSchema[key] = _validationSchema[key].required('Required');
+      }
+    }
+
+    setFormData(_formData);
+
+    console.log(_validationSchema)
     setValidationSchema(Yup.object().shape({ ..._validationSchema }));
   }
 
@@ -191,7 +221,9 @@ function testForm(props) {
       name: elementSchema.name,
       label: elementSchema.label,
       options: elementSchema.options,
-      type: elementSchema.type
+      type: elementSchema.type,
+      placeholder:elementSchema.placeholder,
+      elementName
     };
 
     if (elementSchema.type === "text" || elementSchema.type === "email") {
@@ -212,11 +244,14 @@ function testForm(props) {
     setTimeout(() => {
       alert(JSON.stringify(values, null, 2));
       actions.setSubmitting(false);
+      setStep2(true)
+      setStep1(false)
+      initForm2(formSchema);
     }, 1000)
   };
   return (
     <div>
-      <Form
+      {step1 && <Form
         enableReinitialize
         initialValues={formData}
         validationSchema={validationSchema}
@@ -230,7 +265,25 @@ function testForm(props) {
           </div>
         ))}
         <SubmitButton title="Submit" />
-      </Form>
+      </Form>}
+      {
+step2 &&  <Form
+enableReinitialize
+initialValues={formData}
+validationSchema={validationSchema}
+onSubmit={onSubmit}
+
+>
+
+{Object.keys(formSchema.section.step2.column).map((key, ind) => (
+  <div key={key}>
+    {getFormElement(key, formSchema.section.step2.column[key])}
+  </div>
+))}
+<SubmitButton title="Submit" />
+</Form>
+      }
+     
     </div>
   );
 }

@@ -10,8 +10,9 @@ import {
 } from 'formik';
 import Button from '@mui/material/Button';
 export function Form(props) {
-   console.log(props)
+//    console.log(props)
     return (
+        
         <Formik
             {...props}
         >
@@ -22,25 +23,20 @@ export function Form(props) {
 }
 
 export function TextField(props) {
-    const {label,name,type,options,...rest } = props
-console.log(props)
+    const {placeholder,label,name,type,options,...rest } = props
+
     return (
         <>
-        {label && <label for={name}>{label}</label>}
-        <Field name={name}>
-        {({
-          field, // { name, value, onChange, onBlur }
-          form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-          meta,
-        }) => (
-          <div>
-            <input type={type}  {...field} />
-            {meta.touched && meta.error && (
-              <div className="error">{meta.error}</div>
-            )}
-          </div>
-        )}
-      </Field>
+       {label && <label for={name}>{label}</label>}
+            <Field
+                className="form-control"
+                type={type}
+                name={name}
+                id={name}
+                placeholder={placeholder || ""} 
+                {...rest}
+            />
+            <ErrorMessage name={name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} />
       </>
     )
 }
@@ -53,10 +49,11 @@ export function SelectField(props) {
             <Field
                 as="select"
                 id={name}
+                className="form-control"
                 // name={name}
             >
                 <option value="" >Choose...</option>
-                {options.map((optn, index) => <option value={optn.value} label={optn.label || optn.value} />)}
+                {options.map((optn, index) => <option value={optn.id} label={optn.name || optn.value} />)}
             </Field>
             <ErrorMessage name={name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} />
         </>
