@@ -8,8 +8,9 @@ import {
     useField,
     useFormik
 } from 'formik';
-
+import Button from '@mui/material/Button';
 export function Form(props) {
+   console.log(props)
     return (
         <Formik
             {...props}
@@ -21,20 +22,26 @@ export function Form(props) {
 }
 
 export function TextField(props) {
-    const { name, label, placeholder, ...rest } = props
+    const {label,name,type,options,...rest } = props
+console.log(props)
     return (
         <>
-            {label && <label for={name}>{label}</label>}
-            <Field
-                className="form-control"
-                type="text"
-                name={name}
-                id={name}
-                placeholder={placeholder || ""} 
-                {...rest}
-            />
-            <ErrorMessage name={name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} />
-        </>
+        {label && <label for={name}>{label}</label>}
+        <Field name={name}>
+        {({
+          field, // { name, value, onChange, onBlur }
+          form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+          meta,
+        }) => (
+          <div>
+            <input type={type}  {...field} />
+            {meta.touched && meta.error && (
+              <div className="error">{meta.error}</div>
+            )}
+          </div>
+        )}
+      </Field>
+      </>
     )
 }
 
@@ -46,7 +53,7 @@ export function SelectField(props) {
             <Field
                 as="select"
                 id={name}
-                name={name}
+                // name={name}
             >
                 <option value="" >Choose...</option>
                 {options.map((optn, index) => <option value={optn.value} label={optn.label || optn.value} />)}
@@ -61,6 +68,6 @@ export function SubmitButton(props){
     const { isSubmitting } = useFormikContext();
     
     return (
-        <button type="submit" {...rest} disabled={isSubmitting}>{title}</button>
+        <Button variant="contained" type="submit"  {...rest} disabled={isSubmitting}>{title}</Button>
     )
 }
