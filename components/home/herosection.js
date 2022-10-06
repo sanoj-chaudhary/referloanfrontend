@@ -1,10 +1,52 @@
-import loanwicon from './../../public/images/loan-w-icon.png'
-import inserticon from './../../public/images/interst-icon.png'
-import loantermicon from './../../public/images/loan-term-icon.png'
-import hdimg from './../../public/images/hd-img.png'
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { useState, useEffect } from 'react'
 
-import Image from 'next/image'
+import axios from 'axios'
+import { Radio } from '@mui/material'
+import FormLabel from '@mui/material/FormLabel';
+import RadioGroup from '@mui/material/RadioGroup';
+import { useRouter, withRouter } from 'next/router'
+import Filterproduct from '../../pages/filter-product';
 const herosection = () => {
+      const router = useRouter()
+      const [loans, setLoan] = useState([]);
+      const [formData, setFormData] = useState({
+            product_id: '',
+            pincode: '',
+            emp_type: 'salaried',
+            salary: '',
+            turnover: '',
+            bank_id: '',
+            category: 'loan'
+      })
+
+      const handleChange = (e) => {
+            setFormData({
+                  ...formData,
+                  [e.target.name]: e.target.value.trim()
+            });
+      };
+
+      const onSubmit = async () => {
+
+            router.push({
+                  pathname: `/filter-product`,
+                  query: formData
+            })
+      }
+
+      const getLoan = async () => {
+            const res = await axios.get('api/getpagebycatid/1');
+            const data = await res.data;
+            setLoan(res.data);
+      }
+
+      useEffect(() => {
+            getLoan();
+      }, []);
+
+
       return (
             <section className="heroSection">
                   <div className="container">
@@ -54,27 +96,42 @@ const herosection = () => {
                                                 <form action="">
                                                       <div className="loan-form-area">
                                                             <div className="loanType">
-                                                                  <select>
-                                                                        <option value='1' selected>Type of loan </option>
-                                                                        <option value='2' >Normal</option>
-                                                                        <option value='3'>Hard</option>
-                                                                        <option value='5'>Expert</option>
+                                                                  <select name='product_id' onChange={handleChange}>
+                                                                        {loans.map((item) => (
+                                                                              <option value={item.id}>{item.post_title}</option>
+                                                                        ))}
                                                                   </select>
                                                             </div>
 
                                                             <div className="loanType">
-                                                                  <input type="text" placeholder="Company Name" />
+                                                                  <input name='pincode' type="text" placeholder="Pincode" onChange={handleChange} />
                                                             </div>
-                                                            <div className="loanType salary_slidecontainer">
-                                                                  <label>Salary <div className="amount__box"><span>₹</span> 85K</div></label>
-                                                                  <input type="range" min="1" max="100" value="50" className="slider" id="myRange" />
+                                                            <div>
+                                                                  <FormControl>
+                                                                        <FormLabel id="demo-row-radio-buttons-group-label">Employee Type</FormLabel>
+                                                                        <RadioGroup
+                                                                              row
+                                                                              aria-labelledby="demo-row-radio-buttons-group-label"
+                                                                              value={formData.emp_type}
+                                                                              onChange={handleChange}
+                                                                        >
+                                                                              <FormControlLabel name='emp_type' value="salaried" control={<Radio />} label="Salaried" />
+                                                                              <FormControlLabel name='emp_type' value="self-employed" control={<Radio />} label="Self Employed " />
+
+                                                                        </RadioGroup>
+                                                                  </FormControl>
                                                             </div>
                                                             <div className="loanType">
-                                                                  <input type="text" placeholder="Pincode" />
+                                                                  {formData.emp_type === 'salaried' && <input name='salary' type="text" placeholder="Salary" onChange={handleChange} />}
+                                                                  {formData.emp_type === 'self-employed' && <input name='turnover' type="text" placeholder="Turn Over" onChange={handleChange} />
+                                                                  }
+
                                                             </div>
+
                                                             <div className="search-button">
-                                                                  <button type="button">Search</button>
+                                                                  <button onClick={onSubmit} type="button">Search</button>
                                                             </div>
+
                                                       </div>
                                                 </form>
                                           </div>
@@ -89,4 +146,5 @@ const herosection = () => {
       )
 }
 
-export default herosection
+
+export default withRouter(herosection);

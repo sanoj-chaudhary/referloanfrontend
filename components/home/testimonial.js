@@ -20,7 +20,7 @@ const testimonial = (props) => {
             </Link>
           </h2>
           <ul className="testimaolSlider-container">
-            {testimonial.slice(0, props.slice).map((testimonial) => (
+            {testimonial && testimonial.slice(0, props.slice).map((testimonial) => (
               <li key={testimonial.id}>
                 <div className="ratingPnl">
                   <i className="fas fa-star"></i>
