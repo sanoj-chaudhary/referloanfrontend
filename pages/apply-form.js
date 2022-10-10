@@ -1,30 +1,16 @@
-import React, {useEffect} from 'react'
-import axios from 'axios';
-import { Link } from '@material-ui/core';
+import Form from "../components/form/testForm"
 
-const formData = ({ param }) => {
+const formData = () => {
  
-console.log(param.data)
   
   return (
     <>
-      <div className='productlistwrapper' >
-
-      {Object.keys(param.data || {}).map((index, item) => {
-                return (<div>test{param.data[item]['section']}</div>);
-              })}
-
-      </div>
+      <Form />
     </>
   )
 }
 
-export async function getServerSideProps(context) {
-  let formData = context.query;
-  let result = await axios.post(`${process.env.APP_URL}/apistructurebyapiid`, formData);
-  let param = await result.data;
-  return { props: { param } }
-}
+
 
 export default formData
 
