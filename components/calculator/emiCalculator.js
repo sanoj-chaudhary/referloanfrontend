@@ -104,7 +104,7 @@ const emiCalculator = () => {
   const [pAmount, setpAmount] = useState(100000);
   const [interest, setInterest] = useState(9.56);
   const [duration, setDuration] = useState(12)
-  const maxvalue = 600000000;
+  const maxvalue = 10000000;
   const maxint = 20;
   const maxduration = 360;
 
@@ -125,7 +125,7 @@ const emiCalculator = () => {
           <h2>Loan Amount</h2>
           <small>(Up to 1 Crore)</small>
           <div className="outputArea">
-            <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-rupee"></i> </span>
+            <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check outline-none" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> ₹ </span>
           </div>
 
         </div>
@@ -138,7 +138,7 @@ const emiCalculator = () => {
           <h2>Interest Rate</h2>
           <small>(9.50% to 19.55%)</small>
           <div className="outputArea">
-            <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
+            <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> % </span>
           </div>
         </div>
         <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
@@ -149,7 +149,7 @@ const emiCalculator = () => {
           <h2>Loan Tenure</h2>
           <small>(1 year - 30 years)</small>
           <div className="outputArea">
-            <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" >
+            <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" >Mo
             </span></div>
 
         </div>
@@ -176,9 +176,9 @@ const emiCalculator = () => {
                   }],
                   labels: ['Total Interest', 'Total Amount']
                 }}
-                width={200}
-                height={200}
-
+                width={100}
+                height={100}
+                options={{ maintainAspectRatio: false }}
               />
             </TableCell>
           </TableRow>
