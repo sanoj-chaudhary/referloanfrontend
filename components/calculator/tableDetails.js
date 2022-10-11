@@ -3,35 +3,35 @@ import { TableHead } from '@mui/material'
 const tableDetails = (props) => {
   console.log(props)
   return (
-   <Table style={{ width:"100%", border:"2px solid #ccc" }} area-lable="sample table" >
-    <TableHead>
-      <TableRow>
-        <TableCell className='ETablecellText'>Loan Amount</TableCell>
-        <TableCell className='ETablecellValue'><strong>R</strong>{props.loanamt}</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell className='ETablecellText'>Interest %</TableCell>
-        <TableCell className='ETablecellValue'><strong>R</strong>{props.interest}</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell className='ETablecellText'>Tenure (months)</TableCell>
-        <TableCell className='ETablecellValue'><strong>R</strong>{props.tenure}</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell className='ETablecellText'>Emi (monthly)</TableCell>
-        <TableCell className='ETablecellValue'><strong>R</strong>{props.emi}</TableCell>
-      </TableRow>
-     
-      <TableRow>
-        <TableCell className='ETablecellText'>Total Interest</TableCell>
-        <TableCell className='ETablecellValue'><strong>R</strong>{props.totalIntrest}</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell className='ETablecellText'>Loan Amount + Interest</TableCell>
-        <TableCell className='ETablecellValue'><strong>R</strong>{props.tatalpayment? props.tatalpayment:0}</TableCell>
-      </TableRow>
-    </TableHead>
-   </Table>
+    <Table style={{ width: "100%", border: "2px solid #ccc" }} area-lable="sample table" >
+      <TableHead>
+        <TableRow>
+          <TableCell className='ETablecellText'>Loan Amount</TableCell>
+          <TableCell className='ETablecellValue'><strong>₹</strong>{props.loanamt}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell className='ETablecellText'>Interest %</TableCell>
+          <TableCell className='ETablecellValue'>{props.interest} <strong> % </strong></TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell className='ETablecellText'>Tenure (months)</TableCell>
+          <TableCell className='ETablecellValue'>{props.tenure}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell className='ETablecellText'>Emi (monthly)</TableCell>
+          <TableCell className='ETablecellValue'><strong>₹ </strong>{props.emi}</TableCell>
+        </TableRow>
+
+        <TableRow>
+          <TableCell className='ETablecellText'>Total Interest</TableCell>
+          <TableCell className='ETablecellValue'><strong>₹ </strong>{props.totalIntrest}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell className='ETablecellText'>Loan Amount + Interest</TableCell>
+          <TableCell className='ETablecellValue'><strong>₹ </strong>{props.tatalpayment ? props.tatalpayment : 0}</TableCell>
+        </TableRow>
+      </TableHead>
+    </Table>
   )
 }
 
