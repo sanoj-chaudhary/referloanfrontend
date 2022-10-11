@@ -3,7 +3,7 @@ const calcSidebar = ({setCalcName,calcName}) => {
     console.log(calcName)
     return (
 
-        <div class="article_list">
+        <div class="article_list" data-aos="fade-left">
             <h2>CALCULATOR</h2>
             <ul>
                 <li><a onClick={()=>{setCalcName('Emi Calculator')}} title="EMI Calculator">EMI Calculator</a></li>
