@@ -123,7 +123,7 @@ const sipCalculator = () => {
   return (
     <>
 
-      <div className="row mt-5">
+      <div className="row">
         <div className="col-sm-12 col-md-12  col-xl-12">
           <div className="rangeArea">
             <div className="rangeHead">
@@ -164,23 +164,15 @@ const sipCalculator = () => {
           </div>
 
         </div>
-        <div className="col-sm-12 col-md-6  col-xl-6">
+        
+        <div className="col-sm-12 col-md-12  col-xl-12">
 
           <div className="table-responsive">
             <Table>
               <TableRow>
                 <TableCell>
-                  <TableSipDetails total_amount={futureValue} interest={interest} tenure={duration} total_investment={total_investment} total_interest={total_interest} />
+                  <TableSipDetails total_amount={futureValue} interest={interest} duration={duration} total_investment={total_investment} total_interest={total_interest} />
                 </TableCell>
-              </TableRow>
-            </Table>
-          </div>
-        </div>
-
-        <div className="col-sm-12 col-md-6  col-xl-6">
-          <div className="table-responsive">
-            <Table>
-              <TableRow>
                 <TableCell>
                   <Pie className='clChart'
                     data={{
@@ -190,15 +182,14 @@ const sipCalculator = () => {
                       }],
                       labels: ['Total Interest', 'Total Amount']
                     }}
-                    width={100}
-                    height={100}
+                    width={180}
+                    height={180}
                     options={{ maintainAspectRatio: false }}
                   />
                 </TableCell>
               </TableRow>
             </Table>
           </div>
-
         </div>
 
       </div>

@@ -11,6 +11,10 @@ const tableDetails = (props) => {
         <TableCell className='ETablecellValue'><strong>% </strong>{props.interest}</TableCell>
       </TableRow>
       <TableRow>
+        <TableCell className='ETablecellText'>Duration (Years)</TableCell>
+        <TableCell className='ETablecellValue'><strong> </strong>{props.duration}</TableCell>
+      </TableRow>
+      <TableRow>
         <TableCell className='ETablecellText'>Invested Amount</TableCell>
         <TableCell className='ETablecellValue'><strong>₹ </strong>{props.total_investment}</TableCell>
       </TableRow>
@@ -20,7 +24,7 @@ const tableDetails = (props) => {
       </TableRow>
       <TableRow>
         <TableCell className='ETablecellText'>Total Wealth</TableCell>
-        <TableCell className='ETablecellValue'><strong>₹</strong>{props.total_amount}</TableCell>
+        <TableCell className='ETablecellValue'><strong>₹ </strong>{props.total_amount}</TableCell>
       </TableRow>
     </TableHead>
    </Table>
