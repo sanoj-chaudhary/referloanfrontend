@@ -1,22 +1,11 @@
 import React, { useState } from 'react'
-import { withStyles } from '@material-ui/styles'
 import Slider from '@mui/material/Slider';
-import { Typography } from '@material-ui/core'
-import { Table, TableCell, TableRow } from '@material-ui/core'
-// import { Chart } from 'react-chartjs-2';
+import { Table, TableCell, TableRow, TableHead } from '@material-ui/core'
 import { styled } from '@mui/material/styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-
-ChartJS.register(ArcElement, Tooltip, Legend);
-// export const PretoSlider = withStyles({
-//   color: { color: "#ff9302", height: 10 },
-//   thumb: { height: 20, width: 20, backgroundColor: 'ff9302', marginTop: -1, marginLeft: -9 },
-//   track: { height: 20, borderRadius: 4 },
-//   rail: { height: 40, color:"red", borderRadius: 4 }
-// })(Slider);
 import TableDetails from './tableDetails';
-
+ChartJS.register(ArcElement, Tooltip, Legend);
 const PrettoSlider = styled(Slider)({
   color: '#00796a',
   height: 8,
@@ -101,19 +90,22 @@ const marksss = [
 ];
 
 const emiCalculator = () => {
-  const [pAmount, setpAmount] = useState(100000);
+  const [monthlyinvest, setMonthlyInvest] = useState('5000');
   const [interest, setInterest] = useState(9.56);
-  const [duration, setDuration] = useState(12)
+  const [year, setYear] = useState(2)
   const maxvalue = 10000000;
   const maxint = 20;
-  const maxduration = 360;
+  const maxduration = 30;
 
-  const intrate = interest / 1200;
-  const emi = duration ? Math.round(pAmount * intrate / (1 - (Math.pow(1 / (1 + intrate), duration)))) : 0;
-  const totalAmt = duration * emi;
-  const totalAmountofCredit = Math.round((emi / intrate) * (1 - Math.pow((1 + intrate), (-duration))));
-  const totalAmountofInterest = Math.round(totalAmt - totalAmountofCredit);
-  const payableAmt = pAmount + totalAmountofInterest;
+  const months = year * 12;
+  const R = 10000;
+  const n = (4 * year);
+
+  const i = interest / 400;
+  const totalDeposit = monthlyinvest * months;
+  let totalReturns = monthlyinvest * [(Math.pow((1 + i), n)) - 1] / (1 - (Math.pow((1 + i), (-1 / 3))));
+  const returnInterest = (totalReturns - totalDeposit);
+
   function valuetext(value) {
     return `${value} Lac`;
   }
@@ -122,15 +114,13 @@ const emiCalculator = () => {
 
       <div className="rangeArea">
         <div className="rangeHead">
-          <h2>Loan Amount</h2>
-          <small>(Up to 1 Crore)</small>
+          <h2>Monthly Invest</h2>
           <div className="outputArea">
-            <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check outline-none" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> ₹ </span>
+            <input type="text" value={monthlyinvest} name="loan_amount" id="loan_amount" className="emi_check outline-none" onChange={(e) => { setMonthlyInvest(e.target.value) }} /> <span className="emi-icon"> ₹ </span>
           </div>
-
         </div>
 
-        <PrettoSlider value={pAmount} onChange={(e) => { setpAmount(e.target.value) }} max={maxvalue} getAriaValueText={valuetext}
+        <PrettoSlider value={monthlyinvest} onChange={(e) => { setMonthlyInvest(e.target.value) }} max={maxvalue} getAriaValueText={valuetext}
         ></PrettoSlider>
       </div>
       <div className="rangeArea">
@@ -149,21 +139,36 @@ const emiCalculator = () => {
           <h2>Loan Tenure</h2>
           <small>(1 year - 30 years)</small>
           <div className="outputArea">
-            <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" >Mo
+            <input type="number" value={year} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setYear(e.target.value) }} /> <span className="emi-icon" >Yr
             </span></div>
 
         </div>
         <PrettoSlider
-          onChange={(e, vdur) => { setDuration(vdur) }} value={duration} max={maxduration}
+          onChange={(e, vdur) => { setYear(vdur) }} value={year} max={maxduration}
           valueLabelDisplay="auto"
         />
       </div>
 
       <div>
-        <Table>
+        <Table style={{ borderBottom: "none" }}>
           <TableRow style={{ borderBottom: "2px solid white" }}>
             <TableCell>
-              <TableDetails emi={emi} loanamt={pAmount} interest={interest} tenure={duration} totalIntrest={totalAmountofInterest} tatalpayment={payableAmt} />
+              <Table style={{ width: "100%", border: "none", borderBottom: "none",borderBottom: "none"  }} area-lable="sample table" >
+                <TableHead>
+                  <TableRow>
+                    <TableCell className='ETablecellText'>Invest Amount</TableCell>
+                    <TableCell className='ETablecellValue'>₹ {totalDeposit.toFixed(0)}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className='ETablecellText'> Est. returns</TableCell>
+                    <TableCell className='ETablecellValue'>₹ {returnInterest.toFixed(0)}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className='ETablecellText'>Total value</TableCell>
+                    <TableCell className='ETablecellValue'>₹ {totalReturns.toFixed(0)}</TableCell>
+                  </TableRow>
+                </TableHead>
+              </Table >
             </TableCell>
 
             <TableCell>
@@ -171,13 +176,13 @@ const emiCalculator = () => {
                 data={{
 
                   datasets: [{
-                    data: [totalAmountofInterest, pAmount],
+                    data: [returnInterest, totalDeposit],
                     backgroundColor: ['rgb(0, 121, 106)', 'rgb(255, 147, 2)']
                   }],
-                  labels: ['Total Interest', 'Total Amount']
+                  labels: ['Total Interest', 'Total Invest']
                 }}
-                width={100}
-                height={100}
+                width={300}
+                height={300}
                 options={{ maintainAspectRatio: false }}
               />
             </TableCell>

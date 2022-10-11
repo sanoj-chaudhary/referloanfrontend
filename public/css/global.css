@@ -387,7 +387,7 @@ input[type=number] {
 }
 
 .ETablecellText {
-    background-color: #f3f8ff;
+    /* background-color: #f3f8ff; */
     color: #000;
     font-size: 16px;
 }
@@ -410,6 +410,13 @@ input[type=number] {
 
 .emicontainer .left {
     flex: 2;
+        /* background-color: #fff; */
+        padding: 45px 20px 45px 40px;
+        border: 1px solid #ecedef;
+       
+        border-radius: 5px;
+        /* border: 1px solid lightgrey; */
+        border: 1px solid #ecedef;
 }
 
 .emicontainer .left .emi_check{
@@ -425,8 +432,10 @@ input[type=number] {
     display: table;
     border-spacing: 0;
     border-collapse: collapse;
-    border: 1px solid lightgray !important;
+    border: none !important;
 }
+
+
 .emicontainer .right {
     flex: 1;
 }
