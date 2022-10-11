@@ -327,14 +327,14 @@ input[type=number] {
     width: fit-content;
     display: flex;
     flex-direction: column;
-   margin: auto;
-   padding: 100px 0;
+    margin: auto;
+    padding: 100px 0;
 }
 
 
 /* added by sanoj for emi calculator */
 .rangeArea {
-    padding: 30px 10px;
+    padding: 10px 10px;
 }
 
 .rangeHead {
@@ -374,7 +374,7 @@ input[type=number] {
     column-gap: 15px;
 }
 
-.rangeArea .rangeSlider{
+.rangeArea .rangeSlider {
     -webkit-appearance: none;
     margin-right: 15px;
     width: 700px;
@@ -386,18 +386,102 @@ input[type=number] {
     background-repeat: no-repeat;
 }
 
-.ETablecellText{
-    background-color: #f3f8ff;
+.ETablecellText {
+    /* background-color: #f3f8ff; */
     color: #000;
     font-size: 16px;
 }
 
-.ETablecellValue{
+.ETablecellValue {
     text-align: right;
     font-size: 18px;
 }
 
-.clChart{
+/* .clChart{
     width: 400px !important;
     height: 400px !important;
+} */
+
+.emicontainer {
+    display: flex;
+    padding: 0 50px;
+    margin-bottom: 20px;
+}
+
+.emicontainer .left {
+    flex: 2;
+        /* background-color: #fff; */
+        padding: 45px 20px 45px 40px;
+        border: 1px solid #ecedef;
+       
+        border-radius: 5px;
+        /* border: 1px solid lightgrey; */
+        border: 1px solid #ecedef;
+}
+
+.emicontainer .left .emi_check{
+    outline: none;
+    border: none;
+}
+.emicontainer .left .emi_check:focus{
+    outline: none;
+    border: none;
+}
+.emicontainer .left .MuiTable-root {
+    width: 100%;
+    display: table;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: none !important;
+}
+
+
+.emicontainer .right {
+    flex: 1;
+}
+
+.article_list {
+    border: 1px solid #e4ebf5 !important;
+    margin-top: 20px;
+    margin: 0 20px;
+}
+
+.article_list h2 {
+    font-size: var(--regular-font) !important;
+    font-weight: 600 !important;
+    background-color: #fafcfe;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0 !important;
+}
+
+.article_list ul {
+    text-align: center;
+    padding: 0px;
+}
+
+.article_list ul li {
+    border-top: 1px solid #e4ebf5 !important;
+    padding: 15px 15px;
+    list-style: none !important;
+}
+
+.article_list ul li a {
+    color: #333;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.article_list ul li a:hover {
+    color: #00796a;
+}
+
+.emiCalcHeading {
+    text-align: center;
+    padding: 20px !important;
+    font-family: 'Poppins';
 }

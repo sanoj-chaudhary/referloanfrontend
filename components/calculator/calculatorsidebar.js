@@ -1,17 +1,24 @@
 import Link from 'next/link'
-const calcSidebar = () => {
- return(
-<div classname= "sidebar">
-<Link href="/emi-calculator"><a title="EMI Calculator">EMI Calculator</a></Link>
-<Link href="/eligibility-calculator"><a title="Eligibility Calculator">Eligibility Calculator</a></Link>
-<Link href="/subsidy-calculator"><a title="SUBSIDY Calculator">SUBSIDY Calculator</a></Link>
-<Link href="/sip-calculator"><a title="SIP Calculator">SIP Calculator</a></Link>
-<Link href="/rd-calculator"><a title="RD Calculator">RD Calculator</a></Link>
-<Link href="/ssy-calculator-for-sukanya"><a title="SSY Calculator">SSY Calculator</a></Link>
-<Link href="/ppf-calculator"><a title="PPF Calculator">PPF Calculator</a></Link>
-<Link href="/epf-calculator"><a title="EPF Calculator">EPF Calculator</a></Link>
-<Link href="/lumpsum-calculator"><a title="Lumpsum Calculator">Lumpsum Calculator</a></Link>
-<Link href="/mf-calculator"><a title="MF Returns Calculator">MF Returns Calculator</a></Link>
-</div>
-    )}
-    export default calcSidebar;
+const calcSidebar = ({setCalcName,calcName}) => {
+    console.log(calcName)
+    return (
+
+        <div class="article_list" data-aos="fade-left">
+            <h2>CALCULATOR</h2>
+            <ul>
+                <li><a onClick={()=>{setCalcName('Emi Calculator')}} title="EMI Calculator">EMI Calculator</a></li>
+             
+                <li><a onClick={()=>{setCalcName('Subsidy Calculator')}} title="SUBSIDY Calculator">SUBSIDY Calculator</a></li>
+                <li><a onClick={()=>{setCalcName('SIP Calculator')}} title="SIP Calculator">SIP Calculator</a></li>
+                <li><a onClick={()=>{setCalcName('RD Calculator')}} title="RD Calculator">RD Calculator</a></li>
+
+                <li><a  onClick={()=>{setCalcName('SSY Calculator')}} title="SSY Calculator">SSY Calculator</a></li>
+                <li><a  onClick={()=>{setCalcName('PPF Calculator')}} title="PPF Calculator">PPF Calculator</a></li>
+                <li><a  onClick={()=>{setCalcName('EPF Calculator')}} title="EPF Calculator">EPF Calculator</a></li>
+                <li><a  onClick={()=>{setCalcName('Lumpsum Calculator')}} title="Lumpsum Calculator">Lumpsum Calculator</a></li>
+                <li><a onClick={()=>{setCalcName('MF Returns Calculator')}} title="MF Returns Calculator">MF Returns Calculator</a></li>
+            </ul>
+        </div>
+    )
+}
+export default calcSidebar;
