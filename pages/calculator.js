@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import EmiCalculator from '../components/calculator/emiCalculator'
+import SubsidyCalculator from '../components/calculator/subsidyCalculator'
 import CalcSidebar from '../components/calculator/calculatorsidebar'
 const calculator = () => {
   const [calcName,setCalcName] = useState('Emi Calculator');
@@ -13,7 +14,7 @@ const calculator = () => {
       <div className='emicontainer'>
         <div className='left'>
           {calcName=='Emi Calculator' && <EmiCalculator  />}
-          {calcName=='Subsidy Calculator' && <h1>Subsidy</h1>}
+          {calcName=='Subsidy Calculator' && <SubsidyCalculator />}
         
         </div>
         <div className='right'>
