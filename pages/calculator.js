@@ -5,6 +5,7 @@ import SipCalculator from '../components/calculator/sipCalculator'
 import PpfCalculator from '../components/calculator/ppfCalculator'
 import CalcSidebar from '../components/calculator/calculatorsidebar'
 import RdCaculator from '../components/calculator/rdcalculator'
+import EpfCalculator from '../components/calculator/epfCalculator'
 
 const calculator = () => {
   const [calcName, setCalcName] = useState('Emi Calculator');
@@ -25,6 +26,7 @@ const calculator = () => {
           {calcName == 'RD Calculator' && <RdCaculator />}
           {calcName == 'SIP Calculator' && <SipCalculator />}
           {calcName == 'Subsidy Calculator' && <SubsidyCalculator />}
+          {calcName == 'EPF Calculator' && <EpfCalculator />}
         </div>
         <div className='right'>
           <CalcSidebar setCalcName={setCalcName} calcName={calcName} />

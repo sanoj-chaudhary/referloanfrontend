@@ -16,7 +16,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 //   rail: { height: 40, color:"red", borderRadius: 4 }
 // })(Slider);
 import TableDetails from './tableDetails';
-import TablePpfDetails from './tablePpfDetails';
+import TableEpfDetails from './tableEpfDetails';
 
 const PrettoSlider = styled(Slider)({
   color: '#00796a',
@@ -104,10 +104,20 @@ const marksss = [
 const ppfCalculator = () => {
   const [pAmount, setpAmount] = useState(500);
   const [interest, setInterest] = useState(7.01);
-  const [duration, setDuration] = useState(15)
+  const [duration, setDuration] = useState(15);
+  const [age, setAge] = useState(15);
+  const [retirement_age, setRetirementAge] = useState(58);
+  const [bcom_salary, setBCOMSalary] = useState(10000);
+  const [current_epf_amount, setEPFAmount] = useState(0);
+  const [yearly_growth , setYearlyGrowth] = useState(10);
   const maxvalue = 150000;
   const maxint = 20;
   const maxduration = 50;
+  const maxage = 60;
+  const maxRetirementAge = 60;
+  const maxBCOMSalary = 150000;
+  const maxEPFAmount = 150000;
+  const maxYearlyGrowth = 20;
 
   // F = P[{(1+i)n-1}/i]
   var monthlyRate = interest / 12 / 100;
@@ -139,19 +149,65 @@ const ppfCalculator = () => {
 
       <div className="row">
         <div className="col-sm-12 col-md-12  col-xl-12">
+
           <div className="rangeArea">
             <div className="rangeHead">
-              <h2>Yearly investment Amount</h2>
+              <h2>Your age</h2>
+              <small>(15 to 59)</small>
+              <div className="outputArea">
+                <input type="number" value={age} name="age" id="age" className="age_check" onChange={(e) => { setAge(e.target.value) }} /> <span className="emi-icon" > Years
+                </span>
+              </div>
+            </div>
+            <PrettoSlider onChange={(e, vdur) => { setAge(vdur) }} value={age} max={maxage} valueLabelDisplay="auto" />
+          </div>
+
+          <div className="rangeArea">
+            <div className="rangeHead">
+              <h2>Retirement age</h2>
+              <small>(Up to 60)</small>
+              <div className="outputArea">
+                <input type="number" value={retirement_age} name="retirement_age" id="retirement_age" className="retirement_age_check" onChange={(e) => { setRetirementAge(e.target.value) }} /> <span className="emi-icon" > Years
+                </span>
+              </div>
+            </div>
+            <PrettoSlider onChange={(e, vdur) => { setRetirementAge(vdur) }} value={retirement_age} max={maxRetirementAge} valueLabelDisplay="auto" />
+          </div>
+
+          <div className="rangeArea">
+            <div className="rangeHead">
+              <h2>Basic component of monthly salary</h2>
               <small>(Up to 150000)</small>
               <div className="outputArea">
-                <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
+                <input type="text" value={bcom_salary} name="bcom_salary" id="bcom_salary" className="emi_check" onChange={(e) => { setBCOMSalary(e.target.value) }} /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
               </div>
-
             </div>
+            <PrettoSlider onChange={(e) => { setBCOMSalary(e.target.value) }} value={bcom_salary} max={maxBCOMSalary} getAriaValueText={valuetext} valueLabelDisplay="auto" />
+          </div>
 
-            <PrettoSlider value={pAmount} onChange={(e) => { setpAmount(e.target.value) }} max={maxvalue} getAriaValueText={valuetext}
+          <div className="rangeArea">
+            <div className="rangeHead">
+              <h2>Current EPF Balance</h2>
+              <small>(Up to 1Cr)</small>
+              <div className="outputArea">
+                <input type="text" value={current_epf_amount} name="current_epf_amount" id="current_epf_amount" className="current_epf_check" onChange={(e) => { setEPFAmount(e.target.value) }} /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
+              </div>
+            </div>
+            <PrettoSlider value={current_epf_amount} onChange={(e) => { setEPFAmount(e.target.value) }} max={maxEPFAmount} getAriaValueText={valuetext}
             ></PrettoSlider>
           </div>
+
+          <div className="rangeArea">
+            <div className="rangeHead">
+              <h2>Your expected yearly salary growth</h2>
+              <small>(Up to 20%)</small>
+              <div className="outputArea">
+                <input type="number" value={yearly_growth} name="yearly_growth" id="yearly_growth" className="yearly_growth_check" onChange={(e) => { setYearlyGrowth(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
+              </div>
+            </div>
+            <PrettoSlider value={yearly_growth} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setYearlyGrowth(vamt) }} max={maxYearlyGrowth} ></PrettoSlider>
+          </div>
+
           <div className="rangeArea">
             <div className="rangeHead">
               <h2>Rate of interest</h2>
@@ -162,20 +218,6 @@ const ppfCalculator = () => {
             </div>
             <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
           </div>
-          <div className="rangeArea">
-            <div className="rangeHead">
-              <h2>Time period (in years)</h2>
-              <small>(1 year - 30 years)</small>
-              <div className="outputArea">
-                <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" > Years
-                </span></div>
-
-            </div>
-            <PrettoSlider
-              onChange={(e, vdur) => { setDuration(vdur) }} value={duration} max={maxduration}
-              valueLabelDisplay="auto"
-            />
-          </div>
 
         </div>
         
@@ -185,7 +227,7 @@ const ppfCalculator = () => {
             <Table>
               <TableRow>
                 <TableCell>
-                  <TablePpfDetails futureValue={futureValue} maturityAmount={maturityAmount} interest={interest} duration={duration} total_investment={total_investment} total_interest={total_interest} />
+                  <TableEpfDetails age={age} retirement_age={retirement_age} bcom_salary={bcom_salary} current_epf_amount={current_epf_amount} yearly_growth={yearly_growth} futureValue={futureValue} maturityAmount={maturityAmount} interest={interest} duration={duration} total_investment={total_investment} total_interest={total_interest} />
                 </TableCell>
                 <TableCell>
                   <Pie className='clChart'
