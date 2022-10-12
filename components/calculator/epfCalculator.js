@@ -103,7 +103,7 @@ const marksss = [
 
 const ppfCalculator = () => {
   const [pAmount, setpAmount] = useState(500);
-  const [interest, setInterest] = useState(7.01);
+  const [interest, setInterest] = useState(8.1);
   const [duration, setDuration] = useState(15);
   const [age, setAge] = useState(15);
   const [retirement_age, setRetirementAge] = useState(58);
@@ -211,7 +211,7 @@ const ppfCalculator = () => {
           <div className="rangeArea">
             <div className="rangeHead">
               <h2>Rate of interest</h2>
-              <small>(7.00%)</small>
+              <small>(8.1%)</small>
               <div className="outputArea">
                 <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
               </div>
