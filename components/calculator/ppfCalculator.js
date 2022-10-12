@@ -103,19 +103,33 @@ const marksss = [
 
 const ppfCalculator = () => {
   const [pAmount, setpAmount] = useState(500);
-  const [interest, setInterest] = useState(7.00);
+  const [interest, setInterest] = useState(7.01);
   const [duration, setDuration] = useState(15)
   const maxvalue = 150000;
   const maxint = 20;
   const maxduration = 50;
 
+  // F = P[{(1+i)n-1}/i]
+  var monthlyRate = interest / 12 / 100;
+  var months = duration * 12;
+
+  var total_investment = (pAmount*duration);
+  //var futureValue = Math.round(pAmount*(((1+interest)*duration-1)/interest));
+  //var maturityAmount = Math.round(Math.pow(pAmount*(1+interest),duration));
+  // 120000[({(1+7.1)15}-1)/7.1]
+  var maturityAmount = Math.round( pAmount*( (((1+interest)*duration)-1)/interest ) );
+  var total_interest = (maturityAmount-total_investment);
+  var futureValue = (maturityAmount+total_investment);
+
+  /*
   var monthlyRate = interest / 12 / 100;
   var months = duration * 12;
   var futureValue = 0;
-  var total_investment = (pAmount);
+  var total_investment = (pAmount*duration);
   futureValue = Math.round(pAmount * (1+monthlyRate) * ((Math.pow((1+monthlyRate),months)) - 1)/monthlyRate);
-  /*var total_interest = ((pAmount*duration*interest));*/
-  var total_interest = ((futureValue-total_investment));
+  var total_interest = ((futureValue-pAmount));
+  //var total_interest = ((pAmount*duration*interest));
+  */
 
   function valuetext(value) {
     return `${value} Lac`;
@@ -171,7 +185,7 @@ const ppfCalculator = () => {
             <Table>
               <TableRow>
                 <TableCell>
-                  <TablePpfDetails total_amount={futureValue} interest={interest} duration={duration} total_investment={total_investment} total_interest={total_interest} />
+                  <TablePpfDetails futureValue={futureValue} maturityAmount={maturityAmount} interest={interest} duration={duration} total_investment={total_investment} total_interest={total_interest} />
                 </TableCell>
                 <TableCell>
                   <Pie className='clChart'

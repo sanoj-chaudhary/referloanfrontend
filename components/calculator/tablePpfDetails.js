@@ -15,7 +15,7 @@ const tableDetails = (props) => {
         <TableCell className='ETablecellValue'><strong> </strong>{props.duration}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell className='ETablecellText'>Yearly Invested Amount</TableCell>
+        <TableCell className='ETablecellText'>Invested Amount</TableCell>
         <TableCell className='ETablecellValue'><strong>₹ </strong>{props.total_investment}</TableCell>
       </TableRow>
       <TableRow>
@@ -23,8 +23,12 @@ const tableDetails = (props) => {
         <TableCell className='ETablecellValue'><strong>₹ </strong>{props.total_interest}</TableCell>
       </TableRow>
       <TableRow>
+        <TableCell className='ETablecellText'>Maturity Amount</TableCell>
+        <TableCell className='ETablecellValue'><strong>₹ </strong>{props.maturityAmount}</TableCell>
+      </TableRow>
+      <TableRow>
         <TableCell className='ETablecellText'>Total Wealth</TableCell>
-        <TableCell className='ETablecellValue'><strong>₹ </strong>{props.total_amount}</TableCell>
+        <TableCell className='ETablecellValue'><strong>₹ </strong>{props.futureValue}</TableCell>
       </TableRow>
     </TableHead>
    </Table>
