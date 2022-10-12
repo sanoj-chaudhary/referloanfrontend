@@ -2,62 +2,28 @@ import Image from "next/image"
 
 const insuranceInvestment = () => {
   return (
-      <section className="investment_section">
-      <div className="container">
-        <div className="cardAndLoan_section">
-          <div className="heading__with__border">
-            <h2>INSURANCE & INVESTMENT</h2>
-          </div>
-          <div className="row">
-
-            <div className="col-sm-12 col-md-12 col-xl-12 loan_card_pnl">
-              <ul >
-
-                <li>
-                  <a href="">
-                    <img src="/images/health-icon.png" alt="" />
-                    <h3>Health Insurance </h3>
-                    <p>Protect Yourself & your family
-                      against health expenses </p>
-                    <a href="#" className="more"><span className="material-icons">east</span></a>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="">
-                    <img src={'/images/life-icon.png'} alt="" />
-                    <h3>Life Insurance </h3>
-                    <p>Get insurance for your loved
-                      ones & secure their future</p>
-                    <a href="#" className="more"><span className="material-icons">east</span></a>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="">
-                    <img src={"/images/guaranteed-icon.png"} alt="" />
-                    <h3>Guaranteed Return Plan </h3>
-                    <p>Get guaranteed returns along
-                      with life cover </p>
-                    <a href="#" className="more"><span className="material-icons">east</span></a>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="">
-                    <img src="/images/mutual-icon.png" alt="" />
-                    <h3>Direct Mutual Funds</h3>
-                    <p>Get higher returns on your
-                      Mutual Fund investments </p>
-                    <a href="#" className="more"><span className="material-icons">east</span></a>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section class="financeSimpli_area">
+    <div class="container">
+        <h3>FINANCE SIMPLIFIED</h3>
+        <h2>How the credit review works?</h2>
+        <p>The credit review is an online marketplace that provides borrowers with competitive, personalized loan
+            offers from multiple, vetted lenders in real time.</p>
+        <ul class="stepArea">
+            <li>
+                <div class="step-imgBox"><img src="/images/step1.png" alt="" /></div>
+                <h2>Discover</h2>
+            </li>
+            <li>
+                <div class="step-imgBox"><img src="/images/step2.png" alt="" /></div>
+                <h2>Compare</h2>
+            </li>
+            <li>
+                <div class="step-imgBox"><img src="/images/step3.png" alt="" /></div>
+                <h2>Apply</h2>
+            </li>
+        </ul>
+    </div>
+</section>
   )
 }
 

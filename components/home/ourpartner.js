@@ -32,17 +32,28 @@ function Partner()
  
 
   return (
-    <section className="partnerArea">
-      <div className="container">
-        <h2 className="heading text-center">Our partners</h2>
-        <p>from across the industry</p>
-                
-        <Carousel {...settings}>   
-          {data.map((value, key) => (
-            <div key={key} className="slickItem"><Image src={'/uploads/partner/'+value.logo_path} layout='fill' /></div>
-          ))}
-        </Carousel>
-      </div>
+    <section class="partnerArea">
+        <div class="container">
+            <h2 class="heading text-center">Our partners</h2>
+            <h3>from across the industry</h3>
+            <ul>
+                <li><img src="/images/ptn-logo1.png" alt="" /></li>
+                <li><img src="/images/ptn-logo2.png" alt="" /></li>
+                <li><img src="/images/ptn-logo3.png" alt="" /></li>
+                <li><img src="/images/ptn-logo4.png" alt="" /></li>
+                <li><img src="/images/ptn-logo5.png" alt="" /></li>
+                <li><img src="/images/ptn-logo1.png" alt="" /></li>
+                <li><img src="/images/ptn-logo2.png" alt="" /></li>
+                <li><img src="/images/ptn-logo3.png" alt="" /></li>
+                <li><img src="/images/ptn-logo4.png" alt="" /></li>
+                <li><img src="/images/ptn-logo5.png" alt="" /></li>
+                <li><img src="/images/ptn-logo1.png" alt="" /></li>
+                <li><img src="/images/ptn-logo2.png" alt="" /></li>
+                <li><img src="/images/ptn-logo3.png" alt="" /></li>
+                <li><img src="/images/ptn-logo4.png" alt="" /></li>
+                <li><img src="/images/ptn-logo5.png" alt="" /></li>
+            </ul>
+        </div>
     </section>
   )
 
