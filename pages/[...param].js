@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import Error from "./error";
+import { db } from './../config/db'
 function contentPage({ data }) {
- 
-  if(data.length == 0){
+
+  if(data == 0){
    return Error(404);
   }else{
     return (
@@ -24,9 +25,8 @@ if(context.query.param[1]){
 }else{
   url = context.query.param.toString();
 }
-   
-  const res = await axios.get(`${process.env.APP_URL}/page/${url}`);
-  const data = await res.data;
+const res = await db.query("SELECT post_content FROM `pages` WHERE `post_slug` = '" + url + "' ");
+  const data = JSON.parse(JSON.stringify(res))
   return { props: { data } }
 }
 

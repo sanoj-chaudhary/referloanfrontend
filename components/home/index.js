@@ -10,6 +10,8 @@ import Getapp from './getapp'
 import Form from './../form/testform'
 import EsiestPlaceApply from "./esiestPlaceApply"
 import ServiceArea from "./serviceArea"
+
+import { db } from './../../config/db'
 const index = () => {
  
   return (
