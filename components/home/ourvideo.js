@@ -1,17 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { db } from "../../config/db";
 
-function ourVideo() {
-  const [data, setData] = useState(null)
-
-  const getVideo = async ()=>{
-    const res = await axios.get('/api/video');
-    setData(res.data)
-  }
-
-  useEffect(() => {
-    getVideo()
-  }, [])
+function ourVideo({ data }) {
 
   if (!data) return <p>No video data</p>
 
@@ -21,17 +10,25 @@ function ourVideo() {
       <div className="container">
         <ul className="vdoArea">
           {data.map((value, key) => (
-              <li key={key}>
-                <div className="videBox">
-                  <iframe src={value.embedded_code}></iframe>
-                </div>
-                <p>{value.title}</p>
+            <li key={key}>
+              <div className="videBox">
+                <iframe src={value.embedded_code}></iframe>
+              </div>
+              <p>{value.title}</p>
             </li>
           ))}
         </ul>
       </div>
     </section>
   )
+}
+
+export async function getServerSideProps() {
+  const result = await db.query(" SELECT * FROM `videos` WHERE `is_active` = '1' ");
+  const data = result.json();
+  return {
+    props: { data }
+  }
 }
 
 export default ourVideo
