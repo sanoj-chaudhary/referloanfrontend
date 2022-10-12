@@ -2,7 +2,7 @@ import { db } from "../../config/db";
 import Image from 'next/image'
 
 function Partner({ data }) {
-
+console.log(data)
   return (
     <section class="partnerArea">
       <div class="container">
@@ -22,7 +22,7 @@ function Partner({ data }) {
 
 export async function getServerSideProps() {
   const res = await db.query("SELECT * FROM `partners` WHERE `is_active` = '1'")
-  const data = await res.json()
+  const data = await JSON.parse(JSON.stringify(res))
   return { props: { data } }
 }
 
