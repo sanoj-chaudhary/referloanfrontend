@@ -4,6 +4,9 @@ import { fetchTestimonial } from './../../redux/testimonialSlice';
 import Link from 'next/link'
 import Carousel from "react-slick";
 const testimonial = (props) => {
+
+
+
   const settings = {
     dots: true,
     infinite: true,
@@ -14,12 +17,6 @@ const testimonial = (props) => {
     autoplaySpeed: 4000,
     arrows: false,
   };
-  const dispatch = useDispatch();
-  const { data: testimonial, status } = useSelector((state) => state.testimonial);
-
-  useEffect(() => {
-    dispatch(fetchTestimonial());
-  }, []);
 
   return (
     <section class="testimonial_Area">
@@ -30,103 +27,28 @@ const testimonial = (props) => {
         </h2>
        
           <ul class="testimaol_carousel  ">
-            <Carousel {...settings}>
-              <li>
-                <div class="ratingPnl">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <p>refer loan provides excellent setup speed &amp; service terms, excellent customer support,
-                  ethical business practices and sales transparency.</p>
-
-                {/* <!-----  check img available in testimonials or not  ------> */}
-
-                <div class="profileBxo">
-                  <div class="profile-img"><img
-                    src="https://qa.referloan.in/uploads/testimonial/1664797175.pdf" alt="" /></div>
-                  Narender Mittal
-                </div>
-              </li>
-              <li>
-                <div class="ratingPnl">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <p>refer loan provides excellent setup speed &amp; service terms, excellent customer support,
-                  ethical business practices and sales transparency.</p>
-
-                {/* <!-----  check img available in testimonials or not  ------> */}
-
-                <div class="profileBxo">
-                  <div class="profile-img"><img
-                    src="https://qa.referloan.in/uploads/testimonial/1664797175.pdf" alt="" /></div>
-                  Narender Mittal
-                </div>
-              </li>
-              <li>
-                <div class="ratingPnl">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <p>refer loan provides excellent setup speed &amp; service terms, excellent customer support,
-                  ethical business practices and sales transparency.</p>
-
-                {/* <!-----  check img available in testimonials or not  ------> */}
-
-                <div class="profileBxo">
-                  <div class="profile-img"><img
-                    src="https://qa.referloan.in/uploads/testimonial/1664797175.pdf" alt="" /></div>
-                  Narender Mittal
-                </div>
-              </li>
-              <li>
-                <div class="ratingPnl">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <p>refer loan provides excellent setup speed &amp; service terms, excellent customer support,
-                  ethical business practices and sales transparency.</p>
-
-                {/* <!-----  check img available in testimonials or not  ------> */}
-
-                <div class="profileBxo">
-                  <div class="profile-img"><img
-                    src="https://qa.referloan.in/uploads/testimonial/1664797175.pdf" alt="" /></div>
-                  Narender Mittal
-                </div>
-              </li>
-              <li>
-                <div class="ratingPnl">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <p>refer loan provides excellent setup speed &amp; service terms, excellent customer support,
-                  ethical business practices and sales transparency.</p>
-
-                {/* <!-----  check img available in testimonials or not  ------> */}
-
-                <div class="profileBxo">
-                  <div class="profile-img"><img
-                    src="https://qa.referloan.in/uploads/testimonial/1664797175.pdf" alt="" /></div>
-                  Narender Mittal
-                </div>
-              </li>
-            </Carousel>
+          <Carousel {...settings}>
+            {
+              props.testimonial && props.testimonial.map((item)=>(
+                
+                <li key={testimonial.id}>
+                    <div className="ratingPnl">
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                    </div>
+                    <p>{item.client_message}</p>
+                    <div className="profileBxo">
+                      <div className="profile-img"><img src="/images/profile-img.jpg" alt="" /></div>
+                      {item.client_name}
+                    </div>
+                  </li>
+            
+              ))
+            }
+              </Carousel>
 
           </ul>
       

@@ -10,9 +10,7 @@ import Getapp from './getapp'
 import Form from './../form/testform'
 import EsiestPlaceApply from "./esiestPlaceApply"
 import ServiceArea from "./serviceArea"
-
-import { db } from './../../config/db'
-const index = () => {
+const index = (props) => {
  
   return (
     <>
@@ -22,11 +20,10 @@ const index = () => {
       <CustomerSupport />
       <InsuranceInvestment />
       <ServiceArea />
-
       <AboutUs />
-      <Ourpartner />
-      <Ourvideo />
-      <Testimonial slice={3} />
+      <Ourpartner partner={props.partner} />
+      <Ourvideo video={props.video} />
+      <Testimonial testimonial={props.testimonial} />
       <Getapp />
       <Form />
     </>

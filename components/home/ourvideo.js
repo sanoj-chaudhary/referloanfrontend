@@ -1,15 +1,14 @@
-import { db } from "../../config/db";
 
-function ourVideo({ data }) {
+function ourVideo({ video }) {
 
-  if (!data) return <p>No video data</p>
+  if (!video) return <p className="d-flex justify-content-center">No video data</p>
 
   return (
     <section className="videoSevtion">
       <h2 className="heading text-center">Our Videos</h2>
       <div className="container">
         <ul className="vdoArea">
-          {data.map((value, key) => (
+          {video && video.map((value, key) => (
             <li key={key}>
               <div className="videBox">
                 <iframe src={value.embedded_code}></iframe>
