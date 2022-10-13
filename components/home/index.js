@@ -25,7 +25,6 @@ const index = (props) => {
       <Ourvideo video={props.video} />
       <Testimonial testimonial={props.testimonial} />
       <Getapp />
-      <Form />
     </>
   )
 }
