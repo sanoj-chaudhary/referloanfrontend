@@ -44,7 +44,8 @@ export default function Header(children) {
             {/* core Custom css */ }
             <link href={ '/css/global.css' } rel={ 'stylesheet' } />
             <link href={ '/css/styles.css' } rel={ 'stylesheet' } />
-            <link href={ '/css/menu.css' } rel={ 'stylesheet' } />
+            <link href={ '/css/new-menu.css' } rel={ 'stylesheet' } />
+            <link href={ '/css/mmenu.css' } rel={ 'stylesheet' } />
             <link href={ '/css/slick-theme.css' } rel={ 'stylesheet' } />
             <link href={ '/css/slick.css' } rel={ 'stylesheet' } />
             <link href={ '/css/media.css' } rel={ 'stylesheet' } />
@@ -52,6 +53,8 @@ export default function Header(children) {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="undefined" crossorigin="anonymous" />
             <script src={'/js/common-validation.js'} />
+            <script src={'/js/menu.js'} />
+
         </Head>
     )
 }

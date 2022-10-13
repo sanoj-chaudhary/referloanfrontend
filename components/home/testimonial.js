@@ -16,6 +16,26 @@ const testimonial = (props) => {
     speed: 1000,
     autoplaySpeed: 4000,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 1150,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 1300,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      ],
   };
 
   return (
