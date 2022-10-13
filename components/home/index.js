@@ -2,7 +2,7 @@ import Herosection from "./herosection"
 import CardLoan from './cardLoan'
 import CustomerSupport from './customerSupport'
 import InsuranceInvestment from './insuranceInvestment'
-import AboutUs from './aboutUs'
+import AboutUs from './aboutus'
 import Ourpartner from "./ourpartner"
 import Ourvideo from './ourvideo'
 import Testimonial from "./testimonial"
