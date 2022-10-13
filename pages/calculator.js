@@ -22,10 +22,7 @@ const calculator = () => {
           {calcName=='SIP Calculator' && <SipCalculator  />}
           {calcName=='PPF Calculator' && <PpfCalculator  />}
           {calcName=='Subsidy Calculator' && <SubsidyCalculator />}
-          {calcName == 'Emi Calculator' && <EmiCalculator />}
           {calcName == 'RD Calculator' && <RdCaculator />}
-          {calcName == 'SIP Calculator' && <SipCalculator />}
-          {calcName == 'Subsidy Calculator' && <SubsidyCalculator />}
           {calcName == 'EPF Calculator' && <EpfCalculator />}
         </div>
         <div className='right'>
