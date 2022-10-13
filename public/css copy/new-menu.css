@@ -1,0 +1,373 @@
+
+
+header {
+  /* position: sticky; */
+  top: 0;
+  z-index: 9;
+  background: #fff;
+}
+
+header .customContainer {
+  padding: 10px;
+  box-shadow: 0px 0px 25px 0px rgb(0 0 0 / 10%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+header a.logoSection img {
+  height: 50px;
+  width: auto;
+}
+
+header  .info_section {
+  display: flex;
+}
+
+header .info_section ul {
+  display: flex;
+  column-gap: 40px;
+  margin-right: 40px;
+}
+
+header .info_section ul li {
+display: flex;
+list-style: none;
+text-decoration: none;
+font-size: 18px;
+font-weight: 500;
+align-items: center;
+}
+header .info_section ul li a{
+color: #333333;
+font-size:17px;
+font-weight: 500;
+}
+
+header .info_section ul li img{
+height: 20px;
+width: auto;
+margin-right: 10px;
+}
+
+
+
+.mmobile_menu {
+  display: none;
+}
+
+nav:not(.mm-menu) {
+  /* display: none; */
+}
+
+nav#menu,
+.mm-page {
+  /* display: none; */
+}
+
+#header {
+  display: none;
+}
+
+nav.navBarContainer {
+  background: #022329;
+}
+
+.navBarContainer ul {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+}
+
+.navBarContainer ul li {
+  list-style: none;
+  color: #fff;
+  font-size: var(--regular-font);
+  font-weight: 300;
+}
+
+.navBarContainer ul li a {
+  text-decoration: none;
+  color: #fff;
+  padding: 12px 15px;
+  display: block;
+}
+
+.navBarContainer ul li a:hover,
+.navBarContainer li:hover a {
+  background-color: #fff;
+  color: #022329;
+}
+
+.navBarContainer .megaMenu_container {
+  display: none;
+}
+
+
+
+
+.navBarContainer li:hover .megaMenu_container {
+  display: flex;
+  background: #fff;
+  box-shadow: 0px 14px 20px 0px rgb(0 0 0 / 10%);
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: 9;
+}
+
+.navBarContainer li .megaMenu_container ul {
+  max-width: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: flex-start;
+}
+
+.navBarContainer li .megaMenu_container ul li,
+.navBarContainer li:hover .megaMenu_container ul li a {
+  background-color: transparent !important;
+  font-size: 13px;
+  font-weight: 400;
+  color: #444;
+}
+
+.navBarContainer li .megaMenu_container ul li a:hover {
+  color: var(--primaryColor);
+}
+
+.navBarContainer li .megaMenu_container ul:nth-child(even) {
+  background: #f5f7ff;
+  border: 1px solid;
+}
+
+.navBarContainer li .megaMenu_container ul:nth-child(odd) {
+  background: #fff
+}
+
+.navBarContainer li .megaMenu_container ul li a {
+  padding: 4px 0;
+}
+
+.navBarContainer li .megaMenu_container .menu_imgBox {
+  margin-left: auto;
+  padding: 20px 20px;
+  align-items: flex-end;
+  display: flex;
+}
+
+.navBarContainer li .megaMenu_container .menu_imgBox img {
+  max-width: 190px;
+  max-height: 130px;
+  object-fit: contain;
+}
+
+/* nav:not(.mm-menu) {
+  display: none;
+} */
+
+#header {
+  position: sticky;
+  height: 50px;
+  padding: 0 80px;
+  top: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 44px;
+  text-align: center;
+  background: #bba6a2;
+}
+
+#header a {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 50px;
+  padding: 15px 25px;
+}
+
+#header a:before,
+#header a:after {
+  content: "";
+  display: block;
+  background: #fff;
+  height: 2px;
+}
+
+#header a span {
+  background: #fff;
+  display: block;
+  height: 2px;
+  margin: 7px 0;
+}
+
+.mm-panel {
+  background: #11362f !important;
+}
+
+.mm-listitem {
+  color: #fff !important;
+}
+
+.mm-btn--next:after,
+.mm-btn--prev:before {
+  border: 2px solid #fff !important;
+  border-bottom: none !important;
+  border-right: none !important;
+}
+
+#mheader {
+  display: none;
+}
+/* ++++++++++++++++ For Mobile ++++++++++++++++ */
+
+@media (min-width:320px) and (max-width:768px) {
+  #mheader {
+      display: block;
+  }
+  header .info_section {
+      display: none;
+  }
+  header .customContainer {
+      flex-direction: row-reverse;
+  }
+  .mm-menu--position-bottom.mm-menu--opened,
+  .mm-menu--position-left-front.mm-menu--opened,
+  .mm-menu--position-right-front.mm-menu--opened,
+  .mm-menu--position-top.mm-menu--opened {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      z-index: 999;
+  }
+
+  .mm-listview {
+      padding: 15px 0 0 !important;
+  }
+
+  a.logoSection img {
+      width: 160px;
+      height: auto;
+  }
+
+  #mheader {
+      position: sticky;
+      height: 40px;
+      width: 44px;
+      top: 0px;
+      font-size: 16px;
+      font-weight: bold;
+      color: rgb(255, 255, 255);
+      line-height: 44px;
+      text-align: center;
+      padding: 0px 0px;
+      border-radius: 4px;
+      margin-right: 0px;
+  }
+
+
+  #mheader a {
+      display: block;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 40px;
+      padding: 9px 11px;
+  }
+
+  #mheader a::before,
+  #mheader a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      background: #333;
+      width: 30px;
+  }
+
+  #mheader a span {
+      display: block;
+      height: 2px;
+      background: #333;
+      margin: 7px 0px;
+      width: 21px;
+  }
+
+  #mheader a::before,
+  #mheader a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      background: #333;
+      width: 21px;
+  }
+
+  header {
+      position: sticky;
+      top: 0;
+      z-index: 9;
+      background: #fff;
+      box-shadow: 0px 0px 25px 0px rgb(0 0 0 / 10%);
+  }
+
+  .customContainer {
+      display: flex;
+      padding: 10px;
+      align-items: center;
+  }
+
+
+  .mmenu_icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid #c1c1c1;
+  }
+
+  .mmenu_icon a {
+      display: block;
+      height: 100%;
+  }
+
+  .mmobile_menu {
+      display: block;
+  }
+
+  nav:not(.mm-menu) {
+      display: none;
+  }
+
+  nav#menu,
+  .mm-page {
+      display: block; 
+      /* width: 100%; */
+
+  }
+  #header {
+      display: block;
+  }
+
+  .mm-navbar {
+      background: #092621!important;
+  }
+
+  .mm-navbar a {
+      color: #fff!important;
+      font-size: 25px!important;
+  }
+
+  .mm-btn--next:after, .mm-btn--prev:before {
+      width: 14px!important;
+      height: 14px!important;
+      margin: auto;
+  }
+
+  .mm-btn:not(.mm-hidden)+.mm-navbar__title:last-child {
+      color: #FFF;
+  }
+  
+}
