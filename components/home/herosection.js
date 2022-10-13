@@ -17,8 +17,6 @@ function HeroSection() {
                         <div class="heroContent">
                               <div class="headMain_carousel">
                                     <Carousel {...settings}>
-
-
                                           <div className="slickItem">
                                                 <div class="topArea">
                                                       <div class="left">
