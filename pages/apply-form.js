@@ -1,4 +1,4 @@
-import Form from "../components/form/testForm"
+import Form from "../components/form/testform"
 
 const formData = () => {
  
