@@ -52,6 +52,10 @@ export default async function handler(req, res) {
         }
       }
     case "POST":
+      if(req.query.component == 'insertPage'){
+        return await insertPage(req,res);
+      }
+
       if (req.query.component == 'getcontentbysearch') {
         return await getContentBySearch(req, res);
       }
@@ -394,3 +398,31 @@ console.log("form"+req.body)
     return res.status(500).json({ error });
   }
 };
+
+const insertPage = async (req, res) =>{
+  try {
+console.log(req.body)
+
+    if(req.body.action == 'insert'){
+      const {id,name,slug,description,meta_title,meta_keyword,meta_description,categories_id,product_id,bank_product_id,bank_id,status} = req.body;
+      const result = await db.query("INSERT INTO `pages`(`id`, `name`, `slug`, `description`, `meta_title`, `meta_keyword`, `meta_description`, `categories_id`, `product_id`, `bank_product_id`, `bank_id`, `status`)VALUES('"+id+"','"+name+"','"+slug+"','"+description+"','"+meta_title+"','"+meta_keyword+"','"+meta_description+"','"+categories_id+"','"+product_id+"','"+bank_product_id+"','"+bank_id+"','"+status+"')")
+
+
+
+      return res.status(200).json({'action':result});
+    }else if(req.body.action == 'update'){
+      const {id,name,slug,description,meta_title,meta_keyword,meta_description,categories_id,product_id,bank_product_id,bank_id,status} = req.body;
+      const updaeres = await db.query("UPDATE `pages` SET `id`='"+id+"',`name`='"+name+"',`slug`='"+slug+"',`description`='"+description+"',`meta_title`='"+meta_title+"',`meta_keyword`='"+meta_keyword+"',`meta_description`='"+meta_description+"',`categories_id`='"+categories_id+"',`product_id`='"+product_id+"',`bank_product_id`='"+bank_product_id+"',`bank_id`='"+bank_id+"',`status`='"+status+"' WHERE id='"+id+"'")
+
+      if(updaeres.changedRows == 0){
+        return res.status(500).json({ "message":"Something went wrong"});
+      }
+      return res.status(200).json({'action':updaeres});
+    }else if(req.body.action == 'delete'){
+      return res.status(200).json({'action':'delete'});
+    }
+  } catch (error) {
+    return res.status(500).json({ "message":error.message });
+  }
+  
+}
