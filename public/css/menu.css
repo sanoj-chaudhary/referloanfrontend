@@ -3,9 +3,9 @@
 }
 
 header {
-    position: sticky !important;
+    position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 9;
     background: #fff;
 }
 
@@ -13,14 +13,13 @@ header .customContainer {
     padding: 10px;
     box-shadow: 0px 0px 25px 0px rgb(0 0 0 / 10%);
     display: flex;
-    position: fixed;
     justify-content: space-between;
     align-items: center;
 }
 
 
 header a.logoSection img {
-    height: 50px;
+    height: 40px;
     width: auto;
 }
 

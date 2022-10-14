@@ -1129,6 +1129,8 @@ footer img.footerlogo {
 .footer-card-area .mad-in-india {
     display: flex;
     color: #fff;
+    justify-content: center;
+    align-items: center;
     font-size: var(--medium-font);
     font-weight: 500;
 }

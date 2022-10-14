@@ -10,7 +10,7 @@ const index = (props) => {
  
   return (
     <>
-      <Herosection />
+      <Herosection loanProduct={props.loanProduct} />
       <CardLoan />
       <EsiestPlaceApply />
       <CustomerSupport />
