@@ -9,7 +9,7 @@ const Menu = ({menu}) => {
                 <nav id="menu">
                     <ul>
                         {menu && menu.map((item, index) =>
-                            <li><Link href="{item.slug}"><a title="{item.name}">{item.name}</a></Link></li>
+                            <li key={index}><Link href="{item.slug}"><a title="{item.name}">{item.name}</a></Link></li>
                         )}
                         <li><a target="_blank" href="#" title="Cards"> Cards</a></li>
                         <li>
@@ -62,7 +62,7 @@ const Menu = ({menu}) => {
                 <div className="container">
                     <ul>
                         {menu && menu.map((item, index) =>
-                            <li><Link href="{item.slug}"><a title="{item.name}">{item.name}</a></Link></li>
+                            <li key={index}><Link href="{item.slug}"><a title="{item.name}">{item.name}</a></Link></li>
                         )}
                         <li><a target="_blank" href="#" title="Cards"> Cards</a></li>
                         <li> <a className="hasSub_menu" target="_blank" href="#" title="Loan"> Loan</a>
