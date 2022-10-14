@@ -401,13 +401,9 @@ console.log("form"+req.body)
 
 const insertPage = async (req, res) =>{
   try {
-console.log(req.body)
-
     if(req.body.action == 'insert'){
       const {id,name,slug,description,meta_title,meta_keyword,meta_description,categories_id,product_id,bank_product_id,bank_id,status} = req.body;
       const result = await db.query("INSERT INTO `pages`(`id`, `name`, `slug`, `description`, `meta_title`, `meta_keyword`, `meta_description`, `categories_id`, `product_id`, `bank_product_id`, `bank_id`, `status`)VALUES('"+id+"','"+name+"','"+slug+"','"+description+"','"+meta_title+"','"+meta_keyword+"','"+meta_description+"','"+categories_id+"','"+product_id+"','"+bank_product_id+"','"+bank_id+"','"+status+"')")
-
-
 
       return res.status(200).json({'action':result});
     }else if(req.body.action == 'update'){
