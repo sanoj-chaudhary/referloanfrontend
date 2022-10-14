@@ -12,10 +12,10 @@ function sink() {
 
 export async function getServerSideProps(context) {
   
-  db.query(" TRUNCATE ` categories ` ");
-  db.query(" TRUNCATE ` products ` ");
-  db.query(" TRUNCATE ` banks ` ");
-  db.query(" TRUNCATE ` bank_products ` ");
+  db.query(" TRUNCATE `categories` ");
+  db.query(" TRUNCATE `products` ");
+  db.query(" TRUNCATE `banks` ");
+  db.query(" TRUNCATE `bank_products` ");
   
   const res1  = await axios("https://testapi.referloan.in/api/categories");
   const data1 = await res1.data;
