@@ -1,6 +1,6 @@
 import Home from './../components/home'
 import { db } from './../config/db'
-export default function Index({ partner,video,testimonial }) {
+export default function Index({ partner,video,testimonial,loanProduct }) {
 
   return (
     <>
