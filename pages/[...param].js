@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import Error from "./error";
 import { db } from './../config/db'
 function contentPage({ data }) {
-
   if(data == 0){
    return Error(404);
   }else{
@@ -13,9 +12,6 @@ function contentPage({ data }) {
       />
     )
   }
-
-
-  
 }
 
 export async function getServerSideProps(context) {
@@ -25,7 +21,7 @@ if(context.query.param[1]){
 }else{
   url = context.query.param.toString();
 }
-const res = await db.query("SELECT post_content FROM `pages` WHERE `post_slug` = '" + url + "' ");
+const res = await db.query("SELECT description FROM `pages` WHERE `slug` = '" + url + "' ");
   const data = JSON.parse(JSON.stringify(res))
   return { props: { data } }
 }

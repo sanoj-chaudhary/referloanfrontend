@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-const eligilityForm = () => {
+const eligilityForm = ({loanProduct}) => {
+ 
   const [otpStatus,setOtpStatus] = useState(false)
   const [searchData, setSearchData] = useState({
     "product_id"  : '',
@@ -71,11 +72,13 @@ const eligilityForm = () => {
             <form action="">
               <div className="loan-form-area">
                 <div className="loanType">
-                  <select>
-                    <option selected onChange={handleChange}>Type of loan </option>
-                    <option>Normal</option>
-                    <option>Hard</option>
-                    <option>Expert</option>
+                  <select onChange={handleChange}>
+                    <option selected >Type of loan </option>
+
+                    {loanProduct && loanProduct.map((item,key)=>(
+                      <option value={item.name}>{item.name}</option>
+                    ))}
+                  
                   </select>
                 </div>
 
