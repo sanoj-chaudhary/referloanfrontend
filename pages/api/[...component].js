@@ -140,7 +140,7 @@ const getHeaderMenu = async (req, res) => {
 
 const getFooterLink = async (req, res) => {
   try {
-    const results1 = await db.query("SELECT * FROM `settings` where `name` = 'footer_link' ");
+    const results1 = await db.query("SELECT * FROM `products` WHERE categories_id = 1");
     const withoutFirstAndLast = results1[0]['value'].slice(1, -1);
     const results2 = await db.query('SELECT id,post_title,post_slug,full_url FROM `pages` where `id` IN (' + withoutFirstAndLast + ') ');
 
