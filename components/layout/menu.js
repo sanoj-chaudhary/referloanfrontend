@@ -53,7 +53,7 @@ const Menu = ({menu}) => {
                             <img src="/images/icon/call-icon.png" alt="" /><a href="tel:0124-4847123">0124-4847123</a>
                         </li>
                     </ul>
-                    <a href="#"><img src="/images/icon/cibil-btn.png" alt="" /></a>
+                    <a href="#"><img src="/images/CIBIL Score.gif" alt="" /></a>
                 </div>
 
             </div>
