@@ -1,6 +1,6 @@
 import Carousel from "react-slick";
 import EligilityForm from "./eligilityForm";
-function HeroSection() {
+function HeroSection({loanProduct}) {
       const settings = {
             dots: true,
             infinite: true,
@@ -13,16 +13,16 @@ function HeroSection() {
       };
 
       return (
-            <section class="heroSection">
-                  <div class="container">
-                        <div class="heroContent">
-                              <div class="headMain_carousel">
+            <section className="heroSection">
+                  <div className="container">
+                        <div className="heroContent">
+                              <div className="headMain_carousel">
                                     <Carousel {...settings}>
                                           <div className="slickItem">
-                                                <div class="topArea">
-                                                      <div class="left">
+                                                <div className="topArea">
+                                                      <div className="left">
                                                             <h1>The easy way to compare and get personal loans</h1>
-                                                            <div class="pointsArea">
+                                                            <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
                                                                               <img src="/images/loan-w-icon.png" alt="" />
@@ -39,17 +39,17 @@ function HeroSection() {
                                                                   </ul>
                                                             </div>
                                                       </div>
-                                                      <div class="img-box">
+                                                      <div className="img-box">
                                                             <img src="/images/hd-img.png" alt="" />
                                                       </div>
                                                 </div>
 
                                           </div>
                                           <div className="slickItem">
-                                                <div class="topArea">
-                                                      <div class="left">
+                                                <div className="topArea">
+                                                      <div className="left">
                                                             <h1>The easy way to compare and get personal loans</h1>
-                                                            <div class="pointsArea">
+                                                            <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
                                                                               <img src="/images/loan-w-icon.png" alt="" />
@@ -66,17 +66,17 @@ function HeroSection() {
                                                                   </ul>
                                                             </div>
                                                       </div>
-                                                      <div class="img-box">
+                                                      <div className="img-box">
                                                             <img src="/images/hd-img.png" alt="" />
                                                       </div>
                                                 </div>
 
                                           </div>
                                           <div className="slickItem">
-                                                <div class="topArea">
-                                                      <div class="left">
+                                                <div className="topArea">
+                                                      <div className="left">
                                                             <h1>The easy way to compare and get personal loans</h1>
-                                                            <div class="pointsArea">
+                                                            <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
                                                                               <img src="/images/loan-w-icon.png" alt="" />
@@ -93,17 +93,17 @@ function HeroSection() {
                                                                   </ul>
                                                             </div>
                                                       </div>
-                                                      <div class="img-box">
+                                                      <div className="img-box">
                                                             <img src="/images/hd-img.png" alt="" />
                                                       </div>
                                                 </div>
 
                                           </div>
                                           <div className="slickItem">
-                                                <div class="topArea">
-                                                      <div class="left">
+                                                <div className="topArea">
+                                                      <div className="left">
                                                             <h1>The easy way to compare and get personal loans</h1>
-                                                            <div class="pointsArea">
+                                                            <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
                                                                               <img src="/images/loan-w-icon.png" alt="" />
@@ -120,7 +120,7 @@ function HeroSection() {
                                                                   </ul>
                                                             </div>
                                                       </div>
-                                                      <div class="img-box">
+                                                      <div className="img-box">
                                                             <img src="/images/hd-img.png" alt="" />
                                                       </div>
                                                 </div>
@@ -130,7 +130,7 @@ function HeroSection() {
                               </div>
                         </div>
                         {/* <!-- .header-form-area --> */}
-                        <EligilityForm />
+                        <EligilityForm loanProduct={loanProduct} />
                   </div>
 
                

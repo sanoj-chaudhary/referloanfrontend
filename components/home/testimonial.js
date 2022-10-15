@@ -39,14 +39,14 @@ const testimonial = (props) => {
   };
 
   return (
-    <section class="testimonial_Area">
+    <section className="testimonial_Area">
       <div className="container">
-        <h2 class="heading">What Client say about<br />Our Services
-          <a href="https://qa.referloan.in/testimonials" title="See More" class="seeBtn orangeBtn float-end">See
-            More &nbsp;<span class="material-icons float-end">east</span></a>
+        <h2 className="heading">What Client say about<br />Our Services
+          <a href="https://qa.referloan.in/testimonials" title="See More" className="seeBtn orangeBtn float-end">See
+            More &nbsp;<span className="material-icons float-end">east</span></a>
         </h2>
        
-          <ul class="testimaol_carousel  ">
+          <ul className="testimaol_carousel  ">
           <Carousel {...settings}>
             {
               props.testimonial && props.testimonial.map((item)=>(

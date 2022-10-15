@@ -9,7 +9,7 @@ const Menu = ({menu}) => {
                 <nav id="menu">
                     <ul>
                         {menu && menu.map((item, index) =>
-                            <li key={index}><Link href="{item.slug}"><a title="{item.name}">{item.name}</a></Link></li>
+                            <li key={index}><Link href="{item.id}"><a title="{item.name}">{item.name}</a></Link></li>
                         )}
                         <li><a target="_blank" href="#" title="Cards"> Cards</a></li>
                         <li>
@@ -101,7 +101,7 @@ const Menu = ({menu}) => {
 
 export async function getServerSideProps() {
 
-    const res = await axios.get("https://testapi.referloan.in/api/categories");
+    const res = await axios.get("http://localhost:3000/api/headermenu");
     const menu = await res.data
 
     return { props: { menu } }

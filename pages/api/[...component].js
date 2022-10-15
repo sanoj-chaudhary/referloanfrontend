@@ -107,30 +107,32 @@ const getAllCategory = async (req, res) => {
 
 const getHeaderMenu = async (req, res) => {
   try {
-    let category;
-    let page;
-    let menu_id;
-    let cat_id;
+    let query_cat;
+    let query_product;
+    let query_bank_product;
+    
+    let category_id;
+    let product_id;
     let temp = [];
 
-    const menus = await db.query('SELECT id,name,icon FROM `menu_types` ');
+    query_cat = await db.query("SELECT id,name FROM `categories` WHERE categories.status = '1' ");
 
-    if (menus) {
-      for (let i in menus) {
-        menu_id = menus[i].id;
-        temp[i] = menus[i];
+    if (query_cat) {
+      for (let i in query_cat) {
+        category_id = query_cat[i].id;
+        temp[i] = query_cat[i];
 
-        category = await db.query("SELECT menus.id,menus.cat_id,categories.name,categories.slug,categories.full_url FROM `menus` LEFT JOIN `categories` ON categories.id = menus.cat_id WHERE menus.type1 = '" + menu_id + "' AND menus.page_id = '0' AND menus.is_active = '1' ");
+         query_product = await db.query("SELECT * FROM `products` WHERE products.categories_id = '" + category_id + "' AND products.status = '1' ");
 
-        if (category) {
-          for (let j in category) {
-            cat_id = category[j].cat_id;
-            menus[i]['category'] = category;
+         if (query_product) {
+           for (let j in query_product) {
+             product_id = query_product[j].id;
+             temp[i]['product'] = query_product;
 
-            page = await db.query("SELECT menus.id,menus.cat_id,pages.post_title,pages.post_slug,pages.full_url FROM `menus` LEFT JOIN `pages` ON pages.id = menus.page_id WHERE menus.type1 = '" + menu_id + "' AND menus.cat_id = '" + cat_id + "' AND menus.is_active = '1' ");
-            category[j]['page'] = page;
-          }
-        }
+             query_bank_product = await db.query("SELECT * FROM `bank_products` WHERE bank_products.products_id = '" + product_id + "' AND bank_products.status = '1' ");
+             query_product[j]['bank_product'] = query_bank_product;
+           }
+         }
 
       }
     }
