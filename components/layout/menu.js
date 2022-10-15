@@ -87,7 +87,32 @@ const Menu = ({menu}) => {
                         <li> <a className="" target="_blank" href="#" title="Insurance">Insurance</a></li>
                         <li><a className="" target="_blank" href="#" title="Investment">Investment</a></li>
                         <li><a className="" target="_blank" href="#" title="Subsidy">Subsidy</a></li>
-                        <li><a className="" target="_blank" href="#" title="Knowledge Center">Knowledge Center</a></li>
+                        <li><a className="hasSub_menu" target="_blank" href="#" title="Knowledge Center">Knowledge Center</a>
+                            <div className="megaMenu_container">
+                                <ul>
+
+                                   <li> <Link href={{ pathname: '/calculator', query: { name: 'emi-calculator' } }}><a>EMI Calculator</a></Link></li>
+                                   <li> <Link href={{ pathname: '/calculator', query: { name: 'subsidy-calculator' } }}><a>SUBSIDY Calculator</a></Link></li>
+                                </ul>
+                                <ul>    
+                                    <li> <Link href={{ pathname: '/calculator', query: { name: 'sip-calculator' } }}><a>SIP Calculator</a></Link></li>
+                                    <li> <Link href={{ pathname: '/calculator', query: { name: 'rd-calculator' } }}><a>RD Calculator</a></Link></li>
+                                </ul>
+                                <ul>
+                                    <li> <Link href={{ pathname: '/calculator', query: { name: 'epf-calculator' } }}><a>EPF Calculator</a></Link></li>  
+                                    <li> <Link href={{ pathname: '/calculator', query: { name: 'lumpsum-calculator' } }}><a>Lumpsum Calculator</a></Link></li>  
+                                    
+                    
+                                </ul>
+                                <ul>
+                                <li> <Link href={{ pathname: '/calculator', query: { name: 'ssy-calculator' } }}><a>SSY Calculator</a></Link></li>  
+                                <li> <Link href={{ pathname: '/calculator', query: { name: 'ppf-calculator' } }}><a>PPF Calculator</a></Link></li>  
+                                </ul>
+                                <div className="menu_imgBox">
+                                        <img src="/images/pl-bnr-icon.png" alt="" />
+                                    </div>
+                            </div>
+                        </li>
                         <li><a className="" target="_blank" href="#" title="About">About</a></li>
                         <li><a className="" target="_blank" href="#" title="Franchise">Franchise</a> </li>
                         <li><a className="" target="_blank" href="#" title="Blogs">Blogs</a> </li>
