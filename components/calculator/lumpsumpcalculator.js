@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { withStyles } from '@material-ui/styles'
 import Slider from '@mui/material/Slider';
 import { Typography } from '@material-ui/core'
-import { Table, TableCell, TableRow , TableHead } from '@material-ui/core'
+import { Table, TableCell, TableRow, TableHead } from '@material-ui/core'
 // import { Chart } from 'react-chartjs-2';
 import { styled } from '@mui/material/styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -15,6 +15,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 //   track: { height: 20, borderRadius: 4 },
 //   rail: { height: 40, color:"red", borderRadius: 4 }
 // })(Slider);
+import TableDetails from './tableDetails';
 
 const PrettoSlider = styled(Slider)({
   color: '#00796a',
@@ -99,31 +100,27 @@ const marksss = [
 
 ];
 
-  // A = P(r/n+1) ^ nt
-const SsyCalculator = () => {
-  const [pAmount, setpAmount] = useState(150000);
-  const [age, setAge] = useState(0)
-  const [duration, setDuration] = useState(15)
-  const maxvalue = 150000;                           
-  const maxint = 10;
-  const maxduration = 15; 
-  const interest = "7.6";
-  const maxage = 10;
-  var monthlyRate = interest / 12 / 100;
-  var months = duration * 12;
+const lumpsumpcalculator = () => {
+  const [pAmount, setpAmount] = useState(100000);
+  const [interest, setInterest] = useState(9);
+  const [duration, setDuration] = useState(12)
+  const maxvalue = 100000000;
+  const maxint = 20;
+  const maxduration = 365;
+ var n = 365;
+
+
+  var futureValue = 0;
+  var total_investment = (pAmount);
   
-  // A = P (1 + r/n) ^ nt
-
-
-  var monthlyRate = interest / 12 / 100;
-  var months = duration * 12;
-
-  var total_investment = (pAmount*duration);
-  var maturityAmount = Math.round( pAmount*( (((1+interest)*duration)-1)/interest ) );
-  var total_interest = (maturityAmount-total_investment);
-  var maturityValue = (maturityAmount+total_investment);
-
+  futureValue = pAmount * (Math.pow((1+(interest/n)), (n*duration)));
+  console.log(futureValue);
   
+
+  // futureValue = Math.round(pAmount * (1+monthlyRate) * ((Math.pow((1+monthlyRate),months)) - 1)/monthlyRate);
+  /*var total_interest = ((pAmount*duration*interest));
+  A = P * Math.pow(1 + r/n, nt);*/
+  var total_interest = ((futureValue+total_investment));
 
   function valuetext(value) {
     return `${value} Lac`;
@@ -135,8 +132,8 @@ const SsyCalculator = () => {
         <div className="col-sm-12 col-md-12  col-xl-12">
           <div className="rangeArea">
             <div className="rangeHead">
-              <h2>Yearly Investment </h2>
-              <small>(Up to 150000)</small>
+              <h2>Investment Amount</h2>
+              <small>(Up to 1 Crore)</small>
               <div className="outputArea">
                 <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-rupee"></i> </span>
               </div>
@@ -146,20 +143,20 @@ const SsyCalculator = () => {
             <PrettoSlider value={pAmount} onChange={(e) => { setpAmount(e.target.value) }} max={maxvalue} getAriaValueText={valuetext}
             ></PrettoSlider>
           </div>
-          <div className="rangeArea"> 
+          <div className="rangeArea">
             <div className="rangeHead">
-              <h2>Expected Girl Age </h2>
-              <small>(10 years)</small>
+              <h2>Expected Return Rate (p.a)</h2>
+              <small>(9.50% to 19.55%)</small>
               <div className="outputArea">
-                <input type="number" value={age} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setAge(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
+                <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
               </div>
             </div>
-            <PrettoSlider value={age} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setAge(vamt) }} max={maxage} ></PrettoSlider>
+            <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
           </div>
           <div className="rangeArea">
             <div className="rangeHead">
-              <h2>Total Maturity Period</h2>
-              <small>(In Years)</small>
+              <h2>Investment Period (in Years)</h2>
+              <small>(1 year - 30 years)</small>
               <div className="outputArea">
                 <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" >
                 </span></div>
@@ -172,34 +169,35 @@ const SsyCalculator = () => {
           </div>
 
         </div>
-
+        
         <div className="col-sm-12 col-md-12  col-xl-12">
 
           <div className="table-responsive">
-            <Table style={{ borderBottom: "none" }}>
-              <TableRow style={{ borderBottom: "2px solid white" }}>
-                <TableCell>
-                <TableHead>
+          <Table style={{ width:"100%", border:"2px solid #ccc" }} area-lable="sample table" >
+              <TableHead>
+                <TableRow>
                   <TableRow>
-                    <TableCell className='ETablecellText'>Girl's Age</TableCell>
-                    <TableCell className='ETablecellValue'><strong>Must be less than 10 Years</strong></TableCell>
+                    <TableCell className='ETablecellText'>Interest Rate (%)</TableCell>
+                    <TableCell className='ETablecellValue'><strong>% </strong>{interest}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className='ETablecellText'>Max Rate of Interest</TableCell>
-                    <TableCell className='ETablecellText'><strong>7.6%</strong></TableCell>
+                    <TableCell className='ETablecellText'>Duration (Years)</TableCell>
+                    <TableCell className='ETablecellValue'><strong> </strong>{duration}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className='ETablecellText'> Total Investment </TableCell>
+                    <TableCell className='ETablecellText'>Invested Amount</TableCell>
                     <TableCell className='ETablecellValue'><strong>₹ </strong>{total_investment}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className='ETablecellText'>Maturity Value</TableCell>
-                    <TableCell className='ETablecellValue'><strong>₹ </strong>{maturityValue}</TableCell>
+                    <TableCell className='ETablecellText'>Wealth Gained</TableCell>
+                    <TableCell className='ETablecellValue'><strong>₹ </strong>{total_interest}</TableCell>
                   </TableRow>
-                </TableHead>
-                </TableCell>
-
-                <TableCell>
+                  <TableRow>
+                    <TableCell className='ETablecellText'>Total Wealth</TableCell>
+                    <TableCell className='ETablecellValue'><strong>₹ </strong>{futureValue}</TableCell>
+                  </TableRow>
+                  
+                  <TableCell>
                   <Pie className='clChart'
                     data={{
                       datasets: [{
@@ -213,8 +211,10 @@ const SsyCalculator = () => {
                     options={{ maintainAspectRatio: false }}
                   />
                 </TableCell>
-              </TableRow>
-            </Table>
+
+                </TableRow>
+              </TableHead>
+          </Table>
           </div>
         </div>
 
@@ -224,4 +224,4 @@ const SsyCalculator = () => {
   )
 }
 
-export default SsyCalculator
+export default lumpsumpcalculator
