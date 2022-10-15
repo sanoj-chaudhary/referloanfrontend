@@ -1,11 +1,11 @@
 
 const serviceArea = () => {
   return (
-    <div class="container">
-        <div class="applyService_Area">
-            <div class="cardContainer blue">
+    <div className="container">
+        <div className="applyService_Area">
+            <div className="cardContainer blue">
                 <h2>Apply for loans <a href="#">All</a></h2>
-                <ul class="iconPnl">
+                <ul className="iconPnl">
                     <li>
                         <a href="">
                             <img src="/images/icon/pl-iocn-w.png" alt="" />
@@ -35,9 +35,9 @@ const serviceArea = () => {
                     </li>
                 </ul>
             </div>
-            <div class="cardContainer grey">
+            <div className="cardContainer grey">
                 <h2>Get a credit card <a href="#">All</a></h2>
-                <ul class="iconPnl">
+                <ul className="iconPnl">
                     <li>
                         <a href="">
                             <img src="/images/icon/axis-icon.png" alt="" />
@@ -67,9 +67,9 @@ const serviceArea = () => {
                     </li>
                 </ul>
             </div>
-            <div class="cardContainer green">
+            <div className="cardContainer green">
                 <h2>Get a Insurance Plan <a href="#">All</a></h2>
-                <ul class="iconPnl">
+                <ul className="iconPnl">
                     <li>
                         <a href="">
                             <img src="/images/icon/health-icon.png" alt="" />

@@ -1,36 +1,49 @@
 import React, { useState } from 'react'
-
-const eligilityForm = () => {
+import axios from 'axios';
+const eligilityForm = ({loanProduct}) => {
+ 
+  const [otpStatus,setOtpStatus] = useState(false)
   const [searchData, setSearchData] = useState({
     "product_id"  : '',
     "emp_type"    : 'salaried',
     "salary"      : "",
-    "name"        :"",
-    "turnover"    :"",
+    "full_name"   : "",
+    "turnover"    : "",
     "pincode"     : "",
-    "mobile"      : "",
-    "pancard"     : ""
+    "phone_no"    : "",
+    "pan_card"    : "",
+    "otp"         : ""
   })
 
   const handleChange = (e) => {
 
     setSearchData({
       ...searchData,
-
-      
       [e.target.name]: e.target.value.trim()
     });
   };
 
-  const submitForm = async () => {
-
-    console.log(searchData)
-    router.push({
-      pathname: `/filter-product`,
-      // query: searchData
-    })
+  const generatOtp = async () => {
+   try {
+    let { full_name, phone_no, pan_card } = searchData;
+    const data = {
+      full_name,phone_no,pan_card
+    }
+    const headers = { 
+      'Authorization': 'Bearer my-token',
+      'Content-Type': 'Application/json'
+  };
+    // console.log(data)
+    const otpres = await axios.post('https://testapi.referloan.in/api/generate-otp',data);
+    console.log(otpres);
+   } catch (error) {
+    console.log("message:", error.message );
+   }
   }
 
+  const verifyOtp = async () =>{
+    console.log("first")
+  }
   return (
     <>
       <div className="header-form-area">
@@ -59,11 +72,13 @@ const eligilityForm = () => {
             <form action="">
               <div className="loan-form-area">
                 <div className="loanType">
-                  <select>
-                    <option selected onChange={handleChange}>Type of loan </option>
-                    <option>Normal</option>
-                    <option>Hard</option>
-                    <option>Expert</option>
+                  <select onChange={handleChange}>
+                    <option selected >Type of loan </option>
+
+                    {loanProduct && loanProduct.map((item,key)=>(
+                      <option value={item.name}>{item.name}</option>
+                    ))}
+                  
                   </select>
                 </div>
 
@@ -107,15 +122,15 @@ const eligilityForm = () => {
             <div className="modal-body">
               <h1 id="exampleModalToggleLabel">Credit Card</h1>
               <p>Get the best credit card suit your requirment</p>
-              <div className="formContainer">
+              {!otpStatus ?  <div className="formContainer">
                 <div className="inputRow">
-                  <input type="text" placeholder="Enter Name" name='name' value={searchData.name}  onChange={handleChange} />
+                  <input type="text" placeholder="Enter Full Name" name='full_name' value={searchData.full_name}  onChange={handleChange} />
                 </div>
                 <div className="inputRow">
-                  <input type="text" placeholder="Phone Number" name='mobile' value={searchData.mobile}  onChange={handleChange} />
+                  <input type="text" placeholder="Phone Number" name='phone_no' value={searchData.phone_no}  onChange={handleChange} />
                 </div>
                 <div className="inputRow">
-                  <input type="text" placeholder="Pan Card" name="pancard" value={searchData.pancard}  onChange={handleChange} />
+                  <input type="text" placeholder="Pan Card" name="pan_card" value={searchData.pan_card}  onChange={handleChange} />
                 </div>
                 <div className="checkBoxRow">
                   <input type="checkbox" id="term" name="term" value="term" required />
@@ -127,9 +142,23 @@ const eligilityForm = () => {
                   </label>
                 </div>
                 <div style={{ marginTop: "40px" }}>
-                  <button className="custom__btn" onClick={submitForm}>Generate OTP</button>
+                  <button className="custom__btn" onClick={generatOtp}>Generate OTP</button>
+                </div>
+              </div> : <div className="formContainer">
+                <div className="inputRow">
+                  <input type="text" placeholder="Enter OTP" name='otp' value={searchData.otp}  onChange={handleChange} />
+                </div>
+              
+              
+                
+                <div style={{ marginTop: "40px" }}>
+                  <button className="custom__btn" onClick={verifyOtp}>Generate OTP</button>
                 </div>
               </div>
+}
+             
+              
+
             </div>
           </div>
         </div>

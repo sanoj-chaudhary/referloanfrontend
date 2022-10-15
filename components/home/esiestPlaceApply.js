@@ -3,12 +3,12 @@ import React from 'react'
 const esiestPlaceApply = () => {
   return (
     <div className='container'>
-    <section class="applyLoans__Section">
+    <section className="applyLoans__Section">
  
      
-          <div class="loanCol">
+          <div className="loanCol">
             <h2>Easiest place to apply for your loan</h2>
-            <ul class="iconPnl p-0">
+            <ul className="iconPnl p-0">
               <li>
                 <a href="#">
                   <img src="/images/icon/pl-icon.png" alt="" />
@@ -72,7 +72,7 @@ const esiestPlaceApply = () => {
             </ul>
           </div>
    
-          <div class="cardBanner">
+          <div className="cardBanner">
             <a href="#"><img src="/images/axisBanner.png" alt="" /></a>
           </div>
        
