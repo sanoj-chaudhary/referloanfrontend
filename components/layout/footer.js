@@ -81,12 +81,34 @@ const Footer = () => {
                 <div className="container">
                     <div id="footerNav">
                         <div className="footerNav">
-                            <ul>
+                            {/* <ul>
                                 {menu.map((value) => (
                                     <li key={value.id}><Link href={value.full_url} ><a><span className="material-icons">east</span>{value.post_title}</a></Link></li>
                                 ))}
                                 console.log(value.full_url);
-                            </ul>
+                            </ul> */}
+
+                        <ul>
+                            <li><a href="#"><span class="material-icons">east</span> Personal Loan</a></li>
+                            <li><a href="#"><span class="material-icons">east</span> Gold Loan  </a></li>
+                            <li><a href="#"><span class="material-icons">east</span> Micro Loans</a></li>
+                            <li><a href="#"><span class="material-icons">east</span> Consumer Loan</a></li>
+                            <li><a href="#"><span class="material-icons">east</span> Business Loan</a></li>
+                            <li><a href="#"><span class="material-icons">east</span> Home loan</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#"><span class="material-icons">east</span> Loan Against Property</a></li>
+                            <li><a href="#"><span class="material-icons">east</span> HDFC Bank Millennia Credit Card</a></li>
+                            <li><a href="#"><span class="material-icons">east</span>HDFC Bank Moneyback credit card</a></li>
+                            <li><a href="#"><span class="material-icons">east</span> HDFC Diners Club Privilege Credit Card</a></li>
+                            <li><a href="#"><span class="material-icons">east</span> Investment</a></li>
+                            <li><a href="#"><span class="material-icons">east</span> Insurance</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#"><span class="material-icons">east</span> HDFC Bank Credit Card</a></li>
+                            <li><a href="#"><span class="material-icons">east</span> Yes Bank Credit Card</a></li>
+                            <li><a href="#"><span class="material-icons">east</span> SBI Credit Card</a></li>
+                        </ul>
 
 
                         </div>
@@ -105,9 +127,15 @@ const Footer = () => {
                         <div className="footerLinks">
                             <h2> Loan </h2>
                             <ul>
-                               {loan.map((item)=>(
+                               {/* {loan.map((item)=>(
                                 <li key={item.id}><Link href={item.full_url} ><a  title="About">{item.post_title}</a></Link></li>
-                               ))}
+                               ))} */}
+                            <li><a href="#" title="About">Personal Loan</a></li>
+                            <li><a href="#" title="Careers">Gold Loan</a></li>
+                            <li><a href="#" title="Blog">Micro Loan</a></li>
+                            <li><a href="#" title="Contact">Consumer Loan</a></li>
+                            <li><a href="#" title="Investors">Business Loan</a></li> 
+                            <li><a href="#" title="Investors">Home loan</a></li> 
                             </ul>
                         </div>
 
@@ -115,9 +143,16 @@ const Footer = () => {
                         <div className="footerLinks">
                             <h2>Credit Cards</h2>
                             <ul>
-                            {cc.map((element)=>(
+                            {/* {cc.map((element)=>(
                                 <li key={element.id}><Link href={element.full_url} ><a  title="About">{element.post_title}</a></Link></li>
-                               ))}
+                               ))} */}
+
+                            <li><a href="#" title="About">HDFC Credit Card</a></li>
+                            <li><a href="#" title="Careers">Kotak Mahindra Credit Card</a></li>
+                            <li><a href="#" title="Blog">Yes Bank Credit Card</a></li>
+                            <li><a href="#" title="Contact">ICICI Bank Credit Card</a></li>
+                            <li><a href="#" title="Investors">SBI Credit Card</a></li>
+                            <li><a href="#" title="Investors">Axis bank credit card</a></li>
                             </ul>
                         </div>
 

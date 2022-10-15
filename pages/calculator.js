@@ -10,7 +10,11 @@ import SsyCalculator from '../components/calculator/ssyCalculator'
 import LumpsumCalculator from '../components/calculator/lumpsumpcalculator'
 
 
+
 const calculator = () => {
+  // const router = useRouter()
+  // const {name} = router.query
+  // console.log(name);
   const [calcName, setCalcName] = useState('Emi Calculator');
   return (
     <div data-aos="fade-right">
