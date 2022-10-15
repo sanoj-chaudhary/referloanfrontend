@@ -7,6 +7,7 @@ import CalcSidebar from '../components/calculator/calculatorsidebar'
 import RdCaculator from '../components/calculator/rdcalculator'
 import EpfCalculator from '../components/calculator/epfCalculator'
 import SsyCalculator from '../components/calculator/ssyCalculator'
+import LumpsumCalculator from '../components/calculator/lumpsumpcalculator'
 
 
 const calculator = () => {
@@ -27,6 +28,7 @@ const calculator = () => {
           {calcName == 'RD Calculator' && <RdCaculator />}
           {calcName == 'EPF Calculator' && <EpfCalculator />}
           {calcName == 'SSY Calculator' && <SsyCalculator />}
+          {calcName == 'Lumpsum Calculator' && <LumpsumCalculator />}
 
         </div>
         <div className='right'>
