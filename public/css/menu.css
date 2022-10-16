@@ -5,7 +5,7 @@
 header {
     position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 9;
     background: #fff;
 }
 
@@ -19,7 +19,7 @@ header .customContainer {
 
 
 header a.logoSection img {
-    height: 40px;
+    height: 50px;
     width: auto;
 }
 
@@ -56,7 +56,7 @@ header .info_section ul li img{
 
 
 .mmobile_menu {
-    /* display: none; */
+    display: none;
 }
 
 nav:not(.mm-menu) {
@@ -142,7 +142,6 @@ nav.navBarContainer {
 
 .navBarContainer li .megaMenu_container ul:nth-child(even) {
     background: #f5f7ff;
-    border: 1px solid;
 }
 
 .navBarContainer li .megaMenu_container ul:nth-child(odd) {
@@ -164,6 +163,48 @@ nav.navBarContainer {
     max-width: 190px;
     max-height: 130px;
     object-fit: contain;
+}
+.navBarContainer li .megaMenu_container ul.subMenuLevel2{
+    max-width: 100%;
+    display: flex;
+    height: 310px;
+}
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 li {
+    max-width: 100%;
+    width: 100%;
+}
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 li a{
+    padding: 10px 10px;
+    max-width: 19%;
+    box-sizing: border-box;
+}
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 li a:hover{    
+    background-color:#fefaff!important;
+}
+.navBarContainer li .megaMenu_container .submenuContainer {
+    position: absolute;
+    right: 0;
+    max-width: 80%;
+    width: 100%;
+    top: 0;
+    display: none;
+}
+.navBarContainer li .megaMenu_container .submenuContainer ul{
+    max-width:30%;
+}
+.navBarContainer li .megaMenu_container .submenuContainer ul li a{
+    max-width:100%;
+}
+
+
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 li.activeSubMenu a+.submenuContainer{
+    display: block
+}
+
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 li:hover a+.submenuContainer {
+    display: flex;
+    background-color: #fff;
+    height: 100%;
 }
 
 /* nav:not(.mm-menu) {

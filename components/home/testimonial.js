@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Carousel from "react-slick";
 const testimonial = (props) => {
 
-
+console.log("testi",props)
 
   const settings = {
     dots: true,
@@ -61,7 +61,7 @@ const testimonial = (props) => {
                     </div>
                     <p>{item.client_message}</p>
                     <div className="profileBxo">
-                      <div className="profile-img"><img src="/images/profile-img.jpg" alt="" /></div>
+                      <div className="profile-img"><img src="/images/" alt="" /></div>
                       {item.client_name}
                     </div>
                   </li>
