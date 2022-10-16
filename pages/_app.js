@@ -11,8 +11,6 @@ function MyApp({ Component, pageProps, data }) {
       </Layout>
     </Provider>
   )
-
-
 }
 export async function getServerSideProps(context) {
   const res = await db.query("select * from products where categories_id ='1' ");
