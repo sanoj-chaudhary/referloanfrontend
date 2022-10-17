@@ -1131,6 +1131,7 @@ footer img.footerlogo {
     color: #fff;
     justify-content: center;
     align-items: center;
+    gap: 10px;
     font-size: var(--medium-font);
     font-weight: 500;
 }

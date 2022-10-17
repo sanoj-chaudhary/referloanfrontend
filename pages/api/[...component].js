@@ -115,7 +115,7 @@ const getHeaderMenu = async (req, res) => {
     let product_id;
     let temp = [];
 
-    query_cat = await db.query("SELECT id,name FROM `categories` WHERE categories.status = '1' ");
+    query_cat = await db.query("SELECT id,name FROM `categories` WHERE categories.status = '1' and id !=7 ");
 
     if (query_cat) {
       for (let i in query_cat) {
