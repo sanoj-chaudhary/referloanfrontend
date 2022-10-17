@@ -5,3 +5,8 @@
 .heroSection .heroContent .headMain_carousel ul.slick-dots{
   z-index: 0 !important;
 }
+
+.info_section ul{
+margin-bottom: 0 !important;
+}
+

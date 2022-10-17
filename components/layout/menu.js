@@ -203,7 +203,7 @@ const Menu = (props) => {
                             <img src="/images/icon/call-icon.png" alt="" /><a href="tel:0124-4847123">0124-4847123</a>
                         </li>
                     </ul>
-                    <a href="#"><img src="/images/CIBIL Score.gif" alt="" /></a>
+                    <a href="#"><img style={{ "marginTop":'-14px','height':'36px' }} src="/images/CIBIL Score.gif" alt="" /></a>
                 </div>
 
             </div>

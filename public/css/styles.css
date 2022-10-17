@@ -1719,14 +1719,21 @@ note {
 }
 
 .testimonial_Area h2 {
+    font-size: 24px;
     color: #333333;
-    font-size: 28px;
-    font-weight: 600;
+    font-weight: 500;
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
 }
-
+.testimonial_Area h3{
+    font-size: 18px;
+    color: #333333;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+}
 .testimaolSlider .slick-track {
     position: relative;
     top: 0;
