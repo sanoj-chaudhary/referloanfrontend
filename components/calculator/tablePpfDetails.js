@@ -26,10 +26,6 @@ const tableDetails = (props) => {
         <TableCell className='ETablecellText'>Maturity Amount</TableCell>
         <TableCell className='ETablecellValue'><strong>₹ </strong>{props.maturityAmount}</TableCell>
       </TableRow>
-      <TableRow>
-        <TableCell className='ETablecellText'>Total Wealth</TableCell>
-        <TableCell className='ETablecellValue'><strong>₹ </strong>{props.futureValue}</TableCell>
-      </TableRow>
     </TableHead>
    </Table>
   )

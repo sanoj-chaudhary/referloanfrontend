@@ -37,7 +37,6 @@ const calculator = ({ data }) => {
           {calcName == 'epf-calculator' && <EpfCalculator />}
           {calcName == 'ssy-calculator' && <SsyCalculator />}
           {calcName == 'lumpsum-calculator' && <LumpsumCalculator />}
-
         </div>
         <div className='right'>
           <CalcSidebar setCalcName={setCalcName} calcName={calcName} />

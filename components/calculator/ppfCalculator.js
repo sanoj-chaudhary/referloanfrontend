@@ -108,28 +108,14 @@ const ppfCalculator = () => {
   const maxvalue = 150000;
   const maxint = 20;
   const maxduration = 50;
-
   // F = P[{(1+i)n-1}/i]
+
   var monthlyRate = interest / 12 / 100;
   var months = duration * 12;
-
-  var total_investment = (pAmount*duration);
-  //var futureValue = Math.round(pAmount*(((1+interest)*duration-1)/interest));
-  //var maturityAmount = Math.round(Math.pow(pAmount*(1+interest),duration));
-  // 120000[({(1+7.1)15}-1)/7.1]
-  var maturityAmount = Math.round( pAmount*( (((1+interest)*duration)-1)/interest ) );
+  var maturityAmount = 0;
+  var total_investment = (pAmount*months);
+  maturityAmount = Math.round(pAmount * (1+monthlyRate) * ((Math.pow((1+monthlyRate),months)) - 1)/monthlyRate);
   var total_interest = (maturityAmount-total_investment);
-  var futureValue = (maturityAmount+total_investment);
-
-  /*
-  var monthlyRate = interest / 12 / 100;
-  var months = duration * 12;
-  var futureValue = 0;
-  var total_investment = (pAmount*duration);
-  futureValue = Math.round(pAmount * (1+monthlyRate) * ((Math.pow((1+monthlyRate),months)) - 1)/monthlyRate);
-  var total_interest = ((futureValue-pAmount));
-  //var total_interest = ((pAmount*duration*interest));
-  */
 
   function valuetext(value) {
     return `${value} Lac`;
@@ -141,7 +127,7 @@ const ppfCalculator = () => {
         <div className="col-sm-12 col-md-12  col-xl-12">
           <div className="rangeArea">
             <div className="rangeHead">
-              <h2>Yearly investment Amount</h2>
+              <h2>Monthly Deposit Amount </h2>
               <small>(Up to 150000)</small>
               <div className="outputArea">
                 <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
@@ -154,7 +140,7 @@ const ppfCalculator = () => {
           </div>
           <div className="rangeArea">
             <div className="rangeHead">
-              <h2>Rate of interest</h2>
+              <h2>Current Interest Rate</h2>
               <small>(7.00%)</small>
               <div className="outputArea">
                 <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
@@ -164,7 +150,7 @@ const ppfCalculator = () => {
           </div>
           <div className="rangeArea">
             <div className="rangeHead">
-              <h2>Time period (in years)</h2>
+              <h2>Duration of investment (in years)</h2>
               <small>(1 year - 30 years)</small>
               <div className="outputArea">
                 <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" > Years
@@ -185,7 +171,7 @@ const ppfCalculator = () => {
             <Table>
               <TableRow>
                 <TableCell>
-                  <TablePpfDetails futureValue={futureValue} maturityAmount={maturityAmount} interest={interest} duration={duration} total_investment={total_investment} total_interest={total_interest} />
+                  <TablePpfDetails maturityAmount={maturityAmount} interest={interest} duration={duration} total_investment={total_investment} total_interest={total_interest} />
                 </TableCell>
                 <TableCell>
                   <Pie className='clChart'
