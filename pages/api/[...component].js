@@ -9,7 +9,6 @@ export default async function handler(req, res) {
   });
   switch (req.method) {
     case "GET":
-      console.log(req.query.component[0])
       if (req.query.component == 'partner') {
         return await getAllPartner(req, res);
       }
@@ -115,8 +114,7 @@ const getHeaderMenu = async (req, res) => {
     let product_id;
     let temp = [];
 
-    query_cat = await db.query("SELECT * FROM `categories` WHERE categories.status = '1' and id !=7 and slug != '' ");
-
+    query_cat = await db.query("SELECT * FROM `categories` WHERE status = '1' and `id` != '7' and `slug` != '' ");
     if (query_cat) {
       for (let i in query_cat) {
         category_id = query_cat[i].id;

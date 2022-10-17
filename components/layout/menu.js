@@ -4,7 +4,6 @@ import Link from "next/link";
 import SubMenu from './subMenu';
 const Menu = (props) => {
     const [headermenu, setHeaderMenu] = useState([])
-    console.log(headermenu)
     const getheaderMenu = async () => {
         try {
             const res = await axios.get('api/headermenu');

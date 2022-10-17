@@ -16,10 +16,7 @@ const calculator = ({ data }) => {
   const {name} = router.query
 
   const [calcName, setCalcName] = useState(data.name);
-  console.log('first',data)
- 
- 
-  
+
   return (
     <div data-aos="fade-right">
       <div className='emiCalcHeading'>
