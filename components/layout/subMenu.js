@@ -4,7 +4,7 @@ const subMenu = (props) => {
   const items = props.data.map((item, index) => (
 
     item.id != null
-      ? (<li key={index} className=""><Link href={"#"}><a tabIndex="-1" >{item.id}</a></Link></li>)
+      ? (<li key={index} className=""><Link href={item.slug}><a tabIndex="-1" >{item.name}</a></Link></li>)
       : null
 
   ))
