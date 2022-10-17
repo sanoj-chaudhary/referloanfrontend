@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Error from "./error";
 import { db } from './../config/db'
 import Apply from './../components/page/apply';
+import MidContent from './../components/page/midcontent';
 import Head from 'next/head';
 
 function contentPage({ data }) {
@@ -21,9 +22,7 @@ function contentPage({ data }) {
 
             <h1>{data[0].name}</h1>
             <p></p>
-
-            {data[0].description}
-            
+            <MidContent midcontent={data[0].description} />
 
             <div class="faqSetion">
               <h3>FREQUENTLY ASKED QUESTIONS</h3>
