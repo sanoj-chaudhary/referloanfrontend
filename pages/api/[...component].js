@@ -115,21 +115,21 @@ const getHeaderMenu = async (req, res) => {
     let product_id;
     let temp = [];
 
-    query_cat = await db.query("SELECT id,name FROM `categories` WHERE categories.status = '1' and id !=7 ");
+    query_cat = await db.query("SELECT * FROM `categories` WHERE categories.status = '1' and id !=7 and slug != '' ");
 
     if (query_cat) {
       for (let i in query_cat) {
         category_id = query_cat[i].id;
         temp[i] = query_cat[i];
 
-         query_product = await db.query("SELECT * FROM `products` WHERE products.categories_id = '" + category_id + "' AND products.status = '1' ");
+         query_product = await db.query("SELECT * FROM `products` WHERE products.categories_id = '" + category_id + "' AND products.status = '1' and is_menu=1 and slug != '' ");
 
          if (query_product) {
            for (let j in query_product) {
              product_id = query_product[j].id;
              temp[i]['product'] = query_product;
 
-             query_bank_product = await db.query("SELECT * FROM `bank_products` WHERE bank_products.products_id = '" + product_id + "' AND bank_products.status = '1' ");
+             query_bank_product = await db.query("SELECT * FROM `bank_products` WHERE bank_products.products_id = '" + product_id + "' AND bank_products.status = '1' and is_menu=1 and slug != '' ");
              query_product[j]['bank_product'] = query_bank_product;
            }
          }
