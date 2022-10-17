@@ -8,6 +8,7 @@ import RdCaculator from '../components/calculator/rdcalculator'
 import EpfCalculator from '../components/calculator/epfCalculator'
 import SsyCalculator from '../components/calculator/ssyCalculator'
 import LumpsumCalculator from '../components/calculator/lumpsumpcalculator'
+import Mfcalculator from '../components/calculator/mfcalculator'
 
 import { useRouter } from 'next/router'
 
@@ -34,6 +35,8 @@ const calculator = ({ data }) => {
           {calcName == 'epf-calculator' && <EpfCalculator />}
           {calcName == 'ssy-calculator' && <SsyCalculator />}
           {calcName == 'lumpsum-calculator' && <LumpsumCalculator />}
+          {calcName == 'mf-calculator' && <Mfcalculator />}
+          
         </div>
         <div className='right'>
           <CalcSidebar setCalcName={setCalcName} calcName={calcName} />

@@ -12,11 +12,11 @@ const calcSidebar = ({setCalcName,calcName}) => {
                 <li><a onClick={()=>{setCalcName('sip-calculator')}} title="SIP Calculator">SIP Calculator</a></li>
                 <li><a onClick={()=>{setCalcName('rd-calculator')}} title="RD Calculator">RD Calculator</a></li>
 
-                <li><a  onClick={()=>{setCalcName('ssy-calculator')}} title="SSY Calculator">SSY Calculator</a></li>
+                <li><a  onClick={()=>{setCalcName('ssy-calculator')}} title="Sukanya Samriddhi Yojana (SSY) Calculator">SSY Calculator</a></li>
                 <li><a  onClick={()=>{setCalcName('ppf-calculator')}} title="PPF Calculator">PPF Calculator</a></li>
                 <li><a  onClick={()=>{setCalcName('epf-calculator')}} title="EPF Calculator">EPF Calculator</a></li>
                 <li><a  onClick={()=>{setCalcName('lumpsum-calculator')}} title="Lumpsum Calculator">Lumpsum Calculator</a></li>
-                <li><a onClick={()=>{setCalcName('MF Returns Calculator')}} title="MF Returns Calculator">MF Returns Calculator</a></li>
+                <li><a onClick={()=>{setCalcName('mf-calculator')}} title="MF Returns Calculator">MF Returns Calculator</a></li>
             </ul>
         </div>
     )
