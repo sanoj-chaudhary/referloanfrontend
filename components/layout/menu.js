@@ -4,6 +4,7 @@ import Link from "next/link";
 import SubMenu from './subMenu';
 const Menu = (props) => {
     const [headermenu, setHeaderMenu] = useState([])
+
     const getheaderMenu = async () => {
         try {
             const res = await axios.get('api/headermenu');
@@ -19,11 +20,11 @@ const Menu = (props) => {
     }, []);
 
     const items = headermenu && headermenu.map((item) => (
-        <li key={item.id}><Link href={item.slug} ><a className={item.product ? "hasSub_menu" : ''} target="_blank"  title="Loan">{item.name}</a></Link>
+        <li key={item.id}><Link href={item.slug} ><a className={item.product ? "hasSub_menu" : ''}  title={item.name}>{item.name}</a></Link>
             <div className={item.product ? "megaMenu_container" : ''} >
                 <ul className={item.product ? "subMenuLevel2" : ''}>
                     {item.product && item.product.map((value) => (
-                        <li key={value.id} className="activeSubMenu"> <a className="" href={value.slug} target="_blank"title="Card 1">{value.name}</a>
+                        <li key={value.id} className="activeSubMenu"> <a className="" href={value.slug} title="{value.name}">{value.name}</a>
                             <div className="submenuContainer">
                                 <ul>
                                     {value.bank_product && <SubMenu data={value.bank_product} />}
