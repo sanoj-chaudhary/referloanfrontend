@@ -16,7 +16,7 @@ const calcSidebar = ({setCalcName,calcName}) => {
                 <li><a  onClick={()=>{setCalcName('ppf-calculator')}} title="PPF Calculator">PPF Calculator</a></li>
                 <li><a  onClick={()=>{setCalcName('epf-calculator')}} title="EPF Calculator">EPF Calculator</a></li>
                 <li><a  onClick={()=>{setCalcName('lumpsum-calculator')}} title="Lumpsum Calculator">Lumpsum Calculator</a></li>
-                <li><a onClick={()=>{setCalcName('MF Returns Calculator')}} title="MF Returns Calculator">MF Returns Calculator</a></li>
+                <li><a onClick={()=>{setCalcName('mf-calculator')}} title="MF Returns Calculator">MF Returns Calculator</a></li>
             </ul>
         </div>
     )
