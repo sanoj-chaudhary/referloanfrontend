@@ -1,5 +1,6 @@
 import Home from './../components/home'
 import { db } from './../config/db'
+
 export default function Index({ partner,testimonial,loanProduct }) {
   return (
     <>

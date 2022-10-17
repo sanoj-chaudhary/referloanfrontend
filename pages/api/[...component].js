@@ -148,10 +148,10 @@ const getFooterLink = async (req, res) => {
   try {
     var temp = { 'loanP': [], 'loanBP': [] , 'ccBP': [] };
 
-    // 1 For Loan, 2 For CC
-    const results1 = await db.query("SELECT * FROM `products` where products.categories_id = '1' AND products.status = '1' LIMIT 0,5 ");
-    const results2 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '1' AND bank_products.status = '1' LIMIT 0,5 ");
-    const results3 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '2' AND bank_products.status = '1' LIMIT 0,5 ");
+    // Loan - 2, CC - 1, Other - 7
+    const results1 = await db.query("SELECT * FROM `products` where products.categories_id = '2' AND products.status = '1' LIMIT 0,5 ");
+    const results2 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '2' AND bank_products.status = '1' LIMIT 0,5 ");
+    const results3 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '1' AND bank_products.status = '1' LIMIT 0,5 ");
 
     temp['loanP'].push(results1);
     temp['loanBP'].push(results2);
@@ -168,9 +168,9 @@ const getFooterLink2 = async (req, res) => {
   try {
     var temp = { 'loan': [], 'cc': [] };
 
-    // 1 For Loan, 2 For CC
-    const results1 = await db.query("SELECT * FROM `products` where products.categories_id = '1' AND products.status = '1' LIMIT 0,5 ");
-    const results2 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '2' AND bank_products.status = '1' LIMIT 0,5 ");
+    // Loan - 2, CC - 1, Other - 7
+    const results1 = await db.query("SELECT * FROM `products` where products.categories_id = '2' AND products.status = '1' LIMIT 0,5 ");
+    const results2 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '1' AND bank_products.status = '1' LIMIT 0,5 ");
 
     temp['loan'].push(results1);
     temp['cc'].push(results2);
