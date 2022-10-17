@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { withStyles } from '@material-ui/styles'
 import Slider from '@mui/material/Slider';
 import { Typography } from '@material-ui/core'
-import { Table, TableCell, TableRow } from '@material-ui/core'
+import { Table, TableCell, TableRow, TableHead } from '@material-ui/core'
 // import { Chart } from 'react-chartjs-2';
 import { styled } from '@mui/material/styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -16,7 +16,6 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 //   rail: { height: 40, color:"red", borderRadius: 4 }
 // })(Slider);
 import TableDetails from './tableDetails';
-import TableSipDetails from './tableSipDetails';
 
 const PrettoSlider = styled(Slider)({
   color: '#00796a',
@@ -101,22 +100,21 @@ const marksss = [
 
 ];
 
-const sipCalculator = () => {
+const mfcalculator = () => {
   const [pAmount, setpAmount] = useState(100000);
-  const [interest, setInterest] = useState(9.56);
-  const [duration, setDuration] = useState(12)
+  const [interest, setInterest] = useState(12);
+  const [duration, setDuration] = useState(10)
   const maxvalue = 100000000;
   const maxint = 20;
   const maxduration = 30;
-
+  
   var monthlyRate = interest / 12 / 100;
   var months = duration * 12;
-  var futureValue = 0;
-  var total_investment = (pAmount*months);
-  futureValue = Math.round(pAmount * (1+monthlyRate) * ((Math.pow((1+monthlyRate),months)) - 1)/monthlyRate);
-  /*var total_interest = ((pAmount*duration*interest));*/
-  var total_interest = ((futureValue-total_investment));
-
+  
+  var total_investment = (pAmount);
+  var futureValue = Math.round(pAmount * Math.pow((1+interest/100),duration) );
+  var total_interest = futureValue - total_investment;
+  
   function valuetext(value) {
     return `${value} Lac`;
   }
@@ -127,7 +125,7 @@ const sipCalculator = () => {
         <div className="col-sm-12 col-md-12  col-xl-12">
           <div className="rangeArea">
             <div className="rangeHead">
-              <h2>Monthly SIP Amount</h2>
+              <h2>Investment Amount</h2>
               <small>(Up to 1 Crore)</small>
               <div className="outputArea">
                 <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
@@ -150,10 +148,10 @@ const sipCalculator = () => {
           </div>
           <div className="rangeArea">
             <div className="rangeHead">
-              <h2>SIP Period</h2>
+              <h2>Investment Period (in Years)</h2>
               <small>(1 year - 30 years)</small>
               <div className="outputArea">
-                <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" > Years
+                <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> years <span className="emi-icon" >
                 </span></div>
 
             </div>
@@ -168,12 +166,31 @@ const sipCalculator = () => {
         <div className="col-sm-12 col-md-12  col-xl-12">
 
           <div className="table-responsive">
-            <Table>
-              <TableRow>
-                <TableCell>
-                  <TableSipDetails total_amount={futureValue} interest={interest} duration={duration} total_investment={total_investment} total_interest={total_interest} />
-                </TableCell>
-                <TableCell>
+          <Table style={{ width:"100%", border:"2px solid #ccc" }} area-lable="sample table" >
+              <TableHead>
+                <TableRow>
+                  <TableRow>
+                    <TableCell className='ETablecellText'>Interest Rate (%)</TableCell>
+                    <TableCell className='ETablecellValue'>{interest}<strong> % </strong></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className='ETablecellText'>Duration (Years)</TableCell>
+                    <TableCell className='ETablecellValue'><strong> </strong>{duration}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className='ETablecellText'>Invested Amount</TableCell>
+                    <TableCell className='ETablecellValue'><strong>₹ </strong>{total_investment}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className='ETablecellText'>Wealth Gained</TableCell>
+                    <TableCell className='ETablecellValue'><strong>₹ </strong>{total_interest}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className='ETablecellText'>Total Wealth</TableCell>
+                    <TableCell className='ETablecellValue'><strong>₹ </strong>{futureValue}</TableCell>
+                  </TableRow>
+                  
+                  <TableCell>
                   <Pie className='clChart'
                     data={{
                       datasets: [{
@@ -187,8 +204,10 @@ const sipCalculator = () => {
                     options={{ maintainAspectRatio: false }}
                   />
                 </TableCell>
-              </TableRow>
-            </Table>
+
+                </TableRow>
+              </TableHead>
+          </Table>
           </div>
         </div>
 
@@ -198,4 +217,4 @@ const sipCalculator = () => {
   )
 }
 
-export default sipCalculator
+export default mfcalculator
