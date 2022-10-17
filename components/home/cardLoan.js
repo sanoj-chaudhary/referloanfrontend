@@ -1,9 +1,11 @@
 import Carousel from "react-slick";
+import Link from "next/link"
+
 const cardLoan = () => {
 
   const settings = {
     dots: true,
-   
+
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -30,7 +32,7 @@ const cardLoan = () => {
           slidesToShow: 4,
         },
       },
-      ],
+    ],
   };
 
   return (
@@ -38,11 +40,11 @@ const cardLoan = () => {
     <section className="servicesBanner__Section">
       <div className="container">
         <ul className="loanCard_carousel">
- <Carousel {...settings}>
+          <Carousel {...settings}>
             <div className="slickItem">
               <div className="slide_item">
                 <li className="greenBox">
-                  <a href="#">
+                  <Link href="/loans/personal-loan"><a>
                     <div className="contentArea">
                       <h2>Personal Loan</h2>
                       <p>Instant approval on loans upto Rs. 25 lakh</p>
@@ -52,6 +54,7 @@ const cardLoan = () => {
                       <img src="/images/pl-bnr-icon.png" alt="" />
                     </div>
                   </a>
+                  </Link>
                 </li>
               </div>
             </div>
@@ -59,7 +62,7 @@ const cardLoan = () => {
             <div className="slickItem">
               <div className="slide_item">
                 <li className="blueBox">
-                  <a href="#">
+                  <Link href="/credit-card"><a>
                     <div className="contentArea">
                       <h2>Credit Card</h2>
                       <p>Get a card limit of up to Rs. 2 lakh*</p>
@@ -69,6 +72,7 @@ const cardLoan = () => {
                       <img src="/images/ccard-bnr-icon.png" alt="" />
                     </div>
                   </a>
+                  </Link>
                 </li>
               </div>
             </div>
@@ -76,9 +80,9 @@ const cardLoan = () => {
             <div className="slickItem">
               <div className="slide_item">
                 <li className="purpleBox">
-                  <a href="#">
+                  <Link href="/loans/business-loan"><a>
                     <div className="contentArea">
-                      <h2>Insta EMI Card</h2>
+                      <h2>Business Loan</h2>
                       <p>Purchases into easy EMIS with a limit of up to Rs. 2 lakh*</p>
                       <button>Apply Now</button>
                     </div>
@@ -86,15 +90,16 @@ const cardLoan = () => {
                       <img src="/images/emi-bnr-icon.png" alt="" />
                     </div>
                   </a>
+                  </Link>
                 </li>
               </div>
             </div>
             <div className="slickItem">
               <div className="slide_item">
                 <li className="yellowBox">
-                  <a href="#">
+                  <Link href="/loans/gold-loan"><a>
                     <div className="contentArea">
-                      <h2>Personal Loan</h2>
+                      <h2>Gold Loan</h2>
                       <p>Instant approval on loans upto Rs. 25 lakh</p>
                       <button>Apply Now</button>
                     </div>
@@ -102,11 +107,12 @@ const cardLoan = () => {
                       <img src="/images/pl-bnr-icon.png" alt="" />
                     </div>
                   </a>
+                  </Link>
                 </li>
               </div>
             </div>
           </Carousel>
-         
+
         </ul>
       </div>
     </section>
