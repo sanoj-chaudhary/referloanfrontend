@@ -104,9 +104,6 @@ const eligilityForm = ({ loanProduct }) => {
 
                   </select>
                 </div>
-                <div className="loanType">
-                  <input type="number" max="9" min="4" name='loan_amount' placeholder="Loan Amount" value={searchData.loan_amount} onChange={handleChange} />
-                </div>
                 <div className="loanType" >
                   <select onChange={handleChange} name="emp_type">
                     <option selected >Profession Type </option>
@@ -121,7 +118,9 @@ const eligilityForm = ({ loanProduct }) => {
                   {(searchData.emp_type === 'Self employed - business owner' || searchData.emp_type === 'Self employed professional') && <input name='turnover' type="number" placeholder="Turn Over" onChange={handleChange} value={searchData.turnover} minLength={4} maxLength={18} />
                   }
                 </div>
-
+                <div className="loanType">
+                  <input type="number" name='pincode' placeholder="Pincode" value={searchData.pincode} onChange={handleChange} minLength={6} maxLength={6} />
+                </div>
                 <div className="search-button">
                   <button type="button" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Continue</button>
                 </div>
@@ -156,9 +155,7 @@ const eligilityForm = ({ loanProduct }) => {
                 <div className="inputRow">
                   <input type="text" placeholder="Pan Card" name="pan_card" value={searchData.pan_card} onChange={handleChange} />
                 </div>
-                <div className="inputRow">
-                  <input type="number" name='pincode' placeholder="Pincode" value={searchData.pincode} onChange={handleChange} minLength={6} maxLength={6} />
-                </div>
+               
                 <div className="checkBoxRow">
                   <input type="checkbox" id="term" name="term" value="term" required />
                   <label for="vehicle1">
