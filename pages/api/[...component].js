@@ -146,11 +146,18 @@ const getHeaderMenu = async (req, res) => {
 
 const getFooterLink = async (req, res) => {
   try {
-    const results1 = await db.query("SELECT * FROM `products` WHERE categories_id = 1");
-    const withoutFirstAndLast = results1[0]['value'].slice(1, -1);
-    const results2 = await db.query('SELECT id,post_title,post_slug,full_url FROM `pages` where `id` IN (' + withoutFirstAndLast + ') ');
+    var temp = { 'loanP': [], 'loanBP': [] , 'ccBP': [] };
 
-    return res.status(200).json(results2);
+    // 1 For Loan, 2 For CC
+    const results1 = await db.query("SELECT * FROM `products` where products.categories_id = '1' AND products.status = '1' LIMIT 0,5 ");
+    const results2 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '1' AND bank_products.status = '1' LIMIT 0,5 ");
+    const results3 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '2' AND bank_products.status = '1' LIMIT 0,5 ");
+
+    temp['loanP'].push(results1);
+    temp['loanBP'].push(results2);
+    temp['ccBP'].push(results3);
+
+    return res.status(200).json(temp);
   }
   catch (error) {
     return res.status(500).json({ error });
@@ -161,8 +168,9 @@ const getFooterLink2 = async (req, res) => {
   try {
     var temp = { 'loan': [], 'cc': [] };
 
-    const results1 = await db.query("SELECT id,post_title,post_slug,full_url FROM `pages` where pages.post_master = '1' AND pages.is_active = '1' AND pages.id IN (1,2,3,4,5,6) ");
-    const results2 = await db.query("SELECT id,post_title,post_slug,full_url FROM `pages` where pages.post_master = '2' AND pages.is_active = '1' AND pages.id IN (141,138,142,144,140,147) ");
+    // 1 For Loan, 2 For CC
+    const results1 = await db.query("SELECT * FROM `products` where products.categories_id = '1' AND products.status = '1' LIMIT 0,5 ");
+    const results2 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '2' AND bank_products.status = '1' LIMIT 0,5 ");
 
     temp['loan'].push(results1);
     temp['cc'].push(results2);
