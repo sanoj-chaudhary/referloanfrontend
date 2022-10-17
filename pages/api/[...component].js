@@ -52,6 +52,10 @@ export default async function handler(req, res) {
         }
       }
     case "POST":
+      if(req.query.component == 'insertPage'){
+        return await insertPage(req,res);
+      }
+
       if (req.query.component == 'getcontentbysearch') {
         return await getContentBySearch(req, res);
       }
@@ -103,30 +107,32 @@ const getAllCategory = async (req, res) => {
 
 const getHeaderMenu = async (req, res) => {
   try {
-    let category;
-    let page;
-    let menu_id;
-    let cat_id;
+    let query_cat;
+    let query_product;
+    let query_bank_product;
+    
+    let category_id;
+    let product_id;
     let temp = [];
 
-    const menus = await db.query('SELECT id,name,icon FROM `menu_types` ');
+    query_cat = await db.query("SELECT id,name FROM `categories` WHERE categories.status = '1' ");
 
-    if (menus) {
-      for (let i in menus) {
-        menu_id = menus[i].id;
-        temp[i] = menus[i];
+    if (query_cat) {
+      for (let i in query_cat) {
+        category_id = query_cat[i].id;
+        temp[i] = query_cat[i];
 
-        category = await db.query("SELECT menus.id,menus.cat_id,categories.name,categories.slug,categories.full_url FROM `menus` LEFT JOIN `categories` ON categories.id = menus.cat_id WHERE menus.type1 = '" + menu_id + "' AND menus.page_id = '0' AND menus.is_active = '1' ");
+         query_product = await db.query("SELECT * FROM `products` WHERE products.categories_id = '" + category_id + "' AND products.status = '1' ");
 
-        if (category) {
-          for (let j in category) {
-            cat_id = category[j].cat_id;
-            menus[i]['category'] = category;
+         if (query_product) {
+           for (let j in query_product) {
+             product_id = query_product[j].id;
+             temp[i]['product'] = query_product;
 
-            page = await db.query("SELECT menus.id,menus.cat_id,pages.post_title,pages.post_slug,pages.full_url FROM `menus` LEFT JOIN `pages` ON pages.id = menus.page_id WHERE menus.type1 = '" + menu_id + "' AND menus.cat_id = '" + cat_id + "' AND menus.is_active = '1' ");
-            category[j]['page'] = page;
-          }
-        }
+             query_bank_product = await db.query("SELECT * FROM `bank_products` WHERE bank_products.products_id = '" + product_id + "' AND bank_products.status = '1' ");
+             query_product[j]['bank_product'] = query_bank_product;
+           }
+         }
 
       }
     }
@@ -140,7 +146,7 @@ const getHeaderMenu = async (req, res) => {
 
 const getFooterLink = async (req, res) => {
   try {
-    const results1 = await db.query("SELECT * FROM `settings` where `name` = 'footer_link' ");
+    const results1 = await db.query("SELECT * FROM `products` WHERE categories_id = 1");
     const withoutFirstAndLast = results1[0]['value'].slice(1, -1);
     const results2 = await db.query('SELECT id,post_title,post_slug,full_url FROM `pages` where `id` IN (' + withoutFirstAndLast + ') ');
 
@@ -394,3 +400,27 @@ console.log("form"+req.body)
     return res.status(500).json({ error });
   }
 };
+
+const insertPage = async (req, res) =>{
+  try {
+    if(req.body.action == 'insert'){
+      const {id,name,slug,description,meta_title,meta_keyword,meta_description,categories_id,product_id,bank_product_id,bank_id,status} = req.body;
+      const result = await db.query("INSERT INTO `pages`(`id`, `name`, `slug`, `description`, `meta_title`, `meta_keyword`, `meta_description`, `categories_id`, `product_id`, `bank_product_id`, `bank_id`, `status`)VALUES('"+id+"','"+name+"','"+slug+"','"+description+"','"+meta_title+"','"+meta_keyword+"','"+meta_description+"','"+categories_id+"','"+product_id+"','"+bank_product_id+"','"+bank_id+"','"+status+"')")
+
+      return res.status(200).json({'action':result});
+    }else if(req.body.action == 'update'){
+      const {id,name,slug,description,meta_title,meta_keyword,meta_description,categories_id,product_id,bank_product_id,bank_id,status} = req.body;
+      const updaeres = await db.query("UPDATE `pages` SET `id`='"+id+"',`name`='"+name+"',`slug`='"+slug+"',`description`='"+description+"',`meta_title`='"+meta_title+"',`meta_keyword`='"+meta_keyword+"',`meta_description`='"+meta_description+"',`categories_id`='"+categories_id+"',`product_id`='"+product_id+"',`bank_product_id`='"+bank_product_id+"',`bank_id`='"+bank_id+"',`status`='"+status+"' WHERE id='"+id+"'")
+
+      if(updaeres.changedRows == 0){
+        return res.status(500).json({ "message":"Something went wrong"});
+      }
+      return res.status(200).json({'action':updaeres});
+    }else if(req.body.action == 'delete'){
+      return res.status(200).json({'action':'delete'});
+    }
+  } catch (error) {
+    return res.status(500).json({ "message":error.message });
+  }
+  
+}

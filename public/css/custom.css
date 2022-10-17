@@ -1,0 +1,7 @@
+.header-form-area{
+  z-index: 0 !important;
+}
+
+.heroSection .heroContent .headMain_carousel ul.slick-dots{
+  z-index: 0 !important;
+}

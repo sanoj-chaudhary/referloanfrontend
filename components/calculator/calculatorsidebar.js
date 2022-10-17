@@ -3,19 +3,19 @@ const calcSidebar = ({setCalcName,calcName}) => {
     console.log(calcName)
     return (
 
-        <div class="article_list" data-aos="fade-left">
+        <div className="article_list" data-aos="fade-left">
             <h2>CALCULATOR</h2>
             <ul>
-                <li><a onClick={()=>{setCalcName('Emi Calculator')}} title="EMI Calculator">EMI Calculator</a></li>
+                <li><a onClick={()=>{setCalcName('emi-calculator')}} title="EMI Calculator">EMI Calculator</a></li>
              
-                <li><a onClick={()=>{setCalcName('Subsidy Calculator')}} title="SUBSIDY Calculator">SUBSIDY Calculator</a></li>
-                <li><a onClick={()=>{setCalcName('SIP Calculator')}} title="SIP Calculator">SIP Calculator</a></li>
-                <li><a onClick={()=>{setCalcName('RD Calculator')}} title="RD Calculator">RD Calculator</a></li>
+                <li><a onClick={()=>{setCalcName('subsidy-calculator')}} title="SUBSIDY Calculator">SUBSIDY Calculator</a></li>
+                <li><a onClick={()=>{setCalcName('sip-calculator')}} title="SIP Calculator">SIP Calculator</a></li>
+                <li><a onClick={()=>{setCalcName('rd-calculator')}} title="RD Calculator">RD Calculator</a></li>
 
-                <li><a  onClick={()=>{setCalcName('SSY Calculator')}} title="SSY Calculator">SSY Calculator</a></li>
-                <li><a  onClick={()=>{setCalcName('PPF Calculator')}} title="PPF Calculator">PPF Calculator</a></li>
-                <li><a  onClick={()=>{setCalcName('EPF Calculator')}} title="EPF Calculator">EPF Calculator</a></li>
-                <li><a  onClick={()=>{setCalcName('Lumpsum Calculator')}} title="Lumpsum Calculator">Lumpsum Calculator</a></li>
+                <li><a  onClick={()=>{setCalcName('ssy-calculator')}} title="SSY Calculator">SSY Calculator</a></li>
+                <li><a  onClick={()=>{setCalcName('ppf-calculator')}} title="PPF Calculator">PPF Calculator</a></li>
+                <li><a  onClick={()=>{setCalcName('epf-calculator')}} title="EPF Calculator">EPF Calculator</a></li>
+                <li><a  onClick={()=>{setCalcName('lumpsum-calculator')}} title="Lumpsum Calculator">Lumpsum Calculator</a></li>
                 <li><a onClick={()=>{setCalcName('MF Returns Calculator')}} title="MF Returns Calculator">MF Returns Calculator</a></li>
             </ul>
         </div>
