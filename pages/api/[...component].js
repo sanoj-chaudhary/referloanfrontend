@@ -115,21 +115,21 @@ const getHeaderMenu = async (req, res) => {
     let product_id;
     let temp = [];
 
-    query_cat = await db.query("SELECT * FROM `categories` WHERE categories.status = '1' and id !=7 and slug != '' ");
-
+    query_cat = await db.query("SELECT cat_id as id, cat_name as name, slug FROM `view_cat` WHERE `cat_status` = '1' and `cat_id` !=7 and `slug` != '' ");
+//console.log(query_cat)
     if (query_cat) {
       for (let i in query_cat) {
         category_id = query_cat[i].id;
         temp[i] = query_cat[i];
 
-         query_product = await db.query("SELECT * FROM `products` WHERE products.categories_id = '" + category_id + "' AND products.status = '1' and is_menu=1 and slug != '' ");
+         query_product = await db.query("SELECT product_id as id, product_name as name , slug FROM `view_product` WHERE `cat_id` = '" + category_id + "' AND `product_status` = '1' and `product_is_menu` = '1' and `slug` != '' ");
 
          if (query_product) {
            for (let j in query_product) {
              product_id = query_product[j].id;
              temp[i]['product'] = query_product;
 
-             query_bank_product = await db.query("SELECT * FROM `bank_products` WHERE bank_products.products_id = '" + product_id + "' AND bank_products.status = '1' and is_menu=1 and slug != '' ");
+             query_bank_product = await db.query("SELECT bank_product_id as id, bank_product_name as name, slug FROM `view_bank_pro` WHERE `bank_product_products_id` = '" + product_id + "'  ");
              query_product[j]['bank_product'] = query_bank_product;
            }
          }
@@ -149,9 +149,9 @@ const getFooterLink = async (req, res) => {
     var temp = { 'loanP': [], 'loanBP': [] , 'ccBP': [] };
 
     // Loan - 2, CC - 1, Other - 7
-    const results1 = await db.query("SELECT * FROM `products` where products.categories_id = '2' AND products.status = '1' LIMIT 0,5 ");
-    const results2 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '2' AND bank_products.status = '1' LIMIT 0,5 ");
-    const results3 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '1' AND bank_products.status = '1' LIMIT 0,5 ");
+    const results1 = await db.query("SELECT product_id as id, product_name as name , slug FROM `view_product` where cat_id = '2' LIMIT 0,5 ");
+    const results2 = await db.query("SELECT bank_product_id as id, bank_product_name as name, slug FROM `view_bank_pro` where bank_product_products_id = '2'  LIMIT 0,5 ");
+    const results3 = await db.query("SELECT bank_product_id as id, bank_product_name as name, slug FROM `view_bank_pro` where bank_product_products_id = '1' LIMIT 0,5 ");
 
     temp['loanP'].push(results1);
     temp['loanBP'].push(results2);
@@ -169,8 +169,8 @@ const getFooterLink2 = async (req, res) => {
     var temp = { 'loan': [], 'cc': [] };
 
     // Loan - 2, CC - 1, Other - 7
-    const results1 = await db.query("SELECT * FROM `products` where products.categories_id = '2' AND products.status = '1' LIMIT 0,5 ");
-    const results2 = await db.query("SELECT * FROM `bank_products` where bank_products.products_id = '1' AND bank_products.status = '1' LIMIT 0,5 ");
+    const results1 = await db.query("SELECT product_id as id, product_name as name , slug FROM `view_product` where cat_id = '2' LIMIT 0,5 ");
+    const results2 = await db.query("SELECT bank_product_id as id, bank_product_name as name, slug FROM `view_bank_pro` where bank_product_products_id = '1' LIMIT 0,5 ");
 
     temp['loan'].push(results1);
     temp['cc'].push(results2);
