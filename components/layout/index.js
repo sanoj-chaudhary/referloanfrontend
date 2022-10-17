@@ -20,7 +20,7 @@ export default function Layout(props) {
   
   return (<>
     <Header { ...props } ></Header>
-    {/* <Menu /> */}
+    <Menu />
     { props.children }
 
      <Footer /> 
