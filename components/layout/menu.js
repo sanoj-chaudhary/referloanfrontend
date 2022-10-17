@@ -122,9 +122,9 @@ const Menu = (props) => {
                 <div className="container">
                     <ul>
                         {items}
-                        <li><Link href="/zero-investment-franchise"><a className="" target="_blank"  title="Franchise">Franchise</a></Link></li>
-                        <li><Link href="https://blog.referloan.in/"><a className="" target="_blank"  title="Blogs">Blogs</a></Link></li>
-                        <li><Link href="/contact"><a className="" target="_blank"  title="Contact">Contact</a></Link></li> 
+                        <li><Link href="/zero-investment-franchise"><a className="" title="Franchise">Franchise</a></Link></li>
+                        <li><Link href="https://blog.referloan.in/"><a  target="_blank" title="Blogs">Blogs</a></Link></li>
+                        <li><Link href="/contact"><a className=""  title="Contact">Contact</a></Link></li> 
                     </ul>
                 </div>
             </nav >

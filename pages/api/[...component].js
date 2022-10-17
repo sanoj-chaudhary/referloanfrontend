@@ -170,7 +170,7 @@ const getFooterLink2 = async (req, res) => {
 
     // Loan - 2, CC - 1, Other - 7
     const results1 = await db.query("SELECT product_id as id, product_name as name , slug FROM `view_product` where cat_id = '2' LIMIT 0,5 ");
-    const results2 = await db.query("SELECT bank_product_id as id, bank_product_name as name, slug FROM `view_bank_pro` where bank_product_products_id = '1' LIMIT 0,5 ");
+    const results2 = await db.query("SELECT bank_product_id as id, bank_product_name as name, slug FROM `view_bank_pro` where bank_product_products_id = '7' LIMIT 0,5 ");
 
     temp['loan'].push(results1);
     temp['cc'].push(results2);
