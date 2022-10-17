@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTestimonial } from './../../redux/testimonialSlice';
-import Link from 'next/link'
+
 import Carousel from "react-slick";
 const testimonial = (props) => {
 
@@ -42,14 +39,10 @@ console.log("testi",props)
     <section className="testimonial_Area">
       <div className="container">
         <h2 className="heading text-center">What Client say about</h2><h3>Our Services</h3>
-        
-    
-       
           <ul className="testimaol_carousel  ">
           <Carousel {...settings}>
             {
               props.testimonial && props.testimonial.map((item)=>(
-                
                 <li key={testimonial.id}>
                     <div className="ratingPnl">
                       <i className="fas fa-star"></i>
@@ -64,13 +57,10 @@ console.log("testi",props)
                       {item.client_name}
                     </div>
                   </li>
-            
               ))
             }
               </Carousel>
-
           </ul>
-      
       </div>
     </section>
 

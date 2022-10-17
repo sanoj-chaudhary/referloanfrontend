@@ -1,7 +1,5 @@
 import Head from "next/head"
 import { useRouter } from 'next/router';
-// import "~slick-carousel/slick/slick.css"; 
-// import "~slick-carousel/slick/slick-theme.css";
 export default function Header(children) {
     const router = useRouter();
     const title = 'Referloan: ' + (children.title || 'Apply for Loans, Credit Card, Insurance and Investment');
