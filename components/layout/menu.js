@@ -24,7 +24,7 @@ const Menu = (props) => {
             <div className={item.product ? "megaMenu_container" : ''} >
                 <ul className={item.product ? "subMenuLevel2" : ''}>
                     {item.product && item.product.map((value) => (
-                        <li key={value.id} className="activeSubMenu"> <a className="" href={value.slug} title="{value.name}">{value.name}</a>
+                        <li key={value.id} className="activeSubMenu"> <Link href={value.slug}  ><a className="" title="{value.name}">{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul>
                                     {value.bank_product && <SubMenu data={value.bank_product} />}
