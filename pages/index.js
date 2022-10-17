@@ -19,7 +19,7 @@ export async function getServerSideProps() {
   const partner = JSON.parse(JSON.stringify(res))
 
   // For Loan Only
-  const LoanRes = await db.query("SELECT * FROM `categories` WHERE `id` = '1' ");
+  const LoanRes = await db.query("SELECT * FROM `products` WHERE `categories_id` = '1' ");
   const loanProduct = JSON.parse(JSON.stringify(LoanRes))
 
   return { props: { partner,testimonial,loanProduct } }
