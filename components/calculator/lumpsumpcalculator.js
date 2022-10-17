@@ -102,26 +102,19 @@ const marksss = [
 
 const lumpsumpcalculator = () => {
   const [pAmount, setpAmount] = useState(100000);
-  const [interest, setInterest] = useState(9);
-  const [duration, setDuration] = useState(12)
+  const [interest, setInterest] = useState(6);
+  const [duration, setDuration] = useState(3)
   const maxvalue = 100000000;
   const maxint = 20;
-  const maxduration = 365;
- var n = 365;
-
-
-  var futureValue = 0;
+  const maxduration = 30;
+  
+  var monthlyRate = interest / 12 / 100;
+  var months = duration * 12;
+  
   var total_investment = (pAmount);
+  var futureValue = Math.round(pAmount * Math.pow((1+interest/100),duration) );
+  var total_interest = futureValue - total_investment;
   
-  futureValue = pAmount * (Math.pow((1+(interest/n)), (n*duration)));
-  console.log(futureValue);
-  
-
-  // futureValue = Math.round(pAmount * (1+monthlyRate) * ((Math.pow((1+monthlyRate),months)) - 1)/monthlyRate);
-  /*var total_interest = ((pAmount*duration*interest));
-  A = P * Math.pow(1 + r/n, nt);*/
-  var total_interest = ((futureValue+total_investment));
-
   function valuetext(value) {
     return `${value} Lac`;
   }
@@ -135,7 +128,7 @@ const lumpsumpcalculator = () => {
               <h2>Investment Amount</h2>
               <small>(Up to 1 Crore)</small>
               <div className="outputArea">
-                <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-rupee"></i> </span>
+                <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
               </div>
 
             </div>
@@ -158,7 +151,7 @@ const lumpsumpcalculator = () => {
               <h2>Investment Period (in Years)</h2>
               <small>(1 year - 30 years)</small>
               <div className="outputArea">
-                <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" >
+                <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> years <span className="emi-icon" >
                 </span></div>
 
             </div>
@@ -178,7 +171,7 @@ const lumpsumpcalculator = () => {
                 <TableRow>
                   <TableRow>
                     <TableCell className='ETablecellText'>Interest Rate (%)</TableCell>
-                    <TableCell className='ETablecellValue'><strong>% </strong>{interest}</TableCell>
+                    <TableCell className='ETablecellValue'>{interest}<strong> % </strong></TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className='ETablecellText'>Duration (Years)</TableCell>

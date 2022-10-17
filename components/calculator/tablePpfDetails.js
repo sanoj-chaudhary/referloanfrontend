@@ -8,7 +8,7 @@ const tableDetails = (props) => {
     <TableHead>
       <TableRow>
         <TableCell className='ETablecellText'>Interest Rate (%)</TableCell>
-        <TableCell className='ETablecellValue'><strong>% </strong>{props.interest}</TableCell>
+        <TableCell className='ETablecellValue'>{props.interest} <strong>% </strong></TableCell>
       </TableRow>
       <TableRow>
         <TableCell className='ETablecellText'>Duration (Years)</TableCell>
