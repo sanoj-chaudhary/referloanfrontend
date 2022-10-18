@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import SubMenu from './subMenu';
 const Menu = () => {
+    //console.log(process.env.APP_URL)
     const [headermenu, setHeaderMenu] = useState([])
     const getheaderMenu = async () => {
         try {
-            const res = await axios.get('api/headermenu');
+            const res = await axios.get(`${process.env.APP_URL}/headermenu`);
+            
             setHeaderMenu(res.data);
         }
         catch (err) {

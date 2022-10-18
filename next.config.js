@@ -4,4 +4,7 @@ module.exports = {
       config.resolve.fallback = { fs: false,net:false,tls:false };
       return config;
     },
+    env: {
+      APP_URL: 'http://localhost:3000/api',
+    },
   };
