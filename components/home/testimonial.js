@@ -2,8 +2,6 @@
 import Carousel from "react-slick";
 const testimonial = (props) => {
 
-console.log("testi",props)
-
   const settings = {
     dots: true,
     infinite: true,
@@ -42,8 +40,8 @@ console.log("testi",props)
           <ul className="testimaol_carousel  ">
           <Carousel {...settings}>
             {
-              props.testimonial && props.testimonial.map((item)=>(
-                <li key={testimonial.id}>
+              props.testimonial && props.testimonial.map((item,index)=>(
+                <li key={index}>
                     <div className="ratingPnl">
                       <i className="fas fa-star"></i>
                       <i className="fas fa-star"></i>

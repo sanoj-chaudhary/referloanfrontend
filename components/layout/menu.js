@@ -4,7 +4,7 @@ import Link from "next/link";
 import SubMenu from './subMenu';
 const Menu = (props) => {
     const [headermenu, setHeaderMenu] = useState([])
-
+console.log(headermenu)
     const getheaderMenu = async () => {
         try {
             const res = await axios.get('api/headermenu');
@@ -18,8 +18,8 @@ const Menu = (props) => {
     useEffect(() => {
         getheaderMenu();
     }, []);
-
-    const items = headermenu && headermenu.map((item) => (
+console.log(typeof headermenu)
+    const items =  headermenu.map((item) => (
         <li key={item.id}><Link href={item.slug} ><a className={item.product ? "hasSub_menu" : ''}  title={item.name}>{item.name}</a></Link>
             <div className={item.product ? "megaMenu_container" : ''} >
                 <ul className={item.product ? "subMenuLevel2" : ''}>

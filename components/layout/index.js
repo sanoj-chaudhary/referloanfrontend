@@ -5,12 +5,9 @@ import Script from "next/script"
 import 'bootstrap/dist/css/bootstrap.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
-// ..
 import { useEffect } from "react"
 
 export default function Layout(props) {
-
-
   useEffect(() => {
     AOS.init({
       offset: 220,
