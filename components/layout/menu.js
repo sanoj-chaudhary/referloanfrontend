@@ -111,7 +111,7 @@ const Menu = () => {
                                 <Link href="tel:0124-4847123"><a > <i class="fas fa-phone-square-alt"></i>  0124-4847123</a></Link>
                                 </li>
                             </ul>
-                            <Link href="#"><a ><img style={{ "marginTop":'-14px','height':'36px' }} src="/images/CIBIL Score.gif" alt="" /></a></Link>
+                            <Link href="#"><a ><img src="/images/cibil-score.png" alt="" /></a></Link>
                         </div>
 
                     </div>

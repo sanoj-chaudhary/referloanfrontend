@@ -763,7 +763,7 @@ ul.vdoArea {
     margin-bottom: 10px;
     column-gap: 10px;
     flex-wrap: wrap;
-    z-index: 9;
+    z-index: 1;
     position: relative;
     padding: 0 12px;
     box-sizing: border-box;
