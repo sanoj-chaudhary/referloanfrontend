@@ -15,12 +15,6 @@ export default async function handler(req, res) {
       if (req.query.component == 'testimonial') {
         return await getAllTestimonial(req, res);
       }
-      if (req.query.component == 'allcategory') {
-        return await getAllCategory(req, res);
-      }
-      if (req.query.component == 'video') {
-        return await getAllVideo(req, res);
-      }
       if (req.query.component == 'headermenu') {
         return await getHeaderMenu(req, res);
       }
@@ -30,34 +24,7 @@ export default async function handler(req, res) {
       if (req.query.component == 'footerlink2') {
         return await getFooterLink2(req, res);
       }
-      if (req.query.component[0] == 'category') {
-        if (req.query.component[1]) {
-          return await getCategoryBySlug(req, res);
-        }
-      }
-      if (req.query.component[0] == 'page') {
-        if (req.query.component[1]) {
-          return await getPageBySlug(req, res);
-        }
-      }
-      if (req.query.component[0] == 'bank') {
-        if (req.query.component[1]) {
-          return await getBankBySlug(req, res);
-        }
-      }
-      if (req.query.component[0] == 'getpagebycatid') {
-        if (req.query.component[1]) {
-          return await getPagesByCatId(req, res);
-        }
-      }
     case "POST":
-      if(req.query.component == 'insertPage'){
-        return await insertPage(req,res);
-      }
-
-      if (req.query.component == 'getcontentbysearch') {
-        return await getContentBySearch(req, res);
-      }
       if (req.query.component == 'apistructurebyapiid') {
         return await getApiDataStructureByApiId(req, res);
       }
@@ -77,27 +44,9 @@ const getAllPartner = async (req, res) => {
   }
 };
 
-const getAllVideo = async (req, res) => {
-  try {
-    const results = await db.query("SELECT * FROM `videos` WHERE `is_active` = '1' ");
-    return res.status(200).json(results);
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-};
-
 const getAllTestimonial = async (req, res) => {
   try {
     const results = await db.query("SELECT * FROM `testimonials` WHERE `is_active` = '1' ");
-    return res.status(200).json(results);
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-};
-
-const getAllCategory = async (req, res) => {
-  try {
-    const results = await db.query("SELECT * FROM `categories` WHERE `is_active` = '1' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
@@ -178,101 +127,6 @@ const getFooterLink2 = async (req, res) => {
     return res.status(200).json(temp);
   }
   catch (error) {
-    return res.status(500).json({ error });
-  }
-};
-
-const getCategoryBySlug = async (req, res) => {
-  try {
-    const slug = req.query.component[1];
-    const results = await db.query("SELECT * FROM `pages` WHERE `post_slug` = '" + slug + "' ");
-    return res.status(200).json(results);
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-};
-
-const getPageBySlug = async (req, res) => {
-  try {
-    const slug = req.query.component[1];
-    console.log(slug)
-    const results = await db.query("SELECT post_content FROM `pages` WHERE `post_slug` = '" + slug + "' ");
-    return res.status(200).json(results);
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-};
-
-const getBankBySlug = async (req, res) => {
-  try {
-    const slug = req.query.component[1];
-    const results = await db.query("SELECT * FROM `pages` WHERE `post_slug` = '" + slug + "' ");
-    return res.status(200).json(results);
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-};
-
-const getPagesByCatId = async (req, res) => {
-  try {
-    const slug = req.query.component[1];
-    const results = await db.query("SELECT id,post_master,post_title,post_slug,full_url FROM `pages` WHERE `post_master` = '" + slug + "' ");
-    return res.status(200).json(results);
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-};
-
-const getContentBySearch = async (req, res) => {
-  try {
-    const category = req.body.category;
-    const product_id = req.body.product_id;
-    const pincode = req.body.pincode;
-    const emp_type = req.body.emp_type;
-
-    const loan_amount = req.body.loan_amount;
-    const salary = req.body.salary;
-    const turnover = req.body.turnover;
-    const bank_id = req.body.bank_id;
-
-    // Dummy data
-    const data = {
-      "status": true,
-      "data":
-      {
-        0: {
-          "bank_id": "1",
-          "bank_name": "bank 1",
-          "interest": "10",
-          "fee": "10000",
-          'api_id': '1'
-        },
-        1: {
-          "bank_id": "2",
-          "bank_name": "bank 2",
-          "interest": "20",
-          "fee": "20000",
-          'api_id': '21'
-        },
-        2: {
-          "bank_id": "3",
-          "bank_name": "bank 3",
-          "interest": "30",
-          "fee": "30000",
-          'api_id': '31'
-        },
-        3: {
-          "bank_id": "4",
-          "bank_name": "bank 4",
-          "interest": "40",
-          "fee": "40000",
-          'api_id': '12'
-        }
-      }
-    };
-
-    return res.status(200).json(data);
-  } catch (error) {
     return res.status(500).json({ error });
   }
 };
