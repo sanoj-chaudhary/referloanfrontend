@@ -24,7 +24,7 @@ console.log(typeof headermenu)
             <div className={item.product ? "megaMenu_container" : ''} >
                 <ul className={item.product ? "subMenuLevel2" : ''}>
                     {item.product && item.product.map((value) => (
-                        <li key={value.id} className="activeSubMenu"> <Link href={value.slug}  ><a className="" title="{value.name}">{value.name}</a></Link>
+                        <li key={value.id} className="activeSubMenu"> <Link href={value.slug}  ><a className="" title={value.name}>{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul>
                                     {value.bank_product && <SubMenu data={value.bank_product} />}
@@ -94,29 +94,33 @@ console.log(typeof headermenu)
                     </ul>
                 </nav>
             </div>
+            
+            <section>
+                <div class="container">
+                    <div className="customContainer">
+                        <div className="mmenu_icon" id="mheader">
+                            <a href="#menu"><span></span></a>
+                        </div>
+                        <a className="logoSection"
+                            href="/"><img
+                                src="/images/top-logo.png" alt="" title=" referloan " /></a>
 
-            <div className="customContainer">
-                <div className="mmenu_icon" id="mheader">
-                    <a href="#menu"><span></span></a>
+                        <div className="info_section">
+                            <ul>
+                                <li>
+                                <a
+                                        href="mailto:info@referloan.in"><i class="fa fa-envelope" aria-hidden="true"></i> info@referloan.in</a>
+                                </li>
+                                <li>
+                                    <a href="tel:0124-4847123"> <i class="fas fa-phone-square-alt"></i>  0124-4847123</a>
+                                </li>
+                            </ul>
+                            <a href="#"><img style={{ "marginTop":'-14px','height':'36px' }} src="/images/CIBIL Score.gif" alt="" /></a>
+                        </div>
+
+                    </div>
                 </div>
-                <a className="logoSection"
-                    href="/"><img
-                        src="/images/top-logo.png" alt="" title=" referloan " /></a>
-
-                <div className="info_section">
-                    <ul>
-                        <li>
-                            <img src="/images/icon/email-icon.png" alt="" /><a
-                                href="mailto:info@referloan.in">info@referloan.in</a>
-                        </li>
-                        <li>
-                            <img src="/images/icon/call-icon.png" alt="" /><a href="tel:0124-4847123">0124-4847123</a>
-                        </li>
-                    </ul>
-                    <a href="#"><img style={{ "marginTop":'-14px','height':'36px' }} src="/images/CIBIL Score.gif" alt="" /></a>
-                </div>
-
-            </div>
+            </section>
 
             <nav className=" navBarContainer">
                 <div className="container">
