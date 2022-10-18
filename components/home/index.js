@@ -7,10 +7,9 @@ import Testimonial from "./testimonial"
 import EsiestPlaceApply from "./esiestPlaceApply"
 import ServiceArea from "./serviceArea"
 const index = (props) => {
- 
   return (
     <>
-      <Herosection loanProduct={props.loanProduct} />
+      <Herosection loanProduct={props.loanProduct} creditProduct={props.creditProduct} />
       <CardLoan />
       <EsiestPlaceApply />
       <CustomerSupport />

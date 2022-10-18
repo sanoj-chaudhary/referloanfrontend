@@ -22,18 +22,18 @@ const router = useRouter();
         </Head>
 
         <Apply />
-        <div class="innerpage_bg">
-          <section class="section_pad">
-            <div class="container">
+        <div className="innerpage_bg">
+          <section className="section_pad">
+            <div className="container">
 
               <h1>{data[0].name}</h1>
               <p></p>
               <MidContent midcontent={data[0].description} />
 
-              <div class="faqSetion">
+              <div className="faqSetion">
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>
                 <h2>Have a question? We've got answers!</h2>
-                <div class="faq_row">
+                <div className="faq_row">
                   {/* FAQ List */}
                 </div>
               </div>
