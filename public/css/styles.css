@@ -695,6 +695,13 @@ ul.vdoArea {
     font-size: 21px;
     padding-top: 20px;
 }
+ 
+.fin {
+    font-size: 15px!important;
+   
+}
+
+.fintext{text-align: justify;}
 
 
 /* +++++++++++++++++++++++++++++++++++++
