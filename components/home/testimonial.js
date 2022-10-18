@@ -36,7 +36,7 @@ const testimonial = (props) => {
   return (
     <section className="testimonial_Area">
       <div className="container">
-        <h2 className="heading text-center">What Client say about</h2><h3>Our Services</h3>
+        <h2 className="heading text-center">What Client say about Our Services</h2>
           <ul className="testimaol_carousel  ">
           <Carousel {...settings}>
             {
@@ -49,7 +49,7 @@ const testimonial = (props) => {
                       <i className="fas fa-star"></i>
                       <i className="fas fa-star"></i>
                     </div>
-                    <p>{item.client_message}</p>
+                    <p><i class="fas fa-quote-left pe-2"></i>{item.client_message}</p>
                     <div className="profileBxo">
                       <div className="profile-img"><img src="/images/" alt="" /></div>
                       {item.client_name}
