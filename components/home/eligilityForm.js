@@ -95,18 +95,18 @@ const eligilityForm = ({ loanProduct }) => {
             <form action="">
               <div className="loan-form-area">
                 <div className="loanType">
-                  <select onChange={handleChange}>
-                    <option selected >Type of loan </option>
+                  <select name='product_id' onChange={handleChange} defaultValue={searchData.product_id}>
+                    <option selected disabled>Type of loan </option>
 
                     {loanProduct && loanProduct.map((item, key) => (
-                      <option value={item.name}>{item.name}</option>
+                      <option key={key} value={item.name}>{item.name}</option>
                     ))}
 
                   </select>
                 </div>
                 <div className="loanType" >
-                  <select onChange={handleChange} name="emp_type">
-                    <option selected >Profession Type </option>
+                  <select onChange={handleChange} name="" defaultValue={searchData.emp_type}>
+                    <option selected  disabled>Profession Type </option>
                     <option value="Freelancer">Freelancer</option>
                     <option value="Salaried">Salaried</option>
                     <option value="Self employed - business owner">Self employed - business owner</option>
@@ -136,7 +136,7 @@ const eligilityForm = ({ loanProduct }) => {
         </div>
       </div>
 
-      <div className= 'modal  panCard_Modal' id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1"  >
+      <div className= 'modal  panCard_Modal' id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabIndex="-1"  >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" id='closeModal'></button>
@@ -158,7 +158,7 @@ const eligilityForm = ({ loanProduct }) => {
                
                 <div className="checkBoxRow">
                   <input type="checkbox" id="term" name="term" value="term" required />
-                  <label for="vehicle1">
+                  <label htmlFor="vehicle1">
                     <div className="termBox">
                       Terms and conditions, By entering your personal details, you hereby authorize Refer Laon and or its service provider(s) to contact you and you agree to the <a href="#">Read More</a>
                     </div>
