@@ -2,9 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import SubMenu from './subMenu';
-const Menu = (props) => {
+const Menu = () => {
     const [headermenu, setHeaderMenu] = useState([])
-console.log(headermenu)
     const getheaderMenu = async () => {
         try {
             const res = await axios.get('api/headermenu');
@@ -14,11 +13,6 @@ console.log(headermenu)
             console.log(err)
         }
     }
-
-    useEffect(() => {
-        getheaderMenu();
-    }, []);
-console.log(typeof headermenu)
     const items =  headermenu.map((item) => (
         <li key={item.id}><Link href={item.slug} ><a className={item.product ? "hasSub_menu" : ''}  title={item.name}>{item.name}</a></Link>
             <div className={item.product ? "megaMenu_container" : ''} >
@@ -38,6 +32,9 @@ console.log(typeof headermenu)
         </li>
     ))
 
+    useEffect(() => {
+        getheaderMenu();
+    }, []);
     return (
         <header>
             <div className="mmobile_menu">
@@ -99,9 +96,9 @@ console.log(typeof headermenu)
                 <div className="mmenu_icon" id="mheader">
                     <a href="#menu"><span></span></a>
                 </div>
-                <a className="logoSection"
-                    href="/"><img
-                        src="/images/top-logo.png" alt="" title=" referloan " /></a>
+                <Link  href="/"><a className="logoSection"
+                   ><img
+                        src="/images/top-logo.png" alt="" title=" referloan " /></a></Link>
 
                 <div className="info_section">
                     <ul>
@@ -131,14 +128,5 @@ console.log(typeof headermenu)
         </header >
     )
 }
-
-export async function getServerSideProps() {
-
-    const res = await axios.get("http://localhost:3000/api/headermenu");
-    const data = await res.data;
-
-    return { props: { data } }
-}
-
 
 export default Menu
