@@ -2,9 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import SubMenu from './subMenu';
-const Menu = (props) => {
+const Menu = () => {
     const [headermenu, setHeaderMenu] = useState([])
-console.log(headermenu)
     const getheaderMenu = async () => {
         try {
             const res = await axios.get('api/headermenu');
@@ -14,11 +13,6 @@ console.log(headermenu)
             console.log(err)
         }
     }
-
-    useEffect(() => {
-        getheaderMenu();
-    }, []);
-console.log(typeof headermenu)
     const items =  headermenu.map((item) => (
         <li key={item.id}><Link href={item.slug} ><a className={item.product ? "hasSub_menu" : ''}  title={item.name}>{item.name}</a></Link>
             <div className={item.product ? "megaMenu_container" : ''} >
@@ -38,6 +32,9 @@ console.log(typeof headermenu)
         </li>
     ))
 
+    useEffect(() => {
+        getheaderMenu();
+    }, []);
     return (
         <header>
             <div className="mmobile_menu">
@@ -108,19 +105,21 @@ console.log(typeof headermenu)
                         <div className="info_section">
                             <ul>
                                 <li>
-                                <a
-                                        href="mailto:info@referloan.in"><i class="fa fa-envelope" aria-hidden="true"></i> info@referloan.in</a>
+                                <Link href="mailto:info@referloan.in"><a><i class="fa fa-envelope" aria-hidden="true"></i> info@referloan.in</a></Link>
                                 </li>
                                 <li>
-                                    <a href="tel:0124-4847123"> <i class="fas fa-phone-square-alt"></i>  0124-4847123</a>
+                                <Link href="tel:0124-4847123"><a > <i class="fas fa-phone-square-alt"></i>  0124-4847123</a></Link>
                                 </li>
                             </ul>
-                            <a href="#"><img style={{ "marginTop":'-14px','height':'36px' }} src="/images/CIBIL Score.gif" alt="" /></a>
+                            <Link href="#"><a ><img style={{ "marginTop":'-14px','height':'36px' }} src="/images/CIBIL Score.gif" alt="" /></a></Link>
                         </div>
 
                     </div>
                 </div>
+
             </section>
+
+               
 
             <nav className=" navBarContainer">
                 <div className="container">
@@ -135,14 +134,5 @@ console.log(typeof headermenu)
         </header >
     )
 }
-
-export async function getServerSideProps() {
-
-    const res = await axios.get("http://localhost:3000/api/headermenu");
-    const data = await res.data;
-
-    return { props: { data } }
-}
-
 
 export default Menu
