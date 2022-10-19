@@ -7,11 +7,11 @@ import ContentPage from '../components/page/content_page';
 import Apply from '../components/page/apply';
 import Error from '../components/page/error';
 
-function contentPage({ url, Component, data,form_schema }) {
+function contentPage({ url, Component, data, form_schema }) {
   console.log(url)
   console.log(Component)
   console.log(data)
-
+console.log(form_schema)
   const router = useRouter();
   return (
     <>
@@ -40,13 +40,11 @@ export async function getServerSideProps(context) {
   if (res.length != 0) {
     if (res[0].bank_product_id != null) {
       try {
-        bank_product_id = res[0].bank_product_id;
+        // bank_product_id = res[0].bank_product_id;
         form = await axios.get(`https://api.referloan.in/api/sections/form/3`);
         form_schema = form.data
-        
-        //console.log('aa' + form_schema)
       } catch (error) {
-       // console.log('eeeeee')
+        console.log('eeeeee')
       }
 
       Component = 'Apply'
