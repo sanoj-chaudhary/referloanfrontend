@@ -21,11 +21,8 @@ console.log(data)
         <ProductBankList data={data}  />
         <ContentPage data={data} />
       </>
-
     )
   }
-
-
 }
 
 export async function getServerSideProps(context) {
