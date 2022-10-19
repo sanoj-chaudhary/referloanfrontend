@@ -25,8 +25,8 @@ const router = useRouter();
           <section class="section_pad">
             <div class="container">
 
-              <h1 style={{textTransform: 'capitalize'}}>{data[0].name}</h1>
-              <p></p>
+              {/* <h1 style={{textTransform: 'capitalize'}}>{data[0].name}</h1>
+              <p></p> */}
               <MidContent midcontent={data[0].description} />
 
               <div class="faqSetion">
