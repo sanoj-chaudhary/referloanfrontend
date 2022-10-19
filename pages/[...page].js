@@ -37,7 +37,7 @@ export async function getServerSideProps(context) {
   {   
     if(res[0].bank_product_id != null )
     {
-        component = 'product_bank'
+        component = 'product_bank' // apply
     }
     
     data = JSON.parse(JSON.stringify(res))
