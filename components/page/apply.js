@@ -6,7 +6,6 @@ const apply = ({ data, form_schema }) => {
   console.log("aaaaa " + form_schema)
   return (
 
-
     <div class="container">
       <section class="cardOffer_area">
         <div class="dealStep__leftArea">
@@ -36,7 +35,6 @@ const apply = ({ data, form_schema }) => {
       </div>
 
     </div>
-
   )
 }
 
