@@ -97,10 +97,7 @@ const BasicDetails = () => {
       initialValues,
       validationSchema: signupSchema,
       
-      onSubmit: (values, action) => {
-
-        action.resetForm();
-      },
+      onSubmit: showPopup(values),
     });
     console.log(values)
   return (

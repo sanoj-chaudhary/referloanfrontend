@@ -1,6 +1,6 @@
 import Carousel from "react-slick";
 import EligilityForm from "./eligilityForm";
-function HeroSection({ loanProduct }) {
+function HeroSection({ loanProduct,creditProduct }) {
       const settings = {
             dots: true,
             infinite: true,
@@ -131,7 +131,7 @@ function HeroSection({ loanProduct }) {
                               </div>
                         </div>
                         {/* <!-- .header-form-area --> */}
-                        <EligilityForm loanProduct={loanProduct} />
+                        <EligilityForm loanProduct={loanProduct} creditProduct={creditProduct} />
                   </div>
 
 

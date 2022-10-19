@@ -1,64 +1,63 @@
-
 import { db } from './../config/db'
-import Apply from './../components/page/apply';
-import MidContent from './../components/page/midcontent';
-import Head from 'next/head';
 import {useRouter} from 'next/router'
-import Button from '@mui/material/Button';
-function contentPage({ url, data }) {
-const router = useRouter();
-  if (data.length == 0) {
-    return <div className='error404'>
-      <h2>Page Not Found</h2>
-      <Button variant="contained" onClick={() => router.push('/')}>Back Home</Button>
-    </div>
-  } else {
+
+
+import ProductBankList from '../components/page/product_bank_list';
+import ContentPage from '../components/page/content_page';
+import Apply from '../components/page/apply';
+import Error from '../components/page/error';
+
+function contentPage({ url, Component, data }) {
+console.log(url)
+console.log(Component)
+console.log(data)
+
+  const router = useRouter();
     return (
       <>
-        <Head>
-          <title>{data[0].meta_title}</title>
-          <meta name={'description'} content={data[0].meta_description} />
-          <meta name={'keywords'} content={data[0].meta_keyword} />
-        </Head>
-
-        <Apply />
-        <div class="innerpage_bg">
-          <section class="section_pad">
-            <div class="container">
-
-              <h1 style={{textTransform: 'capitalize'}}>{data[0].name}</h1>
-              <p></p>
-              <MidContent midcontent={data[0].description} />
-
-              <div class="faqSetion">
-                <h3>FREQUENTLY ASKED QUESTIONS</h3>
-                <h2>Have a question? We've got answers!</h2>
-                <div class="faq_row">
-                  {/* FAQ List */}
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
+      {Component=='ContentPage' && <ContentPage data={data} />}
+      {Component=='ProductBankList' && <ProductBankList data={data} />}
+      {Component=='Apply' && <Apply data={data} />}
+      {Component=='Error' && <Error data={data} />}
       </>
-
     )
-  }
-
-
 }
 
 export async function getServerSideProps(context) {
 
-  let url = context.query.page;
-
-
+  let url    = context.query.page;
+  let banklist = context.query.banklist;
+  let data;
+  let Component = 'blank';
   url = url.join("/");
-
+  console.log(banklist)
   const res = await db.query("SELECT * FROM `pages` WHERE `slug` =  '" + url + "' ");
+  if(res.length!=0)
+  {   
+    if(res[0].bank_product_id != null )
+    {
+      Component = 'Apply'
+    }
+    else
+    {
+      Component = 'ContentPage'
+    }
+  }
+  else
+  {
+    if(banklist)
+    {
+      Component = 'ProductBankList'
+    }
+    else
+    {
+      Component = 'Error'
+    } 
+  }
 
-  const data = JSON.parse(JSON.stringify(res))
-  return { props: { url, data } }
+  data = JSON.parse(JSON.stringify(res))
+  
+  return { props: { url, Component, data } }
 }
 
 export default contentPage
