@@ -21,9 +21,7 @@ function HeroSection({ loanProduct }) {
                                           <div className="slickItem">
                                                 <div className="topArea">
                                                       <div className="left">
-                                                            <h1>Looking to get a personal loan? You're in the right place.
-
-</h1>
+                                                            <h1>Looking to get a personal loan? You're in the right place.</h1>
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
@@ -51,6 +49,7 @@ function HeroSection({ loanProduct }) {
                                                 <div className="topArea">
                                                       <div className="left">
                                                             <h1>The easy way to compare and get Car Loan</h1>
+                                                            <p>Enjoy extra-low interest rates and flexible financing options.</p>
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
@@ -96,7 +95,7 @@ function HeroSection({ loanProduct }) {
                                                             </div>
                                                       </div>
                                                       <div className="img-box">
-                                                            <img src="/images/cc.png" alt="" />
+                                                            <img src="/images/hd-img.png" alt="" />
                                                       </div>
                                                 </div>
 

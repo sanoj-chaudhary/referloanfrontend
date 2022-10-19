@@ -137,15 +137,15 @@ const Footer = () => {
                     <div className="footer-card-area">
                         <div className="card-pnl">
                             <ul>
-                                <li><Image src={vcard} width="64" height="44" alt="" /></li>
-                                <li><Image src={aecard} alt="" width="64" height="44" /></li>
-                                <li><Image src={mcard} alt="" width="64" height="44" /></li>
-                                <li><Image src={rpcard} alt="" width="64" height="44" /></li>
-                                <li><Image src={mescard} alt="" width="64" height="44" /></li>
+                                <li><Image src={vcard} alt="" /></li>
+                                <li><Image src={aecard} alt="" /></li>
+                                <li><Image src={mcard} alt="" /></li>
+                                <li><Image src={rpcard} alt="" /></li>
+                                <li><Image src={mescard} alt="" /></li>
                             </ul>
                         </div>
                         <div className="mad-in-india">
-                            <Image className="footerIndialogo" src={indicard} width="40px" height="40px" />
+                            <Image className="footerIndialogo" src={indicard} />
                             <span className="made-india">Made In India</span>
 
                         </div>

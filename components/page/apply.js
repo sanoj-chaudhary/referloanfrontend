@@ -58,9 +58,9 @@ const apply = () => {
             <div class="detail_area">
               <h2>Check <span>Pre-Approved Ruptok Gold Loan</span> for you in Just One Click</h2>
               <ul>
-                <li><img src="assets/images/roi_icon.png" alt="" /> Lowest Interest Rates</li>
-                <li><img src="assets/images/pgr_icon.png" alt="" /> High Per Gram Rate</li>
-                <li><img src="assets/images/quick_icon.png" alt="" /> Quick Disbursement in 30 mins*</li>
+                <li><img src="images/roi_icon.png" alt="" /> Lowest Interest Rates</li>
+                <li><img src="images/pgr_icon.png" alt="" /> High Per Gram Rate</li>
+                <li><img src="images/quick_icon.png" alt="" /> Quick Disbursement in 30 mins*</li>
               </ul>
             </div>
           </div>
