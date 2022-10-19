@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import MidContent from './midcontent';
 
 const midcontent = ({data}) => {
 
@@ -12,8 +11,8 @@ const midcontent = ({data}) => {
           <div class="container">
 
             
-            <MidContent midcontent={data[0].description} />
-
+           
+    produc tbank page
             
           </div>
         </section>
