@@ -21,7 +21,6 @@ const router = useRouter();
           <meta name={'keywords'} content={data[0].meta_keyword} />
         </Head>
 
-        <Apply />
         <div class="innerpage_bg">
           <section class="section_pad">
             <div class="container">
