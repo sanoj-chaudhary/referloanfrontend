@@ -81,6 +81,7 @@ nav.navBarContainer {
     justify-content: space-between;
     width: 100%;
     position: relative;
+    margin-bottom: 0;
 }
 
 .navBarContainer ul li {
@@ -95,6 +96,8 @@ nav.navBarContainer {
     color: #fff;
     padding: 12px 15px;
     display: block;
+    font-weight: 400;
+    font-size: 15px;
 }
 
 .navBarContainer ul li a:hover,
@@ -189,8 +192,14 @@ nav.navBarContainer {
     top: 0;
     display: none;
 }
-.navBarContainer li .megaMenu_container .submenuContainer ul{
-    max-width:30%;
+.navBarContainer li .megaMenu_container .submenuContainer ul {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.navBarContainer li .megaMenu_container .submenuContainer ul li{
+    flex: 30%;
 }
 .navBarContainer li .megaMenu_container .submenuContainer ul li a{
     max-width:100%;
@@ -198,8 +207,9 @@ nav.navBarContainer {
 
 
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li.activeSubMenu a+.submenuContainer{
-    display: block
+    display: none
 }
+
 
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li:hover a+.submenuContainer {
     display: flex;

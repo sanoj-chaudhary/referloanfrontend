@@ -4,10 +4,7 @@ const apply = ({data}) => {
 
 
   return (
-
-    
     <div>Apply Page</div>
-
   )
 }
 
