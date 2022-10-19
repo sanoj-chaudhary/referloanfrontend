@@ -21,13 +21,16 @@ const router = useRouter();
           <meta name={'keywords'} content={data[0].meta_keyword} />
         </Head>
 
-        <Apply />
-        <div className="innerpage_bg">
-          <section className="section_pad">
-            <div className="container">
 
-              <h1>{data[0].name}</h1>
-              <p></p>
+   
+
+        <div class="innerpage_bg">
+          <section class="section_pad">
+            <div class="container">
+
+
+              {/* <h1 style={{textTransform: 'capitalize'}}>{data[0].name}</h1>
+              <p></p> */}
               <MidContent midcontent={data[0].description} />
 
               <div className="faqSetion">

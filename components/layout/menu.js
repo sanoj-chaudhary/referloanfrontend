@@ -2,29 +2,25 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import SubMenu from './subMenu';
-const Menu = (props) => {
+const Menu = () => {
+    //console.log(process.env.APP_URL)
     const [headermenu, setHeaderMenu] = useState([])
-console.log(headermenu)
     const getheaderMenu = async () => {
         try {
-            const res = await axios.get('api/headermenu');
+            const res = await axios.get(`${process.env.APP_URL}/headermenu`);
+            
             setHeaderMenu(res.data);
         }
         catch (err) {
             console.log(err)
         }
     }
-
-    useEffect(() => {
-        getheaderMenu();
-    }, []);
-console.log(typeof headermenu)
     const items =  headermenu.map((item) => (
         <li key={item.id}><Link href={item.slug} ><a className={item.product ? "hasSub_menu" : ''}  title={item.name}>{item.name}</a></Link>
             <div className={item.product ? "megaMenu_container" : ''} >
                 <ul className={item.product ? "subMenuLevel2" : ''}>
                     {item.product && item.product.map((value) => (
-                        <li key={value.id} className="activeSubMenu"> <Link href={value.slug}  ><a className="" title="{value.name}">{value.name}</a></Link>
+                        <li key={value.id} className="activeSubMenu"> <Link href={value.slug}  ><a className="" title={value.name}>{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul>
                                     {value.bank_product && <SubMenu data={value.bank_product} />}
@@ -38,6 +34,9 @@ console.log(typeof headermenu)
         </li>
     ))
 
+    useEffect(() => {
+        getheaderMenu();
+    }, []);
     return (
         <header>
             <div className="mmobile_menu">
@@ -94,29 +93,35 @@ console.log(typeof headermenu)
                     </ul>
                 </nav>
             </div>
+            
+            <section>
+                <div class="container">
+                    <div className="customContainer">
+                        <div className="mmenu_icon" id="mheader">
+                            <a href="#menu"><span></span></a>
+                        </div>
+                        <a className="logoSection"
+                            href="/"><img
+                                src="/images/top-logo.png" alt="" title=" referloan " /></a>
 
-            <div className="customContainer">
-                <div className="mmenu_icon" id="mheader">
-                    <a href="#menu"><span></span></a>
+                        <div className="info_section">
+                            <ul>
+                                <li>
+                                <Link href="mailto:info@referloan.in"><a><i class="fa fa-envelope" aria-hidden="true"></i> info@referloan.in</a></Link>
+                                </li>
+                                <li>
+                                <Link href="tel:0124-4847123"><a > <i class="fas fa-phone-square-alt"></i>  0124-4847123</a></Link>
+                                </li>
+                            </ul>
+                            <Link href="#"><a ><img src="/images/CIBIL Score.gif" alt="" /></a></Link>
+                        </div>
+
+                    </div>
                 </div>
-                <a className="logoSection"
-                    href="/"><img
-                        src="/images/top-logo.png" alt="" title=" referloan " /></a>
 
-                <div className="info_section">
-                    <ul>
-                        <li>
-                            <img src="/images/icon/email-icon.png" alt="" /><a
-                                href="mailto:info@referloan.in">info@referloan.in</a>
-                        </li>
-                        <li>
-                            <img src="/images/icon/call-icon.png" alt="" /><a href="tel:0124-4847123">0124-4847123</a>
-                        </li>
-                    </ul>
-                    <a href="#"><img style={{ "marginTop":'-14px','height':'36px' }} src="/images/CIBIL Score.gif" alt="" /></a>
-                </div>
+            </section>
 
-            </div>
+               
 
             <nav className=" navBarContainer">
                 <div className="container">
@@ -131,14 +136,5 @@ console.log(typeof headermenu)
         </header >
     )
 }
-
-export async function getServerSideProps() {
-
-    const res = await axios.get("http://localhost:3000/api/headermenu");
-    const data = await res.data;
-
-    return { props: { data } }
-}
-
 
 export default Menu

@@ -6,6 +6,7 @@ import Ourpartner from "./ourpartner"
 import Testimonial from "./testimonial"
 import EsiestPlaceApply from "./esiestPlaceApply"
 import ServiceArea from "./serviceArea"
+import BlogSection from "./blogsection"
 const index = (props) => {
   return (
     <>
@@ -17,6 +18,7 @@ const index = (props) => {
       <ServiceArea />
       <Ourpartner partner={props.partner} />
       <Testimonial testimonial={props.testimonial} />
+      <BlogSection />
      
     </>
   )

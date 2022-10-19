@@ -5,6 +5,10 @@
     font-size: 100%;
     background-color: #fbfeff;
 }
+
+ul {
+    padding-left: 0rem!important;
+}
 .heroSection .heroContent .headMain_carousel ul.slick-dots {
     height: 33px;
     position: absolute;
@@ -691,6 +695,13 @@ ul.vdoArea {
     font-size: 21px;
     padding-top: 20px;
 }
+ 
+.fin {
+    font-size: 15px!important;
+   
+}
+
+.fintext{text-align: justify;}
 
 
 /* +++++++++++++++++++++++++++++++++++++
@@ -763,7 +774,7 @@ ul.vdoArea {
     margin-bottom: 10px;
     column-gap: 10px;
     flex-wrap: wrap;
-    z-index: 9;
+    z-index: 1;
     position: relative;
     padding: 0 12px;
     box-sizing: border-box;
@@ -877,7 +888,7 @@ ul.vdoArea {
 /* footer */
 
 footer {
-    background-color: #1b1f27;
+    background-color: #000000;
     min-height: auto;
 }
 
@@ -901,7 +912,7 @@ footer img.footerlogo {
 .fot-top-bar .socialArea .emailBox {
     min-height: 55px;
     display: flex;
-    background-color: #242934;
+    background-color: #000000;
     font-size: var(--regular-font);
     border: 1px solid #2b3955;
     border-width: 0 1px 0 1px;
@@ -920,7 +931,7 @@ footer img.footerlogo {
 }
 
 .footerMenu-Btn {
-    background-color: #242934;
+    background-color: #000000;
     font-size: var(--regular-font);
     border: 1px solid #2b3955;
     border-width: 0 1px 0 1px;
@@ -1059,6 +1070,7 @@ footer img.footerlogo {
 
 .footerLinks ul {
     margin-top: 5px;
+    padding-left: 0px;
 }
 
 .footerLinks li {
@@ -1082,7 +1094,7 @@ footer img.footerlogo {
 }
 
 .copyRightArea {
-    background-color: #113a35;
+    background-color: #ff9e00;
     padding: 9px 0;
 }
 
@@ -1104,7 +1116,7 @@ footer img.footerlogo {
 
 .footer-card-area {
     display: flex;
-    border-top: 1px solid #2b3955;
+    border-top: 1px solid #333333;
     padding: 20px 0;
     justify-content: space-between;
 }
@@ -1123,7 +1135,7 @@ footer img.footerlogo {
 }
 
 .footer-card-area .card-pnl ul li img {
-    width: 59px;
+    width: 65px;
 }
 
 .footer-card-area .mad-in-india {
@@ -1671,7 +1683,7 @@ note {
 
 /* partnerArea */
 .partnerArea {
-    padding: 50px 0;
+    padding: 0px 0;
     text-align: center;
 }
 
@@ -1725,6 +1737,7 @@ note {
     font-weight: 500;
     display: flex;
     width: 100%;
+    padding-bottom: 20px;
     justify-content: center;
 }
 .testimonial_Area h3{
@@ -1772,7 +1785,8 @@ note {
     margin-bottom: 20px;
     position: relative;
     text-align: center;
-    border: 2px solid #dde3fc;
+    border: 1px solid #d3d3d3;
+	border-left: 3px solid #ff9e00;
     border-radius: 4px;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
@@ -1800,6 +1814,7 @@ note {
     align-items: center;
     font-size: var(--regular-font);
     font-weight: 600;
+    
 }
 
 .testimonial_Area .profile-img {
@@ -1836,6 +1851,7 @@ note {
     text-align: left;
     min-height: 90px;
     font-weight: 400;
+    border-bottom: 1px solid #D3D3D3;
 }
 
 
@@ -1844,7 +1860,7 @@ note {
 /* footer */
 
 footer {
-    background-color: #1b1f27;
+    background-color: #000000;
     min-height: auto;
 }
 
@@ -1868,7 +1884,7 @@ footer img.footerlogo {
 .fot-top-bar .socialArea .emailBox {
     min-height: 55px;
     display: flex;
-    background-color: #242934;
+    background-color: #000000;
     font-size: 15px;
     border: 1px solid #2b3955;
     border-width: 0 1px 0 1px;
@@ -1887,9 +1903,9 @@ footer img.footerlogo {
 }
 
 .footerMenu-Btn {
-    background-color: #242934;
+    background-color: #000000;
     font-size: 15px;
-    border: 1px solid #2b3955;
+    border: 1px solid #333;
     border-width: 0 1px 0 1px;
     width: fit-content;
     padding: 0 25px;
@@ -1978,7 +1994,7 @@ footer img.footerlogo {
 }
 
 .fot-bot-bar {
-    border-top: 1px solid #2b3955;
+    border-top: 1px solid #333333;
 }
 
 
@@ -2047,7 +2063,7 @@ footer img.footerlogo {
 }
 
 .copyRightArea {
-    background-color: #113a35;
+    background-color: #ff9e00;
     padding: 9px 0;
 }
 
@@ -2101,3 +2117,5 @@ footer img.footerlogo {
 .panCard_Modal .modal-body button.custom__btn {
     width: 100%;
 }
+
+ 
