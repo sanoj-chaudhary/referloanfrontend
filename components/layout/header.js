@@ -9,7 +9,7 @@ export default function Header(children) {
     return (
         <Head>
             {/* Meta */ }
-            <meta charset={ 'utf-8' } />
+            <meta charSet={ 'utf-8' } />
             <meta name={ 'viewport' } content={ 'width=device-width, initial-scale=1, shrink-to-fit=no' } />
             <title>{ title }</title>
             <meta name={ 'description' } content={ description } />
@@ -49,8 +49,7 @@ export default function Header(children) {
             <link href={ '/css/media.css' } rel={ 'stylesheet' } />
             <link href={ '/css/innerPages.css' } rel={ 'stylesheet' } />
             <link href={ '/css/custom.css' } rel={ 'stylesheet' } />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="undefined" crossorigin="anonymous" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
             <script src={'/js/common-validation.js'} />
             <script src={'/js/menu.js'} />
 

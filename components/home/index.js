@@ -8,10 +8,9 @@ import EsiestPlaceApply from "./esiestPlaceApply"
 import ServiceArea from "./serviceArea"
 import BlogSection from "./blogsection"
 const index = (props) => {
- 
   return (
     <>
-      <Herosection loanProduct={props.loanProduct} />
+      <Herosection loanProduct={props.loanProduct} creditProduct={props.creditProduct} />
       <CardLoan />
       <EsiestPlaceApply />
       <CustomerSupport />
