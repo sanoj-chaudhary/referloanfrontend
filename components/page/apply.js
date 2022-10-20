@@ -36,11 +36,12 @@ const apply = (props) => {
             <div class="dealStep__Area">
 
               <form>
+                
               {props.form_schema && props.form_schema.map((item, index) =>
 
                 <>
 
-
+<h3>{item.section_name}</h3>
                   {item.step_id == 1 && item.forms.map((elem, ind) => (
                     <div key={ind}>
 
