@@ -1,85 +1,130 @@
 import axios from "axios";
-import { Form, TextField, SelectField, SubmitButton } from './../form/fromElement';
-import { useFormik } from 'formik'  
+// import { Form, TextField, SelectField, SubmitButton } from './../form/fromElement';
+import { useFormik } from 'formik'
+import { useState } from "react";
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import * as Yup from "yup";
+import TextField from '@material-ui/core/TextField';
+import Button from '@mui/material/Button';
+const apply = (props) => {
+  const [step, setStep] = useState({})
+  var initialValues = {};
 
-  const apply = (props) => {
-
-    const getFormElement = (elementName, elementSchema) => {
-      const props = {
-        name: elementSchema.name,
-        label: elementSchema.label,
-        options: elementSchema.options,
-        type: elementSchema.type,
-        placeholder: elementSchema.placeholder,
-        elementName
-      };
-    
-      if (elementSchema.type === "text" || elementSchema.type === "email") {
-        return <TextField {...props} />
-      }
-    
-      if (elementSchema.type === "select") {
-        return <SelectField  {...props} />
-      }
-    }
-
-
-    return (
-      <>
-        <div class="container">
-          <section class="cardOffer_area">
-            <div class="dealStep__leftArea">
-              <div class="CardImg_box">
-                {/* <img src="assets/images/axis-card.png" alt="" /> */}
-              </div>
-              <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
-
+  console.log(initialValues)
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: '',
+      validationSchema: '',
+    });
+  return (
+    <>
+      <div class="container">
+        <section class="cardOffer_area">
+          <div class="dealStep__leftArea">
+            <div class="CardImg_box">
+              {/* <img src="assets/images/axis-card.png" alt="" /> */}
             </div>
+            <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
 
-            <div class="dealStep__wrapper">
-              <div class="dealStep__Area">
-
-                <form action="">
-
-                  {props.form_schema && props.form_schema.map((item, index) =>
-
-                    <div>
-                      <h2 class="step_heading" key={item.step_id}>{item.section_name}</h2>
-                      {item.forms.map((item1, index1) => <>
-                        <div class="inputRow">
-                          {/* {getFormElement(index1, item1)} */}
-
-                          <label>{item1.field_name} {item1.is_required ? <span>*</span> : ""}</label>
-                          {item1.type == 'text' ? "<input type='text' />" : ""}
-                          {item1.type == 'number' ? 'number' : ""}
-                          {item1.type == 'checkbox' ? 'checkbox' : ""}
-                          {item1.type == 'select' ? 'select' : ""}
-                        </div>
-                      </>
-                      )}
-                      <button class="custom__btn">Save & Proceed</button>
-                    </div>
-                  )}
-
-                </form>
-
-              </div>
-            </div>
-          </section>
-
-          <div class="innerpage_bg">
-            <section class="section_pad">
-              <div class="container">
-                <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
-              </div>
-            </section>
           </div>
 
+          <div class="dealStep__wrapper">
+            <div class="dealStep__Area">
+
+              <form>
+              {props.form_schema && props.form_schema.map((item, index) =>
+
+                <>
+
+
+                  {item.step_id == 1 && item.forms.map((elem, ind) => (
+                    <div key={ind}>
+
+                      {initialValues[`${elem.param_name}`] = ''}
+                      {elem.type == 'text' && <TextField
+                        fullWidth
+                        id="name"
+                        name={elem.param_name}
+                        label={elem.field_name}
+                        value={values.fullName}
+                        onChange={handleChange}
+                        error={touched.fullName && Boolean(errors.fullName)}
+                        helperText={touched.fullName && errors.fullName}
+                      />}
+
+                      {elem.type == 'select' && <FormControl variant="standard" fullWidth>
+
+                        <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-standard-label"
+                          id="demo-simple-select-standard"
+                          value={values.age}
+                          onChange={handleChange}
+                          name='age'
+                          errors={errors.age}
+                          label="Age"
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          <MenuItem value={10}>Ten</MenuItem>
+                          <MenuItem value={20}>Twenty</MenuItem>
+                          <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
+                      </FormControl> }
+                    </div>
+                  ))}
+
+
+
+                </>
+              )}
+
+<Button variant="contained" className="mt-4" type="submit" >Save & Next</Button>
+</form>
+            </div>
+          </div>
+        </section>
+
+        <div class="innerpage_bg">
+          <section class="section_pad">
+            <div class="container">
+              <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
+            </div>
+          </section>
         </div>
-      </>
-    )
-  }
+
+      </div>
+    </>
+  )
+
+
+}
 
 
 
-  export default apply
+export default apply
+
+// export function TextField(props) {
+//   console.log(props)
+//   const { field_name, param_name, type, ...rest } = props
+
+//   return (
+//     <>
+//       {field_name && <label >{field_name}</label>}
+//       <Field
+//         className="form-control"
+//         type={type}
+//         name={param_name}
+//         id={param_name}
+//         placeholder={field_name || ""}
+//         {...rest}
+//       />
+//       <ErrorMessage name={param_name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} />
+//     </>
+//   )
+// }
