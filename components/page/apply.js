@@ -13,80 +13,81 @@ import Button from '@mui/material/Button';
 const apply = (props) => {
   const [step, setStep] = useState({})
   var initialValues = {};
-
-  console.log(initialValues)
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
-      initialValues: '',
-      validationSchema: '',
+      initialValues,
+      validationSchema: "",
+
     });
+
+  console.log(props)
   return (
     <>
       <div class="container">
         <section class="cardOffer_area">
-          <div class="dealStep__leftArea">
-            <div class="CardImg_box">
-              {/* <img src="assets/images/axis-card.png" alt="" /> */}
-            </div>
-            <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
 
-          </div>
+          <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
+
+
+
+
+
 
           <div class="dealStep__wrapper">
             <div class="dealStep__Area">
 
               <form>
-                
-              {props.form_schema && props.form_schema.map((item, index) =>
 
-                <>
+                {props.form_schema && props.form_schema.map((item, index) =>
 
-<h3>{item.section_name}</h3>
-                  {item.step_id == 1 && item.forms.map((elem, ind) => (
-                    <div key={ind}>
+                  <>
 
-                      {initialValues[`${elem.param_name}`] = ''}
-                      {elem.type == 'text' && <TextField
-                        fullWidth
-                        id="name"
-                        name={elem.param_name}
-                        label={elem.field_name}
-                        value={values.fullName}
-                        onChange={handleChange}
-                        error={touched.fullName && Boolean(errors.fullName)}
-                        helperText={touched.fullName && errors.fullName}
-                      />}
+                    <h3>{item.step_id == 1 && item.section_name}</h3>
+                    {item.step_id == 1 && item.forms.map((elem, ind) => (
+                      <div key={ind}>
 
-                      {elem.type == 'select' && <FormControl variant="standard" fullWidth>
-
-                        <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
-                        <Select
-                          labelId="demo-simple-select-standard-label"
-                          id="demo-simple-select-standard"
-                          value={values.age}
+                        {initialValues[`${elem.param_name}`] = ''}
+                        {elem.type == 'text' && <TextField
+                          fullWidth
+                          id="name"
+                          name={elem.param_name}
+                          label={elem.field_name}
+                          value={values.fullName}
                           onChange={handleChange}
-                          name='age'
-                          errors={errors.age}
-                          label="Age"
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          <MenuItem value={10}>Ten</MenuItem>
-                          <MenuItem value={20}>Twenty</MenuItem>
-                          <MenuItem value={30}>Thirty</MenuItem>
-                        </Select>
-                      </FormControl> }
-                    </div>
-                  ))}
+                          error={touched.fullName && Boolean(errors.fullName)}
+                          helperText={touched.fullName && errors.fullName}
+                        />}
+
+                        {elem.type == 'select' && <FormControl variant="standard" fullWidth>
+
+                          <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+                          <Select
+                            labelId="demo-simple-select-standard-label"
+                            id="demo-simple-select-standard"
+                            value={values.age}
+                            onChange={handleChange}
+                            name='age'
+                            errors={errors.age}
+                            label="Age"
+                          >
+                            <MenuItem value="">
+                              <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                          </Select>
+                        </FormControl>}
+                      </div>
+                    ))}
 
 
 
-                </>
-              )}
+                  </>
+                )}
 
-<Button variant="contained" className="mt-4" type="submit" >Save & Next</Button>
-</form>
+                <Button variant="contained" className="mt-4" type="submit" >Save & Next</Button>
+              </form>
             </div>
           </div>
         </section>

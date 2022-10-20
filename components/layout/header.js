@@ -52,7 +52,7 @@ export default function Header(children) {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
             <script src={'/js/common-validation.js'} />
             <script src={'/js/menu.js'} />
-
+            <link href={ '/css/menu-new.css' } rel={ 'stylesheet' } />
         </Head>
     )
 }

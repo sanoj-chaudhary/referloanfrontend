@@ -10,8 +10,11 @@ const router = useRouter()
   });
 
   const [searchData, setSearchData] = useState({
-    "employemnt_type": '',
+    "cat_id": "2",
+    "cat_name": "loan",
+    "employemnt_type": 'Salaried',
     "product_id": '',
+    "product_name": '',
     "salary": "",
     "turnover": "",
     "pincode": "",
@@ -30,7 +33,8 @@ const router = useRouter()
       e.preventDefault()
       localStorage.setItem("searchData", JSON.stringify(values));
      
-      router.push(`product-bank?banklist=125`)
+     //router.push(`product-bank?banklist=125`)
+      router.push(values.cat_name+'/'+values.product_name+'/salary/'+values.salary+'/pincode/'+values.pincode+'?p='+values.product_id)
     }
 
   return (
@@ -54,16 +58,16 @@ const router = useRouter()
               <div className="loan-form-area">
                 <div className="loanType">
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
-                    <option selected value=''>Type of loan </option>
+                    <option defaultValue value=''>Type of loan </option>
                     {loanProduct && loanProduct.map((item, key) => (
-                      <option key={key} value={item.id}>{item.name}</option>
+                      <option key={key} value={item.id} slug={item.name}>{item.name}</option>
                     ))}
                   </select>
                   {errors.product_id && <p style={{ color: 'red' }}>{errors.product_id}</p>}
                 </div>
                 <div className="loanType" >
                   <select onChange={handleChange} name="employemnt_type" value={values.employemnt_type} required>
-                    <option selected value=''>Profession Type </option>
+                    <option defaultValue value=''>Profession Type </option>
                     <option value="Salaried">Salaried</option>
                     <option value="Self employed">Self employed</option>
                   </select>
@@ -83,7 +87,7 @@ const router = useRouter()
                         autoComplete="off"
                         name="salary"
                         id="salary"
-                        placeholder="Salary"
+                        placeholder="Monthly income"
                         value={values.salary}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -116,7 +120,7 @@ const router = useRouter()
                     autoComplete="off"
                     name="pincode"
                     id="pincode"
-                    placeholder="Pincode"
+                    placeholder="Residential Pincode"
                     value={values.pincode}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -137,7 +141,7 @@ const router = useRouter()
               <div className="loan-form-area">
                 <div className="loanType">
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
-                    <option selected value=''>Type of Card </option>
+                    <option defaultValue value=''>Type of Card </option>
                     {creditProduct && creditProduct.map((item, key) => (
                       <option key={key} value={item.id}>{item.name}</option>
                     ))}
@@ -146,7 +150,7 @@ const router = useRouter()
                 </div>
                 <div className="loanType" >
                   <select onChange={handleChange} name="employemnt_type" value={values.employemnt_type} required>
-                    <option selected value=''>Profession Type </option>
+                    <option defaultValue value=''>Profession Type </option>
                     <option value="Salaried">Salaried</option>
                     <option value="Self employed">Self employed</option>
                   </select>
@@ -162,7 +166,7 @@ const router = useRouter()
                         autoComplete="off"
                         name="salary"
                         id="salary"
-                        placeholder="Salary"
+                        placeholder="Monthly income"
                         value={values.salary}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -193,7 +197,7 @@ const router = useRouter()
                     autoComplete="off"
                     name="pincode"
                     id="pincode"
-                    placeholder="Pincode"
+                    placeholder="Residential Pincode"
                     value={values.pincode}
                     onChange={handleChange}
                     onBlur={handleBlur}
