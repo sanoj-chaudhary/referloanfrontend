@@ -8,7 +8,7 @@ const esiestPlaceApply = () => {
 
 
         <div className="loanCol">
-          <h2>Easiest place to apply for your loan</h2>
+          <h2>Your Financial Stability Made Easy!</h2>
           <ul className="iconPnl p-0">
             <li>
               <Link href="/loans/personal-loan"><a>
