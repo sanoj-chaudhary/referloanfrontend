@@ -1,7 +1,5 @@
 import Head from "next/head"
 import { useRouter } from 'next/router';
-// import "~slick-carousel/slick/slick.css"; 
-// import "~slick-carousel/slick/slick-theme.css";
 export default function Header(children) {
     const router = useRouter();
     const title = 'Referloan: ' + (children.title || 'Apply for Loans, Credit Card, Insurance and Investment');
@@ -11,7 +9,7 @@ export default function Header(children) {
     return (
         <Head>
             {/* Meta */ }
-            <meta charset={ 'utf-8' } />
+            <meta charSet={ 'utf-8' } />
             <meta name={ 'viewport' } content={ 'width=device-width, initial-scale=1, shrink-to-fit=no' } />
             <title>{ title }</title>
             <meta name={ 'description' } content={ description } />
@@ -45,14 +43,13 @@ export default function Header(children) {
             <link href={ '/css/global.css' } rel={ 'stylesheet' } />
             <link href={ '/css/styles.css' } rel={ 'stylesheet' } />
             <link href={ '/css/menu.css' } rel={ 'stylesheet' } />
-            <link href={ '/css/custom.css' } rel={ 'stylesheet' } />
             <link href={ '/css/mmenu.css' } rel={ 'stylesheet' } />
             <link href={ '/css/slick-theme.css' } rel={ 'stylesheet' } />
             <link href={ '/css/slick.css' } rel={ 'stylesheet' } />
             <link href={ '/css/media.css' } rel={ 'stylesheet' } />
             <link href={ '/css/innerPages.css' } rel={ 'stylesheet' } />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="undefined" crossorigin="anonymous" />
+            <link href={ '/css/custom.css' } rel={ 'stylesheet' } />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
             <script src={'/js/common-validation.js'} />
             <script src={'/js/menu.js'} />
 

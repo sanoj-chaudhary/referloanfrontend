@@ -23,20 +23,20 @@ export function Form(props) {
 }
 
 export function TextField(props) {
-    const {placeholder,label,name,type,options,...rest } = props
+    const {field_name,param_name,type,...rest } = props
 
     return (
         <>
-       {label && <label for={name}>{label}</label>}
+       {field_name && <label for={param_name}>{field_name}</label>}
             <Field
                 className="form-control"
                 type={type}
-                name={name}
-                id={name}
-                placeholder={placeholder || ""} 
+                name={param_name}
+                id={param_name}
+                placeholder={field_name || ""} 
                 {...rest}
             />
-            <ErrorMessage name={name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} />
+            <ErrorMessage name={param_name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} />
       </>
     )
 }

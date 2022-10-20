@@ -6,11 +6,11 @@ import Ourpartner from "./ourpartner"
 import Testimonial from "./testimonial"
 import EsiestPlaceApply from "./esiestPlaceApply"
 import ServiceArea from "./serviceArea"
+import BlogSection from "./blogsection"
 const index = (props) => {
- 
   return (
     <>
-      <Herosection loanProduct={props.loanProduct} />
+      <Herosection loanProduct={props.loanProduct} creditProduct={props.creditProduct} />
       <CardLoan />
       <EsiestPlaceApply />
       <CustomerSupport />
@@ -18,6 +18,7 @@ const index = (props) => {
       <ServiceArea />
       <Ourpartner partner={props.partner} />
       <Testimonial testimonial={props.testimonial} />
+      <BlogSection />
      
     </>
   )

@@ -3,8 +3,8 @@ import Link from 'next/link'
 const subMenu = (props) => {
   const items = props.data.map((item, index) => (
 
-    item.post_title != null
-      ? (<li key={index} className=""><Link href={item.full_url}><a tabIndex="-1" >{item.post_title}</a></Link></li>)
+    item.id != null
+      ? (<li key={index} className=""><Link href={item.slug}><a tabIndex="-1" >{item.name}</a></Link></li>)
       : null
 
   ))

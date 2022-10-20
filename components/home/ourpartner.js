@@ -9,7 +9,7 @@ function Partner(props) {
         <h3>from across the industry</h3>
         <ul>
           {props.partner && props.partner.map((item, index) =>
-            <li><img src={'/uploads/partner/' + item.logo_path} layout='fill' /></li>
+            <li key={index}><img src={'/uploads/partner/' + item.logo_path} layout='fill' /></li>
           )}
         </ul>
       </div>
