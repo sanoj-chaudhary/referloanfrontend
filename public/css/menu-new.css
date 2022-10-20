@@ -1,0 +1,33 @@
+
+
+.navBarContainer li .megaMenu_container .submenuContainer ul li {
+    /* flex: 30%;*/ 
+    float: left !important;
+    width: fit-content;
+    max-width: 260px;
+    min-width: 260px;
+}
+
+
+.navBarContainer li .megaMenu_container .submenuContainer ul {
+    max-width: 100%;
+    display: flex;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    /*background: aliceblue;*/
+}
+
+.navBarContainer li .megaMenu_container ul {
+    /* max-width: 20%; */
+    width: 100%;
+    /* display: flex; */
+    flex-direction: column !important;
+    padding: 14px;
+    justify-content: flex-start;
+}
+
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 li a {
+    padding: 4px 10px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
