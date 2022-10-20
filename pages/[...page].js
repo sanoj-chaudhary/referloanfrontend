@@ -47,6 +47,7 @@ export async function getServerSideProps(context) {
   {
     if(banklist)
     {
+      console.log(banklist)
       Component = 'ProductBankList'
     }
     else

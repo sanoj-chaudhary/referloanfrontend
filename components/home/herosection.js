@@ -1,6 +1,6 @@
 import Carousel from "react-slick";
 import EligilityForm from "./eligilityForm";
-function HeroSection({ loanProduct,creditProduct }) {
+function HeroSection({ loanProduct, creditProduct }) {
       const settings = {
             dots: true,
             infinite: true,
@@ -23,7 +23,7 @@ function HeroSection({ loanProduct,creditProduct }) {
                                                       <div className="left">
                                                             <h1>Looking to get a personal loan? You're in the right place.
 
-</h1>
+                                                            </h1>
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>

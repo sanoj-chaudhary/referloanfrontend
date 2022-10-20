@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import * as Yup from "yup";
 import { useFormik } from "formik";
-
+import { useRouter } from 'next/router';
 const eligilityForm = ({ loanProduct, creditProduct }) => {
-
+const router = useRouter()
   const signupSchema = Yup.object({
     pincode: Yup.string().min(6).max(6),
   });
@@ -13,12 +13,9 @@ const eligilityForm = ({ loanProduct, creditProduct }) => {
     "employemnt_type": '',
     "product_id": '',
     "salary": "",
-    "full_name": "",
     "turnover": "",
     "pincode": "",
   })
-
-
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -29,6 +26,12 @@ const eligilityForm = ({ loanProduct, creditProduct }) => {
       }
     });
 
+    const searchProduct = async (e) =>{
+      e.preventDefault()
+      localStorage.setItem("searchData", JSON.stringify(values));
+     
+      router.push(`product-bank?banklist=125`)
+    }
 
   return (
     <>
@@ -47,7 +50,7 @@ const eligilityForm = ({ loanProduct, creditProduct }) => {
         </ul>
         <div className="tab-content" id="myTabContent">
           <div className="tab-pane fade show active" id="loan" role="tabpanel" aria-labelledby="home-tab">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={searchProduct}>
               <div className="loan-form-area">
                 <div className="loanType">
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
@@ -130,7 +133,7 @@ const eligilityForm = ({ loanProduct, creditProduct }) => {
 
           {/* Credit card search form */}
           <div className="tab-pane fade" id="creditCard" role="tabpanel" aria-labelledby="profile-tab">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={searchProduct}>
               <div className="loan-form-area">
                 <div className="loanType">
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
@@ -151,11 +154,7 @@ const eligilityForm = ({ loanProduct, creditProduct }) => {
                 </div>
 
                 {values.employemnt_type &&
-
-
                   <div className="loanType ">
-
-
                     {
                       values.employemnt_type === 'Salaried' &&
                       <input
@@ -184,9 +183,7 @@ const eligilityForm = ({ loanProduct, creditProduct }) => {
                         onBlur={handleBlur}
                         required
                       />
-
                     }
-
                   </div>}
 
                 <div className="loanType">
@@ -205,30 +202,13 @@ const eligilityForm = ({ loanProduct, creditProduct }) => {
                   {errors.pincode && <p style={{ color: 'red', fontSize: "12px" }}>{errors.pincode}</p>}
                 </div>
                 <div className="search-button">
-
                   <button type="submit" >Continue</button>
-
                 </div>
               </div>
             </form>
           </div>
-
         </div>
       </div>
-
-      {/* <div className='modal  panCard_Modal' id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabIndex="-1"  >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" id='closeModal'></button>
-            <div className="modal-body">
-
-             
-
-            </div>
-          </div>
-        </div>
-      </div> */}
-
     </>
   )
 }

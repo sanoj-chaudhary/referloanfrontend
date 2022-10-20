@@ -1423,6 +1423,8 @@ footer img.footerlogo {
     color: #333;
     list-style: none;
     font-weight: 400;
+    display: flex;
+    gap: 6px;
 }
 
 .cardOffer_area .cardlist-Pnl .lstRow .actionPnl .offerBox {
