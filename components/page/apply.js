@@ -26,27 +26,27 @@ import { useFormik } from 'formik'
 
     return (
       <>
-        <div class="container">
-          <section class="cardOffer_area">
-            <div class="dealStep__leftArea">
-              <div class="CardImg_box">
+        <div className="container">
+          <section className="cardOffer_area">
+            <div className="dealStep__leftArea">
+              <div className="CardImg_box">
                 {/* <img src="assets/images/axis-card.png" alt="" /> */}
               </div>
               <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
 
             </div>
 
-            <div class="dealStep__wrapper">
-              <div class="dealStep__Area">
+            <div className="dealStep__wrapper">
+              <div className="dealStep__Area">
 
                 <form action="">
 
                   {props.form_schema && props.form_schema.map((item, index) =>
 
                     <div>
-                      <h2 class="step_heading" key={item.step_id}>{item.section_name}</h2>
+                      <h2 className="step_heading" key={item.step_id}>{item.section_name}</h2>
                       {item.forms.map((item1, index1) => <>
-                        <div class="inputRow">
+                        <div className="inputRow">
                           {/* {getFormElement(index1, item1)} */}
 
                           <label>{item1.field_name} {item1.is_required ? <span>*</span> : ""}</label>
@@ -57,7 +57,7 @@ import { useFormik } from 'formik'
                         </div>
                       </>
                       )}
-                      <button class="custom__btn">Save & Proceed</button>
+                      <button className="custom__btn">Save & Proceed</button>
                     </div>
                   )}
 
@@ -67,9 +67,9 @@ import { useFormik } from 'formik'
             </div>
           </section>
 
-          <div class="innerpage_bg">
-            <section class="section_pad">
-              <div class="container">
+          <div className="innerpage_bg">
+            <section className="section_pad">
+              <div className="container">
                 <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
               </div>
             </section>

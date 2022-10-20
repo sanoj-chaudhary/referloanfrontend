@@ -8,14 +8,14 @@ const leftfilter = () => {
             <div className="inputRow">
               <label>Type of Laon</label>
               <select className="form-select" aria-label="Type of loan ">
-                <option selected>Type of loan</option>
+                <option defaultValue>Type of loan</option>
                 <option value='3'>Home Loan</option>
               </select>
             </div>
             <div className="inputRow">
               <label>Profession Type</label>
               <select className="form-select" aria-label="Type of loan ">
-              <option selected>Profession Type</option>
+              <option defaultValue>Profession Type</option>
                 <option value="1">Salaried</option>
                 <option value="2">Self employed</option>
               </select>
