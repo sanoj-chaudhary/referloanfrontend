@@ -53,8 +53,11 @@ export async function getServerSideProps(context) {
       Component = 'ContentPage'
     }
   }
-  else {
-    if (banklist) {
+  else
+  {
+    if(banklist)
+    {
+      console.log(banklist)
       Component = 'ProductBankList'
     }
     else {

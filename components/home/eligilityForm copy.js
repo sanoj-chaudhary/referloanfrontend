@@ -15,17 +15,12 @@ console.log('token',token)
     pincode: Yup.string().min(6).max(6),
   });
 
-  const [searchData, setSearchData] = useState({
-    "employemnt_type": '',
-    "product_id": '',
-    "salary": "",
-    "full_name": "",
-    "turnover": "",
-    "pincode": "",
-    "phone_no": "",
-    "otp": "",
-  })
-
+  const [pincode, setPincode] = useState()
+  const [product_id, setProductId] = useState()
+  const [employemntType, setEmployemntType] = useState()
+  const [turnover, setTurnover] = useState()
+  const [salary, setSalary] = useState()
+ 
   const generatOtp = async (e) => {
     e.preventDefault()
     try {
