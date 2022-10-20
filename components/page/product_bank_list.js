@@ -20,16 +20,16 @@ const getSearchData = () => {
   }
 }
 
-const midcontent = ({ data }) => {
+const midcontent = ({ url,data }) => {
 
   const a = getSearchData()
   const [products, setProducts] = useState([])
   const [searchData, setsearchData] = useState(getSearchData())
   console.log(searchData)
   const searchProduct = async () => {
-
+    console.log(url)
     try {
-      const response = await axios.get('https://api.referloan.in/api/banks', searchData);
+      const response = await axios.post('https://api.referloan.in/api/banks', searchData);
       if (response) {
         const data = await response.data;
         console.log(data)
@@ -39,8 +39,7 @@ const midcontent = ({ data }) => {
       }
     } catch (error) {
       alert('failed')
-      //console.log("message", error.message)
-    }
+     }
   }
   useEffect(() => {
     searchProduct()

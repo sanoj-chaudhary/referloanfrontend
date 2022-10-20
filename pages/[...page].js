@@ -16,7 +16,7 @@ function contentPage({ url, Component, data, form_schema }) {
   return (
     <>
       {Component == 'ContentPage' && <ContentPage data={data} />}
-      {Component == 'ProductBankList' && <ProductBankList data={data} />}
+      {Component == 'ProductBankList' && <ProductBankList url={url} data={data} />}
       {Component == 'Apply' && <Apply data={data} form_schema={form_schema} />}
       {Component == 'Error' && <Error data={data} />}
     </>
