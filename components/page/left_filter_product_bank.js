@@ -6,7 +6,7 @@ const leftfilter = () => {
 
         <div className="filterArea">
             <div className="inputRow">
-              <label>Type of Laon</label>
+              <label>Type of Loan</label>
               <select className="form-select" aria-label="Type of loan ">
                 <option defaultValue>Type of loan</option>
                 <option value='3'>Home Loan</option>
