@@ -77,7 +77,7 @@ const serviceArea = () => {
                     </ul>
                 </div>
                 <div className="cardContainer green">
-                    <h2>Get a Insurance Plan <a href="#">All</a></h2>
+                    <h2>Get an Insurance Plan <a href="#">All</a></h2>
                     <ul className="iconPnl">
                         <li>
                             <Link href="/"><a>
