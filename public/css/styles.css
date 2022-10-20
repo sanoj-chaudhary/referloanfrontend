@@ -1867,7 +1867,16 @@ note {
     text-align: left;
     min-height: 90px;
     font-weight: 400;
-    border-bottom: 1px solid #D3D3D3;
+    height: 86px;
+    padding: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+    line-clamp: 4; 
+    -webkit-box-orient: vertical;
+    
+  
 }
 
 
