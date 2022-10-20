@@ -2,6 +2,8 @@
 import { useState,useEffect } from 'react';
 import {  } from 'react';
 import axios from 'axios';
+import LeftFilterProductBank from '../page/left_filter_product_bank'
+
 const getSearchData = () => {
 
   if (typeof window !== 'undefined') {
@@ -14,7 +16,6 @@ const getSearchData = () => {
     }
   }
 }
-
 
 const midcontent = ({ data }) => {
 
@@ -46,58 +47,17 @@ const midcontent = ({ data }) => {
       <section class="grabDeal_header">
         <div class="container">
           <div class="headingArea">
-            <div class="iconBox">
-              <img src="/images/ccard-bnr-icon.png" alt="" />
-            </div>
-            <div class="leftCol">
-              <div class="heading_box">
-                <h2>11 Credit cards</h2>
-                <p>Available for you</p>
-              </div>
-              <div class="rightCol">
-                <a href="#">Edit Profile</a>
-              </div>
-            </div>
-
+            Heading
           </div>
         </div>
       </section>
       <div class="container">
         <section class="cardOffer_area">
-          <div class="filterArea">
-            <div class="inputRow">
-              <label for="">Loan Purpose</label>
-              <select class="form-select" aria-label="Type of loan ">
-                <option selected>Type of loan</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div class="inputRow">
-              <label for="">Loan Amount</label>
-              <select class="form-select" aria-label="Type of loan ">
-                <option selected>₹ 50,000,00</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div class="inputRow">
-              <label for="">Annual Income</label>
-              <select class="form-select" aria-label="Type of loan ">
-                <option selected>₹ 20,000,00</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <button class="applyBtn" title="Apply Filter">Apply Filter</button>
-          </div>
+          
+          <LeftFilterProductBank />
+          
+          
           <div class="cardlist-Pnl">
-            {/* <!-- list row --> */}
-
-
             {products.map((item) => (
               <div class="lstRow">
                 <div class="topPnl">
@@ -114,7 +74,11 @@ const midcontent = ({ data }) => {
                     </div>
                     {/* <!-- benefitRow --> */}
                     <div class="benefitRow">
-                      <ul>
+                    {/* {item.bankProductInfo} */}
+                     {/* {item.bankProductInfo.map((item1,key1) => (  
+                        <div>{item1.slug}</div>
+                      ))} */}
+                      {/* <ul>
                         <li>
                           <span>Best Suited For</span>
                           <i class="fas fa-angle-right"></i>&nbsp; CashBack&nbsp;&nbsp; <i class="fas fa-angle-right"></i> &nbsp;Lounge &nbsp;&nbsp;<i class="fas fa-angle-right"></i> &nbsp; Shopping
@@ -123,7 +87,7 @@ const midcontent = ({ data }) => {
                           <span>1st Year fee</span>
                           ₹ 500
                         </li>
-                      </ul>
+                      </ul> */}
                     </div>
                   </div>
                 </div>
@@ -139,8 +103,8 @@ const midcontent = ({ data }) => {
               </div> */}
 
                   <div class="actBtnArea">
-                    <a href="#" class="grabDeal">Grab Deal</a>
-                    <a href="#" class="deatilBtn">View Detail <span class="material-icons">
+                    <a href="/" class="grabDeal">Grab Deal</a>
+                    <a href="/" class="deatilBtn">View Detail <span class="material-icons">
                       keyboard_arrow_down
                     </span></a>
                   </div>
