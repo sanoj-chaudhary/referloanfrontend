@@ -20,7 +20,7 @@ const Menu = () => {
             <div className={item.product ? "megaMenu_container" : ''} >
                 <ul className={item.product ? "subMenuLevel2" : ''}>
                     {item.product && item.product.map((value) => (
-                        <li key={value.id} className="activeSubMenu"> <Link href={value.slug}  ><a className="" title={value.name}>{value.name}</a></Link>
+                        <li key={value.id} className="activeSubMenu"> <Link href={value.slug}  ><a  title={value.name}>{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul>
                                     {value.bank_product && <SubMenu data={value.bank_product} />}
@@ -49,47 +49,47 @@ const Menu = () => {
                         <li>
                             <span>Loans</span>
                             <ul>
-                                <li> <a className="" target="_blank" href="#" title="Personal Loan">Personal Loan</a>
+                                <li> <a  target="_blank" href="#" title="Personal Loan">Personal Loan</a>
                                 </li>
-                                <li><a className="" target="_blank" href="#" title="Gold Loan">Gold Loan </a></li>
-                                <li><a className="" target="_blank" href="#" title="Education Loan">Education Loan </a>
+                                <li><a  target="_blank" href="#" title="Gold Loan">Gold Loan </a></li>
+                                <li><a  target="_blank" href="#" title="Education Loan">Education Loan </a>
                                 </li>
-                                <li><a className="" target="_blank" href="#" title="Home Loan">Home Loan</a></li>
-                                <li><a className="" target="_blank" href="#" title="Business Loan">Business Loan</a></li>
-                                <li><a className="" target="_blank" href="#" title="Loan">Loan</a></li>
+                                <li><a  target="_blank" href="#" title="Home Loan">Home Loan</a></li>
+                                <li><a  target="_blank" href="#" title="Business Loan">Business Loan</a></li>
+                                <li><a  target="_blank" href="#" title="Loan">Loan</a></li>
                                 {/* <!--  --> */}
-                                <li><a className="" target="_blank" href="#" title="ICICI Bank Business Loan Overdraft">ICICI
+                                <li><a  target="_blank" href="#" title="ICICI Bank Business Loan Overdraft">ICICI
                                     Bank
                                     Business Loan
                                     Overdraft</a></li>
-                                <li><a className="" target="_blank" href="#" title="Tata Capital Used Car Loan">Tata Capital
+                                <li><a  target="_blank" href="#" title="Tata Capital Used Car Loan">Tata Capital
                                     Used Car Loan</a></li>
-                                <li><a className="" target="_blank" href="#" title="Faircent Personal Loan">Faircent
+                                <li><a  target="_blank" href="#" title="Faircent Personal Loan">Faircent
                                     Personal Loan</a></li>
-                                <li><a className="" target="_blank" href="#" title="InstaMoney Personal Loan">InstaMoney
+                                <li><a  target="_blank" href="#" title="InstaMoney Personal Loan">InstaMoney
                                     Personal Loan</a></li>
-                                <li><a className="" target="_blank" href="#" title="MPokket Instant Loan">MPokket Instant
+                                <li><a  target="_blank" href="#" title="MPokket Instant Loan">MPokket Instant
                                     Loan</a></li>
                                 {/* <!--  --> */}
-                                <li><a className="" target="_blank" href="#" title="KreditBee Personal Loan">KreditBee
+                                <li><a  target="_blank" href="#" title="KreditBee Personal Loan">KreditBee
                                     Personal Loan </a></li>
-                                <li><a className="" target="_blank" href="#" title="Upward Fintech Personal Loan">Upward
+                                <li><a  target="_blank" href="#" title="Upward Fintech Personal Loan">Upward
                                     Fintech Personal Loan </a></li>
-                                <li><a className="" target="_blank" href="#" title="CASHe Personal Loan">CASHe Personal Loan
+                                <li><a  target="_blank" href="#" title="CASHe Personal Loan">CASHe Personal Loan
                                 </a></li>
-                                <li><a className="" target="_blank" href="#" title="FlexSalary Personal Loan">FlexSalary
+                                <li><a  target="_blank" href="#" title="FlexSalary Personal Loan">FlexSalary
                                     Personal Loan </a></li>
                             </ul>
 
                         </li>
-                        <li> <a className="" target="_blank" href="#" title="Insurance">Insurance</a></li>
-                        <li><a className="" target="_blank" href="#" title="Investment">Investment</a></li>
-                        <li><a className="" target="_blank" href="#" title="Subsidy">Subsidy</a></li>
-                        <li><a className="" target="_blank" href="#" title="Knowledge Center">Knowledge Center</a></li>
-                        <li><a className="" target="_blank" href="#" title="About">About</a></li>
-                        <li><a className="" target="_blank" href="#" title="Franchise">Franchise</a> </li>
-                        <li><a className="" target="_blank" href="#" title="Blogs">Blogs</a> </li>
-                        <li><a className="" target="_blank" href="#" title="Contact">Contact</a> </li>
+                        <li> <a  target="_blank" href="#" title="Insurance">Insurance</a></li>
+                        <li><a  target="_blank" href="#" title="Investment">Investment</a></li>
+                        <li><a  target="_blank" href="#" title="Subsidy">Subsidy</a></li>
+                        <li><a  target="_blank" href="#" title="Knowledge Center">Knowledge Center</a></li>
+                        <li><a  target="_blank" href="#" title="About">About</a></li>
+                        <li><a  target="_blank" href="#" title="Franchise">Franchise</a> </li>
+                        <li><a  target="_blank" href="#" title="Blogs">Blogs</a> </li>
+                        <li><a  target="_blank" href="#" title="Contact">Contact</a> </li>
                     </ul>
                 </nav>
             </div>
@@ -127,9 +127,9 @@ const Menu = () => {
                 <div className="container">
                     <ul>
                         {items}
-                        <li><Link href="/zero-investment-franchise"><a className="" title="Franchise">Franchise</a></Link></li>
+                        <li><Link href="/zero-investment-franchise"><a  title="Franchise">Franchise</a></Link></li>
                         <li><Link href="https://blog.referloan.in/"><a  target="_blank" title="Blogs">Blogs</a></Link></li>
-                        <li><Link href="/contact"><a className=""  title="Contact">Contact</a></Link></li> 
+                        <li><Link href="/contact"><a   title="Contact">Contact</a></Link></li> 
                     </ul>
                 </div>
             </nav >

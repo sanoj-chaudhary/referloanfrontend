@@ -2,6 +2,7 @@
 import { useState,useEffect } from 'react';
 import {  } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 import LeftFilterProductBank from '../page/left_filter_product_bank'
 
 const getSearchData = () => {
@@ -10,6 +11,7 @@ const getSearchData = () => {
     const items = localStorage.getItem('searchData');
 
     if (items) {
+     // console.log(items)
       return JSON.parse(localStorage.getItem('searchData'));
     } else {
       return [];
@@ -28,6 +30,7 @@ const midcontent = ({ data }) => {
       const response = await axios.post('https://api.referloan.in/api/banks', searchData);
       if (response) {
         const data = await response.data;
+        console.log(data)
         setProducts(data.data)
       } else {
         alert('failed')
@@ -48,6 +51,7 @@ const midcontent = ({ data }) => {
         <div class="container">
           <div class="headingArea">
             Heading
+            
           </div>
         </div>
       </section>
@@ -74,39 +78,28 @@ const midcontent = ({ data }) => {
                     </div>
                     {/* <!-- benefitRow --> */}
                     <div class="benefitRow">
-                    {/* {item.bankProductInfo} */}
+                    {/* {item.bankProductInfo}
+                    {JSON.stringify(item.bankProductInfo)}
+                    {JSON.parse(item.bankProductInfo)} */}
                      {/* {item.bankProductInfo.map((item1,key1) => (  
                         <div>{item1.slug}</div>
                       ))} */}
-                      {/* <ul>
+                      <ul>
                         <li>
-                          <span>Best Suited For</span>
-                          <i class="fas fa-angle-right"></i>&nbsp; CashBack&nbsp;&nbsp; <i class="fas fa-angle-right"></i> &nbsp;Lounge &nbsp;&nbsp;<i class="fas fa-angle-right"></i> &nbsp; Shopping
+                          <span>Best Suited For</span>Lounge 
                         </li>
                         <li>
                           <span>1st Year fee</span>
                           ₹ 500
                         </li>
-                      </ul> */}
+                      </ul>
                     </div>
                   </div>
                 </div>
-                {/* <!-- actionBar --> */}
+                
                 <div class="actionPnl">
-                  {/* <div class="compareBox">
-                  <input type="checkbox" id="compare" name="compare" value="compare" />
-                  <label for="compare"> Compare</label>
-              </div> */}
-                  {/* <!-- offer --> */}
-                  {/* <div class="offerBox">
-                  <a href="#"><img src="/images/icon/discount-icon.png" alt="" /> Get Flipkart Voucher</a>
-              </div> */}
-
                   <div class="actBtnArea">
-                    <a href="/" class="grabDeal">Grab Deal</a>
-                    <a href="/" class="deatilBtn">View Detail <span class="material-icons">
-                      keyboard_arrow_down
-                    </span></a>
+                    <Link href={item.slug}><a class="grabDeal">Grab Deal</a></Link>
                   </div>
                 </div>
               </div>
