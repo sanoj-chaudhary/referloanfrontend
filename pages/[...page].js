@@ -58,7 +58,9 @@ export async function getServerSideProps(context) {
     if(banklist)
     {
       console.log(banklist)
+      form_schema = 'a'
       Component = 'ProductBankList'
+
     }
     else {
       Component = 'Error'
