@@ -21,8 +21,16 @@ const leftfilter = () => {
               </select>
             </div>
             <div className="inputRow">
+              <label>Salary</label>
+              <input type="text" value="" />
+            </div>
+            <div className="inputRow">
               <label>Pincode</label>
-              <input type="text" />
+              <input type="text" value="" />
+            </div>
+            <div className="inputRow">
+              <label>Interest</label>
+              <input type="text" placeholder="min" value="" /> <input type="text" placeholder="max" value="" />
             </div>
             <button className="applyBtn" title="Apply Filter">Apply Filter</button>
           </div>

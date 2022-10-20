@@ -10,8 +10,11 @@ const router = useRouter()
   });
 
   const [searchData, setSearchData] = useState({
+    "cat_id": "2",
+    "cat_name": "loan",
     "employemnt_type": '',
     "product_id": '',
+    "product_name": '',
     "salary": "",
     "turnover": "",
     "pincode": "",
@@ -31,7 +34,7 @@ const router = useRouter()
       localStorage.setItem("searchData", JSON.stringify(values));
      
      //router.push(`product-bank?banklist=125`)
-      router.push(values.product_id+'/'+values.salary+'/'+values.pincode+'?pid='+values.product_id)
+      router.push(values.cat_name+'/'+values.product_name+'/salary/'+values.salary+'/pincode/'+values.pincode+'?p='+values.product_id)
     }
 
   return (

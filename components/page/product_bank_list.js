@@ -12,7 +12,7 @@ const getSearchData = () => {
     const items = localStorage.getItem('searchData');
 
     if (items) {
-     // console.log(items)
+    console.log(items)
       return JSON.parse(localStorage.getItem('searchData'));
     } else {
       return [];
