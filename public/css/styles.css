@@ -1126,7 +1126,7 @@ footer img.footerlogo {
 .footer-card-area .card-pnl ul {
     display: flex;
     column-gap: 5px;
-    max-width: 400px;
+    max-width: 320px;
    
 }
 
@@ -1149,7 +1149,7 @@ footer img.footerlogo {
 }
 
 .footer-card-area .mad-in-india img {
-    width: 50px!important;
+    width: 40px!important;
     margin-right: 10px;
 }
 
