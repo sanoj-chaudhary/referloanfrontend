@@ -39,7 +39,7 @@ const Menu = () => {
     }, []);
     return (
         <header>
-            <div className="mmobile_menu">
+            <div className="mmobile_menu d-none">
 
                 <nav id="menu">
                     <ul>
@@ -100,9 +100,9 @@ const Menu = () => {
                         <div className="mmenu_icon" id="mheader">
                             <a href="#menu"><span></span></a>
                         </div>
-                        <a className="logoSection"
-                            href="/"><img
-                                src="/images/top-logo.png" alt="" title=" referloan " /></a>
+                        <Link  href="/"><a className="logoSection"
+                           ><img
+                                src="/images/top-logo.png" alt="" title=" referloan " /></a></Link>
 
                         <div className="info_section">
                             <ul>
