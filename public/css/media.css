@@ -56,6 +56,17 @@
         /* background-color: #f5fafc; */
     }
 
+
+    .home_blogArea ul {
+        display: flex;
+        column-gap: 35px;
+        padding-top: 35px;
+        flex-direction: column;
+    }
+    .home_blogArea ul li {
+        margin-bottom: 20px;
+    }
+
     .sticky_nav {
         display: flex;
     }
