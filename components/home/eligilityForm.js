@@ -30,7 +30,8 @@ const router = useRouter()
       e.preventDefault()
       localStorage.setItem("searchData", JSON.stringify(values));
      
-      router.push(`product-bank?banklist=125`)
+     //router.push(`product-bank?banklist=125`)
+      router.push(values.product_id+'/'+values.salary+'/'+values.pincode+'?pid='+values.product_id)
     }
 
   return (
@@ -56,7 +57,7 @@ const router = useRouter()
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
                     <option defaultValue value=''>Type of loan </option>
                     {loanProduct && loanProduct.map((item, key) => (
-                      <option key={key} value={item.id}>{item.name}</option>
+                      <option key={key} value={item.id} slug={item.name}>{item.name}</option>
                     ))}
                   </select>
                   {errors.product_id && <p style={{ color: 'red' }}>{errors.product_id}</p>}

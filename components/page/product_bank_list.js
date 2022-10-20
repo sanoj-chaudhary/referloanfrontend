@@ -22,16 +22,17 @@ const getSearchData = () => {
 
 const midcontent = ({ data }) => {
 
+  const a = getSearchData()
   const [products, setProducts] = useState([])
   const [searchData, setsearchData] = useState(getSearchData())
-
+  console.log(searchData)
   const searchProduct = async () => {
 
     try {
       const response = await axios.post('https://api.referloan.in/api/banks', searchData);
       if (response) {
         const data = await response.data;
-        //console.log(data)
+        
         setProducts(data.data)
       } else {
         alert('failed')
@@ -42,7 +43,6 @@ const midcontent = ({ data }) => {
     }
   }
   useEffect(() => {
-    //searchData()
     searchProduct()
   }, []);
 
@@ -53,6 +53,8 @@ const midcontent = ({ data }) => {
         <div className="container">
           <div className="headingArea">
           Product Name | salary | pincode
+          {/*  {a} {searchData.salary} */}
+          {/* {JSON.parse(searchData)['salary']}  */}
           </div>
         </div>
       </section>
