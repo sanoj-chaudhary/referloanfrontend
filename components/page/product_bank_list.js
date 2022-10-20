@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import {  } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import Image from 'next/image';
 import LeftFilterProductBank from '../page/left_filter_product_bank'
 
 const getSearchData = () => {
@@ -30,17 +31,18 @@ const midcontent = ({ data }) => {
       const response = await axios.post('https://api.referloan.in/api/banks', searchData);
       if (response) {
         const data = await response.data;
-        console.log(data)
+        //console.log(data)
         setProducts(data.data)
       } else {
         alert('failed')
       }
     } catch (error) {
       alert('failed')
-      console.log("message", error.message)
+      //console.log("message", error.message)
     }
   }
   useEffect(() => {
+    //searchData()
     searchProduct()
   }, []);
 
@@ -50,8 +52,7 @@ const midcontent = ({ data }) => {
       <section className="grabDeal_header">
         <div className="container">
           <div className="headingArea">
-            Heading
-            
+          Product Name | salary | pincode
           </div>
         </div>
       </section>
@@ -59,14 +60,13 @@ const midcontent = ({ data }) => {
         <section className="cardOffer_area">
           
           <LeftFilterProductBank />
-          
-          
+
           <div className="cardlist-Pnl">
-            {products.map((item) => (
-              <div className="lstRow">
+            {products.map((item,key) => (
+              <div className="lstRow" key={key}>
                 <div className="topPnl">
                   <div className="cardImg">
-                    <img src="/images/axis-card.png" alt="" />
+                    <Image src={'/uploads/product_bank/'+item.bankProductName+'.png'} height="214" width="340" />
                   </div>
                   <div className="cardDtl_pnl">
                     <div className="headingBar">
@@ -76,21 +76,20 @@ const midcontent = ({ data }) => {
                         <p>Approval Chances {item.chance} %</p>
                       </div>
                     </div>
-                    {/* <!-- benefitRow --> */}
+
                     <div className="benefitRow">
-                    {/* {item.bankProductInfo}
-                    {JSON.stringify(item.bankProductInfo)}
-                    {JSON.parse(item.bankProductInfo)} */}
-                     {/* {item.bankProductInfo.map((item1,key1) => (  
-                        <div>{item1.slug}</div>
-                      ))} */}
                       <ul>
                         <li>
-                          <span>Best Suited For</span>Lounge 
+                          <span>Min Interest</span>{JSON.parse(item.bankProductInfo)['interest_min']} % 
                         </li>
                         <li>
-                          <span>1st Year fee</span>
-                          ₹ 500
+                          <span>Max Interest</span>{JSON.parse(item.bankProductInfo)['interest_max']} %
+                        </li>
+                        <li>
+                          <span>Processing Fees</span>{JSON.parse(item.bankProductInfo)['processing_fee']} 
+                        </li>
+                        <li>
+                          <span>Fees</span>{JSON.parse(item.bankProductInfo)['fee']} %
                         </li>
                       </ul>
                     </div>
