@@ -10,11 +10,8 @@ const router = useRouter()
   });
 
   const [searchData, setSearchData] = useState({
-    "cat_id": "2",
-    "cat_name": "loan",
     "employemnt_type": 'Salaried',
     "product_id": '',
-    "product_name": '',
     "salary": "",
     "turnover": "",
     "pincode": "",
@@ -34,7 +31,7 @@ const router = useRouter()
       localStorage.setItem("searchData", JSON.stringify(values));
      
      //router.push(`product-bank?banklist=125`)
-      router.push(values.cat_name+'/'+values.product_name+'/salary/'+values.salary+'/pincode/'+values.pincode+'?p='+values.product_id)
+     router.push(values.product_id+'/salary/'+values.salary+'/pincode/'+values.pincode+'?p=1')
     }
 
   return (
@@ -60,7 +57,7 @@ const router = useRouter()
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
                     <option defaultValue value=''>Type of loan </option>
                     {loanProduct && loanProduct.map((item, key) => (
-                      <option key={key} value={item.id} slug={item.name}>{item.name}</option>
+                      <option key={key} value={item.slug}>{item.name}</option>
                     ))}
                   </select>
                   {errors.product_id && <p style={{ color: 'red' }}>{errors.product_id}</p>}
@@ -143,7 +140,7 @@ const router = useRouter()
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
                     <option defaultValue value=''>Type of Card </option>
                     {creditProduct && creditProduct.map((item, key) => (
-                      <option key={key} value={item.id}>{item.name}</option>
+                      <option key={key} value={item.slug}>{item.name}</option>
                     ))}
                   </select>
                   {errors.product_id && <p style={{ color: 'red' }}>{errors.product_id}</p>}
