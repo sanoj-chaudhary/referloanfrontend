@@ -29,10 +29,10 @@ const midcontent = ({ data }) => {
   const searchProduct = async () => {
 
     try {
-      const response = await axios.post('https://api.referloan.in/api/banks', searchData);
+      const response = await axios.get('https://api.referloan.in/api/banks', searchData);
       if (response) {
         const data = await response.data;
-        
+        console.log(data)
         setProducts(data.data)
       } else {
         alert('failed')
