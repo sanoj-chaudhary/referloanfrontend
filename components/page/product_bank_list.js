@@ -47,37 +47,37 @@ const midcontent = ({ data }) => {
   return (
     <>
 
-      <section class="grabDeal_header">
-        <div class="container">
-          <div class="headingArea">
+      <section className="grabDeal_header">
+        <div className="container">
+          <div className="headingArea">
             Heading
             
           </div>
         </div>
       </section>
-      <div class="container">
-        <section class="cardOffer_area">
+      <div className="container">
+        <section className="cardOffer_area">
           
           <LeftFilterProductBank />
           
           
-          <div class="cardlist-Pnl">
+          <div className="cardlist-Pnl">
             {products.map((item) => (
-              <div class="lstRow">
-                <div class="topPnl">
-                  <div class="cardImg">
+              <div className="lstRow">
+                <div className="topPnl">
+                  <div className="cardImg">
                     <img src="/images/axis-card.png" alt="" />
                   </div>
-                  <div class="cardDtl_pnl">
-                    <div class="headingBar">
+                  <div className="cardDtl_pnl">
+                    <div className="headingBar">
                       <h2>{item.bankProductName}</h2>
-                      <div class="cibilBox">
+                      <div className="cibilBox">
                         <h3><img src="/images/cibil-meter.png" alt="" />Excellent</h3>
                         <p>Approval Chances {item.chance} %</p>
                       </div>
                     </div>
                     {/* <!-- benefitRow --> */}
-                    <div class="benefitRow">
+                    <div className="benefitRow">
                     {/* {item.bankProductInfo}
                     {JSON.stringify(item.bankProductInfo)}
                     {JSON.parse(item.bankProductInfo)} */}
@@ -97,9 +97,9 @@ const midcontent = ({ data }) => {
                   </div>
                 </div>
                 
-                <div class="actionPnl">
-                  <div class="actBtnArea">
-                    <Link href={item.slug}><a class="grabDeal">Grab Deal</a></Link>
+                <div className="actionPnl">
+                  <div className="actBtnArea">
+                    <Link href={item.slug}><a className="grabDeal">Grab Deal</a></Link>
                   </div>
                 </div>
               </div>

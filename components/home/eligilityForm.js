@@ -54,7 +54,7 @@ const router = useRouter()
               <div className="loan-form-area">
                 <div className="loanType">
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
-                    <option selected value=''>Type of loan </option>
+                    <option defaultValue value=''>Type of loan </option>
                     {loanProduct && loanProduct.map((item, key) => (
                       <option key={key} value={item.id}>{item.name}</option>
                     ))}
@@ -63,7 +63,7 @@ const router = useRouter()
                 </div>
                 <div className="loanType" >
                   <select onChange={handleChange} name="employemnt_type" value={values.employemnt_type} required>
-                    <option selected value=''>Profession Type </option>
+                    <option defaultValue value=''>Profession Type </option>
                     <option value="Salaried">Salaried</option>
                     <option value="Self employed">Self employed</option>
                   </select>
@@ -137,7 +137,7 @@ const router = useRouter()
               <div className="loan-form-area">
                 <div className="loanType">
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
-                    <option selected value=''>Type of Card </option>
+                    <option defaultValue value=''>Type of Card </option>
                     {creditProduct && creditProduct.map((item, key) => (
                       <option key={key} value={item.id}>{item.name}</option>
                     ))}
@@ -146,7 +146,7 @@ const router = useRouter()
                 </div>
                 <div className="loanType" >
                   <select onChange={handleChange} name="employemnt_type" value={values.employemnt_type} required>
-                    <option selected value=''>Profession Type </option>
+                    <option defaultValue value=''>Profession Type </option>
                     <option value="Salaried">Salaried</option>
                     <option value="Self employed">Self employed</option>
                   </select>

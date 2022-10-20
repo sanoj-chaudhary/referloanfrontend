@@ -95,7 +95,7 @@ const Menu = () => {
             </div>
             
             <section>
-                <div class="container">
+                <div className="container">
                     <div className="customContainer">
                         <div className="mmenu_icon" id="mheader">
                             <a href="#menu"><span></span></a>
@@ -107,10 +107,10 @@ const Menu = () => {
                         <div className="info_section">
                             <ul>
                                 <li>
-                                <Link href="mailto:info@referloan.in"><a><i class="fa fa-envelope" aria-hidden="true"></i> info@referloan.in</a></Link>
+                                <Link href="mailto:info@referloan.in"><a><i className="fa fa-envelope" aria-hidden="true"></i> info@referloan.in</a></Link>
                                 </li>
                                 <li>
-                                <Link href="tel:0124-4847123"><a > <i class="fas fa-phone-square-alt"></i>  0124-4847123</a></Link>
+                                <Link href="tel:0124-4847123"><a > <i className="fas fa-phone-square-alt"></i>  0124-4847123</a></Link>
                                 </li>
                             </ul>
                             <Link href="#"><a ><img src="/images/CIBIL Score.gif" alt="" /></a></Link>
