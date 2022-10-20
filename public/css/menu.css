@@ -177,8 +177,8 @@ nav.navBarContainer {
     width: 100%;
 }
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li a{
-    padding: 10px 10px;
-    max-width: 19%;
+    padding: 4px 10px;
+    max-width: 100%;
     box-sizing: border-box;
 }
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li a:hover{    
@@ -199,7 +199,7 @@ nav.navBarContainer {
     flex-wrap: wrap;
 }
 .navBarContainer li .megaMenu_container .submenuContainer ul li{
-    flex: 30%;
+    /*flex: 30%;*/
 }
 .navBarContainer li .megaMenu_container .submenuContainer ul li a{
     max-width:100%;
