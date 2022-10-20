@@ -10,7 +10,7 @@ const router = useRouter()
   });
 
   const [searchData, setSearchData] = useState({
-    "employemnt_type": '',
+    "employemnt_type": 'Salaried',
     "product_id": '',
     "salary": "",
     "turnover": "",
@@ -83,7 +83,7 @@ const router = useRouter()
                         autoComplete="off"
                         name="salary"
                         id="salary"
-                        placeholder="Salary"
+                        placeholder="Monthly income"
                         value={values.salary}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -116,7 +116,7 @@ const router = useRouter()
                     autoComplete="off"
                     name="pincode"
                     id="pincode"
-                    placeholder="Pincode"
+                    placeholder="Residential Pincode"
                     value={values.pincode}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -162,7 +162,7 @@ const router = useRouter()
                         autoComplete="off"
                         name="salary"
                         id="salary"
-                        placeholder="Salary"
+                        placeholder="Monthly income"
                         value={values.salary}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -193,7 +193,7 @@ const router = useRouter()
                     autoComplete="off"
                     name="pincode"
                     id="pincode"
-                    placeholder="Pincode"
+                    placeholder="Residential Pincode"
                     value={values.pincode}
                     onChange={handleChange}
                     onBlur={handleBlur}
