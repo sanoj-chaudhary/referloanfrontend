@@ -31,7 +31,7 @@ export async function getServerSideProps(context) {
   let Component = 'blank';
   let bank_product_id;
   let form;
-  let form_schema;
+  let form_schema = '1';
 
   url = url.join("/");
   console.log(banklist)
@@ -58,7 +58,6 @@ export async function getServerSideProps(context) {
     if(banklist)
     {
       console.log(banklist)
-      form_schema = 'a'
       Component = 'ProductBankList'
 
     }
