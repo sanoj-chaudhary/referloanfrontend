@@ -48,21 +48,21 @@ function HeroSection({ loanProduct,creditProduct }) {
                                           <div className="slickItem">
                                                 <div className="topArea">
                                                       <div className="left">
-                                                            <h1>The easy way to compare and get Car Loan</h1>
-                                                            <p>Enjoy extra-low interest rates and flexible financing options.</p>
+                                                            <h1>Get Your Car Financed in a Jiffy!</h1>
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
                                                                               <img src="/images/loan-w-icon.png" alt="" />
-                                                                              <h3>Loans upto<br /> ₹ 100K available</h3>
+                                                                              <h3>Easy EMIs</h3>
+
                                                                         </li>
                                                                         <li>
                                                                               <img src="/images/interst-icon.png" alt="" />
-                                                                              <h3>Lowest<br />interest rates</h3>
+                                                                              <h3>Financing <br />All Models </h3>
                                                                         </li>
                                                                         <li>
                                                                               <img src="/images/loan-term-icon.png" alt="" />
-                                                                              <h3>Flexible <br /> loan termse</h3>
+                                                                              <h3>Flexible <br /> loan tenure</h3>
                                                                         </li>
                                                                   </ul>
                                                             </div>
@@ -76,20 +76,20 @@ function HeroSection({ loanProduct,creditProduct }) {
                                           <div className="slickItem">
                                                 <div className="topArea">
                                                       <div className="left">
-                                                            <h1>The easy way to compare and get Credit Card</h1>
+                                                            <h1>Check Out a New Way to Get Approved for Credit Cards</h1>
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
                                                                               <img src="/images/loan-w-icon.png" alt="" />
-                                                                              <h3>Loans upto<br /> ₹ 100K available</h3>
+                                                                              <h3>Instant Approvals</h3>
                                                                         </li>
                                                                         <li>
                                                                               <img src="/images/interst-icon.png" alt="" />
-                                                                              <h3>Lowest<br />interest rates</h3>
+                                                                              <h3>Cashbacks & Rewards</h3>
                                                                         </li>
                                                                         <li>
                                                                               <img src="/images/loan-term-icon.png" alt="" />
-                                                                              <h3>Flexible <br /> loan termse</h3>
+                                                                              <h3>Wide Range to Choose From </h3>
                                                                         </li>
                                                                   </ul>
                                                             </div>
