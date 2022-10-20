@@ -67,9 +67,14 @@ ul {
     font-size: 32px;
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
-    padding-right: 120px;
+    padding-right: 0px;
     color: #4f16a6;
     font-weight: 600;
+}
+.heroSection .heroContent .topArea .left p{
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
 }
 
 .heroSection .heroContent .topArea .left .pointsArea ul {
@@ -704,6 +709,86 @@ ul.vdoArea {
 .fintext{text-align: justify;}
 
 
+
+.home_blogArea {
+    background-color: #f5f8fb;
+    padding: 50px 0;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.home_blogArea h2 {
+    font-size: 26px;
+    font-weight: 500;
+    padding-top: 5px;
+}
+
+.home_blogArea h3 {
+    font-size: var(--medium-font);
+    color: #6304f2;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.home_blogArea p {
+    font-size: var(--regular-font);
+    max-width: 650px;
+    margin: auto;
+    padding-top: 0px;
+    font-weight: 400;
+    text-align: left;
+    line-height: 1.5;
+}
+
+
+.home_blogArea ul {
+    display: flex;
+    column-gap: 35px;
+    padding-top: 35px;
+}
+
+.home_blogArea ul li {
+    list-style: none;
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.home_blogArea ul li a {
+    width: fit-content;
+    font-weight: 500;
+    font-size: 15px;
+    margin-top: 7px;
+    color: var(--secondryColor);
+    margin: 20px;
+}
+
+.home_blogArea ul li .step-imgBox {
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.home_blogArea ul li .step-imgBox img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+
+.home_blogArea ul li h2 {
+    font-size: 17px!important;
+    padding-top: 20px;
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+ .home_blogArea ul li p {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+ 
+
 /* +++++++++++++++++++++++++++++++++++++
             applyService_Area
  +++++++++++++++++++++++++++++++++++++ */
@@ -971,6 +1056,8 @@ footer img.footerlogo {
 
 .fot-top-bar .socialArea ul.socialIcon {
     display: flex;
+    margin: 0;
+    padding: 0;
 }
 
 .fot-top-bar .socialArea ul.socialIcon li a {
@@ -1135,7 +1222,7 @@ footer img.footerlogo {
 }
 
 .footer-card-area .card-pnl ul li img {
-    width: 65px;
+    width: 55px!important;
 }
 
 .footer-card-area .mad-in-india {
@@ -1149,7 +1236,8 @@ footer img.footerlogo {
 }
 
 .footer-card-area .mad-in-india img {
-    width: 40px;
+    width:40px!important;
+    height: auto;
     margin-right: 10px;
 }
 
@@ -1816,7 +1904,8 @@ note {
     align-items: center;
     font-size: var(--regular-font);
     font-weight: 600;
-    
+    border-top: 1px solid #D3D3D3;
+    margin-top: 5px;
 }
 
 .testimonial_Area .profile-img {
@@ -1851,9 +1940,15 @@ note {
 .testimonial_Area p {
     font-size: var(--regular-font);
     text-align: left;
-    min-height: 90px;
     font-weight: 400;
-    border-bottom: 1px solid #D3D3D3;
+    height: 86px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+            line-clamp: 4; 
+    -webkit-box-orient: vertical;
+
 }
 
 
@@ -2054,8 +2149,8 @@ footer img.footerlogo {
 .footerLinks li a {
     color: #fff;
     padding: 0;
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .footerLinks li a:hover {
@@ -2077,9 +2172,10 @@ footer img.footerlogo {
     font-weight: 300;
 }
 
-.copyRight_inner a {
-    color: #fff;
+.copyRight_inner a,.copyRight_inner span {
+    color: #323232;
     margin-left: 8px;
+    font-weight: 500;
 }
 
 /* panCard_Modal */
