@@ -8,10 +8,10 @@ import Apply from '../components/page/apply';
 import Error from '../components/page/error';
 
 function contentPage({ url, Component, data, form_schema }) {
-  console.log(url)
-  console.log(Component)
-  console.log(data)
-console.log(form_schema)
+  //console.log(url)
+  //console.log(Component)
+  //console.log(data)
+  //console.log(form_schema)
   const router = useRouter();
   return (
     <>
