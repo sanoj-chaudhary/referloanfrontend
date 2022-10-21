@@ -86,7 +86,7 @@ const midcontent = ({ url,refer,data }) => {
       <section className="grabDeal_header">
         <div className="container">
           <div className="headingArea">
-          {content.p_name} | {content.salary} | {content.pincode}
+          {content.p_name} | Salary : {content.salary} | Pincode : {content.pincode}
           </div>
         </div>
       </section>
