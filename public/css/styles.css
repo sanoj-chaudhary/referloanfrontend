@@ -1968,6 +1968,7 @@ footer img.footerlogo {
 
 .fot-top-bar .socialArea ul.socialIcon {
     display: flex;
+    margin-bottom: 0px;
 }
 
 .fot-top-bar .socialArea ul.socialIcon li a {
@@ -2158,10 +2159,15 @@ padding: 20px;
 text-align: center;}
 
 .blog_subheading{
-    font-size: 20px;
+    font-size: 16px;
     padding: 10px 0px 0px 0px;}
  
-    .blog_subheadingPar {
+
+.blog_subheadingPar {
         font-size: 14px;
-        text-align: justify; padding-bottom: 20px;
+        text-align: justify; padding-bottom: 20px; color: #000;
         }
+
+.blog_subheading_readmore{ font-weight: 500;}
+.blog_subheading_shadow{ box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 4px 4px 0 rgb(0 0 0 / 19%);}
+.blog_pic{width: 100%;}

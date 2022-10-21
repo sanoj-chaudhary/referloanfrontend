@@ -10,8 +10,9 @@ const router = useRouter()
   });
 
   const [searchData, setSearchData] = useState({
-    "employemnt_type": 'Salaried',
+    "cat_id": '1',
     "product_id": '',
+    "employemnt_type": 'Salaried',
     "salary": "",
     "turnover": "",
     "pincode": "",
@@ -30,8 +31,26 @@ const router = useRouter()
       e.preventDefault()
       localStorage.setItem("searchData", JSON.stringify(values));
      
-     //router.push(`product-bank?banklist=125`)
-     router.push(values.product_id+'/salary/'+values.salary+'/pincode/'+values.pincode+'?p=1')
+      try {
+
+          const response = await axios.post(`${process.env.APP_URL}/insert_search_info_local`, values);
+          console.log(response)
+          console.log(values)
+          
+          if(response) 
+          {
+            const search_id = response.data.insertId
+            const split     = values.product_id.split("_");;
+            console.log(values.product_id)
+
+            const hit = split[1]+'/salary/'+values.salary+'/pincode/'+values.pincode+'?ref=web'+search_id;
+
+            router.push(hit)
+          } 
+      }
+      catch (err) {
+          console.log(err)
+      }
     }
 
   return (
@@ -39,14 +58,16 @@ const router = useRouter()
       <div className="header-form-area">
         <ul className="nav nav-tabs" id="myTab" role="tablist">
           <li className="nav-item" role="presentation">
-            <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#loan"
+            <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#loan" data-id="2" value="2"
               type="button" role="tab" aria-controls="home" aria-selected="true">Loan</button>
           </li>
           <li className="nav-item" role="presentation">
-            <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#creditCard"
+            <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#creditCard" data-id="1" value="1" 
               type="button" role="tab" aria-controls="creditCard" aria-selected="false">Credit
               Card</button>
           </li>
+
+          {/* onClick={setSearchData({cat_id:1})} */}
 
         </ul>
         <div className="tab-content" id="myTabContent">
@@ -57,7 +78,7 @@ const router = useRouter()
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
                     <option defaultValue value=''>Type of loan </option>
                     {loanProduct && loanProduct.map((item, key) => (
-                      <option key={key} value={item.slug}>{item.name}</option>
+                      <option key={key} value={item.id+'_'+item.slug+'_'+item.name}>{item.name}</option>
                     ))}
                   </select>
                   {errors.product_id && <p style={{ color: 'red' }}>{errors.product_id}</p>}
@@ -140,7 +161,7 @@ const router = useRouter()
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
                     <option defaultValue value=''>Type of Card </option>
                     {creditProduct && creditProduct.map((item, key) => (
-                      <option key={key} value={item.slug}>{item.name}</option>
+                      <option key={key} value={item.id+'_'+item.slug+'_'+item.name}>{item.name}</option>
                     ))}
                   </select>
                   {errors.product_id && <p style={{ color: 'red' }}>{errors.product_id}</p>}

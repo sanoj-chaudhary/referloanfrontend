@@ -31,3 +31,16 @@
     max-width: 100%;
     box-sizing: border-box;
 }
+
+.menu-active{
+    background-color: #efefef !important;
+}
+
+.menu-active > a{
+    color: var(--primaryColor) !important;
+}
+
+.menu-active > div{
+    display: block !important;
+}
+

@@ -6,37 +6,37 @@ import Link from 'next/link';
 import Image from 'next/image';
 import LeftFilterProductBank from '../page/left_filter_product_bank'
 
-const getSearchData = () => {
 
-  if (typeof window !== 'undefined') {
-    const items = localStorage.getItem('searchData');
+const midcontent = ({ url,refer,data }) => {
 
-    if (items) {
-    console.log(items)
-      return JSON.parse(localStorage.getItem('searchData'));
-    } else {
-      return [];
-    }
-  }
-}
-
-const midcontent = ({ url,data }) => {
-
-  const a = getSearchData()
   const [products, setProducts] = useState([])
-  const [searchData, setsearchData] = useState(getSearchData())
-  console.log(searchData)
+  const [content, setContent] = useState([])
   const searchProduct = async () => {
-    console.log(url)
+   // console.log(url)
+
     try {
-      const response = await axios.post('https://api.referloan.in/api/banks', searchData);
-      if (response) {
-        const data = await response.data;
-        console.log(data)
-        setProducts(data.data)
-      } else {
-        alert('failed')
-      }
+      let finaldata;
+      
+      const response1 = await axios.get(`${process.env.APP_URL}/get_search_info_local/`+refer);
+      const data1     = await response1.data;
+      if(data1)
+      {
+        console.log(data1)
+
+        finaldata = data1[0]
+        console.log(finaldata)
+  
+        setContent(finaldata)
+
+        const response = await axios.post('https://api.referloan.in/api/banks', finaldata);
+        if (response) {
+          const data = await response.data;
+          console.log(data)
+          setProducts(data.data)
+        } else {
+          alert('failed')
+        }
+      } 
     } catch (error) {
       alert('failed')
      }
@@ -51,16 +51,14 @@ const midcontent = ({ url,data }) => {
       <section className="grabDeal_header">
         <div className="container">
           <div className="headingArea">
-          Product Name | salary | pincode
-          {/*  {a} {searchData.salary} */}
-          {/* {JSON.parse(searchData)['salary']}  */}
+          {content.name} | {content.salary} | {content.pincode}
           </div>
         </div>
       </section>
       <div className="container">
         <section className="cardOffer_area">
           
-          <LeftFilterProductBank />
+          <LeftFilterProductBank content={content} />
 
           <div className="cardlist-Pnl">
             {products.map((item,key) => (

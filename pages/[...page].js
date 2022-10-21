@@ -7,7 +7,7 @@ import ContentPage from '../components/page/content_page';
 import Apply from '../components/page/apply';
 import Error from '../components/page/error';
 
-function contentPage({ url, Component, data, form_schema }) {
+function contentPage({ url,refer, Component, data, form_schema }) {
   //console.log(url)
   //console.log(Component)
   //console.log(data)
@@ -16,7 +16,7 @@ function contentPage({ url, Component, data, form_schema }) {
   return (
     <>
       {Component == 'ContentPage' && <ContentPage data={data} />}
-      {Component == 'ProductBankList' && <ProductBankList url={url} data={data} />}
+      {Component == 'ProductBankList' && <ProductBankList url={url} refer={refer} data={data} />}
       {Component == 'Apply' && <Apply data={data} form_schema={form_schema} />}
       {Component == 'Error' && <Error data={data} />}
     </>
@@ -26,7 +26,8 @@ function contentPage({ url, Component, data, form_schema }) {
 export async function getServerSideProps(context) {
 
   let url = context.query.page;
-  let p = context.query.p;
+  let ref = context.query.ref;
+  let refer = ''
   let data;
   let Component = 'blank';
   let bank_product_id;
@@ -34,7 +35,7 @@ export async function getServerSideProps(context) {
   let form_schema = '1';
 
   url = url.join("/");
-  console.log(p)
+  console.log(ref)
 
   const res = await db.query("SELECT * FROM `pages` WHERE `slug` =  '" + url + "' ");
   if (res.length != 0) {
@@ -55,9 +56,10 @@ export async function getServerSideProps(context) {
   }
   else
   {
-    if(p)
+    if(ref)
     {
-      console.log(p)
+      console.log(ref)
+      refer = ref
       Component = 'ProductBankList'
 
     }
@@ -69,7 +71,7 @@ export async function getServerSideProps(context) {
 
   data = JSON.parse(JSON.stringify(res))
 
-  return { props: { url, Component, data,form_schema } }
+  return { props: { url, refer,Component, data,form_schema } }
 }
 
 export default contentPage
