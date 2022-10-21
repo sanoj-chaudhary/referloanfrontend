@@ -7,26 +7,36 @@ import Image from 'next/image';
 import LeftFilterProductBank from '../page/left_filter_product_bank'
 
 
-const midcontent = ({ url,data }) => {
+const midcontent = ({ url,refer,data }) => {
 
   const [products, setProducts] = useState([])
+  const [content, setContent] = useState([])
   const searchProduct = async () => {
-    console.log(url)
-    const split = url.split("/");
-    console.log(split)
-    
+   // console.log(url)
+
     try {
+      let finaldata;
       
-      
-      
-      // const response = await axios.post('https://api.referloan.in/api/banks', searchData);
-      // if (response) {
-      //   const data = await response.data;
-      //   console.log(data)
-      //   setProducts(data.data)
-      // } else {
-      //   alert('failed')
-      // }
+      const response1 = await axios.get(`${process.env.APP_URL}/get_search_info_local/`+refer);
+      const data1     = await response1.data;
+      if(data1)
+      {
+        console.log(data1)
+
+        finaldata = data1[0]
+        console.log(finaldata)
+  
+        setContent(finaldata)
+
+        const response = await axios.post('https://api.referloan.in/api/banks', finaldata);
+        if (response) {
+          const data = await response.data;
+          console.log(data)
+          setProducts(data.data)
+        } else {
+          alert('failed')
+        }
+      } 
     } catch (error) {
       alert('failed')
      }
@@ -41,19 +51,17 @@ const midcontent = ({ url,data }) => {
       <section className="grabDeal_header">
         <div className="container">
           <div className="headingArea">
-          Product Name | salary | pincode
-          {/*  {a} {searchData.salary} */}
-          {/* {JSON.parse(searchData)['salary']}  */}
+          {content.name} | {content.salary} | {content.pincode}
           </div>
         </div>
       </section>
       <div className="container">
         <section className="cardOffer_area">
           
-          <LeftFilterProductBank />
+          <LeftFilterProductBank content={content} />
 
           <div className="cardlist-Pnl">
-            {/* {products.map((item,key) => (
+            {products.map((item,key) => (
               <div className="lstRow" key={key}>
                 <div className="topPnl">
                   <div className="cardImg">
@@ -93,7 +101,7 @@ const midcontent = ({ url,data }) => {
                   </div>
                 </div>
               </div>
-            ))} */}
+            ))}
 
           </div>
         </section>
