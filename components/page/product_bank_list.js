@@ -1,4 +1,5 @@
 
+import { db } from "./../../config/db";
 import { useState,useEffect } from 'react';
 import {  } from 'react';
 import axios from 'axios';
@@ -13,31 +14,65 @@ const midcontent = ({ url,refer,data }) => {
   const [content, setContent] = useState([])
   const searchProduct = async () => {
    // console.log(url)
+    try 
+    {
+      const split     = url.split("/");
+      console.log(split);
 
-    try {
-      let finaldata;
-      
-      const response1 = await axios.get(`${process.env.APP_URL}/get_search_info_local/`+refer);
-      const data1     = await response1.data;
+      let slug = split[0]+'/'+split[1];
+      let salary = split[3];
+      let pincode = split[5];
+      console.log(slug);
+      const response1 = await axios.get(`${process.env.APP_URL}/get_product_by_slug/`+slug);
+     const data1     = await response1.data;
       if(data1)
       {
-        console.log(data1)
+        console.log(data1[0]);
 
-        finaldata = data1[0]
-        console.log(finaldata)
-  
-        setContent(finaldata)
+      }
+      let content_data  = data1[0];
+      let product_id = content_data.id;
+      let p_name = content_data.name;
+        
+      console.log(product_id);
 
-        const response = await axios.post('https://api.referloan.in/api/banks', finaldata);
-        if (response) {
-          const data = await response.data;
-          console.log(data)
-          setProducts(data.data)
+      
+      const finaldata = {product_id,salary,pincode}; 
+      console.log(finaldata);
+
+         const response2 = await axios.post('https://api.referloan.in/api/banks', finaldata);
+        if (response2) {
+          const data2 = await response2.data;
+          console.log(content_data)
+          setContent({p_name,salary,pincode})
+         setProducts(data2.data)
         } else {
           alert('failed')
         }
-      } 
-    } catch (error) {
+
+      // let finaldata;
+      // const response1 = await axios.get(`${process.env.APP_URL}/get_search_info_local/`+refer);
+      // const data1     = await response1.data;
+      // if(data1)
+      // {
+      //   console.log(data1)
+
+      //   finaldata = data1[0]
+      //   console.log(finaldata)
+  
+      //   setContent(finaldata)
+
+      //   const response = await axios.post('https://api.referloan.in/api/banks', finaldata);
+      //   if (response) {
+      //     const data = await response.data;
+      //     console.log(data)
+      //     setProducts(data.data)
+      //   } else {
+      //     alert('failed')
+      //   }
+      // } 
+    } 
+    catch (error) {
       alert('failed')
      }
   }
@@ -51,7 +86,7 @@ const midcontent = ({ url,refer,data }) => {
       <section className="grabDeal_header">
         <div className="container">
           <div className="headingArea">
-          {content.name} | {content.salary} | {content.pincode}
+          {content.p_name} | {content.salary} | {content.pincode}
           </div>
         </div>
       </section>
