@@ -23,15 +23,8 @@ function HeroSection({ loanProduct, creditProduct }) {
                                                       <div className="left">
 
                                                             <h1>Looking to get a personal loan? You're in the right place.
-
-
-
-
-
-
                                                             </h1>
-
-                                                            
+                                                                                                        
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
