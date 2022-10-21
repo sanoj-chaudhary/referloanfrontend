@@ -33,20 +33,22 @@ const router = useRouter()
      
       try {
 
-          const response = await axios.post(`${process.env.APP_URL}/insert_search_info_local`, values);
-          console.log(response)
-          console.log(values)
+          // const response = await axios.post(`${process.env.APP_URL}/insert_search_info_local`, values);
+          // console.log(response)
+          // console.log(values)
           
-          if(response) 
-          {
-            const search_id = response.data.insertId
-            const split     = values.product_id.split("_");;
-            console.log(values.product_id)
+          // if(response) 
+          // {
+          //   const search_id = response.data.insertId
+          //   const split     = values.product_id.split("_");
+          //   console.log(values.product_id)
 
-            const hit = split[1]+'/salary/'+values.salary+'/pincode/'+values.pincode+'?ref=web'+search_id;
+          //   const hit = split[1]+'/salary/'+values.salary+'/pincode/'+values.pincode+'?ref=web'+search_id;
 
-            router.push(hit)
-          } 
+          //   router.push(hit)
+          // }
+          const hit = values.product_id+'/salary/'+values.salary+'/pincode/'+values.pincode+'?ref=web';
+          router.push(hit) 
       }
       catch (err) {
           console.log(err)
@@ -78,7 +80,7 @@ const router = useRouter()
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
                     <option defaultValue value=''>Type of loan </option>
                     {loanProduct && loanProduct.map((item, key) => (
-                      <option key={key} value={item.id+'_'+item.slug+'_'+item.name}>{item.name}</option>
+                      <option key={key} value={item.slug}>{item.name}</option>
                     ))}
                   </select>
                   {errors.product_id && <p style={{ color: 'red' }}>{errors.product_id}</p>}
@@ -161,7 +163,7 @@ const router = useRouter()
                   <select name='product_id' onChange={handleChange} value={values.product_id} required>
                     <option defaultValue value=''>Type of Card </option>
                     {creditProduct && creditProduct.map((item, key) => (
-                      <option key={key} value={item.id+'_'+item.slug+'_'+item.name}>{item.name}</option>
+                      <option key={key} value={item.slug}>{item.name}</option>
                     ))}
                   </select>
                   {errors.product_id && <p style={{ color: 'red' }}>{errors.product_id}</p>}

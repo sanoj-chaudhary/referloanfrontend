@@ -27,6 +27,10 @@ export default async function handler(req, res) {
       if (req.query.component[0] == 'get_search_info_local') {
         return await GetSearchInfoLocal(req, res);
       }
+      if (req.query.component[0] == 'get_product_by_slug') {
+        return await GetProductBySlug(req, res);
+      }
+
       
     case "POST":
       if (req.query.component == 'insert_search_info_local') {
@@ -61,6 +65,16 @@ const insertSearchInfoLocal = async (req, res) => {
 const GetSearchInfoLocal = async (req, res) => {
   try {
     const results = await db.query("SELECT * FROM `search_info_local` WHERE `id` = '"+req.query.component[1]+"' ");
+    return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const GetProductBySlug = async (req, res) => {
+  try {
+    let slug = req.query.component[1]+'/'+req.query.component[2];
+    const results = await db.query("SELECT * FROM `view_product` WHERE `slug` = '"+slug +"' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
