@@ -26,7 +26,7 @@ function contentPage({ url, Component, data, form_schema }) {
 export async function getServerSideProps(context) {
 
   let url = context.query.page;
-  let p = context.query.p;
+  let ref = context.query.ref;
   let data;
   let Component = 'blank';
   let bank_product_id;
@@ -34,7 +34,7 @@ export async function getServerSideProps(context) {
   let form_schema = '1';
 
   url = url.join("/");
-  console.log(p)
+  console.log(ref)
 
   const res = await db.query("SELECT * FROM `pages` WHERE `slug` =  '" + url + "' ");
   if (res.length != 0) {
@@ -55,9 +55,9 @@ export async function getServerSideProps(context) {
   }
   else
   {
-    if(p)
+    if(ref)
     {
-      console.log(p)
+      console.log(ref)
       Component = 'ProductBankList'
 
     }
