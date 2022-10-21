@@ -24,6 +24,11 @@ function HeroSection({ loanProduct, creditProduct }) {
 
                                                             <h1>Looking to get a personal loan? You're in the right place.
 
+
+
+
+
+
                                                             </h1>
 
                                                             
