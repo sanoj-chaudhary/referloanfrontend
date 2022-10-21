@@ -121,9 +121,7 @@ const Menu = () => {
 
             </section>
 
-               
-
-            <nav className=" navBarContainer">
+            <nav className=" navBarContainer"> 
                 <div className="container">
                     <ul>
                         {items}

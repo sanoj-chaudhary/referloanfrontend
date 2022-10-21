@@ -201,7 +201,7 @@ nav.navBarContainer {
     flex-wrap: wrap;
 }
 .navBarContainer li .megaMenu_container .submenuContainer ul li{
-    list-style: initial; border-bottom: 1px Solid #efefef;
+     border-bottom: 1px Solid #efefef; list-style: initial;
     /*flex: 30%;*/
 }
 .navBarContainer li .megaMenu_container .submenuContainer ul li a{
