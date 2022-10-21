@@ -31,3 +31,29 @@
     max-width: 100%;
     box-sizing: border-box;
 }
+
+.menu-active{
+    background-color: #efefef;
+}
+
+.menu-active > a{
+    color: var(--primaryColor);
+}
+
+.menu-active > div{
+    display: block !important;
+}
+
+/*
+.navBarContainer li .megaMenu_container ul li a:hover {
+    color: var(--primaryColor);
+}
+
+.navBarContainer li .megaMenu_container ul li a:hover {
+    color: var(--primaryColor);
+}
+
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 li a:hover {
+    background-color: #efefef!important;
+}
+*/
