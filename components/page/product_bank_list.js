@@ -6,37 +6,27 @@ import Link from 'next/link';
 import Image from 'next/image';
 import LeftFilterProductBank from '../page/left_filter_product_bank'
 
-const getSearchData = () => {
-
-  if (typeof window !== 'undefined') {
-    const items = localStorage.getItem('searchData');
-
-    if (items) {
-    console.log(items)
-      return JSON.parse(localStorage.getItem('searchData'));
-    } else {
-      return [];
-    }
-  }
-}
 
 const midcontent = ({ url,data }) => {
 
-  const a = getSearchData()
   const [products, setProducts] = useState([])
-  const [searchData, setsearchData] = useState(getSearchData())
-  console.log(searchData)
   const searchProduct = async () => {
     console.log(url)
+    const split = url.split("/");
+    console.log(split)
+    
     try {
-      const response = await axios.post('https://api.referloan.in/api/banks', searchData);
-      if (response) {
-        const data = await response.data;
-        console.log(data)
-        setProducts(data.data)
-      } else {
-        alert('failed')
-      }
+      
+      
+      
+      // const response = await axios.post('https://api.referloan.in/api/banks', searchData);
+      // if (response) {
+      //   const data = await response.data;
+      //   console.log(data)
+      //   setProducts(data.data)
+      // } else {
+      //   alert('failed')
+      // }
     } catch (error) {
       alert('failed')
      }
@@ -63,7 +53,7 @@ const midcontent = ({ url,data }) => {
           <LeftFilterProductBank />
 
           <div className="cardlist-Pnl">
-            {products.map((item,key) => (
+            {/* {products.map((item,key) => (
               <div className="lstRow" key={key}>
                 <div className="topPnl">
                   <div className="cardImg">
@@ -103,7 +93,7 @@ const midcontent = ({ url,data }) => {
                   </div>
                 </div>
               </div>
-            ))}
+            ))} */}
 
           </div>
         </section>
