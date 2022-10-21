@@ -15,12 +15,12 @@ const Menu = () => {
             console.log(err)
         }
     }
-    const items =  headermenu.map((item) => (
+    const items =  headermenu.map((item, index) => (
         <li key={item.id}><Link href={item.slug} ><a className={item.product ? "hasSub_menu" : ''}  title={item.name}>{item.name}</a></Link>
             <div className={item.product ? "megaMenu_container" : ''} >
                 <ul className={item.product ? "subMenuLevel2" : ''}>
-                    {item.product && item.product.map((value) => (
-                        <li key={value.id} className="activeSubMenu"> <Link href={value.slug}  ><a  title={value.name}>{value.name}</a></Link>
+                    {item.product && item.product.map((value, Indexkey) => (
+                        <li key={value.id} className={Indexkey ? "activeSubMenu" : "activeSubMenu menu-active"}> <Link href={value.slug}  ><a  title={value.name}>{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul>
                                     {value.bank_product && <SubMenu data={value.bank_product} />}

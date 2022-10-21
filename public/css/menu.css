@@ -133,7 +133,8 @@ nav.navBarContainer {
 
 .navBarContainer li .megaMenu_container ul li,
 .navBarContainer li:hover .megaMenu_container ul li a {
-    background-color: transparent !important;
+    /*background-color: transparent !important;*/
+    background-color: transparent;
     font-size: 13px;
     font-weight: 400;
     color: #444;
@@ -174,7 +175,8 @@ nav.navBarContainer {
 }
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li {
     max-width: 100%;
-    width: 100%; 
+    /*width: 100%; */
+    width: 223px;
 }
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li a{
     padding: 4px 10px;
