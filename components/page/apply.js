@@ -10,44 +10,58 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import * as Yup from "yup";
 import TextField from '@material-ui/core/TextField';
 import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import Radio from '@mui/material/Radio';
+const getSearchData = () => {
+
+  if (typeof window !== 'undefined') {
+    const items = localStorage.getItem('step');
+
+    if (items) {
+      console.log(items)
+      return JSON.parse(localStorage.getItem('step'));
+    } else {
+      return [];
+    }
+  }
+}
 const apply = (props) => {
-  const [step, setStep] = useState({})
+
+  let countStep = getSearchData();
+  console.log(countStep)
+  const [step, setStep] = useState(countStep != '' ? countStep : 0)
   var initialValues = {};
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
       validationSchema: "",
 
+      onSubmit: (values) => {
+        alert(values)
+        setStep(step + 1)
+        localStorage.setItem("step", step + 1);
+      },
     });
+
 
   console.log(props)
   return (
     <>
       <div class="container">
         <section class="cardOffer_area">
-
           <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
-
-
-
-
-
-
           <div class="dealStep__wrapper">
             <div class="dealStep__Area">
-
-              <form>
-
-                {props.form_schema && props.form_schema.map((item, index) =>
+              <form onSubmit={handleSubmit}>
+                {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
                   <>
-
-                    <h3>{item.step_id == 1 && item.section_name}</h3>
-                    {item.step_id == 1 && item.forms.map((elem, ind) => (
+                    <h3>{item.section_name}</h3>
+                    {item.forms.map((elem, ind) => (
                       <div key={ind}>
-
                         {initialValues[`${elem.param_name}`] = ''}
-                        {elem.type == 'text' && <TextField
+                        {(elem.type == 'text' || elem.type == 'number' || elem.type == 'date') && <TextField
                           fullWidth
                           id="name"
                           name={elem.param_name}
@@ -58,31 +72,24 @@ const apply = (props) => {
                           helperText={touched.fullName && errors.fullName}
                         />}
 
-                        {elem.type == 'select' && <FormControl variant="standard" fullWidth>
+                        {elem.type == 'select' && <SelectField {...elem} values={values} />}
 
-                          <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
-                          <Select
-                            labelId="demo-simple-select-standard-label"
-                            id="demo-simple-select-standard"
-                            value={values.age}
-                            onChange={handleChange}
-                            name='age'
-                            errors={errors.age}
-                            label="Age"
+                        {elem.type == 'checkbox' && <FormControlLabel control={<Checkbox defaultChecked />} label={elem.field_name} />}
+
+                        {elem.type == 'radio' && <FormControl>
+                          <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+                          <RadioGroup
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            defaultValue="female"
+                            name="radio-buttons-group"
                           >
-                            <MenuItem value="">
-                              <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
-                          </Select>
+                            <FormControlLabel value="female" control={<Radio />} label="Female" />
+                            <FormControlLabel value="male" control={<Radio />} label="Male" />
+                            <FormControlLabel value="other" control={<Radio />} label="Other" />
+                          </RadioGroup>
                         </FormControl>}
                       </div>
                     ))}
-
-
-
                   </>
                 )}
 
@@ -99,7 +106,6 @@ const apply = (props) => {
             </div>
           </section>
         </div>
-
       </div>
     </>
   )
@@ -130,3 +136,33 @@ export default apply
 //     </>
 //   )
 // }
+
+
+export function SelectField(props) {
+
+  console.log("select", props)
+  const { name, label, ParamOptions } = props
+  return (
+    <>
+      {/* {label && <label for={name}>{label}</label>} */}
+      <FormControl variant="standard" fullWidth>
+
+        <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          name={props.param_name}
+          label={props.field_name}
+        >
+          {ParamOptions.map((optn) => (
+            <MenuItem value={optn.value
+            }>
+              <em>{optn.name}</em>
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      {/* <ErrorMessage name={name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} /> */}
+    </>
+  )
+}
