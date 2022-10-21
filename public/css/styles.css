@@ -1968,6 +1968,7 @@ footer img.footerlogo {
 
 .fot-top-bar .socialArea ul.socialIcon {
     display: flex;
+    margin-bottom: 0px;
 }
 
 .fot-top-bar .socialArea ul.socialIcon li a {
