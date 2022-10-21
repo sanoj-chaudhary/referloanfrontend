@@ -3,7 +3,7 @@ const customerSupport = () => {
   return (
     <section className="financiallyArea">
       <div className="container">
-        <h2 className="headingBlue">Keeping you Financially Healthy and safe, always hello</h2>
+        <h2 className="headingBlue">Keeping You Financially Safe and Healthy!</h2>
         <div className="item_pnl">
           <div className="item_col">
             <div className="item-img">

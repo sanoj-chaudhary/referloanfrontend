@@ -174,7 +174,7 @@ nav.navBarContainer {
 }
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li {
     max-width: 100%;
-    width: 100%;
+    width: 100%; 
 }
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li a{
     padding: 4px 10px;
@@ -182,7 +182,7 @@ nav.navBarContainer {
     box-sizing: border-box;
 }
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li a:hover{    
-    background-color:#fefaff!important;
+    background-color:#efefef!important;
 }
 .navBarContainer li .megaMenu_container .submenuContainer {
     position: absolute;
@@ -199,10 +199,11 @@ nav.navBarContainer {
     flex-wrap: wrap;
 }
 .navBarContainer li .megaMenu_container .submenuContainer ul li{
+    list-style: initial; border-bottom: 1px Solid #efefef;
     /*flex: 30%;*/
 }
 .navBarContainer li .megaMenu_container .submenuContainer ul li a{
-    max-width:100%;
+    max-width:100%; 
 }
 
 

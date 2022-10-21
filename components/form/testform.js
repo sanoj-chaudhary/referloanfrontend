@@ -256,7 +256,6 @@ function testForm(props) {
         initialValues={formData}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
-
       >
 
         {Object.keys(formSchema.section.step1.column).map((key, ind) => (

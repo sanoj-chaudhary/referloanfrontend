@@ -8,15 +8,15 @@ import Apply from '../components/page/apply';
 import Error from '../components/page/error';
 
 function contentPage({ url, Component, data, form_schema }) {
-  console.log(url)
-  console.log(Component)
-  console.log(data)
-console.log(form_schema)
+  //console.log(url)
+  //console.log(Component)
+  //console.log(data)
+  //console.log(form_schema)
   const router = useRouter();
   return (
     <>
       {Component == 'ContentPage' && <ContentPage data={data} />}
-      {Component == 'ProductBankList' && <ProductBankList data={data} />}
+      {Component == 'ProductBankList' && <ProductBankList url={url} data={data} />}
       {Component == 'Apply' && <Apply data={data} form_schema={form_schema} />}
       {Component == 'Error' && <Error data={data} />}
     </>
@@ -26,7 +26,7 @@ console.log(form_schema)
 export async function getServerSideProps(context) {
 
   let url = context.query.page;
-  let banklist = context.query.banklist;
+  let p = context.query.p;
   let data;
   let Component = 'blank';
   let bank_product_id;
@@ -34,7 +34,7 @@ export async function getServerSideProps(context) {
   let form_schema = '1';
 
   url = url.join("/");
-  console.log(banklist)
+  console.log(p)
 
   const res = await db.query("SELECT * FROM `pages` WHERE `slug` =  '" + url + "' ");
   if (res.length != 0) {
@@ -55,9 +55,9 @@ export async function getServerSideProps(context) {
   }
   else
   {
-    if(banklist)
+    if(p)
     {
-      console.log(banklist)
+      console.log(p)
       Component = 'ProductBankList'
 
     }

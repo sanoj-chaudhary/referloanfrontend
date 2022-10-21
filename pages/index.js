@@ -22,9 +22,9 @@ export async function getServerSideProps() {
   const partner = JSON.parse(JSON.stringify(res))
 
   // / Loan - 2, CC - 1, Other - 7
-  const LoanRes = await db.query("SELECT * FROM `products` WHERE `categories_id` = '2' ");
+  const LoanRes = await db.query("SELECT * FROM `view_product` WHERE `cat_id` = '2' ");
   const loanProduct = JSON.parse(JSON.stringify(LoanRes))
-  const creditRes = await db.query("SELECT * FROM `products` WHERE `categories_id` = '1' ");
+  const creditRes = await db.query("SELECT * FROM `view_product` WHERE `cat_id` = '1' ");
   const creditProduct = JSON.parse(JSON.stringify(creditRes))
 
   return { props: { partner,testimonial,loanProduct,creditProduct } }

@@ -2,6 +2,8 @@
 import { useState,useEffect } from 'react';
 import {  } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
+import Image from 'next/image';
 import LeftFilterProductBank from '../page/left_filter_product_bank'
 
 const getSearchData = () => {
@@ -10,6 +12,7 @@ const getSearchData = () => {
     const items = localStorage.getItem('searchData');
 
     if (items) {
+    console.log(items)
       return JSON.parse(localStorage.getItem('searchData'));
     } else {
       return [];
@@ -17,25 +20,26 @@ const getSearchData = () => {
   }
 }
 
-const midcontent = ({ data }) => {
+const midcontent = ({ url,data }) => {
 
+  const a = getSearchData()
   const [products, setProducts] = useState([])
   const [searchData, setsearchData] = useState(getSearchData())
-
+  console.log(searchData)
   const searchProduct = async () => {
-
+    console.log(url)
     try {
       const response = await axios.post('https://api.referloan.in/api/banks', searchData);
       if (response) {
         const data = await response.data;
+        console.log(data)
         setProducts(data.data)
       } else {
         alert('failed')
       }
     } catch (error) {
       alert('failed')
-      console.log("message", error.message)
-    }
+     }
   }
   useEffect(() => {
     searchProduct()
@@ -44,69 +48,58 @@ const midcontent = ({ data }) => {
   return (
     <>
 
-      <section class="grabDeal_header">
-        <div class="container">
-          <div class="headingArea">
-            Heading
+      <section className="grabDeal_header">
+        <div className="container">
+          <div className="headingArea">
+          Product Name | salary | pincode
+          {/*  {a} {searchData.salary} */}
+          {/* {JSON.parse(searchData)['salary']}  */}
           </div>
         </div>
       </section>
-      <div class="container">
-        <section class="cardOffer_area">
+      <div className="container">
+        <section className="cardOffer_area">
           
           <LeftFilterProductBank />
-          
-          
-          <div class="cardlist-Pnl">
-            {products.map((item) => (
-              <div class="lstRow">
-                <div class="topPnl">
-                  <div class="cardImg">
-                    <img src="/images/axis-card.png" alt="" />
+
+          <div className="cardlist-Pnl">
+            {products.map((item,key) => (
+              <div className="lstRow" key={key}>
+                <div className="topPnl">
+                  <div className="cardImg">
+                    <Image src={'/uploads/product_bank/'+item.bankProductName+'.png'} height="214" width="340" />
                   </div>
-                  <div class="cardDtl_pnl">
-                    <div class="headingBar">
+                  <div className="cardDtl_pnl">
+                    <div className="headingBar">
                       <h2>{item.bankProductName}</h2>
-                      <div class="cibilBox">
+                      <div className="cibilBox">
                         <h3><img src="/images/cibil-meter.png" alt="" />Excellent</h3>
                         <p>Approval Chances {item.chance} %</p>
                       </div>
                     </div>
-                    {/* <!-- benefitRow --> */}
-                    <div class="benefitRow">
-                    {/* {item.bankProductInfo} */}
-                     {/* {item.bankProductInfo.map((item1,key1) => (  
-                        <div>{item1.slug}</div>
-                      ))} */}
-                      {/* <ul>
+
+                    <div className="benefitRow">
+                      <ul>
                         <li>
-                          <span>Best Suited For</span>
-                          <i class="fas fa-angle-right"></i>&nbsp; CashBack&nbsp;&nbsp; <i class="fas fa-angle-right"></i> &nbsp;Lounge &nbsp;&nbsp;<i class="fas fa-angle-right"></i> &nbsp; Shopping
+                          <span>Min Interest</span>{JSON.parse(item.bankProductInfo)['interest_min']} % 
                         </li>
                         <li>
-                          <span>1st Year fee</span>
-                          ₹ 500
+                          <span>Max Interest</span>{JSON.parse(item.bankProductInfo)['interest_max']} %
                         </li>
-                      </ul> */}
+                        <li>
+                          <span>Processing Fees</span>{JSON.parse(item.bankProductInfo)['processing_fee']} 
+                        </li>
+                        <li>
+                          <span>Fees</span>{JSON.parse(item.bankProductInfo)['fee']} %
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
-                {/* <!-- actionBar --> */}
-                <div class="actionPnl">
-                  {/* <div class="compareBox">
-                  <input type="checkbox" id="compare" name="compare" value="compare" />
-                  <label for="compare"> Compare</label>
-              </div> */}
-                  {/* <!-- offer --> */}
-                  {/* <div class="offerBox">
-                  <a href="#"><img src="/images/icon/discount-icon.png" alt="" /> Get Flipkart Voucher</a>
-              </div> */}
-
-                  <div class="actBtnArea">
-                    <a href="/" class="grabDeal">Grab Deal</a>
-                    <a href="/" class="deatilBtn">View Detail <span class="material-icons">
-                      keyboard_arrow_down
-                    </span></a>
+                
+                <div className="actionPnl">
+                  <div className="actBtnArea">
+                    <Link href={item.slug}><a className="grabDeal">Grab Deal</a></Link>
                   </div>
                 </div>
               </div>
