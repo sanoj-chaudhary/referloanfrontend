@@ -2,9 +2,20 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import SubMenu from './subMenu';
+import $ from 'jquery';
+import Script from 'next/script';
+
 const Menu = () => {
     //console.log(process.env.APP_URL)
-    const [headermenu, setHeaderMenu] = useState([])
+    const [headermenu, setHeaderMenu] = useState([]);
+    const [isHovering, setIsHovering] = useState(false);
+    const handleMouseOver = () => {
+      setIsHovering(true);
+    };
+
+    const handleMouseOut = () => {
+      setIsHovering(false);
+    };
     const getheaderMenu = async () => {
         try {
             const res = await axios.get(`${process.env.APP_URL}/headermenu`);
@@ -20,7 +31,11 @@ const Menu = () => {
             <div className={item.product ? "megaMenu_container" : ''} >
                 <ul className={item.product ? "subMenuLevel2" : ''}>
                     {item.product && item.product.map((value, Indexkey) => (
-                        <li key={value.id} className={Indexkey ? "activeSubMenu" : "activeSubMenu menu-active"}> <Link href={value.slug}  ><a  title={value.name}>{value.name}</a></Link>
+                        <li key={value.id} 
+                            className={Indexkey ? "activeSubMenu" : "activeSubMenu menu-active" && isHovering ? 'activeSubMenu' : 'activeSubMenu menu-active'}
+                            onMouseOver={handleMouseOver}
+                            onMouseOut={handleMouseOut}
+                        > <Link href={value.slug}  ><a  title={value.name}>{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul>
                                     {value.bank_product && <SubMenu data={value.bank_product} />}
@@ -134,7 +149,9 @@ const Menu = () => {
                 </div>
             </nav >
         </header >
+
     )
+
 }
 
 export default Menu

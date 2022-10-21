@@ -33,11 +33,11 @@
 }
 
 .menu-active{
-    background-color: #efefef;
+    background-color: #efefef !important;
 }
 
 .menu-active > a{
-    color: var(--primaryColor);
+    color: var(--primaryColor) !important;
 }
 
 .menu-active > div{
