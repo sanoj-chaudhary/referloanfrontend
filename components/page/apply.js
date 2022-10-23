@@ -1,7 +1,7 @@
 import axios from "axios";
 // import { Form, TextField, SelectField, SubmitButton } from './../form/fromElement';
 import { useFormik } from 'formik'
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -12,14 +12,14 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
-const getSearchData = () => {
+const getToken = () => {
 
   if (typeof window !== 'undefined') {
-    const items = localStorage.getItem('step');
+    const items = localStorage.getItem('token');
 
     if (items) {
       console.log(items)
-      return JSON.parse(localStorage.getItem('step'));
+      return JSON.parse(localStorage.getItem('token'));
     } else {
       return [];
     }
@@ -27,9 +27,17 @@ const getSearchData = () => {
 }
 const apply = (props) => {
 
-  let countStep = getSearchData();
-  console.log(countStep)
-  const [step, setStep] = useState(countStep != '' ? countStep : 0)
+  // const tokenkey = getToken();
+  const [step, setStep] = useState(0)
+  const [token, setToken] = useState('');
+  const [otpStatus, setOtpStatus] = useState(false);
+  const [genOtpData, setGenOtpData] = useState({
+    "full_name" : '',
+    "phone_no" : '',
+    "pan_card" : '',
+    "otp" : '',
+    "bank_product_id":7
+  })
   var initialValues = {};
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -38,22 +46,88 @@ const apply = (props) => {
       validationSchema: "",
 
       onSubmit: (values) => {
-        alert(values)
         setStep(step + 1)
-        localStorage.setItem("step", step + 1);
+        try {
+          const headers = {
+            'Authorization':`Bearer ${token}`
+          }
+          const res =  axios.post('https://api.referloan.in/api/customers/',values,{headers});
+          if(res){
+          alert('here')
+         
+          }
+        } catch (error) {
+          alert('failed')
+        }
       },
     });
 
+    const handleInput = (e) =>{
+      setGenOtpData({...genOtpData, [e.target.name]: e.target.value
+      });
+    }
 
-  console.log(props)
+    const generateOtp = (e) =>{
+      e.preventDefault();
+      try {
+        const res =  axios.post('https://api.referloan.in/api/generate-otp',genOtpData);
+        if(res){
+          setOtpStatus(true)
+         alert('sdfsh')
+        }
+      } catch (error) {
+        console.log("message",error.message);
+      }
+    }
+
+    const verifyItp = async (e) =>{
+      e.preventDefault();
+      const {phone_no,otp} = genOtpData;
+      const data = {
+        phone_no,otp,bank_product_id:7
+      }
+      try {
+        const res = await axios.post('https://api.referloan.in/api/verify-otp',data);
+        if(res){
+
+          alert('here')
+          console.log('res',res.data)
+          localStorage.setItem("token", JSON.stringify(res.data.token));
+          if (typeof window !== 'undefined') {
+            setToken(window.localStorage.getItem("token"))
+          }
+        }
+      } catch (error) {
+        console.log("message",error.message);
+      }
+    }
+
+    useEffect(() => {
+
+      if (typeof window !== 'undefined') {
+        setToken(window.localStorage.getItem("token"))
+      }
+    }, [token])
   return (
     <>
-      <div class="container">
-        <section class="cardOffer_area">
+      <div className="container">
+        <section className="cardOffer_area">
           <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
-          <div class="dealStep__wrapper">
-            <div class="dealStep__Area">
-              <form onSubmit={handleSubmit}>
+          <div className="dealStep__wrapper">
+            <div className="dealStep__Area">
+              {(token == '' || token == null) && <form>
+
+                {!otpStatus?<><TextField value={genOtpData.full_name} required name="full_name" fullWidth label="Full Name" variant="standard" onChange={(e) => handleInput(e)} />
+                <TextField value={genOtpData.phone_no} required name="phone_no" fullWidth label="Phone Number" variant="standard" onChange={(e) => handleInput(e)} />
+                <TextField value={genOtpData.pan_card} required name="pan_card" fullWidth label="Pan Card" variant="standard" onChange={(e) => handleInput(e)} />
+                <Button variant="contained" className="mt-4" type="submit" onClick={generateOtp}>Generate OTP</Button></> : <>
+                <TextField value={genOtpData.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={(e) => handleInput(e)} />
+                <Button variant="contained" className="mt-4" type="submit" onClick={verifyItp}>verify OTP</Button></>}
+                
+              </form>
+              }
+
+              {token != null  && <form onSubmit={handleSubmit}>
                 {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
                   <>
@@ -94,14 +168,14 @@ const apply = (props) => {
                 )}
 
                 <Button variant="contained" className="mt-4" type="submit" >Save & Next</Button>
-              </form>
+              </form>}
             </div>
           </div>
         </section>
 
-        <div class="innerpage_bg">
-          <section class="section_pad">
-            <div class="container">
+        <div className="innerpage_bg">
+          <section className="section_pad">
+            <div className="container">
               <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
             </div>
           </section>
@@ -154,8 +228,8 @@ export function SelectField(props) {
           name={props.param_name}
           label={props.field_name}
         >
-          {ParamOptions.map((optn) => (
-            <MenuItem value={optn.value
+          {ParamOptions.map((optn, ind) => (
+            <MenuItem key={ind} value={optn.value
             }>
               <em>{optn.name}</em>
             </MenuItem>
