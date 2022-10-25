@@ -2,7 +2,7 @@ import Head from "next/head"
 import { useRouter } from 'next/router';
 export default function Header(children) {
     const router = useRouter();
-    const title = 'Referloan: ' + (children.title || 'Apply for Loans, Credit Card, Insurance and Investment');
+    const title = (children.title || 'Apply Personal Loan, Gold Loan, Home Loan, Business Loan, Education Loan Online India - ReferLoan');
     const description = children.description || 'We provide wide range of services like loans, Credit Card, Insurance and Investment. We aim to bring a stronghold in the market and aim to build a satisfied community that reaches out to us anytime and everytime they need.';
     const keywords = children.keywords || 'Apply for Loans, Apply for credit card, Apply for Insurance, Loans Apply';
     const path = 'https://referloan.in' + router.pathname;
