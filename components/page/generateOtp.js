@@ -4,11 +4,13 @@ import Button from '@mui/material/Button';
 import axios from "axios";
 import { useFormik } from 'formik'
 import * as Yup from "yup";
-const GenerateOtp = ({setToken}) => {
+const GenerateOtp = ({ setToken }) => {
 
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(true)
   const [errmsg, setErrmsg] = useState('')
+  const [serversidemsg,setServerSideMsg] = useState('')
+  const [serversideStatus,setServerSideStatus] = useState(true)
   const [genOtpData, setGenOtpData] = useState({
     "full_name": '',
     "phone_no": '',
@@ -20,7 +22,7 @@ const GenerateOtp = ({setToken}) => {
 
   const verifyItp = async (e) => {
     e.preventDefault();
-
+    setServerSideStatus(true)
     try {
 
       const { phone_no, otp } = values;
@@ -40,14 +42,16 @@ const GenerateOtp = ({setToken}) => {
         const res = await axios.post('https://api.referloan.in/api/verify-otp', data);
         if (res) {
           localStorage.setItem("token", JSON.stringify(res.data.token));
+          setServerSideStatus(true)
           if (typeof window !== 'undefined') {
             setToken(window.localStorage.getItem("token"))
           }
-
         }
       }
-
     } catch (error) {
+      setServerSideStatus(false)
+      setServerSideMsg('Something Went Wrong')
+     
       console.log("message", error.message);
     }
   }
@@ -77,6 +81,7 @@ const GenerateOtp = ({setToken}) => {
 
   const generateOtp = async (e) => {
     e.preventDefault();
+    setServerSideStatus(true)
     try {
       handleSubmit()
       const res = await axios.post('https://api.referloan.in/api/generate-otp', values);
@@ -84,13 +89,16 @@ const GenerateOtp = ({setToken}) => {
         setOtpStatus(true)
       }
     } catch (error) {
+      
+      setServerSideStatus(false)
+      setServerSideMsg('Fill the valid information')
       console.log("message", error.message);
     }
   }
   return (
     <>
       <form>
-
+{!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
         {!otpStatus ? <>
 
           <TextField value={values.full_name} required name="full_name" fullWidth label="Full Name" variant="standard" onChange={handleChange} onBlur={handleBlur} />
@@ -106,12 +114,14 @@ const GenerateOtp = ({setToken}) => {
           {errors.pan_card && touched.pan_card ? (
             <p className="form-error">{errors.full_name}</p>
           ) : null}
-          <Button variant="contained" className="mt-4" type="submit" onClick={generateOtp}>Generate OTP</Button></> : <>
+          <div className="search-button">
+            <button className="mt-4" type="submit" onClick={generateOtp}>Generate OTP</button>
+            </div></> : <>
           <TextField value={values.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={handleChange} onBlur={handleBlur} />
           {!otpfieldval ? (
             <p className="form-error">{errmsg}</p>
           ) : null}
-          <Button variant="contained" className="mt-4" type="submit" onClick={verifyItp}>verify OTP</Button></>}
+          <div className="search-button"><button className="mt-4" type="submit" onClick={verifyItp}>verify OTP</button></div></>}
 
       </form>
     </>
