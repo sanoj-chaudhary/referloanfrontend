@@ -4,7 +4,7 @@
     /* flex: 30%;*/ 
     float: left !important;
     width: fit-content;
-    max-width: 260px;
+    /* max-width: 300px; */
     min-width: 260px;
 }
 
