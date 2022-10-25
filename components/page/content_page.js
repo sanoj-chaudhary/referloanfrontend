@@ -16,13 +16,13 @@ const midcontent = ({data}) => {
 
             <div dangerouslySetInnerHTML={{ __html: data[0].description }}></div>
             
-            <div className="faqSetion">
+            {/* <div className="faqSetion">
               <h3>FREQUENTLY ASKED QUESTIONS</h3>
               <h2>Have a question? We've got answers!</h2>
               <div className="faq_row">
-                {/* FAQ List */}
+                FAQ List
               </div>
-            </div>
+            </div> */}
           </div>
         </section>
       </div>
