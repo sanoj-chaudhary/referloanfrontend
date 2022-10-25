@@ -77,10 +77,10 @@ const serviceArea = () => {
                     </ul>
                 </div>
                 <div className="cardContainer green">
-                    <h2>Get an Insurance Plan <a href="#">All</a></h2>
+                    <h2>Get an Insurance Plan </h2>
                     <ul className="iconPnl">
                         <li>
-                            <Link href="/"><a>
+                            <Link href="/other-product/health-insurance"><a>
                                 <img src="/images/icon/health-icon.png" alt="" />
                                 <h3>Health</h3>
                             </a>
@@ -88,7 +88,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/"><a>
+                            <Link href="/other-product/life-insurance"><a>
                                 <img src="/images/icon/life-icon.png" alt="" />
                                 <h3>Life</h3>
                             </a>
@@ -96,7 +96,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/"><a>
+                            <Link href="/insurance-and-investment/guaranteed-return-plan"><a>
                                 <img src="/images/icon/return-icon.png" alt="" />
                                 <h3>Return</h3>
                             </a>
@@ -104,7 +104,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/"><a>
+                            <Link href="/insurance-and-investment/direct-mutual-funds"><a>
                                 <img src="/images/icon/mutual-icon.png" alt="" />
                                 <h3>Mutual</h3>
                             </a>
