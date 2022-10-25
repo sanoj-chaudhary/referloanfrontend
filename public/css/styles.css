@@ -260,11 +260,11 @@ ul {
     color: var(--secondryColor);
 }
 
-.header-form-area .search-button {
+.search-button {
     width: 140px;
 }
 
-.header-form-area .search-button button {
+ .search-button button {
     background-color: var(--secondryColor);
     color: #fff;
     font-size: var(--medium-font);
@@ -276,7 +276,7 @@ ul {
     transition: all 0.3s;
 }
 
-.header-form-area .search-button button:hover{
+ .search-button button:hover{
     background-color: var(--primaryColor);
 }
 
@@ -1553,6 +1553,7 @@ footer img.footerlogo {
 
 .dealStep__wrapper {
     width: 100%;
+    flex: 1;
 }
 
 .dealStep__wrapper .dealStep__Area {
@@ -2073,6 +2074,7 @@ footer img.footerlogo {
     padding-top: 2px;
     margin: 0;
     padding-bottom: 2px !important;
+    width: max-content;
 }
 
 .footerLinks li a {

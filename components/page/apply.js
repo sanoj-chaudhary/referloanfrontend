@@ -12,6 +12,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
+
+import GenerateOtp from "./generateOtp";
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
@@ -29,79 +31,32 @@ const apply = (props) => {
 
   // const tokenkey = getToken();
   const [step, setStep] = useState(0)
-  const [token, setToken] = useState('');
-  const [otpStatus, setOtpStatus] = useState(false);
-  const [genOtpData, setGenOtpData] = useState({
-    "full_name" : '',
-    "phone_no" : '',
-    "pan_card" : '',
-    "otp" : '',
-    "bank_product_id":7
-  })
+  const [token, setToken] = useState(getToken());
+  const [validationSchema, setValidationSchema] = useState({});
+  
   var initialValues = {};
+ 
 
+  
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
-      validationSchema: "",
+      validationSchema: '',
 
-      onSubmit: (values) => {
-        setStep(step + 1)
+      onSubmit: async (values) => {
         try {
           const headers = {
-            'Authorization':`Bearer ${token}`
+            'Authorization':"Bearer "+token.slice(1, -1)+""
           }
-          const res =  axios.post('https://api.referloan.in/api/customers/',values,{headers});
-          if(res){
-          alert('here')
-         
+          const res = await axios.post('https://api.referloan.in/api/customers/',values,{headers});
+          if(res.data.status){
+            setStep(step + 1)
           }
         } catch (error) {
-          alert('failed')
+          alert('Something Went Wrong')
         }
       },
     });
-
-    const handleInput = (e) =>{
-      setGenOtpData({...genOtpData, [e.target.name]: e.target.value
-      });
-    }
-
-    const generateOtp = (e) =>{
-      e.preventDefault();
-      try {
-        const res =  axios.post('https://api.referloan.in/api/generate-otp',genOtpData);
-        if(res){
-          setOtpStatus(true)
-         alert('sdfsh')
-        }
-      } catch (error) {
-        console.log("message",error.message);
-      }
-    }
-
-    const verifyItp = async (e) =>{
-      e.preventDefault();
-      const {phone_no,otp} = genOtpData;
-      const data = {
-        phone_no,otp,bank_product_id:7
-      }
-      try {
-        const res = await axios.post('https://api.referloan.in/api/verify-otp',data);
-        if(res){
-
-          alert('here')
-          console.log('res',res.data)
-          localStorage.setItem("token", JSON.stringify(res.data.token));
-          if (typeof window !== 'undefined') {
-            setToken(window.localStorage.getItem("token"))
-          }
-        }
-      } catch (error) {
-        console.log("message",error.message);
-      }
-    }
-
     useEffect(() => {
 
       if (typeof window !== 'undefined') {
@@ -115,47 +70,48 @@ const apply = (props) => {
           <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
           <div className="dealStep__wrapper">
             <div className="dealStep__Area">
-              {(token == '' || token == null) && <form>
-
-                {!otpStatus?<><TextField value={genOtpData.full_name} required name="full_name" fullWidth label="Full Name" variant="standard" onChange={(e) => handleInput(e)} />
-                <TextField value={genOtpData.phone_no} required name="phone_no" fullWidth label="Phone Number" variant="standard" onChange={(e) => handleInput(e)} />
-                <TextField value={genOtpData.pan_card} required name="pan_card" fullWidth label="Pan Card" variant="standard" onChange={(e) => handleInput(e)} />
-                <Button variant="contained" className="mt-4" type="submit" onClick={generateOtp}>Generate OTP</Button></> : <>
-                <TextField value={genOtpData.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={(e) => handleInput(e)} />
-                <Button variant="contained" className="mt-4" type="submit" onClick={verifyItp}>verify OTP</Button></>}
-                
-              </form>
+              {(token == '' || token == null) && <GenerateOtp token={token} setToken={setToken} />
               }
 
-              {token != null  && <form onSubmit={handleSubmit}>
+              {(token != null || token != undefined) && <form onSubmit={handleSubmit}>
                 {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
-                  <>
-                    <h3>{item.section_name}</h3>
+                  <div  key={index}>
+                    <h3 >{item.section_name}</h3>
                     {item.forms.map((elem, ind) => (
                       <div key={ind}>
-                        {initialValues[`${elem.param_name}`] = ''}
+                        {initialValues[elem.param_name] = ''}
+                      
                         {(elem.type == 'text' || elem.type == 'number' || elem.type == 'date') && <TextField
                           fullWidth
-                          id="name"
+                          
+                          required
+                          className="mt-2"
                           name={elem.param_name}
                           label={elem.field_name}
                           value={values.fullName}
                           onChange={handleChange}
                           error={touched.fullName && Boolean(errors.fullName)}
                           helperText={touched.fullName && errors.fullName}
-                        />}
+                        />
+                    
+                          
+                        
+                        
+                        
+                        }
 
                         {elem.type == 'select' && <SelectField {...elem} values={values} />}
 
-                        {elem.type == 'checkbox' && <FormControlLabel control={<Checkbox defaultChecked />} label={elem.field_name} />}
+                        {elem.type == 'checkbox' && <FormControlLabel className="mt-2" control={<Checkbox defaultChecked />} label={elem.field_name} required />}
 
-                        {elem.type == 'radio' && <FormControl>
+                        {elem.type == 'radio' && <FormControl className="mt-2" >
                           <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
                           <RadioGroup
                             aria-labelledby="demo-radio-buttons-group-label"
                             defaultValue="female"
                             name="radio-buttons-group"
+                            required
                           >
                             <FormControlLabel value="female" control={<Radio />} label="Female" />
                             <FormControlLabel value="male" control={<Radio />} label="Male" />
@@ -164,7 +120,7 @@ const apply = (props) => {
                         </FormControl>}
                       </div>
                     ))}
-                  </>
+                  </div>
                 )}
 
                 <Button variant="contained" className="mt-4" type="submit" >Save & Next</Button>
@@ -219,14 +175,15 @@ export function SelectField(props) {
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
-      <FormControl variant="standard" fullWidth>
+      <FormControl variant="standard" className="mt-2" fullWidth>
 
-        <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-standard-label">Profession Type</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
           name={props.param_name}
           label={props.field_name}
+          required
         >
           {ParamOptions.map((optn, ind) => (
             <MenuItem key={ind} value={optn.value

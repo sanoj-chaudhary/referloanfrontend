@@ -73,7 +73,16 @@ const GetSearchInfoLocal = async (req, res) => {
 
 const GetProductBySlug = async (req, res) => {
   try {
-    let slug = req.query.component[1]+'/'+req.query.component[2];
+    let slug;
+    if(req.query.component[2])
+    {
+      slug = req.query.component[1]+'/'+req.query.component[2];
+    
+    }
+    else
+    {
+       slug = req.query.component[1];
+    }
     const results = await db.query("SELECT * FROM `view_product` WHERE `slug` = '"+slug +"' ");
     return res.status(200).json(results);
   } catch (error) {
