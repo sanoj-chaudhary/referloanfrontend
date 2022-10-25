@@ -19,18 +19,36 @@ const midcontent = ({ url,refer,data }) => {
       const split     = url.split("/");
       console.log(split);
 
-      let slug = split[0]+'/'+split[1];
-      let salary = split[3];
-      let pincode = split[5];
+      let slug;
+      let salary;
+      let pincode;
+
+      if(split[1]=='salary')
+      {
+        slug = split[0];
+        salary = split[2];
+        pincode = split[4];
+        console.log('s'+slug);
+      }
+      else
+      {
+        slug = split[0]+'/'+split[1];
+        salary = split[3];
+        pincode = split[5];
+        console.log('s'+slug); 
+      }
+      
       console.log(slug);
       const response1 = await axios.get(`${process.env.APP_URL}/get_product_by_slug/`+slug);
-     const data1     = await response1.data;
+      const data1     = await response1.data;
       if(data1)
       {
         console.log(data1[0]);
 
       }
       let content_data  = data1[0];
+      console.log(content_data);
+
       let product_id = content_data.id;
       let p_name = content_data.name;
         
@@ -49,28 +67,6 @@ const midcontent = ({ url,refer,data }) => {
         } else {
           alert('failed')
         }
-
-      // let finaldata;
-      // const response1 = await axios.get(`${process.env.APP_URL}/get_search_info_local/`+refer);
-      // const data1     = await response1.data;
-      // if(data1)
-      // {
-      //   console.log(data1)
-
-      //   finaldata = data1[0]
-      //   console.log(finaldata)
-  
-      //   setContent(finaldata)
-
-      //   const response = await axios.post('https://api.referloan.in/api/banks', finaldata);
-      //   if (response) {
-      //     const data = await response.data;
-      //     console.log(data)
-      //     setProducts(data.data)
-      //   } else {
-      //     alert('failed')
-      //   }
-      // } 
     } 
     catch (error) {
       alert('failed')
