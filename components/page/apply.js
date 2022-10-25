@@ -12,6 +12,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
+
+import GenerateOtp from "./generateOtp";
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
@@ -29,16 +31,9 @@ const apply = (props) => {
 
   // const tokenkey = getToken();
   const [step, setStep] = useState(0)
-  const [token, setToken] = useState('');
-  const [otpStatus, setOtpStatus] = useState(false);
+  const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
-  const [genOtpData, setGenOtpData] = useState({
-    "full_name" : '',
-    "phone_no" : '',
-    "pan_card" : '',
-    "otp" : '',
-    "bank_product_id":7
-  })
+  
   var initialValues = {};
  
 
@@ -62,44 +57,6 @@ const apply = (props) => {
         }
       },
     });
-
-    const handleInput = (e) =>{
-      setGenOtpData({...genOtpData, [e.target.name]: e.target.value
-      });
-    }
-
-    const generateOtp = (e) =>{
-      e.preventDefault();
-      try {
-        const res =  axios.post('https://api.referloan.in/api/generate-otp',genOtpData);
-        if(res){
-          setOtpStatus(true)
-        }
-      } catch (error) {
-        console.log("message",error.message);
-      }
-    }
-
-    const verifyItp = async (e) =>{
-      e.preventDefault();
-      const {phone_no,otp} = genOtpData;
-      const data = {
-        phone_no,otp,bank_product_id:7
-      }
-      try {
-        const res = await axios.post('https://api.referloan.in/api/verify-otp',data);
-        if(res){
-          localStorage.setItem("token", JSON.stringify(res.data.token));
-          if (typeof window !== 'undefined') {
-            setToken(window.localStorage.getItem("token"))
-          }
-          
-        }
-      } catch (error) {
-        console.log("message",error.message);
-      }
-    }
-
     useEffect(() => {
 
       if (typeof window !== 'undefined') {
@@ -113,16 +70,7 @@ const apply = (props) => {
           <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
           <div className="dealStep__wrapper">
             <div className="dealStep__Area">
-              {(token == '' || token == null) && <form>
-
-                {!otpStatus?<><TextField value={genOtpData.full_name} required name="full_name" fullWidth label="Full Name" variant="standard" onChange={(e) => handleInput(e)} />
-                <TextField value={genOtpData.phone_no} required name="phone_no" fullWidth label="Phone Number" variant="standard" onChange={(e) => handleInput(e)} />
-                <TextField value={genOtpData.pan_card} required name="pan_card" fullWidth label="Pan Card" variant="standard" onChange={(e) => handleInput(e)} />
-                <Button variant="contained" className="mt-4" type="submit" onClick={generateOtp}>Generate OTP</Button></> : <>
-                <TextField value={genOtpData.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={(e) => handleInput(e)} />
-                <Button variant="contained" className="mt-4" type="submit" onClick={verifyItp}>verify OTP</Button></>}
-                
-              </form>
+              {(token == '' || token == null) && <GenerateOtp token={token} setToken={setToken} />
               }
 
               {(token != null || token != undefined) && <form onSubmit={handleSubmit}>
