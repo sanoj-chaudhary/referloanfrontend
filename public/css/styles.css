@@ -2073,6 +2073,7 @@ footer img.footerlogo {
     padding-top: 2px;
     margin: 0;
     padding-bottom: 2px !important;
+    width: max-content;
 }
 
 .footerLinks li a {
