@@ -17,7 +17,7 @@ const midcontent = ({ url,refer,data }) => {
     try 
     {
       const split     = url.split("/");
-      console.log(split);
+      //console.log(split);
 
       let slug;
       let salary;
@@ -28,48 +28,48 @@ const midcontent = ({ url,refer,data }) => {
         slug = split[0];
         salary = split[2];
         pincode = split[4];
-        console.log('s'+slug);
+        //console.log('s'+slug);
       }
       else
       {
         slug = split[0]+'/'+split[1];
         salary = split[3];
         pincode = split[5];
-        console.log('s'+slug); 
+        //console.log('s'+slug); 
       }
       
-      console.log(slug);
+      //console.log(slug);
       const response1 = await axios.get(`${process.env.APP_URL}/get_product_by_slug/`+slug);
       const data1     = await response1.data;
-      if(data1)
-      {
-        console.log(data1[0]);
+      // if(data1)
+      // {
+      //   console.log(data1[0]);
 
-      }
+      // }
       let content_data  = data1[0];
-      console.log(content_data);
+      //console.log(content_data);
 
       let product_id = content_data.id;
       let p_name = content_data.name;
         
-      console.log(product_id);
+      //console.log(product_id);
 
       
       const finaldata = {product_id,salary,pincode}; 
-      console.log(finaldata);
+      //console.log(finaldata);
 
          const response2 = await axios.post('https://api.referloan.in/api/banks', finaldata);
-        if (response2) {
+         if (response2) {
           const data2 = await response2.data;
-          console.log(content_data)
+          //console.log(content_data)
           setContent({p_name,salary,pincode})
          setProducts(data2.data)
         } else {
-          alert('failed')
+          alert('product bank list - failed')
         }
     } 
     catch (error) {
-      alert('failed')
+      alert('product info - failed')
      }
   }
   useEffect(() => {
