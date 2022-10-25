@@ -260,11 +260,11 @@ ul {
     color: var(--secondryColor);
 }
 
-.header-form-area .search-button {
+.search-button {
     width: 140px;
 }
 
-.header-form-area .search-button button {
+ .search-button button {
     background-color: var(--secondryColor);
     color: #fff;
     font-size: var(--medium-font);
@@ -276,7 +276,7 @@ ul {
     transition: all 0.3s;
 }
 
-.header-form-area .search-button button:hover{
+ .search-button button:hover{
     background-color: var(--primaryColor);
 }
 
