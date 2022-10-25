@@ -1553,6 +1553,7 @@ footer img.footerlogo {
 
 .dealStep__wrapper {
     width: 100%;
+    flex: 1;
 }
 
 .dealStep__wrapper .dealStep__Area {
