@@ -5,6 +5,7 @@ import {  } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import Image from 'next/image';
+import Head from "next/head";
 import LeftFilterProductBank from '../page/left_filter_product_bank'
 
 
@@ -78,7 +79,12 @@ const midcontent = ({ url,refer,data }) => {
 
   return (
     <>
-
+      <Head>
+        <title>Referloan : {content.p_name+' | Salary : '+content.salary+' | Pincode : '+content.pincode}</title>
+        <meta name={'description'} content={content.p_name+' | Salary : '+content.salary+' | Pincode : '+content.pincode} />
+        <meta name={'keywords'} content={content.p_name+' | Salary : '+content.salary+' | Pincode : '+content.pincode}/>
+      </Head>
+      
       <section className="grabDeal_header">
         <div className="container">
           <div className="headingArea">
@@ -96,7 +102,7 @@ const midcontent = ({ url,refer,data }) => {
               <div className="lstRow" key={key}>
                 <div className="topPnl">
                   <div className="cardImg">
-                    <Image src={'/uploads/product_bank/'+item.bankProductName+'.png'} height="214" width="340" />
+                    <Image src={'/uploads/product_bank/'+item.bankProductName.replace(/\s/g, '-')+'.png'} height="214" width="340" />
                   </div>
                   <div className="cardDtl_pnl">
                     <div className="headingBar">
