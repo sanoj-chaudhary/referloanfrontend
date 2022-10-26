@@ -25,18 +25,26 @@
 margin-bottom: 0 !important;
 }
 
-.btn{
-  background-color: var(--secondryColor);
-  color: #fff;
-  font-size: var(--medium-font);
+#loading {
   width: 100%;
-  border: none;
-  height: 100%;
-  border-radius: 4px;
-  height: 47px;
-  transition: all 0.3s; 
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: block;
+  opacity: 1;
+  background-color: #fff;
+  z-index: 99;
+  text-align: center;
 }
 
-.btn:hover{
-  background-color: var(--primaryColor); 
+#loading-image {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  z-index: 100;
+}
+
+#loading-image .float {
+  animation: float 3s ease-in-out infinite;
 }
