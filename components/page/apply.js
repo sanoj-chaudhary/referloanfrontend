@@ -12,8 +12,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
-
+import Head from "next/head";
 import GenerateOtp from "./generateOtp";
+
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
@@ -65,6 +66,13 @@ const apply = (props) => {
     }, [token])
   return (
     <>
+      
+      <Head>
+        <title>Referloan : Apply for {props.data[0].name}</title>
+        <meta name={'description'} content={'Referloan : Apply for '+props.data[0].name} />
+        <meta name={'keywords'} content={'Referloan : Apply for '+props.data[0].name} />
+      </Head>
+
       <div className="container">
         <section className="cardOffer_area">
           <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
