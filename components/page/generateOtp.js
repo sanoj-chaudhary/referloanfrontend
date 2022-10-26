@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import axios from "axios";
 import { useFormik } from 'formik'
 import * as Yup from "yup";
-const GenerateOtp = ({ setToken }) => {
+const GenerateOtp = ({ setToken, setPancard }) => {
 
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(true)
@@ -51,31 +51,21 @@ const GenerateOtp = ({ setToken }) => {
     } catch (error) {
       setServerSideStatus(false)
       setServerSideMsg('Something Went Wrong')
-     
       console.log("message", error.message);
     }
   }
-
-
-  const handleInput = (e) => {
-    setGenOtpData({
-      ...genOtpData, [e.target.name]: e.target.value
-    });
-  }
-
+  
   const OtpSchema = Yup.object({
     full_name: Yup.string().min(2).required("Please enter your name "),
-    phone_no: Yup.string().min(10).max(10).required("Please enter your phone number"),
-    pan_card: Yup.string().min(10).max(10).required("Please fill the pan card"),
+    phone_no: Yup.string().min(10).max(10).required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/,"Invalid phone number"),
+    pan_card: Yup.string().min(10).max(10).required("Please fill the pan card").matches(/([A-Z]){5}([0-9]){4}([A-Z]){1}$/,"Invalid Pancard"),
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: genOtpData,
       validationSchema: OtpSchema,
-
       onSubmit: async (values) => {
-
       },
     });
 
@@ -87,6 +77,7 @@ const GenerateOtp = ({ setToken }) => {
       const res = await axios.post('https://api.referloan.in/api/generate-otp', values);
       if (res.data.success) {
         setOtpStatus(true)
+        setPancard(values.pan_card)
       }
     } catch (error) {
       
@@ -112,7 +103,7 @@ const GenerateOtp = ({ setToken }) => {
           ) : null}
           <TextField value={values.pan_card} required name="pan_card" fullWidth label="Pan Card" variant="standard" onChange={handleChange} onBlur={handleBlur} />
           {errors.pan_card && touched.pan_card ? (
-            <p className="form-error">{errors.full_name}</p>
+            <p className="form-error">{errors.pan_card}</p>
           ) : null}
           <div className="search-button">
             <button className="mt-4" type="submit" onClick={generateOtp}>Generate OTP</button>

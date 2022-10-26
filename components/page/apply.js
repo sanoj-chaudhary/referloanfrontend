@@ -1,7 +1,7 @@
 import axios from "axios";
 // import { Form, TextField, SelectField, SubmitButton } from './../form/fromElement';
 import { useFormik } from 'formik'
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -20,7 +20,6 @@ const getToken = () => {
     const items = localStorage.getItem('token');
 
     if (items) {
-      console.log(items)
       return JSON.parse(localStorage.getItem('token'));
     } else {
       return [];
@@ -33,11 +32,10 @@ const apply = (props) => {
   const [step, setStep] = useState(0)
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
-  
+const [panCard, setPancard] = useState('');
+const [paramName, setParamName] = ('')
   var initialValues = {};
- 
 
-  
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
@@ -46,10 +44,10 @@ const apply = (props) => {
       onSubmit: async (values) => {
         try {
           const headers = {
-            'Authorization':"Bearer "+token.slice(1, -1)+""
+            'Authorization': "Bearer " + token.slice(1, -1) + ""
           }
-          const res = await axios.post('https://api.referloan.in/api/customers/',values,{headers});
-          if(res.data.status){
+          const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
+          if (res.data.status) {
             setStep(step + 1)
           }
         } catch (error) {
@@ -57,59 +55,88 @@ const apply = (props) => {
         }
       },
     });
-    useEffect(() => {
+  useEffect(() => {
 
-      if (typeof window !== 'undefined') {
-        setToken(window.localStorage.getItem("token"))
-      }
-    }, [token])
+    if (typeof window !== 'undefined') {
+      setToken(window.localStorage.getItem("token"))
+    }
+  }, [token])
   return (
     <>
       <div className="container">
         <section className="cardOffer_area">
-          <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
+          
+          <div className="dealStep__leftArea">
+                <div className="CardImg_box">
+                    <img src={`/uploads/product_bank/${props.data[0].name}.png `} alt="" />
+                </div>
+                <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
+                <ul>
+                    <li>
+                        <div className="price_row">
+                           <label for=""> 1st Year fee</label>
+                           <span>₹ 500</span>
+                        </div>
+                        <p>
+                            Annual Fee waiver on annual spends of ₹ 2,00,000
+                        </p>
+                    </li> 
+                    <li>
+                        <div className="price_row">
+                           <label for="">Reward Values</label>
+                           <span>₹ 500</span>
+                        </div>
+                        <p>
+                            On Spending exceeding ₹ 2,00,000
+                        </p>
+                    </li> 
+                    <li>
+                        <div className="price_row">
+                           <label for=""> 1st Year fee</label>
+                           <span>₹ 500</span>
+                        </div>
+                        <p>
+                            Annual Fee waiver on annual spends of ₹ 2,00,000
+                        </p>
+                    </li>
+                </ul>
+            </div>
           <div className="dealStep__wrapper">
             <div className="dealStep__Area">
-              {(token == '' || token == null) && <GenerateOtp token={token} setToken={setToken} />
+              {(token == '' || token == null) && <GenerateOtp setPancard={setPancard} setToken={setToken} />
               }
 
               {(token != null || token != undefined) && <form onSubmit={handleSubmit}>
                 {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
-                  <div  key={index}>
-                    <h3 >{item.section_name}</h3>
+                  <div key={index}>
+                    <h3>{item.section_name}</h3>
                     {item.forms.map((elem, ind) => (
                       <div key={ind}>
-                        {initialValues[elem.param_name] = ''}
-                      
-                        {(elem.type == 'text' || elem.type == 'number' || elem.type == 'date') && <TextField
+                        {elem.param_name == 'pan_card'?initialValues[elem.param_name] = panCard: initialValues[elem.param_name] = ''}
+
+                        {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'date') && <TextField
                           fullWidth
-                          
-                          required
-                          className="mt-2"
+                          pattern={elem.patterns}
+                          required={elem.is_required}
+                          className={`"mt-2" ${elem.is_visible? '':'d-none'}`}
                           name={elem.param_name}
                           label={elem.field_name}
-                          value={values.fullName}
+                         autoComplete="off"
                           onChange={handleChange}
-                          error={touched.fullName && Boolean(errors.fullName)}
-                          helperText={touched.fullName && errors.fullName}
                         />
-                    
-                          
-                        
-                        
-                        
+
                         }
 
                         {elem.type == 'select' && <SelectField {...elem} values={values} />}
 
-                        {elem.type == 'checkbox' && <FormControlLabel className="mt-2" control={<Checkbox defaultChecked />} label={elem.field_name} required />}
+                        {elem.type == 'checkbox' && <FormControlLabel className={`"mt-2" ${elem.is_visible? '':'d-none'}`} control={<Checkbox  />} label={elem.field_name} required />}
 
                         {elem.type == 'radio' && <FormControl className="mt-2" >
                           <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
                           <RadioGroup
                             aria-labelledby="demo-radio-buttons-group-label"
-                            defaultValue="female"
+                           
                             name="radio-buttons-group"
                             required
                           >
@@ -122,7 +149,6 @@ const apply = (props) => {
                     ))}
                   </div>
                 )}
-
                 <Button variant="contained" className="mt-4" type="submit" >Save & Next</Button>
               </form>}
             </div>
