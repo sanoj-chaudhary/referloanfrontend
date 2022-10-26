@@ -1,3 +1,18 @@
+:root {
+  --primaryColor: #ff9302;
+  --secondryColor: #00796a;
+  --headingPurpel: #6824cf;
+  --headingBlue: #10417f;
+  --greyColor: #333;
+  --xs-font: 0.75rem !important;
+  --small-font: 0.825rem !important;
+  --regular-font: 0.875rem !important;
+  --medium-font: 1rem !important;
+  --large-font: 1.125rem !important;
+}
+
+
+
 .header-form-area{
   z-index: 0 !important;
 }
@@ -10,3 +25,18 @@
 margin-bottom: 0 !important;
 }
 
+.btn{
+  background-color: var(--secondryColor);
+  color: #fff;
+  font-size: var(--medium-font);
+  width: 100%;
+  border: none;
+  height: 100%;
+  border-radius: 4px;
+  height: 47px;
+  transition: all 0.3s; 
+}
+
+.btn:hover{
+  background-color: var(--primaryColor); 
+}
