@@ -102,7 +102,7 @@ const midcontent = ({ url,refer,data }) => {
               <div className="lstRow" key={key}>
                 <div className="topPnl">
                   <div className="cardImg">
-                    <Image src={'/uploads/product_bank/'+item.bankProductName.replace(/\s/g, '-')+'.png'} height="214" width="340" />
+                    <Image src={'/uploads/product_bank/'+item.bankProductName.replace(/\s/g, '_')+'.png'} height="214" width="340" />
                   </div>
                   <div className="cardDtl_pnl">
                     <div className="headingBar">
