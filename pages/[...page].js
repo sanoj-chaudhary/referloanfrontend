@@ -41,8 +41,8 @@ export async function getServerSideProps(context) {
   if (res.length != 0) {
     if (res[0].bank_product_id != null) {
       try {
-        // bank_product_id = res[0].bank_product_id;
-        form = await axios.get(`https://api.referloan.in/api/sections/form/3`);
+        bank_product_id = res[0].bank_product_id;
+        form = await axios.get(`https://api.referloan.in/api/sections/form/`+bank_product_id);
         form_schema = form.data
       } catch (error) {
         console.log('eeeeee')
