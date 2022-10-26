@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
-
+import { useRouter } from 'next/router'
 const error = () => {
-
+const router = useRouter();
 
   return (
 
