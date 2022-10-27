@@ -113,30 +113,47 @@ const getHeaderMenu = async (req, res) => {
     let query_cat;
     let query_product;
     let query_bank_product;
+    let query_page;
     
     let category_id;
     let product_id;
+    let page_id;
     let temp = [];
 
 
-    query_cat = await db.query("SELECT id,name,slug FROM `view_category` WHERE `status` = '1' and `id` !=7 and `slug` != '' ");
+    query_cat = await db.query("SELECT id,name,slug,hierarchy FROM `view_category` WHERE `status` = '1' and `is_menu` = '1' and `slug` != '' ");
 
     if (query_cat) {
       for (let i in query_cat) {
         category_id = query_cat[i].id;
         temp[i] = query_cat[i];
 
-         query_product = await db.query("SELECT id,name , slug FROM `view_product` WHERE `cat_id` = '" + category_id + "' AND `status` = '1' and `is_menu` = '1' and `slug` != '' ");
+        if(query_cat[i].hierarchy=='Product_BankProduct')
+        {
+          query_product = await db.query("SELECT id,name , slug FROM `view_product` WHERE `cat_id` = '" + category_id + "' AND `status` = '1' and `is_menu` = '1' and `slug` != '' ");
 
-         if (query_product) {
-           for (let j in query_product) {
-             product_id = query_product[j].id;
-             temp[i]['product'] = query_product;
+          if (query_product) {
+            for (let j in query_product) {
+              product_id = query_product[j].id;
+              temp[i]['product'] = query_product;
+ 
+              query_bank_product = await db.query("SELECT id,name, slug FROM `view_bank_product` WHERE `product_id` = '" + product_id + "'  ");
+              query_product[j]['bank_product'] = query_bank_product;
+            }
+          }
+        }
+        else
+        {
+          query_page = await db.query("SELECT * FROM `pages` WHERE `categories_id` = '" + category_id + "' AND status = '1' ");
 
-             query_bank_product = await db.query("SELECT id,name, slug FROM `view_bank_product` WHERE `product_id` = '" + product_id + "'  ");
-             query_product[j]['bank_product'] = query_bank_product;
-           }
-         }
+          if (query_page) {
+            for (let j in query_page) {
+              page_id = query_page[j].id;
+              temp[i]['page'] = query_page;
+            }
+          }
+        }
+        
 
       }
     }
