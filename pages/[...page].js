@@ -10,8 +10,8 @@ import Error from '../components/page/error';
 function contentPage({ url, refer, Component, data, form_schema, specification, faq }) {
   //console.log(url)
   //console.log(Component)
-  //console.log(data)
-  //console.log('specification'+specification)
+  console.log(data)
+  console.log('specification'+specification)
   //console.log(form_schema)
   const router = useRouter();
   return (
