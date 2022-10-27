@@ -1,16 +1,19 @@
 
-const leftfilter = ({content}) => {
+const leftfilter = ({content,ProductByCat}) => {
 
 const handleChange=()=>{
   
 }
-
+console.log(ProductByCat)
   return (
     <>
 
         <div className="filterArea">
             <div className="inputRow">
               <label>Type of Loan</label>
+              {/* {ProductByCat.map((item,key) => (
+                <div>{item.name}</div>
+              ))} */}
               <select className="form-select" aria-label="Type of loan " onChange={handleChange}>
                 <option defaultValue>Type of loan</option>
                 <option value='3'>Home Loan</option>
