@@ -1566,7 +1566,7 @@ footer img.footerlogo {
 .dealStep__wrapper .dealStep__Area {
     max-width: 615px;
     width: 100%;
-    margin: auto;
+    margin-left: auto;
     background-color: #fff;
     box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 10%);
     border-radius: 4px;
