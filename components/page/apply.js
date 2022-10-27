@@ -88,7 +88,7 @@ const apply = (props) => {
          <ul>
            <li>
              <div className="price_row">
-               <label for=""> 1st Year fee</label>
+               <label htmlFor=""> 1st Year fee</label>
                <span>₹ 500</span>
              </div>
              <p>
@@ -97,7 +97,7 @@ const apply = (props) => {
            </li>
            <li>
              <div className="price_row">
-               <label for="">Reward Values</label>
+               <label htmlFor="">Reward Values</label>
                <span>₹ 500</span>
              </div>
              <p>
@@ -106,7 +106,7 @@ const apply = (props) => {
            </li>
            <li>
              <div className="price_row">
-               <label for=""> 1st Year fee</label>
+               <label htmlFor=""> 1st Year fee</label>
                <span>₹ 500</span>
              </div>
              <p>
