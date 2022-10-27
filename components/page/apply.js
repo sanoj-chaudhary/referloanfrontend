@@ -98,33 +98,15 @@ const newProductName = productName.map((word) => {
          </div>
          <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
          <ul>
-           <li>
-             <div className="price_row">
-               <label htmlFor=""> 1st Year fee</label>
-               <span>₹ 500</span>
-             </div>
-             <p>
-               Annual Fee waiver on annual spends of ₹ 2,00,000
-             </p>
-           </li>
-           <li>
-             <div className="price_row">
-               <label htmlFor="">Reward Values</label>
-               <span>₹ 500</span>
-             </div>
-             <p>
-               On Spending exceeding ₹ 2,00,000
-             </p>
-           </li>
-           <li>
-             <div className="price_row">
-               <label htmlFor=""> 1st Year fee</label>
-               <span>₹ 500</span>
-             </div>
-             <p>
-               Annual Fee waiver on annual spends of ₹ 2,00,000
-             </p>
-           </li>
+         {props.specification.map((item,key) => (
+            <li>
+              <div className="price_row">
+                <label htmlFor="">{item.title}</label>
+                <span>₹ {item.value}</span>
+              </div>
+              <p>{item.short_description}</p>
+            </li>
+          ))}
          </ul>
        </div>
        <div className="dealStep__wrapper">

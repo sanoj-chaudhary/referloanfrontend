@@ -11,7 +11,7 @@ function contentPage({ url, refer, Component, data, form_schema, specification, 
   //console.log(url)
   //console.log(Component)
   console.log(data)
-  console.log(faq)
+  console.log('specification'+specification)
   //console.log(form_schema)
   const router = useRouter();
   return (
@@ -57,8 +57,12 @@ export async function getServerSideProps(context) {
         form = await axios.get(`https://api.referloan.in/api/sections/form/` + bank_product_id);
         form_schema = form.data
 
-        // apply_response = await db.query("SELECT * FROM `product_bank_specification` WHERE `product_bank_id` =  '" + bank_product_id + "' AND status = '1' ORDER BY `order` ");
-        //specification  = apply_response.data;
+        apply_response = await db.query("SELECT * FROM `bank_product_specifications` WHERE bank_product_specifications.bank_product_id =  '" + bank_product_id + "' AND `status` = '1' ORDER BY `order` ");
+       
+        if(apply_response)
+        {
+          specification = JSON.parse(JSON.stringify(apply_response))
+        }
 
       } catch (error) {
         console.log('bank product id missing - can not call apply page')
