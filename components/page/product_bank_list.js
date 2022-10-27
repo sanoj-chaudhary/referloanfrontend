@@ -8,14 +8,12 @@ import Image from 'next/image';
 import Head from "next/head";
 import LeftFilterProductBank from '../page/left_filter_product_bank'
 
-
 const midcontent = ({ url,refer,data }) => {
 
   const [products, setProducts] = useState([])
   const [content, setContent] = useState([])
   const [ProductByCat, setProductByCat] = useState([])
   
-
   const searchProduct = async () => {
     try 
     {
@@ -46,13 +44,12 @@ const midcontent = ({ url,refer,data }) => {
       let product_id = content_data.id;
       let p_name = content_data.name;
       let cat_id = content_data.cat_id;
-     console.log(cat_id)
       
       const finaldata = {product_id,salary,pincode}; 
 
-         const response2 = await axios.post('https://api.referloan.in/api/banks', finaldata);
-         if (response2) 
-         {
+      const response2 = await axios.post('https://api.referloan.in/api/banks', finaldata);
+      if (response2) 
+      {
           const data2 = await response2.data;
           setContent({p_name,salary,pincode})
           setProducts(data2.data)
@@ -62,9 +59,7 @@ const midcontent = ({ url,refer,data }) => {
 
         const response3 = await axios.get(`${process.env.APP_URL}/get_product_by_catid/`+cat_id);
         const data3     = await response3.data;
-        console.log(data3)
-        setProductByCat(data3)
-         
+        setProductByCat(data3) 
     } 
     catch (error) {
       alert('product info - failed')
