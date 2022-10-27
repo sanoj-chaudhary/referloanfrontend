@@ -30,7 +30,10 @@ export default async function handler(req, res) {
       if (req.query.component[0] == 'get_product_by_slug') {
         return await GetProductBySlug(req, res);
       }
-
+      if (req.query.component[0] == 'get_product_by_catid') {
+        return await GetProductByCatId(req, res);
+      }
+      
       
     case "POST":
       if (req.query.component == 'insert_search_info_local') {
@@ -90,6 +93,17 @@ const GetProductBySlug = async (req, res) => {
   }
 };
 
+const GetProductByCatId = async (req, res) => {
+  try {
+    let cat_id = req.query.component[1];
+
+    const results = await db.query("SELECT * FROM `view_product` WHERE `cat_id` = '"+cat_id +"' ");
+    return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
 const getAllPartner = async (req, res) => {
   try {
     const results = await db.query("SELECT * FROM `partners` WHERE `is_active` = '1' ");
@@ -113,30 +127,47 @@ const getHeaderMenu = async (req, res) => {
     let query_cat;
     let query_product;
     let query_bank_product;
+    let query_page;
     
     let category_id;
     let product_id;
+    let page_id;
     let temp = [];
 
 
-    query_cat = await db.query("SELECT id,name,slug FROM `view_category` WHERE `status` = '1' and `id` !=7 and `slug` != '' ");
+    query_cat = await db.query("SELECT id,name,slug,hierarchy FROM `view_category` WHERE `status` = '1' and `is_menu` = '1' and `slug` != '' ");
 
     if (query_cat) {
       for (let i in query_cat) {
         category_id = query_cat[i].id;
         temp[i] = query_cat[i];
 
-         query_product = await db.query("SELECT id,name , slug FROM `view_product` WHERE `cat_id` = '" + category_id + "' AND `status` = '1' and `is_menu` = '1' and `slug` != '' ");
+        if(query_cat[i].hierarchy=='Product_BankProduct')
+        {
+          query_product = await db.query("SELECT id,name , slug FROM `view_product` WHERE `cat_id` = '" + category_id + "' AND `status` = '1' and `is_menu` = '1' and `slug` != '' ");
 
-         if (query_product) {
-           for (let j in query_product) {
-             product_id = query_product[j].id;
-             temp[i]['product'] = query_product;
+          if (query_product) {
+            for (let j in query_product) {
+              product_id = query_product[j].id;
+              temp[i]['product'] = query_product;
+ 
+              query_bank_product = await db.query("SELECT id,name, slug FROM `view_bank_product` WHERE `product_id` = '" + product_id + "'  ");
+              query_product[j]['bank_product'] = query_bank_product;
+            }
+          }
+        }
+        else
+        {
+          query_page = await db.query("SELECT * FROM `pages` WHERE `categories_id` = '" + category_id + "' AND status = '1' ");
 
-             query_bank_product = await db.query("SELECT id,name, slug FROM `view_bank_product` WHERE `product_id` = '" + product_id + "'  ");
-             query_product[j]['bank_product'] = query_bank_product;
-           }
-         }
+          if (query_page) {
+            for (let j in query_page) {
+              page_id = query_page[j].id;
+              temp[i]['page'] = query_page;
+            }
+          }
+        }
+        
 
       }
     }
@@ -185,28 +216,3 @@ const getFooterLink2 = async (req, res) => {
     return res.status(500).json({ error });
   }
 };
-
-
-const insertPage = async (req, res) =>{
-  try {
-    if(req.body.action == 'insert'){
-      const {id,name,slug,description,meta_title,meta_keyword,meta_description,categories_id,product_id,bank_product_id,bank_id,status} = req.body;
-      const result = await db.query("INSERT INTO `pages`(`id`, `name`, `slug`, `description`, `meta_title`, `meta_keyword`, `meta_description`, `categories_id`, `product_id`, `bank_product_id`, `bank_id`, `status`)VALUES('"+id+"','"+name+"','"+slug+"','"+description+"','"+meta_title+"','"+meta_keyword+"','"+meta_description+"','"+categories_id+"','"+product_id+"','"+bank_product_id+"','"+bank_id+"','"+status+"')")
-
-      return res.status(200).json({'action':result});
-    }else if(req.body.action == 'update'){
-      const {id,name,slug,description,meta_title,meta_keyword,meta_description,categories_id,product_id,bank_product_id,bank_id,status} = req.body;
-      const updaeres = await db.query("UPDATE `pages` SET `id`='"+id+"',`name`='"+name+"',`slug`='"+slug+"',`description`='"+description+"',`meta_title`='"+meta_title+"',`meta_keyword`='"+meta_keyword+"',`meta_description`='"+meta_description+"',`categories_id`='"+categories_id+"',`product_id`='"+product_id+"',`bank_product_id`='"+bank_product_id+"',`bank_id`='"+bank_id+"',`status`='"+status+"' WHERE id='"+id+"'")
-
-      if(updaeres.changedRows == 0){
-        return res.status(500).json({ "message":"Something went wrong"});
-      }
-      return res.status(200).json({'action':updaeres});
-    }else if(req.body.action == 'delete'){
-      return res.status(200).json({'action':'delete'});
-    }
-  } catch (error) {
-    return res.status(500).json({ "message":error.message });
-  }
-  
-}

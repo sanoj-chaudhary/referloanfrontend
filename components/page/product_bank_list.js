@@ -8,18 +8,17 @@ import Image from 'next/image';
 import Head from "next/head";
 import LeftFilterProductBank from '../page/left_filter_product_bank'
 
-
 const midcontent = ({ url,refer,data }) => {
 
   const [products, setProducts] = useState([])
   const [content, setContent] = useState([])
+  const [ProductByCat, setProductByCat] = useState([])
+  
   const searchProduct = async () => {
-   // console.log(url)
     try 
     {
       const split     = url.split("/");
-      //console.log(split);
-
+      
       let slug;
       let salary;
       let pincode;
@@ -29,45 +28,38 @@ const midcontent = ({ url,refer,data }) => {
         slug = split[0];
         salary = split[2];
         pincode = split[4];
-        //console.log('s'+slug);
       }
       else
       {
         slug = split[0]+'/'+split[1];
         salary = split[3];
         pincode = split[5];
-        //console.log('s'+slug); 
       }
-      
-      //console.log(slug);
+
       const response1 = await axios.get(`${process.env.APP_URL}/get_product_by_slug/`+slug);
       const data1     = await response1.data;
-      // if(data1)
-      // {
-      //   console.log(data1[0]);
 
-      // }
       let content_data  = data1[0];
-      //console.log(content_data);
-
+      
       let product_id = content_data.id;
       let p_name = content_data.name;
-        
-      //console.log(product_id);
-
+      let cat_id = content_data.cat_id;
       
       const finaldata = {product_id,salary,pincode}; 
-      //console.log(finaldata);
 
-         const response2 = await axios.post('https://api.referloan.in/api/banks', finaldata);
-         if (response2) {
+      const response2 = await axios.post('https://api.referloan.in/api/banks', finaldata);
+      if (response2) 
+      {
           const data2 = await response2.data;
-          //console.log(content_data)
           setContent({p_name,salary,pincode})
-         setProducts(data2.data)
+          setProducts(data2.data)
         } else {
           alert('product bank list - failed')
         }
+
+        const response3 = await axios.get(`${process.env.APP_URL}/get_product_by_catid/`+cat_id);
+        const data3     = await response3.data;
+        setProductByCat(data3) 
     } 
     catch (error) {
       alert('product info - failed')
@@ -95,7 +87,7 @@ const midcontent = ({ url,refer,data }) => {
       <div className="container">
         <section className="cardOffer_area">
           
-          <LeftFilterProductBank content={content} />
+          <LeftFilterProductBank content={content} ProductByCat={ProductByCat} />
 
           <div className="cardlist-Pnl">
             {products.map((item,key) => (

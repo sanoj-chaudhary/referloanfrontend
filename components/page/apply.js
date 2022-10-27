@@ -15,6 +15,9 @@ import Radio from '@mui/material/Radio';
 import Head from "next/head";
 import GenerateOtp from "./generateOtp";
 import Loader from "./loader";
+import $ from 'jquery';
+import Script from 'next/script';
+import Thanks from "./thanks";
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
@@ -68,6 +71,16 @@ const apply = (props) => {
 
 
   }, [token])
+
+  const mySentence = props.data[0].name;
+  const productName = mySentence.split(" ");
+
+  const newProductName = productName.map((word) => {
+    return word[0].toUpperCase() + word.substring(1);
+  }).join("_");
+
+
+
   return (
     <>
 
@@ -76,109 +89,109 @@ const apply = (props) => {
         <meta name={'description'} content={'Referloan : Apply for ' + props.data[0].name} />
         <meta name={'keywords'} content={'Referloan : Apply for ' + props.data[0].name} />
       </Head>
-     {loading? <Loader loading={loading} /> :
-     <div className="container">
-     <section className="cardOffer_area">
+      {loading ? <Loader loading={loading} /> :
+        <div className="container">
+          <div className="applyHeaderCard">
+            <h3>Start with <span style={{ textTransform: 'capitalize' }}>{props.data[0].name}</span> in few steps</h3>
+            <p>Enter your mobile number,name and pancard and request for OTP to continue</p>
+          </div>
+          <section className="cardOffer_area">
+            <div className="dealStep__leftArea">
+              <div className="CardImg_box">
+                <img
+                  src={`/uploads/product_bank/${newProductName}.png`}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null; // prevents looping
+                    currentTarget.src = '/uploads/product_bank/' + props.data[0].categories_id + '.png';
+                  }}
+                />
+                
+              </div>
+              <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
+              <ul>
+                {props.specification.map((item, key) => (
+                  <li>
+                    <div className="price_row">
+                      <label htmlFor="">{item.title}</label>
+                      <span>₹ {item.value}</span>
+                    </div>
+                    <p>{item.short_description}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="dealStep__wrapper">
+              <div className="dealStep__Area">
+                {(token == '' || token == null) && <GenerateOtp setPancard={setPancard} setToken={setToken} />
+                }
 
-       <div className="dealStep__leftArea">
-         <div className="CardImg_box">
-           <img src={`/uploads/product_bank/${props.data[0].name}.png `} alt="" />
-         </div>
-         <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
-         <ul>
-           <li>
-             <div className="price_row">
-               <label for=""> 1st Year fee</label>
-               <span>₹ 500</span>
-             </div>
-             <p>
-               Annual Fee waiver on annual spends of ₹ 2,00,000
-             </p>
-           </li>
-           <li>
-             <div className="price_row">
-               <label for="">Reward Values</label>
-               <span>₹ 500</span>
-             </div>
-             <p>
-               On Spending exceeding ₹ 2,00,000
-             </p>
-           </li>
-           <li>
-             <div className="price_row">
-               <label for=""> 1st Year fee</label>
-               <span>₹ 500</span>
-             </div>
-             <p>
-               Annual Fee waiver on annual spends of ₹ 2,00,000
-             </p>
-           </li>
-         </ul>
-       </div>
-       <div className="dealStep__wrapper">
-         <div className="dealStep__Area">
-           {(token == '' || token == null) && <GenerateOtp setPancard={setPancard} setToken={setToken} />
-           }
+                {(token != null || token != undefined) && <form onSubmit={handleSubmit}>
+                  {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
-           {(token != null || token != undefined) && <form onSubmit={handleSubmit}>
-             {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
+                    <div key={index}>
+                      <h3>{item.section_name}</h3>
+                      {item.forms.map((elem, ind) => (
+                        <div key={ind}>
 
-               <div key={index}>
-                 <h3>{item.section_name}</h3>
-                 {item.forms.map((elem, ind) => (
-                   <div key={ind}>
-                     {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
+                          {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
 
-                     {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'date') && <TextField
-                       fullWidth
-                       pattern={elem.patterns}
-                       required={elem.is_required}
-                       className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                       name={elem.param_name}
-                       label={elem.field_name}
-                       autoComplete="off"
-                       onChange={handleChange}
-                     />
+                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'date') && <TextField
+                            fullWidth
+                            inputProps={elem.patterns != '' ? { pattern: elem.patterns } : ''}
+                            required={elem.is_required}
+                            className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                            name={elem.param_name}
+                            label={elem.field_name}
+                            id={elem.param_name}
+                            autoComplete="off"
+                            onChange={handleChange}
+                          />
 
-                     }
+                          }
 
-                     {elem.type == 'select' && <SelectField {...elem} values={values} />}
+                          {elem.type == 'select' && <SelectField {...elem} values={values} />}
 
-                     {elem.type == 'checkbox' && <FormControlLabel className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
+                          {elem.type == 'checkbox' && <FormControlLabel className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
 
-                     {elem.type == 'radio' && <FormControl className="mt-2" >
-                       <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-                       <RadioGroup
-                         aria-labelledby="demo-radio-buttons-group-label"
+                          {elem.type == 'radio' && <FormControl className="mt-2" >
+                            <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+                            <RadioGroup
+                              aria-labelledby="demo-radio-buttons-group-label"
 
-                         name="radio-buttons-group"
-                         required
-                       >
-                         <FormControlLabel value="female" control={<Radio />} label="Female" />
-                         <FormControlLabel value="male" control={<Radio />} label="Male" />
-                         <FormControlLabel value="other" control={<Radio />} label="Other" />
-                       </RadioGroup>
-                     </FormControl>}
-                   </div>
-                 ))}
-               </div>
-             )}
-             <Button variant="contained" className="mt-4" type="submit" >Save & Next</Button>
-           </form>}
-         </div>
-       </div>
-     </section>
+                              name="radio-buttons-group"
+                              required
+                            >
+                              <FormControlLabel value="female" control={<Radio />} label="Female" />
+                              <FormControlLabel value="male" control={<Radio />} label="Male" />
+                              <FormControlLabel value="other" control={<Radio />} label="Other" />
+                            </RadioGroup>
+                          </FormControl>}
+                        </div>
+                      ))}
+                      <div className="search-button"><button className="mt-4" type="submit" >Save & Next</button></div>
 
-     <div className="innerpage_bg">
-       <section className="section_pad">
-         <div className="container">
-           <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
-         </div>
-       </section>
-     </div>
-   </div>
-     }
-      
+                    </div>
+
+                  )}
+
+                  {props.form_schema.length !=0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} /> : ""}
+
+                  {props.form_schema.length ==0? <img src="/images/coming-soon.png" width="100" />:''}
+                </form>}
+              </div>
+            </div>
+          </section>
+
+          <div className="innerpage_bg">
+            <section className="section_pad">
+              <div className="container">
+                <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
+              </div>
+            </section>
+          </div>
+        </div>
+      }
+
     </>
   )
 
@@ -219,7 +232,7 @@ export function SelectField(props) {
       {/* {label && <label for={name}>{label}</label>} */}
       <FormControl variant="standard" className="mt-2" fullWidth>
 
-        <InputLabel id="demo-simple-select-standard-label">Profession Type</InputLabel>
+        <InputLabel id="demo-simple-select-standard-label">{props.field_name}</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"

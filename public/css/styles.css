@@ -7,8 +7,9 @@
 }
 
 ul {
-    padding-left: 0rem!important;
+    padding-left: 0rem !important;
 }
+
 .heroSection .heroContent .headMain_carousel ul.slick-dots {
     height: 33px;
     position: absolute;
@@ -31,6 +32,7 @@ ul {
     padding: 0 11px;
     box-shadow: 0px 0px 25px 0px rgb(0 0 0 / 10%);
 }
+
 .heroSection {
     background: #fefaff;
     width: 100%;
@@ -157,7 +159,7 @@ ul {
     transition: all 0.3s;
 }
 
-.header-form-area ul.nav-tabs li button.nav-link.active:hover{
+.header-form-area ul.nav-tabs li button.nav-link.active:hover {
     background-color: var(--primaryColor);
     color: #fff;
 }
@@ -264,7 +266,7 @@ ul {
     width: 140px;
 }
 
- .search-button button {
+.search-button button {
     background-color: var(--secondryColor);
     color: #fff;
     font-size: var(--medium-font);
@@ -276,7 +278,7 @@ ul {
     transition: all 0.3s;
 }
 
- .search-button button:hover{
+.search-button button:hover {
     background-color: var(--primaryColor);
 }
 
@@ -552,7 +554,7 @@ ul.vdoArea {
  +++++++++++++++++++++++++++++++++++++ */
 
 
- .aboutSection {
+.aboutSection {
     width: 100%;
     display: flex;
     flex-grow: 1;
@@ -601,7 +603,7 @@ ul.vdoArea {
 }
 
 .aboutCol .inner img {
-    max-height:240px;
+    max-height: 240px;
     max-width: 100%;
     object-fit: contain;
     margin-top: -20px;
@@ -638,7 +640,7 @@ ul.vdoArea {
     object-fit: contain;
     margin-top: -20px;
 }
-  
+
 
 /* +++++++++++++++++++++++++++++++++++++
             FINANCE SIMPLIFIED
@@ -818,7 +820,7 @@ ul.vdoArea {
 
 .getApp .left {
     flex: 1;
-    font-size:55px;
+    font-size: 55px;
     color: #fff;
     line-height: 1.2;
     padding: 45px 0 0 61px;
@@ -837,6 +839,7 @@ ul.vdoArea {
     bottom: -69px;
     left: -10px;
 }
+
 .getApp .left::after {
     content: '';
     background: url(../assets/images/android-icon.png) bottom left no-repeat;
@@ -844,7 +847,7 @@ ul.vdoArea {
     height: 316px;
     position: absolute;
     bottom: -69px;
-    right:0;
+    right: 0;
     z-index: 0;
 }
 
@@ -1127,7 +1130,7 @@ footer img.footerlogo {
     display: flex;
     column-gap: 5px;
     max-width: 320px;
-   
+
 }
 
 .footer-card-area .card-pnl ul li {
@@ -1149,7 +1152,7 @@ footer img.footerlogo {
 }
 
 .footer-card-area .mad-in-india img {
-    width: 40px!important;
+    width: 40px !important;
     margin-right: 10px;
 }
 
@@ -1390,21 +1393,25 @@ footer img.footerlogo {
     margin: 0;
     padding: 0;
     display: flex;
-    column-gap: 40px;
+    column-gap: 10px;
 }
 
 .cardOffer_area .cardlist-Pnl .lstRow .topPnl .cardDtl_pnl .benefitRow li {
     font-size: var(--small-font);
     color: #333;
     list-style: none;
-    font-weight: 400;
+    font-weight: 600;
+    background: #ffffff;
+    padding: 5px 10px;
+    border: 1px dashed #cfbeec;
+    border-radius: 4px;
 }
 
 .cardOffer_area .cardlist-Pnl .lstRow .topPnl .cardDtl_pnl .benefitRow li span {
     font-size: var(--xs-font);
-    color: #999;
+    color: #5d22c8;
     display: block;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 /* listing action bar  */
@@ -1559,7 +1566,7 @@ footer img.footerlogo {
 .dealStep__wrapper .dealStep__Area {
     max-width: 615px;
     width: 100%;
-    margin: auto;
+    margin-left: auto;
     background-color: #fff;
     box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 10%);
     border-radius: 4px;
@@ -1757,7 +1764,8 @@ note {
     padding-bottom: 20px;
     justify-content: center;
 }
-.testimonial_Area h3{
+
+.testimonial_Area h3 {
     font-size: 18px;
     color: #333333;
     display: flex;
@@ -1765,6 +1773,7 @@ note {
     justify-content: center;
     margin-bottom: 10px;
 }
+
 .testimaolSlider .slick-track {
     position: relative;
     top: 0;
@@ -1803,7 +1812,7 @@ note {
     position: relative;
     text-align: center;
     border: 1px solid #d3d3d3;
-	border-left: 3px solid #ff9e00;
+    border-left: 3px solid #ff9e00;
     border-radius: 4px;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
@@ -1831,7 +1840,7 @@ note {
     align-items: center;
     font-size: var(--regular-font);
     font-weight: 600;
-    
+
 }
 
 .testimonial_Area .profile-img {
@@ -1873,11 +1882,12 @@ note {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 4; /* number of lines to show */
-    line-clamp: 4; 
+    -webkit-line-clamp: 4;
+    /* number of lines to show */
+    line-clamp: 4;
     -webkit-box-orient: vertical;
-    
-  
+
+
 }
 
 
@@ -2155,21 +2165,33 @@ footer img.footerlogo {
     overflow: hidden;
 }
 
-.blog_heading{
-font-size: 24px;
-padding: 20px;
-text-align: center;}
+.blog_heading {
+    font-size: 24px;
+    padding: 20px;
+    text-align: center;
+}
 
-.blog_subheading{
+.blog_subheading {
     font-size: 16px;
-    padding: 10px 0px 0px 0px;}
- 
+    padding: 10px 0px 0px 0px;
+}
+
 
 .blog_subheadingPar {
-        font-size: 14px;
-        text-align: justify; padding-bottom: 20px; color: #000;
-        }
+    font-size: 14px;
+    text-align: justify;
+    padding-bottom: 20px;
+    color: #000;
+}
 
-.blog_subheading_readmore{ font-weight: 500;}
-.blog_subheading_shadow{ box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 4px 4px 0 rgb(0 0 0 / 19%);}
-.blog_pic{width: 100%;}
+.blog_subheading_readmore {
+    font-weight: 500;
+}
+
+.blog_subheading_shadow {
+    box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 4px 4px 0 rgb(0 0 0 / 19%);
+}
+
+.blog_pic {
+    width: 100%;
+}

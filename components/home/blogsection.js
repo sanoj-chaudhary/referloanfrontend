@@ -4,7 +4,7 @@ const insuranceInvestment = () => {
   return (
     <section className="home_blogArea">
     <div className="container">
-    <div class="row">
+    <div className="row">
         <h2 className="blog_heading">Blogs</h2>
         
         <div className="col-lg-3 order-lg-12">

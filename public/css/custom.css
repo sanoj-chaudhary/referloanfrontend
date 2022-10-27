@@ -44,7 +44,35 @@ margin-bottom: 0 !important;
   left: 45%;
   z-index: 100;
 }
-
+#loading-image img{
+  width: 100px !important;
+}
 #loading-image .float {
   animation: float 3s ease-in-out infinite;
 }
+
+.applyHeaderCard{
+  width: 100%;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 10%);
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    /* margin-bottom: 12px; */
+    margin-top: 10px;
+    padding: 9px;
+    height: max-content;
+}
+
+.applyHeaderCard h3{
+  font-size: 20px !important;
+  font-family: 'Poppins';
+}
+
+.applyHeaderCard p{
+  margin: 0px !important;
+}
+
