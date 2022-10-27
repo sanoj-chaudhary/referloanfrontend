@@ -144,7 +144,7 @@ const newProductName = productName.map((word) => {
 
                      {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'date') && <TextField
                        fullWidth
-                       inputProps={{ pattern: elem.patterns }}
+                       inputProps={elem.patterns != ''?{  pattern: elem.patterns } : ''}
                        required={elem.is_required}
                        className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                        name={elem.param_name}
