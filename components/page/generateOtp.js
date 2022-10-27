@@ -46,6 +46,12 @@ const GenerateOtp = ({ setToken, setPancard }) => {
           if (typeof window !== 'undefined') {
             setToken(window.localStorage.getItem("token"))
           }
+
+          setTimeout(() => {
+            if (typeof window !== 'undefined') {
+              window.localStorage.removeItem("token"); 
+            }
+          }, 3600);
         }
       }
     } catch (error) {
