@@ -7,17 +7,18 @@ import ContentPage from '../components/page/content_page';
 import Apply from '../components/page/apply';
 import Error from '../components/page/error';
 
-function contentPage({ url,refer, Component, data, form_schema }) {
+function contentPage({ url, refer, Component, data, form_schema, specification, faq }) {
   //console.log(url)
   //console.log(Component)
-  //console.log(data)
+  console.log(data)
+  console.log(faq)
   //console.log(form_schema)
   const router = useRouter();
   return (
     <>
-      {Component == 'ContentPage' && <ContentPage data={data} />}
+      {Component == 'ContentPage' && <ContentPage data={data} faq={faq} />}
       {Component == 'ProductBankList' && <ProductBankList url={url} refer={refer} data={data} />}
-      {Component == 'Apply' && <Apply data={data} form_schema={form_schema} />}
+      {Component == 'Apply' && <Apply data={data} form_schema={form_schema} specification={specification} />}
       {Component == 'Error' && <Error data={data} />}
     </>
   )
@@ -30,34 +31,62 @@ export async function getServerSideProps(context) {
   let refer = ''
   let data;
   let Component = 'blank';
+
+  // Content Page
+  let content_response;
+  let faq = '1';
+
+  // Apply Page
+  let apply_response;
+  let specification = '1';
+
+  // Product Bank Page
   let bank_product_id;
   let form;
   let form_schema = '1';
+
 
   url = url.join("/");
   console.log(ref)
 
   const res = await db.query("SELECT * FROM `pages` WHERE `slug` =  '" + url + "' ");
   if (res.length != 0) {
-    if (res[0].bank_product_id != null) {
+    bank_product_id = res[0].bank_product_id;
+    if (bank_product_id != null) {
       try {
-        bank_product_id = res[0].bank_product_id;
-        form = await axios.get(`https://api.referloan.in/api/sections/form/`+bank_product_id);
+        form = await axios.get(`https://api.referloan.in/api/sections/form/` + bank_product_id);
         form_schema = form.data
+
+        // apply_response = await db.query("SELECT * FROM `product_bank_specification` WHERE `product_bank_id` =  '" + bank_product_id + "' AND status = '1' ORDER BY `order` ");
+        //specification  = apply_response.data;
+
       } catch (error) {
-        console.log('eeeeee')
+        console.log('bank product id missing - can not call apply page')
       }
 
       Component = 'Apply'
     }
     else {
+
+      try {
+         content_response = await db.query("SELECT * FROM `faqs` WHERE faqs.page_id =  '" + res[0].id + "' ");
+        
+         if(content_response)
+         {
+           faq = JSON.parse(JSON.stringify(content_response))
+         }
+
+      }
+      catch (error) {
+        console.log('page id missing - can not call content page')
+      }
+
+
       Component = 'ContentPage'
     }
   }
-  else
-  {
-    if(ref)
-    {
+  else {
+    if (ref) {
       console.log(ref)
       refer = ref
       Component = 'ProductBankList'
@@ -71,7 +100,7 @@ export async function getServerSideProps(context) {
 
   data = JSON.parse(JSON.stringify(res))
 
-  return { props: { url, refer,Component, data,form_schema } }
+  return { props: { url, refer, Component, data, form_schema, specification, faq } }
 }
 
 export default contentPage
