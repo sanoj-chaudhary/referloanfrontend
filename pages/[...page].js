@@ -69,7 +69,7 @@ export async function getServerSideProps(context) {
     else {
 
       try {
-         content_response = await db.query("SELECT * FROM `faqs` WHERE faqs.page_id =  '" + res[0].id + "' ");
+         content_response = await db.query("SELECT * FROM `faqs` WHERE faqs.page_id =  '" + res[0].id + "' ORDER BY `order` ");
         
          if(content_response)
          {
