@@ -15,6 +15,9 @@ import Radio from '@mui/material/Radio';
 import Head from "next/head";
 import GenerateOtp from "./generateOtp";
 import Loader from "./loader";
+import $ from 'jquery';
+import Script from 'next/script';
+
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
@@ -136,15 +139,17 @@ const newProductName = productName.map((word) => {
                  <h3>{item.section_name}</h3>
                  {item.forms.map((elem, ind) => (
                    <div key={ind}>
+
                      {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
 
                      {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'date') && <TextField
                        fullWidth
-                       pattern={elem.patterns}
+                       inputProps={{ pattern: elem.patterns }}
                        required={elem.is_required}
                        className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                        name={elem.param_name}
                        label={elem.field_name}
+                       id={elem.param_name}
                        autoComplete="off"
                        onChange={handleChange}
                      />
