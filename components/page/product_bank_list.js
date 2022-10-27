@@ -63,7 +63,7 @@ const midcontent = ({ url,refer,data }) => {
         const response3 = await axios.get(`${process.env.APP_URL}/get_product_by_catid/`+cat_id);
         const data3     = await response3.data;
         console.log(data3)
-        setProductByCat(data3.data)
+        setProductByCat(data3)
          
     } 
     catch (error) {
