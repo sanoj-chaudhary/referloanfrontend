@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from 'next/router';
-const leftfilter = ({ content }) => {
+const leftfilter = ({ content,ProductByCat }) => {
   const router = useRouter()
   const [searchData, setSearchData] = useState({
     "cat_id": '1',
@@ -41,18 +41,12 @@ const leftfilter = ({ content }) => {
       <form onSubmit={searchProduct}>
         <div className="filterArea">
           <div className="inputRow">
-            <label>Type of Loan</label>
+            <label>Choose Product</label>
             <select className="form-select" aria-label="Type of loan " name='product_id' onChange={handleChange}>
-              <option defaultValue>Type of loan</option>
-              <option value="">Type of loan </option>
-              <option value="loans/home-loan">Home Loan</option>
-              <option value="loans/personal-loan">Personal Loan</option>
-              <option value="loans/business-loan">Business Loan</option>
-              <option value="loans/gold-loan">Gold Loan</option>
-              <option value="loans/loan-against-property">Loan Against Property</option>
-              <option value="loans/builder-loan">Builder Loan</option>
-              <option value="loans/hospital-loan">Hospital Loan</option>
-              <option value="loans/school-loan">School Loan</option>
+             
+            {ProductByCat.map((item,key) => (
+              <option value={item.name}>{item.name}</option>
+              ))}
             </select>
           </div>
           <div className="inputRow">
@@ -73,6 +67,7 @@ const leftfilter = ({ content }) => {
                 name="salary"
                 id="salary"
                 placeholder="Monthly income"
+                defaultValue={content.salary}
                 value={values.salary}
                 onChange={handleChange}
                 onBlur={handleBlur}
