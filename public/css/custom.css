@@ -44,7 +44,9 @@ margin-bottom: 0 !important;
   left: 45%;
   z-index: 100;
 }
-
+#loading-image img{
+  width: 100px !important;
+}
 #loading-image .float {
   animation: float 3s ease-in-out infinite;
 }

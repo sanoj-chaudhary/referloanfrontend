@@ -68,6 +68,15 @@ const apply = (props) => {
 
 
   }, [token])
+
+  const mySentence = props.data[0].name;
+const productName = mySentence.split(" ");
+
+const newProductName = productName.map((word) => { 
+    return word[0].toUpperCase() + word.substring(1); 
+}).join("_");
+
+
   return (
     <>
 
@@ -82,7 +91,7 @@ const apply = (props) => {
 
        <div className="dealStep__leftArea">
          <div className="CardImg_box">
-           <img src={`/uploads/product_bank/${props.data[0].name}.png `} alt="" />
+           <img src={`/uploads/product_bank/${newProductName}.png`} alt={props.data[0].name} />
          </div>
          <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
          <ul>
