@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-const midcontent = ({data}) => {
+const midcontent = ({data,faq}) => {
 
   return (
     <>
@@ -16,13 +16,34 @@ const midcontent = ({data}) => {
 
             <div dangerouslySetInnerHTML={{ __html: data[0].description }}></div>
             
-            {/* <div className="faqSetion">
+            <div class="faqSetion">
               <h3>FREQUENTLY ASKED QUESTIONS</h3>
               <h2>Have a question? We've got answers!</h2>
-              <div className="faq_row">
-                FAQ List
-              </div>
-            </div> */}
+              <div class="faq_row">
+                <div class="accordion accordion-flush faqAccordion " id="accordionFlushExample">
+
+                    {faq.map((item,key) => (
+                        <div class="accordion-item">
+                        <h2 class="accordion-header" id={'flush-heading'+key}>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse'+key} aria-expanded="false" aria-controls={'flush-collapse'+key}>
+                                {item.question}
+                            </button>
+                        </h2>
+                        <div id={'flush-collapse'+key} class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p>{item.answer}</p>
+                            </div>
+                        </div>
+                    </div> 
+                    ))}                       
+                  </div>
+
+                  <div class="faqImg">
+                      <img src="/images/faq.png" alt="" />
+                  </div>
+                </div>
+            </div>
+            
           </div>
         </section>
       </div>
@@ -32,3 +53,5 @@ const midcontent = ({data}) => {
 }
 
 export default midcontent
+
+
