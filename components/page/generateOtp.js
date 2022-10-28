@@ -11,6 +11,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues }) => {
   const [errmsg, setErrmsg] = useState('')
   const [serversidemsg,setServerSideMsg] = useState('')
   const [serversideStatus,setServerSideStatus] = useState(true)
+  const [loading, setLoading] = useState(true)
   const [genOtpData, setGenOtpData] = useState({
     "full_name": '',
     "phone_no": '',
@@ -96,10 +97,16 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues }) => {
       console.log("message", error.message);
     }
   }
+
+  useEffect(() => {
+    setLoading(false)
+     });
+
   return (
     <>
+       {loading && <Loader/>}
       <form>
-{!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
+ {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
         {!otpStatus ? <>
 
           <TextField value={values.full_name} required name="full_name" fullWidth label="Full Name" variant="standard" onChange={handleChange} onBlur={handleBlur} />
@@ -125,6 +132,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues }) => {
           <div className="search-button"><button className="mt-4" type="submit" onClick={verifyItp}>verify OTP</button></div></>}
 
       </form>
+    
     </>
   )
 }
