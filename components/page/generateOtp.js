@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import axios from "axios";
 import { useFormik } from 'formik'
 import * as Yup from "yup";
+import Loader from "./loader";
 const GenerateOtp = ({ setToken, setPancard, setUserValues }) => {
 
   const [otpStatus, setOtpStatus] = useState(false);
