@@ -54,7 +54,7 @@ const Menu = () => {
                         className={Indexkey ? "activeSubMenu" : "activeSubMenu menu-active" && isHovering ? 'activeSubMenu' : 'activeSubMenu menu-active'}
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOut}
-                    > <Link href={value.slug}  ><a  title={value.name}>{value.name}</a></Link>  
+                    > <Link href={value.slug}  ><a style={{ textTransform: 'capitalize' }} title={value.name}>{value.name}</a></Link>  
                     </li>
                 ))}
             </ul>
