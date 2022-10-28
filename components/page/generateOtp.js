@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import axios from "axios";
 import { useFormik } from 'formik'
 import * as Yup from "yup";
-const GenerateOtp = ({ setToken, setPancard }) => {
+const GenerateOtp = ({ setToken, setPancard, setUserValues }) => {
 
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(true)
@@ -72,6 +72,9 @@ const GenerateOtp = ({ setToken, setPancard }) => {
       initialValues: genOtpData,
       validationSchema: OtpSchema,
       onSubmit: async (values) => {
+        localStorage.setItem("full_name", values.full_name);
+        localStorage.setItem("pan", values.pan_card);
+        localStorage.setItem("phone", values.phone_no);
       },
     });
 
@@ -80,6 +83,7 @@ const GenerateOtp = ({ setToken, setPancard }) => {
     setServerSideStatus(true)
     try {
       handleSubmit()
+      setUserValues(values)
       const res = await axios.post('https://api.referloan.in/api/generate-otp', values);
       if (res.data.success) {
         setOtpStatus(true)
