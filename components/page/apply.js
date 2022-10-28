@@ -39,7 +39,30 @@ const apply = (props) => {
   const [panCard, setPancard] = useState('');
   const [paramName, setParamName] = ('')
   const [loading, setLoading] = useState(true)
+  const [userValues, setUserValues] = useState({});
   var initialValues = {};
+  if (typeof window !== 'undefined') {
+    var full_name = window.localStorage.getItem("full_name");
+    var FName = full_name.split(" ");
+    //console.log(FName[0]);
+    var pan = window.localStorage.getItem("pan");
+    var phone = window.localStorage.getItem("phone");
+    var first_name = FName[0];
+    var last_name = FName[1];
+
+  }else{
+    var full_name = '';
+    var pan = '';
+    var phone = '';
+    var first_name = '';
+    var last_name = '';
+  }
+  
+  const otpData = {
+    full_name,first_name,last_name,pan,phone
+  }
+
+  //console.log(userValues.full_name);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -51,6 +74,7 @@ const apply = (props) => {
           const headers = {
             'Authorization': "Bearer " + token.slice(1, -1) + ""
           }
+          console.log(values)
           setLoading(true)
           const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
           if (res.data.status) {
@@ -122,7 +146,7 @@ const apply = (props) => {
             </div>
             <div className="dealStep__wrapper">
               <div className="dealStep__Area">
-                {(token == '' || token == null) && <GenerateOtp setPancard={setPancard} setToken={setToken} />
+                {(token == '' || token == null) && <GenerateOtp setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
 
                 {(token != null || token != undefined) && <form onSubmit={handleSubmit}>
@@ -137,10 +161,11 @@ const apply = (props) => {
 
                           {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'date') && <TextField
                             fullWidth
-                            inputProps={elem.patterns != '' ? { pattern: elem.patterns } : ''}
+                            inputProps={elem.patterns != '' ? { pattern: elem.patterns, title:"Please Fill Valid Data!" } : ''}
                             required={elem.is_required}
                             className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                             name={elem.param_name}
+                            inputProps={(elem.param_name == 'first_name' || elem.param_name == 'last_name' || elem.param_name == 'phone' || elem.param_name == 'pan') ? { value:otpData[elem.param_name] } : ''}
                             label={elem.field_name}
                             id={elem.param_name}
                             autoComplete="off"
