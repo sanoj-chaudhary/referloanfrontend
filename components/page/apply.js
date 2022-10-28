@@ -64,8 +64,7 @@ const apply = (props) => {
     full_name,first_name,last_name,pan,phone
   }
 
-  console.log('F: '+first_name);
-  console.log('L: '+last_name);
+  //console.log('F: '+first_name);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
