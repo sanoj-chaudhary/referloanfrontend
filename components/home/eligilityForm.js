@@ -30,16 +30,16 @@ const router = useRouter()
     const searchProduct = async (e) =>{
       e.preventDefault()
       localStorage.setItem("searchData", JSON.stringify(values));
-     
+      let hit;
       try {
           if(values.employemnt_type=='Salaried')
           {
-            const hit = values.product_id+'/salary/'+values.salary+'/pincode/'+values.pincode+'?ref=web';
+            hit = values.product_id+'/salary/'+values.salary+'/pincode/'+values.pincode+'?ref=web';
             console.log(hit)
           }
           else
           {
-            const hit = values.product_id+'/turnover/'+values.tenure+'/pincode/'+values.pincode+'?ref=web';
+           hit = values.product_id+'/turnover/'+values.tenure+'/pincode/'+values.pincode+'?ref=web';
             console.log(hit)
           }
 
