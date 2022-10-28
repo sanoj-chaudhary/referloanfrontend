@@ -43,13 +43,12 @@ const apply = (props) => {
   var initialValues = {};
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
-    //var FName = full_name.split(" ");
-    //console.log(FName[0]);
     var pan = window.localStorage.getItem("pan");
     var phone = window.localStorage.getItem("phone");
-    var first_name = full_name;
-    var last_name = '';
-
+    if (full_name != null) {
+      var first_name = full_name.split(' ').slice(0, -1).join(' ');
+      var last_name = full_name.split(' ').slice(-1).join(' ');
+    }
   }else{
     var full_name = '';
     var pan = '';
