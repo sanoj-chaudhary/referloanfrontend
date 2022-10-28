@@ -43,12 +43,12 @@ const apply = (props) => {
   var initialValues = {};
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
-    var FName = full_name.split(" ");
+    //var FName = full_name.split(" ");
     //console.log(FName[0]);
     var pan = window.localStorage.getItem("pan");
     var phone = window.localStorage.getItem("phone");
-    var first_name = FName[0];
-    var last_name = FName[1];
+    var first_name = full_name;
+    var last_name = '';
 
   }else{
     var full_name = '';
