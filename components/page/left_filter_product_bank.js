@@ -22,7 +22,6 @@ const leftfilter = ({ content, ProductByCat }) => {
       initialValues: searchData,
       validationSchema: signupSchema,
       onSubmit: (values, actions) => {
-
       }
     });
 
@@ -36,27 +35,23 @@ const leftfilter = ({ content, ProductByCat }) => {
       console.log(err)
     }
   }
-
-  values['salary'] = "" + content.salary + ""
-  values['pincode'] = "" + content.pincode + ""
-  values['product_id'] = "" + content.p_name + ""
   return (
     <>
       <form onSubmit={searchProduct}>
         <div className="filterArea">
           <div className="inputRow">
             <label>Choose Product</label>
-            <select className="form-select" aria-label="Type of loan " name='product_id' value={values.product_id} onChange={handleChange}>
+            <select className="form-select" aria-label="Type of loan " name='product_id'  onChange={handleChange}>
 
               {ProductByCat.map((item, key) => (
-                <option key={key} value={item.name}>{item.name}</option>
+                <option selected={content.p_name == item.name} key={key} value={item.name}>{item.name}</option>
               ))}
             </select>
           </div>
           <div className="inputRow">
             <label>Profession Type</label>
-            <select className="form-select" name="employemnt_type" aria-label="Type of loan " value={values.employemnt_type} onChange={handleChange} required>
-              <option defaultValue value=''>Profession Type </option>
+            <select className="form-select" name="employemnt_type" aria-label="Type of loan " defaultValue={values.employemnt_type} onChange={handleChange} required>
+              <option  value=''>Profession Type </option>
               <option value="Salaried">Salaried</option>
               <option value="Self employed">Self employed</option>
             </select>
@@ -71,7 +66,7 @@ const leftfilter = ({ content, ProductByCat }) => {
                 name="salary"
                 id="salary"
                 placeholder="Monthly income"
-                value={values.salary}
+                defaultValue={content.salary}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 required />
@@ -86,7 +81,8 @@ const leftfilter = ({ content, ProductByCat }) => {
                 name="tenure"
                 id="tenure"
                 placeholder="Turn Over"
-                value={values.tenure}
+                defaultValue={content.tenure}
+                
                 onChange={handleChange}
                 onBlur={handleBlur}
                 required />
@@ -100,7 +96,8 @@ const leftfilter = ({ content, ProductByCat }) => {
               name="pincode"
               id="pincode"
               placeholder="Residential Pincode"
-              value={values.pincode}
+              defaultValue={content.pincode}
+              
               onChange={handleChange}
               onBlur={handleBlur}
               required />
@@ -111,10 +108,12 @@ const leftfilter = ({ content, ProductByCat }) => {
               <input type="text" placeholder="min" value="" onChange={handleChange} /> <input type="text" placeholder="max" value="" onChange={handleChange} />
             </div> */}
 
+
           <button className="applyBtn" title="Apply Filter" type="submit">Apply Filter</button>
         </div>
       </form>
     </>
+
   )
 }
 
