@@ -21,19 +21,24 @@ const midcontent = ({ url,refer,data }) => {
       
       let slug;
       let salary;
+      let label;
       let pincode;
 
-      if(split[1]=='salary')
+      if(split[1]=='salary' || split[1]=='turnover')
       {
         slug = split[0];
         salary = split[2];
         pincode = split[4];
+
+        if(split[1]=='salary') {label = 'Salary'} if(split[1]=='turnover') {label = 'TurnOver'}
       }
       else
       {
         slug = split[0]+'/'+split[1];
         salary = split[3];
         pincode = split[5];
+
+        if(split[2]=='salary') {label = 'Salary'} if(split[2]=='turnover') {label = 'TurnOver'}
       }
 
       const response1 = await axios.get(`${process.env.APP_URL}/get_product_by_slug/`+slug);
@@ -45,13 +50,13 @@ const midcontent = ({ url,refer,data }) => {
       let p_name = content_data.name;
       let cat_id = content_data.cat_id;
       
-      const finaldata = {product_id,salary,pincode}; 
+      const finaldata = {product_id,salary,pincode,label}; 
 
       const response2 = await axios.post('https://api.referloan.in/api/banks', finaldata);
       if (response2) 
       {
           const data2 = await response2.data;
-          setContent({p_name,salary,pincode})
+          setContent({p_name,salary,pincode,label})
           setProducts(data2.data)
         } else {
           alert('product bank list - failed')
@@ -72,15 +77,15 @@ const midcontent = ({ url,refer,data }) => {
   return (
     <>
       <Head>
-        <title>Referloan : {content.p_name+' | Salary : '+content.salary+' | Pincode : '+content.pincode}</title>
-        <meta name={'description'} content={content.p_name+' | Salary : '+content.salary+' | Pincode : '+content.pincode} />
-        <meta name={'keywords'} content={content.p_name+' | Salary : '+content.salary+' | Pincode : '+content.pincode}/>
+        <title>Referloan : {content.p_name+' | '+content.label+' : '+content.salary+' | Pincode : '+content.pincode}</title>
+        <meta name={'description'} content={content.p_name+' | '+content.label+' : '+content.salary+' | Pincode : '+content.pincode} />
+        <meta name={'keywords'} content={content.p_name+' | '+content.label+' : '+content.salary+' | Pincode : '+content.pincode}/>
       </Head>
       
       <section className="grabDeal_header">
         <div className="container">
           <div className="headingArea">
-          {content.p_name} | Salary : {content.salary} | Pincode : {content.pincode}
+          {content.p_name} | {content.label} : {content.salary} | Pincode : {content.pincode}
           </div>
         </div>
       </section>
