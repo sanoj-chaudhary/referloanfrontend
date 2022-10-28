@@ -187,6 +187,35 @@ const apply = (props) => {
               <div className="container">
                 <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
               </div>
+
+              <div class="faqSetion">
+              <h3>FREQUENTLY ASKED QUESTIONS</h3>
+              <h2>Have a question? We've got answers!</h2>
+              <div class="faq_row">
+                <div class="accordion accordion-flush faqAccordion " id="accordionFlushExample">
+
+                    {props.faq.map((item,key) => (
+                        <div class="accordion-item">
+                        <h2 class="accordion-header" id={'flush-heading'+key}>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse'+key} aria-expanded="false" aria-controls={'flush-collapse'+key}>
+                                {item.question}
+                            </button>
+                        </h2>
+                        <div id={'flush-collapse'+key} class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p>{item.answer}</p>
+                            </div>
+                        </div>
+                    </div> 
+                    ))}                       
+                  </div>
+
+                  <div class="faqImg">
+                      <img src="/images/faq.png" alt="" />
+                  </div>
+                </div>
+            </div>
+
             </section>
           </div>
         </div>

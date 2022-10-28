@@ -12,13 +12,13 @@ function contentPage({ url, refer, Component, data, form_schema, specification, 
   //console.log(Component)
   console.log(data)
   console.log('specification'+specification)
-  //console.log(form_schema)
+  console.log(faq)
   const router = useRouter();
   return (
     <>
       {Component == 'ContentPage' && <ContentPage data={data} faq={faq} />}
       {Component == 'ProductBankList' && <ProductBankList url={url} refer={refer} data={data} />}
-      {Component == 'Apply' && <Apply data={data} form_schema={form_schema} specification={specification} />}
+      {Component == 'Apply' && <Apply data={data} form_schema={form_schema} specification={specification} faq={faq} />}
       {Component == 'Error' && <Error data={data} />}
     </>
   )
@@ -62,6 +62,13 @@ export async function getServerSideProps(context) {
         if(apply_response)
         {
           specification = JSON.parse(JSON.stringify(apply_response))
+        }
+
+        content_response = await db.query("SELECT * FROM `faqs` WHERE faqs.page_id =  '" + res[0].id + "' ORDER BY `order` ");
+        
+        if(content_response)
+        {
+           faq = JSON.parse(JSON.stringify(content_response))
         }
 
       } catch (error) {
