@@ -147,7 +147,8 @@
 }
 
 .innerpage_bg {
-    background-color: #f5f7fa;
+   /* background-color: #f5f7fa;*/
+    background-color: #ffffff;
     padding: 30px 0 50px;
 }
 
