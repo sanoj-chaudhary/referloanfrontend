@@ -5,6 +5,7 @@ import {  } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import Image from 'next/image';
+import Loader from "./loader";
 import Head from "next/head";
 import LeftFilterProductBank from '../page/left_filter_product_bank'
 
@@ -13,6 +14,7 @@ const midcontent = ({ url,refer,data }) => {
   const [products, setProducts] = useState([])
   const [content, setContent] = useState([])
   const [ProductByCat, setProductByCat] = useState([])
+  const [loading, setLoading] = useState(true);
   
   const searchProduct = async () => {
     try 
@@ -53,6 +55,7 @@ const midcontent = ({ url,refer,data }) => {
           const data2 = await response2.data;
           setContent({p_name,salary,pincode})
           setProducts(data2.data)
+          
         } else {
           alert('product bank list - failed')
         }
@@ -63,11 +66,13 @@ const midcontent = ({ url,refer,data }) => {
     } 
     catch (error) {
       alert('product info - failed')
+      setLoading(false)
      }
   }
   useEffect(() => {
     searchProduct()
-  }, []);
+    setLoading(false)
+  }, []); 
 
   return (
     <>
@@ -76,7 +81,7 @@ const midcontent = ({ url,refer,data }) => {
         <meta name={'description'} content={content.p_name+' | Salary : '+content.salary+' | Pincode : '+content.pincode} />
         <meta name={'keywords'} content={content.p_name+' | Salary : '+content.salary+' | Pincode : '+content.pincode}/>
       </Head>
-      
+      {loading && <Loader/>}
       <section className="grabDeal_header">
         <div className="container">
           <div className="headingArea">
