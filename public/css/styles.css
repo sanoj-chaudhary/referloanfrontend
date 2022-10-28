@@ -1288,7 +1288,7 @@ footer img.footerlogo {
 .cardOffer_area .filterArea .applyBtn {
     font-size: var(--small-font);
     font-weight: 400;
-    background-color: #6824cf;
+    background-color: var(--secondryColor);
     color: #fff;
     height: 44px;
     line-height: 44px;
@@ -1300,6 +1300,11 @@ footer img.footerlogo {
     text-transform: uppercase;
     border: none;
     width: 100%;
+    transition: all 0.3s;
+}
+
+.cardOffer_area .filterArea .applyBtn:hover{
+    background-color: var(--primaryColor);
 }
 
 .cardOffer_area .cardlist-Pnl {

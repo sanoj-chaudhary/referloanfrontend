@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from 'next/router';
-const leftfilter = ({ content,ProductByCat }) => {
+const leftfilter = ({ content, ProductByCat }) => {
   const router = useRouter()
   const [searchData, setSearchData] = useState({
     "cat_id": '1',
@@ -16,6 +16,7 @@ const leftfilter = ({ content,ProductByCat }) => {
   const signupSchema = Yup.object({
     pincode: Yup.string().min(6).max(6),
   });
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: searchData,
@@ -24,34 +25,37 @@ const leftfilter = ({ content,ProductByCat }) => {
 
       }
     });
+
   const searchProduct = async (e) => {
     e.preventDefault()
-    alert('here')
     try {
       const hit = values.product_id + '/salary/' + values.salary + '/pincode/' + values.pincode + '?ref=web';
       router.push(hit)
-
     }
     catch (err) {
       console.log(err)
     }
   }
+
+  values['salary'] = "" + content.salary + ""
+  values['pincode'] = "" + content.pincode + ""
+  values['product_id'] = "" + content.p_name + ""
   return (
     <>
       <form onSubmit={searchProduct}>
         <div className="filterArea">
           <div className="inputRow">
             <label>Choose Product</label>
-            <select className="form-select" aria-label="Type of loan " name='product_id' onChange={handleChange}>
-             
-            {ProductByCat.map((item,key) => (
-              <option value={item.name}>{item.name}</option>
+            <select className="form-select" aria-label="Type of loan " name='product_id' value={values.product_id} onChange={handleChange}>
+
+              {ProductByCat.map((item, key) => (
+                <option key={key} value={item.name}>{item.name}</option>
               ))}
             </select>
           </div>
           <div className="inputRow">
             <label>Profession Type</label>
-            <select className="form-select" name="employemnt_type" aria-label="Type of loan " onChange={handleChange} required>
+            <select className="form-select" name="employemnt_type" aria-label="Type of loan " value={values.employemnt_type} onChange={handleChange} required>
               <option defaultValue value=''>Profession Type </option>
               <option value="Salaried">Salaried</option>
               <option value="Self employed">Self employed</option>
@@ -67,7 +71,6 @@ const leftfilter = ({ content,ProductByCat }) => {
                 name="salary"
                 id="salary"
                 placeholder="Monthly income"
-                defaultValue={content.salary}
                 value={values.salary}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -90,7 +93,6 @@ const leftfilter = ({ content,ProductByCat }) => {
             </div>
           }
 
-
           <div className="inputRow">
             <label>Pincode</label>
             <input type="number"
@@ -108,11 +110,11 @@ const leftfilter = ({ content,ProductByCat }) => {
               <label>Interest</label>
               <input type="text" placeholder="min" value="" onChange={handleChange} /> <input type="text" placeholder="max" value="" onChange={handleChange} />
             </div> */}
+
           <button className="applyBtn" title="Apply Filter" type="submit">Apply Filter</button>
         </div>
       </form>
     </>
-
   )
 }
 
