@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useRouter } from 'next/router';
 const leftfilter = ({ content, ProductByCat }) => {
   const router = useRouter()
+  const [empType, setEmpType] = useState()
   const [searchData, setSearchData] = useState({
     "cat_id": '1',
     "product_id": '',
@@ -13,28 +14,46 @@ const leftfilter = ({ content, ProductByCat }) => {
     "pincode": "",
   })
 
-  const signupSchema = Yup.object({
-    pincode: Yup.string().min(6).max(6),
-  });
+  // const signupSchema = Yup.object({
+  //   pincode: Yup.string().min(6).max(6),
+  // });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: searchData,
-      validationSchema: signupSchema,
-      onSubmit: (values, actions) => {
-      }
-    });
+  // const { searchData, errors, touched, handleBlur, handleChange, handleSubmit } =
+  //   useFormik({
+  //     initialsearchData: searchData,
+  //     validationSchema: signupSchema,
+  //     onSubmit: (searchData, actions) => {
+  //     }
+  //   });
 
+  console.log(ProductByCat)
+const handleChange = (e) =>{
+  
+  if(e.target.value == "Salaried"){
+    alert(e.target.value)
+    setEmpType("Salary")
+  }else if(e.target.value == "Self employed"){
+    setEmpType("TurnOver")
+  }
+  setSearchData({...searchData,[e.target.name]:e.target.value})
+}
   const searchProduct = async (e) => {
     e.preventDefault()
     try {
-      const hit = values.product_id + '/salary/' + values.salary + '/pincode/' + values.pincode + '?ref=web';
+      const hit = searchData.product_id + '/salary/' + searchData.salary + '/pincode/' + searchData.pincode + '?ref=web';
       router.push(hit)
     }
     catch (err) {
       console.log(err)
     }
   }
+
+  useEffect(() => {
+    
+    setSearchData({...searchData,salary:content.salary,pincode:content.pincode,prodeuct_id:content.p_name,turnover:content.salary})
+    setEmpType(content.label)
+  }, [content])
+console.log()
   return (
     <>
       <form onSubmit={searchProduct}>
@@ -44,13 +63,13 @@ const leftfilter = ({ content, ProductByCat }) => {
             <select className="form-select" aria-label="Type of loan " name='product_id'  onChange={handleChange}>
 
               {ProductByCat.map((item, key) => (
-                <option selected={content.p_name == item.name} key={key} value={item.name}>{item.name}</option>
+                <option selected={content.p_name == item.name} key={key} value={item.slug}>{item.name}</option>
               ))}
             </select>
           </div>
           <div className="inputRow">
             <label>Profession Type</label>
-            <select className="form-select" name="employemnt_type" aria-label="Type of loan " defaultValue={values.employemnt_type} onChange={handleChange} required>
+            <select className="form-select" name="employemnt_type" aria-label="Type of loan " defaultValue={searchData.employemnt_type} onChange={handleChange} required>
               <option  value=''>Profession Type </option>
               <option value="Salaried">Salaried</option>
               <option value="Self employed">Self employed</option>
@@ -58,7 +77,7 @@ const leftfilter = ({ content, ProductByCat }) => {
           </div>
 
           {
-            values.employemnt_type === 'Salaried' &&
+            empType === 'Salary' &&
             <div className="inputRow">
               <label>Salary</label>
               <input type="number"
@@ -66,14 +85,14 @@ const leftfilter = ({ content, ProductByCat }) => {
                 name="salary"
                 id="salary"
                 placeholder="Monthly income"
-                defaultValue={content.salary}
+                defaultValue={searchData.salary}
                 onChange={handleChange}
-                onBlur={handleBlur}
+                
                 required />
             </div>
           }
           {
-            values.employemnt_type === 'Self employed' &&
+            empType === 'TurnOver' &&
             <div className="inputRow">
               <label>Turn Over</label>
               <input type="number"
@@ -81,10 +100,10 @@ const leftfilter = ({ content, ProductByCat }) => {
                 name="tenure"
                 id="tenure"
                 placeholder="Turn Over"
-                defaultValue={content.tenure}
+                defaultValue={searchData.turnover}
                 
                 onChange={handleChange}
-                onBlur={handleBlur}
+                
                 required />
             </div>
           }
@@ -96,12 +115,11 @@ const leftfilter = ({ content, ProductByCat }) => {
               name="pincode"
               id="pincode"
               placeholder="Residential Pincode"
-              defaultValue={content.pincode}
-              
+              defaultValue={searchData.pincode}
               onChange={handleChange}
-              onBlur={handleBlur}
+              
               required />
-            {errors.pincode && <p style={{ color: 'red', fontSize: '12px' }}>{errors.pincode}</p>}
+            {/* {errors.pincode && <p style={{ color: 'red', fontSize: '12px' }}>{errors.pincode}</p>} */}
           </div>
           {/* <div className="inputRow">
               <label>Interest</label>
