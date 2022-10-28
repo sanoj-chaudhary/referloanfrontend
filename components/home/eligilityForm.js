@@ -32,21 +32,6 @@ const router = useRouter()
       localStorage.setItem("searchData", JSON.stringify(values));
      
       try {
-
-          // const response = await axios.post(`${process.env.APP_URL}/insert_search_info_local`, values);
-          // console.log(response)
-          // console.log(values)
-          
-          // if(response) 
-          // {
-          //   const search_id = response.data.insertId
-          //   const split     = values.product_id.split("_");
-          //   console.log(values.product_id)
-
-          //   const hit = split[1]+'/salary/'+values.salary+'/pincode/'+values.pincode+'?ref=web'+search_id;
-
-          //   router.push(hit)
-          // }
           const hit = values.product_id+'/salary/'+values.salary+'/pincode/'+values.pincode+'?ref=web';
           router.push(hit) 
       }
