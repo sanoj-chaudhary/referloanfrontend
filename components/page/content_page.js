@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Loader from "./loader";
 
 const midcontent = ({ data, faq }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(false)
   });

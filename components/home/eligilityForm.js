@@ -14,7 +14,7 @@ const router = useRouter()
     "product_id": '',
     "employemnt_type": 'Salaried',
     "salary": "",
-    "turnover": "",
+    "tenure": "",
     "pincode": "",
   })
 
@@ -30,10 +30,20 @@ const router = useRouter()
     const searchProduct = async (e) =>{
       e.preventDefault()
       localStorage.setItem("searchData", JSON.stringify(values));
-     
+      let hit;
       try {
-          const hit = values.product_id+'/salary/'+values.salary+'/pincode/'+values.pincode+'?ref=web';
-          router.push(hit) 
+          if(values.employemnt_type=='Salaried')
+          {
+            hit = values.product_id+'/salary/'+values.salary+'/pincode/'+values.pincode+'?ref=web';
+            console.log(hit)
+          }
+          else
+          {
+           hit = values.product_id+'/turnover/'+values.tenure+'/pincode/'+values.pincode+'?ref=web';
+            console.log(hit)
+          }
+
+          router.push(hit)
       }
       catch (err) {
           console.log(err)
