@@ -11,6 +11,7 @@ export default function Header(children) {
             {/* Meta */ }
             <meta charSet={ 'utf-8' } />
             <meta name={ 'viewport' } content={ 'width=device-width, initial-scale=1, shrink-to-fit=no' } />
+            <meta http-equiv="ScreenOrientation" content="autoRotate:disabled"></meta>
             <title>{ title }</title>
             <meta name={ 'description' } content={ description } />
             <meta name={ 'keywords' } content={ keywords } />
