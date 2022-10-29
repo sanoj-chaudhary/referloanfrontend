@@ -55,18 +55,7 @@ header .info_section ul li img{
 
 
 
-.mmobile_menu {
-    display: none;
-}
 
-nav:not(.mm-menu) {
-    /* display: none; */
-}
-
-nav#menu,
-.mm-page {
-    /* display: none; */
-}
 
 #header {
     display: none;
@@ -392,10 +381,7 @@ nav.navBarContainer {
         display: block;
     }
 
-    nav:not(.mm-menu) {
-        display: none;
-    }
-
+    
     nav#menu,
     .mm-page {
         display: block; 
