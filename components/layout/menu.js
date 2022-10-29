@@ -2,8 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import SubMenu from './subMenu';
-import $ from 'jquery';
-import Script from 'next/script';
 
 const Menu = () => {
     //console.log(process.env.APP_URL)
@@ -69,25 +67,25 @@ const Menu = () => {
     return (
         <>
             <header id="moileheader" className="d-md-none d-block">
-                <div class="mheadWrapper">
-                    <div class="header_left">
-                        <a class="logo" href="#"><img src="/images/logo.png" alt="logo" /></a>
+                <div className="mheadWrapper">
+                    <div className="header_left">
+                        <a className="logo" href="#"><img src="/images/logo.png" alt="logo" /></a>
                     </div>
-                    <div class="header_right">
-                        <label for="menuTrigger" class="nav_ico"><i class="fa fa-bars"></i></label>
+                    <div className="header_right">
+                        <label for="menuTrigger" className="nav_ico"><i className="fa fa-bars"></i></label>
                         <input id="menuTrigger" type="checkbox" name="" />
-                        <nav class="main_nav">
+                        <nav className="main_nav">
                             <ul>
                                 {
                                     headermenu.map((item1, index) => (
-                                        <li><a href="#">{item1.name}</a>
-                                        <i class="fa fa-caret-down"></i>
+                                        <li key={index}><a href="#">{item1.name}</a>
+                                        <i className="fa fa-caret-down"></i>
                                             <ul>
                                                 {
-                                                    item1.product && item1.product.map((value1, Indexkey) => (
+                                                    item1.product && item1.product.map((value1, key) => (
 
-                                                        <li><a href="#">{value1.name}</a>
-                                                            <i class="fa fa-caret-down"></i>
+                                                        <li key={key} ><a href="#">{value1.name}</a>
+                                                            <i className="fa fa-caret-down"></i>
 
                                                             <ul>
                                                                 {value1.bank_product && <SubMenu data={value1.bank_product} />}
