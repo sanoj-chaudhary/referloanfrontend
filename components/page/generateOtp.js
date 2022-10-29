@@ -4,13 +4,15 @@ import Button from '@mui/material/Button';
 import axios from "axios";
 import { useFormik } from 'formik'
 import * as Yup from "yup";
-const GenerateOtp = ({ setToken, setPancard }) => {
+import Loader from "./loader";
+const GenerateOtp = ({ setToken, setPancard, setUserValues }) => {
 
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(true)
   const [errmsg, setErrmsg] = useState('')
   const [serversidemsg,setServerSideMsg] = useState('')
   const [serversideStatus,setServerSideStatus] = useState(true)
+  const [loading, setLoading] = useState(true)
   const [genOtpData, setGenOtpData] = useState({
     "full_name": '',
     "phone_no": '',
@@ -72,6 +74,9 @@ const GenerateOtp = ({ setToken, setPancard }) => {
       initialValues: genOtpData,
       validationSchema: OtpSchema,
       onSubmit: async (values) => {
+        localStorage.setItem("full_name", values.full_name);
+        localStorage.setItem("pan", values.pan_card);
+        localStorage.setItem("phone", values.phone_no);
       },
     });
 
@@ -80,6 +85,7 @@ const GenerateOtp = ({ setToken, setPancard }) => {
     setServerSideStatus(true)
     try {
       handleSubmit()
+      setUserValues(values)
       const res = await axios.post('https://api.referloan.in/api/generate-otp', values);
       if (res.data.success) {
         setOtpStatus(true)
@@ -92,10 +98,16 @@ const GenerateOtp = ({ setToken, setPancard }) => {
       console.log("message", error.message);
     }
   }
+
+  useEffect(() => {
+    setLoading(false)
+     });
+
   return (
     <>
+       {loading && <Loader/>}
       <form>
-{!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
+ {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
         {!otpStatus ? <>
 
           <TextField value={values.full_name} required name="full_name" fullWidth label="Full Name" variant="standard" onChange={handleChange} onBlur={handleBlur} />
@@ -121,6 +133,7 @@ const GenerateOtp = ({ setToken, setPancard }) => {
           <div className="search-button"><button className="mt-4" type="submit" onClick={verifyItp}>verify OTP</button></div></>}
 
       </form>
+    
     </>
   )
 }
