@@ -5,8 +5,7 @@ import axios from "axios";
 import { useFormik } from 'formik'
 import * as Yup from "yup";
 import Loader from "./loader";
-const GenerateOtp = ({ setToken, setPancard, setUserValues }) => {
-
+const GenerateOtp = ({ setToken, setPancard, setUserValues,data }) => {
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(true)
   const [errmsg, setErrmsg] = useState('')
@@ -18,9 +17,8 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues }) => {
     "phone_no": '',
     "pan_card": '',
     "otp": '',
-    "bank_product_id": 7
+    "bank_product_id": ""
   })
-
 
   const verifyItp = async (e) => {
     e.preventDefault();
@@ -29,7 +27,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues }) => {
 
       const { phone_no, otp } = values;
       const data = {
-        phone_no, otp, bank_product_id: 7
+        phone_no, otp, bank_product_id:genOtpData.bank_product_id
       }
       setOtpfieldval(true)
       if (otp == '') {
@@ -99,10 +97,12 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues }) => {
     }
   }
 
-  useEffect(() => {
-    setLoading(false)
-     });
-
+ 
+     useEffect(() => {
+      setLoading(false)
+      setGenOtpData({...genOtpData,bank_product_id:data.bank_product_id})
+      
+    }, [data])
   return (
     <>
        {loading && <Loader/>}

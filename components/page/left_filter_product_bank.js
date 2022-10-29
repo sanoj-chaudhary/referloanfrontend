@@ -53,7 +53,7 @@ const handleChange = (e) =>{
     setSearchData({...searchData,salary:content.salary,pincode:content.pincode,prodeuct_id:content.p_name,turnover:content.salary})
     setEmpType(content.label)
   }, [content])
-console.log()
+
   return (
     <>
       <form onSubmit={searchProduct}>
