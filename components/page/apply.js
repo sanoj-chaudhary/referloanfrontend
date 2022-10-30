@@ -32,7 +32,7 @@ const getToken = () => {
 }
 const apply = (props) => {
 console.log("length",props.form_schema.length)
-console.log("form_schema",props.form_schema.length)
+console.log("form_schema",props.form_schema)
   // const tokenkey = getToken();
   const [step, setStep] = useState(0)
   const [token, setToken] = useState(getToken());
