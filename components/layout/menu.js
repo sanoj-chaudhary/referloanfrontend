@@ -4,6 +4,7 @@ import Link from "next/link";
 import SubMenu from './subMenu';
 
 const Menu = () => {
+    const utm = "?utm_source=direct_visitors&utm_medium=self&utm_campaign=&utm_id=";
     //console.log(process.env.APP_URL)
     const [headermenu, setHeaderMenu] = useState([]);
     const [isHovering, setIsHovering] = useState(false);
@@ -25,7 +26,7 @@ const Menu = () => {
         }
     }
     const items = headermenu.map((item, index) => (
-        item.hierarchy == 'Product_BankProduct' ? <li key={item.id}><Link href={item.slug} ><a className={item.product ? "hasSub_menu" : ''} title={item.name}>{item.name}</a></Link>
+        item.hierarchy == 'Product_BankProduct' ? <li key={item.id}><Link href={item.slug+utm} ><a className={item.product ? "hasSub_menu" : ''} title={item.name}>{item.name}</a></Link>
             <div className={item.product ? "megaMenu_container" : ''} >
                 <ul className={item.product ? "subMenuLevel2" : ''}>
                     {item.product && item.product.map((value, Indexkey) => (
@@ -33,10 +34,10 @@ const Menu = () => {
                             className={Indexkey ? "activeSubMenu" : "activeSubMenu menu-active" && isHovering ? 'activeSubMenu' : 'activeSubMenu menu-active'}
                             onMouseOver={handleMouseOver}
                             onMouseOut={handleMouseOut}
-                        > <Link href={value.slug}  ><a title={value.name}>{value.name}</a></Link>
+                        > <Link href={value.slug+utm}  ><a title={value.name}>{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul>
-                                    {value.bank_product && <SubMenu data={value.bank_product} />}
+                                    {value.bank_product && <SubMenu utm={utm} data={value.bank_product} />}
                                 </ul>
                             </div>
 
@@ -72,7 +73,7 @@ const Menu = () => {
                         <a className="logo" href="#"><img src="/images/logo.png" alt="logo" /></a>
                     </div>
                     <div className="header_right">
-                        <label for="menuTrigger" className="nav_ico"><i className="fa fa-bars"></i></label>
+                        <label htmlFor="menuTrigger" className="nav_ico"><i className="fa fa-bars"></i></label>
                         <input id="menuTrigger" type="checkbox" name="" />
                         <nav className="main_nav">
                             <ul>
