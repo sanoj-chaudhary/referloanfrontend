@@ -63,7 +63,7 @@ const handleChange = (e) =>{
             <select className="form-select" aria-label="Type of loan " name='product_id'  onChange={handleChange}>
 
               {ProductByCat.map((item, key) => (
-                <option selected={content.p_name == item.name} key={key} value={item.slug}>{item.name}</option>
+                <option defaultValue='' selected={content.p_name == item.name} key={key} value={item.slug}>{item.name}</option>
               ))}
             </select>
           </div>

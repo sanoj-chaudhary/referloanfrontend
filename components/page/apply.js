@@ -31,7 +31,8 @@ const getToken = () => {
   }
 }
 const apply = (props) => {
-
+console.log("length",props.form_schema.length)
+console.log("form_schema",props.form_schema.length)
   // const tokenkey = getToken();
   const [step, setStep] = useState(0)
   const [token, setToken] = useState(getToken());
@@ -136,9 +137,9 @@ const apply = (props) => {
               <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
               <ul>
                 {props.specification.map((item, key) => (
-                  <li>
+                  <li key={key}>
                     <div className="price_row">
-                      <label htmlFor="">{item.title}</label>
+                      <label >{item.title}</label>
                       <span>₹ {item.value}</span>
                     </div>
                     <p>{item.short_description}</p>
@@ -163,11 +164,11 @@ const apply = (props) => {
 
                           {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'date') && <TextField
                             fullWidth
-                            inputProps={elem.patterns != '' ? { pattern: elem.patterns, title:"Please Fill Valid Data!" } : ''}
+                            inputProps={elem.patterns != '' ? { pattern: elem.patterns, title:"Please Fill Valid Data!" } : {}}
                             required={elem.is_required}
                             className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                             name={elem.param_name}
-                            inputProps={(elem.param_name == 'first_name' || elem.param_name == 'last_name' || elem.param_name == 'phone' || elem.param_name == 'pan') ? { value:otpData[elem.param_name] } : ''}
+                            inputProps={(elem.param_name == 'first_name' || elem.param_name == 'last_name' || elem.param_name == 'phone' || elem.param_name == 'pan') ? { value:otpData[elem.param_name] } : {}}
                             label={elem.field_name}
                             id={elem.param_name}
                             autoComplete="off"
@@ -222,7 +223,7 @@ const apply = (props) => {
                 <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
 
                     {props.faq.map((item,key) => (
-                        <div className="accordion-item">
+                        <div key={key} className="accordion-item">
                         <h2 className="accordion-header" id={'flush-heading'+key}>
                             <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse'+key} aria-expanded="false" aria-controls={'flush-collapse'+key}>
                                 {item.question}
@@ -238,7 +239,7 @@ const apply = (props) => {
                   </div>
 
                   <div className="faqImg">
-                      <img src="/images/faq.png" alt="" />
+                      <img src="/images/faq.png" alt="faqImg" />
                   </div>
                 </div>
             </div>
