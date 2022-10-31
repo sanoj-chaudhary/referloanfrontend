@@ -124,7 +124,8 @@ const apply = (props) => {
   }).join("_");
 
 
-
+console.log("formSchemaa",props.form_schema)
+console.log("schema length",props.form_schema.length)
   return (
     <>
 
