@@ -65,6 +65,11 @@
     --large-font: 1.125rem !important;
 }
 
+html,
+li {
+    font-family: 'Poppins', sans-serif !important;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     /* font-family: 'Open Sans', sans-serif; */
@@ -105,7 +110,9 @@ ul,
 li,
 
 p {
-    font-weight: 300;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
 }
 
 img {
@@ -115,7 +122,7 @@ img {
 
 p {
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     padding: 14px;
     font-family: 'Poppins', sans-serif;
     line-height: 1.5;
@@ -129,9 +136,72 @@ p+p {
     margin-bottom: 5px;
 }
 
+ul {
+    padding-left: 0rem !important;
+}
+
+ul li {
+    font-weight: 400;
+    margin: 0 0px;
+}
+
+ul li+li {
+    /* padding-top: 10px; */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse !important;
+    margin-bottom: 28px;
+}
+
+table,
+td,
+th {
+    border: 1px solid #ededf5 !important;
+}
+
+table td,
+table th {
+    padding: 5px;
+}
+
+tr:nth-child(even) {
+    background-color: #f5fcff;
+}
+
+table td p {
+    padding: 0px !important;
+}
+
+table p,
+table td {
+    padding: 8px;
+    margin-bottom: 0;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+}
+
+table+p {
+    padding: 0px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.innerpage_bg p+h2 {
+    margin-top: 20px;
+}
+
+h2,
+.h2 {
+    font-size: 1.5rem;
+    font-family: 'Poppins';
+}
+
 .h100 {
     height: 100% !important;
 }
+
 
 h2.headingBlue {
     color: var(--headingBlue);
@@ -165,14 +235,14 @@ h2.headingBlue {
     padding-bottom: 15px;
 }
 
-.formContainer  .inputRow label {
+.formContainer .inputRow label {
     font-size: var(--small-font);
     font-weight: 500;
     color: #333;
 }
 
-.formContainer  .inputRow select,
-.formContainer  .inputRow input {
+.formContainer .inputRow select,
+.formContainer .inputRow input {
     font-size: var(--xs-font);
     font-weight: 400;
     color: #333;
@@ -183,20 +253,20 @@ h2.headingBlue {
     height: 46px;
 }
 
-.formContainer  .inputRow input::placeholder {
+.formContainer .inputRow input::placeholder {
     font-size: var(--small-font);
     font-weight: 300;
     color: #666;
 }
 
-.formContainer  .checkBoxRow {
+.formContainer .checkBoxRow {
     display: flex;
 }
 
-.formContainer  .checkBoxRow input[type='checkbox']{
+.formContainer .checkBoxRow input[type='checkbox'] {
     height: 19px;
     width: 19px;
-    border: 1px solid #e2edfb!important;
+    border: 1px solid #e2edfb !important;
     border-radius: 4px;
     margin-right: 10px;
 }
@@ -462,23 +532,25 @@ input[type=number] {
 
 .emicontainer .left {
     flex: 2;
-        /* background-color: #fff; */
-        padding: 45px 20px 45px 40px;
-        border: 1px solid #ecedef;
-       
-        border-radius: 5px;
-        /* border: 1px solid lightgrey; */
-        border: 1px solid #ecedef;
+    /* background-color: #fff; */
+    padding: 45px 20px 45px 40px;
+    border: 1px solid #ecedef;
+
+    border-radius: 5px;
+    /* border: 1px solid lightgrey; */
+    border: 1px solid #ecedef;
 }
 
-.emicontainer .left .emi_check{
+.emicontainer .left .emi_check {
     outline: none;
     border: none;
 }
-.emicontainer .left .emi_check:focus{
+
+.emicontainer .left .emi_check:focus {
     outline: none;
     border: none;
 }
+
 .emicontainer .left .MuiTable-root {
     width: 100%;
     display: table;

@@ -56,7 +56,32 @@ const Footer = () => {
     }
 
     return (
-        <footer className='footerWrapper'>
+
+
+
+        <footer >
+           
+            <div class="sticky_nav">
+                    <a class="nav-item" href="#">
+                        <img src="/images/icon/pl-icon.png" alt="" /><span>Home</span>
+                    </a>
+
+                    <a class="nav-item" href="#">
+                        <img src="/images/icon/ccard-icon.png" alt="" />
+                        <span>Activity</span>
+                    </a>
+
+                    <a class="nav-item" href="#">
+                        <img src="/images/icon/sa-icon.png" alt="" />
+                        <span>Saving Account</span>
+                    </a>
+
+                    <a class="nav-item" href="#">
+                        <img src="images/icon/eduL-icon.png" alt="" />
+                        <span>Investment</span>
+                    </a>
+                </div>
+          <div className='footerWrapper'>
             <div className="fot-top-bar">
                 <div className="container">
                     <div className="innerBar">
@@ -85,19 +110,19 @@ const Footer = () => {
                         <div className="footerNav">
                             <ul>
                                 {loanP.map((value) => (
-                                    <li key={value.id}><Link href={value.slug} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 
                             <ul>
                                 {loanBP.map((value) => (
-                                    <li key={value.id}><Link href={value.slug} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 
                             <ul>
                                 {ccBP.map((value) => (
-                                    <li key={value.id}><Link href={value.slug} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 
@@ -118,7 +143,7 @@ const Footer = () => {
                             <h2> Loan </h2>
                             <ul>
                                 {loan.map((item)=>(
-                                    <li key={item.id}><Link href={item.slug} ><a title="{item.name}">{item.name}</a></Link></li>
+                                    <li key={item.id}><Link href={'/'+item.slug+process.env.UTM} ><a title="{item.name}">{item.name}</a></Link></li>
                                 ))}
                             </ul>
                         </div>
@@ -127,7 +152,7 @@ const Footer = () => {
                             <h2>Credit Cards</h2>
                             <ul>
                                 {cc.map((item)=>(
-                                    <li key={item.id}><Link href={item.slug} ><a title="{item.name}">{item.name}</a></Link></li>
+                                    <li key={item.id}><Link href={'/'+item.slug+process.env.UTM} ><a title="{item.name}">{item.name}</a></Link></li>
                                 ))}
                             </ul>
                         </div>
@@ -166,7 +191,9 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
+            </div>
         </footer>
+        
     )
 }
 

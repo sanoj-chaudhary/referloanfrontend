@@ -44,7 +44,7 @@ const cardLoan = () => {
             <div className="slickItem">
               <div className="slide_item">
                 <li className="greenBox">
-                  <Link href="/loans/personal-loan"><a>
+                  <Link href={'/loans/personal-loan' + process.env.UTM}><a>
                     <div className="contentArea">
                       <h2>Personal Loan</h2>
                       <p>Instant approval on loans upto Rs. 25 lakh</p>
@@ -62,7 +62,7 @@ const cardLoan = () => {
             <div className="slickItem">
               <div className="slide_item">
                 <li className="blueBox">
-                  <Link href="/credit-card"><a>
+                  <Link href={'/credit-card' + process.env.UTM}><a>
                     <div className="contentArea">
                       <h2>Credit Card</h2>
                       <p>Get a card limit of up to Rs. 2 lakh*</p>
@@ -80,7 +80,7 @@ const cardLoan = () => {
             <div className="slickItem">
               <div className="slide_item">
                 <li className="purpleBox">
-                  <Link href="/loans/business-loan"><a>
+                  <Link href={"/loans/business-loan" + process.env.UTM}><a>
                     <div className="contentArea">
                       <h2>Business Loan</h2>
                       <p>Purchases into easy EMIS with a limit of up to Rs. 2 lakh*</p>
@@ -97,7 +97,7 @@ const cardLoan = () => {
             <div className="slickItem">
               <div className="slide_item">
                 <li className="yellowBox">
-                  <Link href="/loans/gold-loan"><a>
+                  <Link href={"/loans/gold-loan" + process.env.UTM}><a>
                     <div className="contentArea">
                       <h2>Gold Loan</h2>
                       <p>Instant approval on loans upto Rs. 25 lakh</p>

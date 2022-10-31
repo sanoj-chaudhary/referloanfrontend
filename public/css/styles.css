@@ -6,9 +6,7 @@
     background-color: #fbfeff;
 }
 
-ul {
-    padding-left: 0rem !important;
-}
+
 
 .heroSection .heroContent .headMain_carousel ul.slick-dots {
     height: 33px;
@@ -1466,7 +1464,7 @@ footer img.footerlogo {
     font-size: var(--small-font);
     color: #fff;
     font-weight: 500;
-    background-color: #5cc300;
+    background-color: var(--secondryColor);
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -1474,6 +1472,11 @@ footer img.footerlogo {
     -o-border-radius: 4px;
     padding: 7px 15px;
     cursor: pointer;
+    transition: all 0.3s;
+}
+
+.cardOffer_area .cardlist-Pnl .lstRow .actionPnl .actBtnArea .grabDeal:hover {
+    background-color: var(--primaryColor);
 }
 
 .cardOffer_area .cardlist-Pnl .lstRow .actionPnl .actBtnArea .deatilBtn {
@@ -1817,7 +1820,6 @@ note {
     position: relative;
     text-align: center;
     border: 1px solid #d3d3d3;
-    border-left: 3px solid #ff9e00;
     border-radius: 4px;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
@@ -2170,6 +2172,10 @@ footer img.footerlogo {
     overflow: hidden;
 }
 
+.home_blogArea{
+    padding: 20px 0 50px;
+}
+
 .blog_heading {
     font-size: 24px;
     padding: 20px;
@@ -2184,9 +2190,11 @@ footer img.footerlogo {
 
 .blog_subheadingPar {
     font-size: 14px;
-    text-align: justify;
-    padding-bottom: 20px;
+    text-align: left;
+    padding-bottom: 0px;
     color: #000;
+    margin: 0;
+    font-weight: 400;
 }
 
 .blog_subheading_readmore {
@@ -2194,7 +2202,14 @@ footer img.footerlogo {
 }
 
 .blog_subheading_shadow {
-    box-shadow: 0 4px 4px 0 rgb(0 0 0 / 20%), 0 4px 4px 0 rgb(0 0 0 / 19%);
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+}
+.home_blogArea .blog_dis_area {
+    background-color: #fff;
+    box-shadow: 0px 0px 25px 0px rgb(0 0 0 / 10%);
+    padding: 10px 20px 20px;
+    margin-bottom: 20px;
 }
 
 .blog_pic {

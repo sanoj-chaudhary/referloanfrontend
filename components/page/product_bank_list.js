@@ -9,7 +9,6 @@ import Head from "next/head";
 import LeftFilterProductBank from '../page/left_filter_product_bank'
 
 const midcontent = ({ url,refer,data }) => {
-  const utm = "?utm_source=direct_visitors&utm_medium=self&utm_campaign=&utm_id=";
   const [products, setProducts] = useState([])
   const [content, setContent] = useState([])
   const [ProductByCat, setProductByCat] = useState([])
@@ -96,7 +95,7 @@ const midcontent = ({ url,refer,data }) => {
       <div className="container">
         <section className="cardOffer_area">
           
-          <LeftFilterProductBank content={content} ProductByCat={ProductByCat} />
+          <LeftFilterProductBank content={content} ProductByCat={ProductByCat} searchProduct={searchProduct} />
 
           <div className="cardlist-Pnl">
             {products.map((item,key) => (
@@ -135,7 +134,7 @@ const midcontent = ({ url,refer,data }) => {
                 
                 <div className="actionPnl">
                   <div className="actBtnArea">
-                    <Link href={item.slug+utm}><a className="grabDeal">Grab Deal</a></Link>
+                    <Link href={item.slug+process.env.UTM}><a className="grabDeal">Grab Deal</a></Link>
                   </div>
                 </div>
               </div>
