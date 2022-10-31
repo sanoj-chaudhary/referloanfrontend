@@ -31,8 +31,8 @@ const getToken = () => {
   }
 }
 const apply = (props) => {
-console.log("length",props.form_schema.length)
-console.log("form_schema",props.form_schema)
+  //console.log("length",props.form_schema.length)
+  //console.log("form_schema",props.form_schema)
   // const tokenkey = getToken();
   const [step, setStep] = useState(0)
   const [token, setToken] = useState(getToken());
@@ -78,11 +78,23 @@ console.log("form_schema",props.form_schema)
             'Authorization': "Bearer " + token.slice(1, -1) + ""
           }
           console.log(values)
+          
           setLoading(true)
           const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
           if (res.data.status) {
             setStep(step + 1)
             setLoading(false)
+          }
+
+          console.log('length: '+props.form_schema.length)
+          console.log('count: '+step)
+          console.log('Pro: '+props.data[0].id)
+
+          if(props.form_schema.length !=0 && (props.form_schema.length-1) == step)
+           {
+            var bank_product_id = props.data[0].id;
+            const resData = await axios.post('https://testapi.referloan.in/api/banks/process/', bank_product_id, { headers });
+            console.log('resData: '+resData)
           }
         } catch (error) {
           alert('Something Went Wrong')
@@ -168,8 +180,9 @@ console.log("form_schema",props.form_schema)
                             required={elem.is_required}
                             className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                             name={elem.param_name}
-                            inputProps={(elem.param_name == 'first_name' || elem.param_name == 'last_name' || elem.param_name == 'phone' || elem.param_name == 'pan') ? { value:otpData[elem.param_name] } : {}}
+                            inputProps={(elem.param_name == 'first_name' || (elem.param_name == 'last_name' && last_name != '') || elem.param_name == 'phone' || elem.param_name == 'pan') ? { value:otpData[elem.param_name] } : {}}
                             label={elem.field_name}
+                            //inputProps={ ? { value:otpData[elem.param_name] } : {}}
                             id={elem.param_name}
                             autoComplete="off"
                             onChange={handleChange}
