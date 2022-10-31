@@ -41,6 +41,8 @@ const apply = (props) => {
   const [paramName, setParamName] = ('')
   const [loading, setLoading] = useState(true)
   const [userValues, setUserValues] = useState({});
+  const [serversidemsg, setServerSideMsg] = useState('')
+  const [serversideStatus, setServerSideStatus] = useState(true)
   var initialValues = {};
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
@@ -49,20 +51,20 @@ const apply = (props) => {
     if (full_name != null) {
       var first_name = full_name.split(' ').slice(0, 1).join(' ');
       var last_name = full_name.split(' ').slice(1, full_name.length).join(' ');
-    }else{
+    } else {
       var first_name = '';
       var last_name = '';
     }
-  }else{
+  } else {
     var full_name = '';
     var pan = '';
     var phone = '';
     var first_name = '';
     var last_name = '';
   }
-  
+
   const otpData = {
-    full_name,first_name,last_name,pan,phone
+    full_name, first_name, last_name, pan, phone
   }
 
   //console.log('F: '+first_name);
@@ -78,33 +80,40 @@ const apply = (props) => {
             'Authorization': "Bearer " + token.slice(1, -1) + ""
           }
           console.log(values)
-          
+
           setLoading(true)
           const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
           if (res.data.status) {
-            setStep(step + 1)
+
             setLoading(false)
+
+            if (props.form_schema.length - 1 == step) {
+              var bank_product_id = { "bank_product_id": props.data[0].bank_product_id }
+              const resData = await axios.post('https://api.referloan.in/api/banks/process', bank_product_id, { headers });
+              console.log('resData: ' + resData)
+              if (resData.data.status) {
+                setStep(step + 1)
+              }
+            } else {
+              setStep(step + 1)
+            }
           }
 
-          if(props.form_schema.length !=0 && (props.form_schema.length-1) == step)
-          {
-            var bank_product_id = {"bank_product_id":props.data[0].bank_product_id}
-            const resData = await axios.post('https://testapi.referloan.in/api/banks/process/', bank_product_id, { headers });
-            console.log('resData: '+resData)
-          }
+
         } catch (error) {
-          alert('Something Went Wrong')
+          setServerSideStatus(false)
+          setServerSideMsg('Fill the valid information')
+          console.log("message", error.message);
           setLoading(false)
         }
       },
     });
+
   useEffect(() => {
     setLoading(false)
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
-
-
   }, [token])
 
   const mySentence = props.data[0].name;
@@ -140,7 +149,7 @@ const apply = (props) => {
                     currentTarget.src = '/uploads/product_bank/' + props.data[0].categories_id + '.png';
                   }}
                 />
-                
+
               </div>
               <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
               <ul>
@@ -157,7 +166,8 @@ const apply = (props) => {
             </div>
             <div className="dealStep__wrapper">
               <div className="dealStep__Area">
-                {(token == '' || token == null) && <GenerateOtp data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
+                {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
+                {(token == '' || token == null) && <GenerateOtp setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
 
                 {(token != null || token != undefined) && <form onSubmit={handleSubmit}>
@@ -172,11 +182,11 @@ const apply = (props) => {
 
                           {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'date') && <TextField
                             fullWidth
-                            inputProps={elem.patterns != '' ? { pattern: elem.patterns, title:"Please Fill Valid Data!" } : {}}
+                            inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
                             required={elem.is_required}
                             className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                             name={elem.param_name}
-                            inputProps={(elem.param_name == 'first_name' || (elem.param_name == 'last_name' && last_name != '') || elem.param_name == 'phone' || elem.param_name == 'pan') ? { value:otpData[elem.param_name] } : {}}
+                            inputProps={(elem.param_name == 'first_name' || (elem.param_name == 'last_name' && last_name != '') || elem.param_name == 'phone' || elem.param_name == 'pan') ? { value: otpData[elem.param_name] } : {}}
                             label={elem.field_name}
                             //inputProps={ ? { value:otpData[elem.param_name] } : {}}
                             id={elem.param_name}
@@ -211,9 +221,9 @@ const apply = (props) => {
 
                   )}
 
-                  {props.form_schema.length !=0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} /> : ""}
+                  {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} /> : ""}
 
-                  {props.form_schema.length ==0? <img src="/images/coming-soon.png" width="100" />:''}
+                  {props.form_schema.length == 0 ? <img src="/images/coming-soon.png" width="100" /> : ''}
                 </form>}
               </div>
             </div>
@@ -226,32 +236,32 @@ const apply = (props) => {
               </div>
 
               <div className="faqSetion">
-              <h3>FREQUENTLY ASKED QUESTIONS</h3>
-              <h2>Have a question? We've got answers!</h2>
-              <div className="faq_row">
-                <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
+                <h3>FREQUENTLY ASKED QUESTIONS</h3>
+                <h2>Have a question? We've got answers!</h2>
+                <div className="faq_row">
+                  <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
 
-                    {props.faq.map((item,key) => (
-                        <div key={key} className="accordion-item">
-                        <h2 className="accordion-header" id={'flush-heading'+key}>
-                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse'+key} aria-expanded="false" aria-controls={'flush-collapse'+key}>
-                                {item.question}
-                            </button>
+                    {props.faq.map((item, key) => (
+                      <div key={key} className="accordion-item">
+                        <h2 className="accordion-header" id={'flush-heading' + key}>
+                          <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse' + key} aria-expanded="false" aria-controls={'flush-collapse' + key}>
+                            {item.question}
+                          </button>
                         </h2>
-                        <div id={'flush-collapse'+key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                            <div className="accordion-body">
-                                <div dangerouslySetInnerHTML={{ __html: item.answer }}></div>
-                            </div>
+                        <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                          <div className="accordion-body">
+                            <div dangerouslySetInnerHTML={{ __html: item.answer }}></div>
+                          </div>
                         </div>
-                    </div> 
-                    ))}                       
+                      </div>
+                    ))}
                   </div>
 
                   <div className="faqImg">
-                      <img src="/images/faq.png" alt="faqImg" />
+                    <img src="/images/faq.png" alt="faqImg" />
                   </div>
                 </div>
-            </div>
+              </div>
 
             </section>
           </div>
