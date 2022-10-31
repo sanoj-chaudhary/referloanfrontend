@@ -8,7 +8,7 @@ const serviceArea = () => {
                     <h2>Apply for loans</h2>
                     <ul className="iconPnl">
                         <li>
-                            <Link href="/loans/personal-loan"><a>
+                            <Link href={"/loans/personal-loan" + process.env.UTM}><a>
                                 <img src="/images/icon/pl-iocn-w.png" alt="" />
                                 <h3>Personal</h3>
                             </a>
@@ -16,7 +16,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/loans/business-loan"><a>
+                            <Link href={"/loans/business-loan" + process.env.UTM}><a>
                                 <img src="/images/icon/bl-icon-w.png" alt="" />
                                 <h3>Business</h3>
                             </a>
@@ -24,7 +24,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/loans/education-loan"><a>
+                            <Link href={"/loans/education-loan" + process.env.UTM}><a>
                                 <img src="/images/icon/ed-icon-w.png" alt="" />
                                 <h3>Education</h3>
                             </a>
@@ -32,7 +32,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/loans/gold-loan"><a>
+                            <Link href={"/loans/gold-loan" + process.env.UTM}><a>
                                 <img src="/images/icon/offer-icon-w.png" alt="" />
                                 <h3>Gold</h3>
                             </a>
@@ -44,7 +44,7 @@ const serviceArea = () => {
                     <h2>Get a credit card </h2>
                     <ul className="iconPnl">
                         <li>
-                            <Link href="/bank-axis"><a>
+                            <Link href={"/bank-axis" + process.env.UTM}><a>
                                 <img src="/images/icon/axis-icon.png" alt="" />
                                 <h3>Axis</h3>
                             </a>
@@ -52,7 +52,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/bank-kotak"><a>
+                            <Link href={"/bank-kotak" + process.env.UTM}><a>
                                 <img src="/images/icon/kotak-icon.png" alt="" />
                                 <h3>Kotak</h3>
                             </a>
@@ -60,7 +60,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/bank-icici"><a>
+                            <Link href={"/bank-icici" + process.env.UTM}><a>
                                 <img src="/images/icon/icici-icon-w.png" alt="" />
                                 <h3>ICICI</h3>
                             </a>
@@ -68,7 +68,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/bank-sbi"><a>
+                            <Link href={"/bank-sbi" + process.env.UTM}><a>
                                 <img src="/images/icon/sbi-icon.png" alt="" />
                                 <h3>SBI</h3>
                             </a>
@@ -80,7 +80,7 @@ const serviceArea = () => {
                     <h2>Get an Insurance Plan </h2>
                     <ul className="iconPnl">
                         <li>
-                            <Link href="/other-product/health-insurance"><a>
+                            <Link href={"/other-product/health-insurance" + process.env.UTM}><a>
                                 <img src="/images/icon/health-icon.png" alt="" />
                                 <h3>Health</h3>
                             </a>
@@ -88,7 +88,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/other-product/life-insurance"><a>
+                            <Link href={"/other-product/life-insurance" + process.env.UTM}><a>
                                 <img src="/images/icon/life-icon.png" alt="" />
                                 <h3>Life</h3>
                             </a>
@@ -96,7 +96,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/insurance-and-investment/guaranteed-return-plan"><a>
+                            <Link href={"/insurance-and-investment/guaranteed-return-plan" + process.env.UTM}><a>
                                 <img src="/images/icon/return-icon.png" alt="" />
                                 <h3>Return</h3>
                             </a>
@@ -104,7 +104,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href="/insurance-and-investment/direct-mutual-funds"><a>
+                            <Link href={"/insurance-and-investment/direct-mutual-funds" + process.env.UTM}><a>
                                 <img src="/images/icon/mutual-icon.png" alt="" />
                                 <h3>Mutual</h3>
                             </a>
