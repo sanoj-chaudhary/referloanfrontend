@@ -63,7 +63,7 @@ const calculator = ({ data,content }) => {
 export async function getServerSideProps(context) {
  
  const data = context.query.calculator;  
- let res = await db.query("SELECT * FROM `pages` WHERE `slug` =  '" + data + "' AND `status` = '1' ");
+ let res = await db.query("SELECT * FROM `pages` WHERE `slug` =  'calculator/" + data + "' AND `status` = '1' ");
  let content = JSON.parse(JSON.stringify(res))
  
  return { props: { data,content } }
