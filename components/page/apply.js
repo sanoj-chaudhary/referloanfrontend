@@ -86,13 +86,9 @@ const apply = (props) => {
             setLoading(false)
           }
 
-          console.log('length: '+props.form_schema.length)
-          console.log('count: '+step)
-          console.log('Pro: '+props.data[0].id)
-
           if(props.form_schema.length !=0 && (props.form_schema.length-1) == step)
-           {
-            var bank_product_id = props.data[0].id;
+          {
+            var bank_product_id = {"bank_product_id":props.data[0].id}
             const resData = await axios.post('https://testapi.referloan.in/api/banks/process/', bank_product_id, { headers });
             console.log('resData: '+resData)
           }
