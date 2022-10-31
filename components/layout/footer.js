@@ -110,19 +110,19 @@ const Footer = () => {
                         <div className="footerNav">
                             <ul>
                                 {loanP.map((value) => (
-                                    <li key={value.id}><Link href={value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 
                             <ul>
                                 {loanBP.map((value) => (
-                                    <li key={value.id}><Link href={value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 
                             <ul>
                                 {ccBP.map((value) => (
-                                    <li key={value.id}><Link href={value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 
@@ -143,7 +143,7 @@ const Footer = () => {
                             <h2> Loan </h2>
                             <ul>
                                 {loan.map((item)=>(
-                                    <li key={item.id}><Link href={item.slug+process.env.UTM} ><a title="{item.name}">{item.name}</a></Link></li>
+                                    <li key={item.id}><Link href={'/'+item.slug+process.env.UTM} ><a title="{item.name}">{item.name}</a></Link></li>
                                 ))}
                             </ul>
                         </div>
@@ -152,7 +152,7 @@ const Footer = () => {
                             <h2>Credit Cards</h2>
                             <ul>
                                 {cc.map((item)=>(
-                                    <li key={item.id}><Link href={item.slug+process.env.UTM} ><a title="{item.name}">{item.name}</a></Link></li>
+                                    <li key={item.id}><Link href={'/'+item.slug+process.env.UTM} ><a title="{item.name}">{item.name}</a></Link></li>
                                 ))}
                             </ul>
                         </div>

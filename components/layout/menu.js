@@ -24,7 +24,7 @@ const Menu = () => {
         }
     }
     const items = headermenu.map((item, index) => (
-        item.hierarchy == 'Product_BankProduct' ? <li key={item.id}><Link href={item.slug+process.env.UTM} ><a className={item.product ? "hasSub_menu" : ''} title={item.name}>{item.name}</a></Link>
+        item.hierarchy == 'Product_BankProduct' ? <li key={item.id}><Link href={'/'+item.slug+process.env.UTM} ><a className={item.product ? "hasSub_menu" : ''} title={item.name}>{item.name}</a></Link>
             <div className={item.product ? "megaMenu_container" : ''} >
                 <ul className={item.product ? "subMenuLevel2" : ''}>
                     {item.product && item.product.map((value, Indexkey) => (
@@ -32,7 +32,7 @@ const Menu = () => {
                             className={Indexkey ? "activeSubMenu" : "activeSubMenu menu-active" && isHovering ? 'activeSubMenu' : 'activeSubMenu menu-active'}
                             onMouseOver={handleMouseOver}
                             onMouseOut={handleMouseOut}
-                        > <Link href={value.slug+process.env.UTM}  ><a title={value.name}>{value.name}</a></Link>
+                        > <Link href={'/'+value.slug+process.env.UTM}  ><a title={value.name}>{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul>
                                     {value.bank_product && <SubMenu utm={process.env.UTM} data={value.bank_product} />}
@@ -43,7 +43,7 @@ const Menu = () => {
                     ))}
                 </ul>
             </div>
-        </li> : <li key={item.id}><Link href={item.slug+process.env.UTM} ><a className={item.page ? "hasSub_menu" : ''} title={item.name}>{item.name}</a></Link>
+        </li> : <li key={item.id}><Link href={'/'+item.slug+process.env.UTM} ><a className={item.page ? "hasSub_menu" : ''} title={item.name}>{item.name}</a></Link>
             <div className={item.page ? "megaMenu_container" : ''} >
                 <ul className={item.page ? "subMenuLevel2" : ''}>
                     {item.page && item.page.map((value, Indexkey) => (
@@ -51,7 +51,7 @@ const Menu = () => {
                             className={Indexkey ? "activeSubMenu" : "activeSubMenu menu-active" && isHovering ? 'activeSubMenu' : 'activeSubMenu menu-active'}
                             onMouseOver={handleMouseOver}
                             onMouseOut={handleMouseOut}
-                        > <Link href={value.slug+process.env.UTM}  ><a style={{ textTransform: 'capitalize' }} title={value.name}>{value.name}</a></Link>
+                        > <Link href={'/'+value.slug+process.env.UTM}  ><a style={{ textTransform: 'capitalize' }} title={value.name}>{value.name}</a></Link>
                         </li>
                     ))}
                 </ul>
