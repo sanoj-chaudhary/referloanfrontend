@@ -5,7 +5,7 @@ import axios from "axios";
 import { useFormik } from 'formik'
 import * as Yup from "yup";
 import Loader from "./loader";
-const GenerateOtp = ({ setToken, setPancard, setUserValues,data }) => {
+const GenerateOtp = ({ setToken, setPancard, setUserValues,data,setServerSideMsg,setServerSideStatus }) => {
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(true)
   const [errmsg, setErrmsg] = useState('')
