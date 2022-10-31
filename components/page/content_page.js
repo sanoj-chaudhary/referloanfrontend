@@ -19,9 +19,7 @@ const midcontent = ({ data, faq }) => {
         <div className="innerpage_bg">
           <section className="section_pad">
             <div className="container">
-              <div
-                dangerouslySetInnerHTML={{ __html: data[0].description }}
-              ></div>
+              <div dangerouslySetInnerHTML={{ __html: data[0].description }}></div>
 
               <div class="faqSetion">
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>
@@ -52,7 +50,7 @@ const midcontent = ({ data, faq }) => {
                           data-bs-parent="#accordionFlushExample"
                         >
                           <div class="accordion-body">
-                            <p>{item.answer}</p>
+                            <div dangerouslySetInnerHTML={{ __html: item.answer}}></div>
                           </div>
                         </div>
                       </div>
