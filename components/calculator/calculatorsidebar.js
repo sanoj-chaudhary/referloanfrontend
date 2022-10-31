@@ -6,17 +6,15 @@ const calcSidebar = ({setCalcName,calcName}) => {
         <div className="article_list" data-aos="fade-left">
             <h2>CALCULATOR</h2>
             <ul>
-                <li><a onClick={()=>{setCalcName('emi-calculator')}} title="EMI Calculator">EMI Calculator</a></li>
-             
-                <li><a onClick={()=>{setCalcName('subsidy-calculator')}} title="SUBSIDY Calculator">SUBSIDY Calculator</a></li>
-                <li><a onClick={()=>{setCalcName('sip-calculator')}} title="SIP Calculator">SIP Calculator</a></li>
-                <li><a onClick={()=>{setCalcName('rd-calculator')}} title="RD Calculator">RD Calculator</a></li>
-
-                <li><a  onClick={()=>{setCalcName('ssy-calculator')}} title="Sukanya Samriddhi Yojana (SSY) Calculator">SSY Calculator</a></li>
-                <li><a  onClick={()=>{setCalcName('ppf-calculator')}} title="PPF Calculator">PPF Calculator</a></li>
-                <li><a  onClick={()=>{setCalcName('epf-calculator')}} title="EPF Calculator">EPF Calculator</a></li>
-                <li><a  onClick={()=>{setCalcName('lumpsum-calculator')}} title="Lumpsum Calculator">Lumpsum Calculator</a></li>
-                <li><a onClick={()=>{setCalcName('mf-calculator')}} title="MF Returns Calculator">MF Returns Calculator</a></li>
+                <li><Link href="/calculator/emi-calculator"><a title="EMI Calculator">EMI Calculator</a></Link></li>
+                <li><Link href="/calculator/subsidy-calculator"><a title="SUBSIDY Calculator">SUBSIDY Calculator</a></Link></li>
+                <li><Link href="/calculator/sip-calculator"><a title="SIP Calculator">SIP Calculator</a></Link></li>
+                <li><Link href="/calculator/rd-calculator"><a title="RD Calculator">RD Calculator</a></Link></li>
+                <li><Link href="/calculator/ssy-calculator"><a title="SSY Calculator">SSY Calculator</a></Link></li>
+                <li><Link href="/calculator/ppf-calculator"><a title="PPF Calculator">PPF Calculator</a></Link></li>
+                <li><Link href="/calculator/epf-calculator"><a title="EPF Calculator">EPF Calculator</a></Link></li>
+                <li><Link href="/calculator/lumpsum-calculator"><a title="Lumpsum Calculator">Lumpsum Calculator</a></Link></li>
+                <li><Link href="/calculator/mf-calculator"><a title="MF Returns Calculator">MF Returns Calculator</a></Link></li>
             </ul>
         </div>
     )
