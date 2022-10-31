@@ -9,8 +9,8 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues,data }) => {
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(true)
   const [errmsg, setErrmsg] = useState('')
-  const [serversidemsg,setServerSideMsg] = useState('')
-  const [serversideStatus,setServerSideStatus] = useState(true)
+  // const [serversidemsg,setServerSideMsg] = useState('')
+  // const [serversideStatus,setServerSideStatus] = useState(true)
   const [loading, setLoading] = useState(true)
   const [genOtpData, setGenOtpData] = useState({
     "full_name": '',
@@ -107,7 +107,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues,data }) => {
     <>
        {loading && <Loader/>}
       <form>
- {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
+ 
         {!otpStatus ? <>
 
           <TextField value={values.full_name} required name="full_name" fullWidth label="Full Name" variant="standard" onChange={handleChange} onBlur={handleBlur} />

@@ -95,7 +95,7 @@ const midcontent = ({ url,refer,data }) => {
       <div className="container">
         <section className="cardOffer_area">
           
-          <LeftFilterProductBank content={content} ProductByCat={ProductByCat} />
+          <LeftFilterProductBank content={content} ProductByCat={ProductByCat} searchProduct={searchProduct} />
 
           <div className="cardlist-Pnl">
             {products.map((item,key) => (
