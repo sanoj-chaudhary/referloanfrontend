@@ -56,7 +56,32 @@ const Footer = () => {
     }
 
     return (
-        <footer className='footerWrapper'>
+
+
+
+        <footer >
+           
+            <div class="sticky_nav">
+                    <a class="nav-item" href="#">
+                        <img src="/images/icon/pl-icon.png" alt="" /><span>Home</span>
+                    </a>
+
+                    <a class="nav-item" href="#">
+                        <img src="/images/icon/ccard-icon.png" alt="" />
+                        <span>Activity</span>
+                    </a>
+
+                    <a class="nav-item" href="#">
+                        <img src="/images/icon/sa-icon.png" alt="" />
+                        <span>Saving Account</span>
+                    </a>
+
+                    <a class="nav-item" href="#">
+                        <img src="images/icon/eduL-icon.png" alt="" />
+                        <span>Investment</span>
+                    </a>
+                </div>
+          <div className='footerWrapper'>
             <div className="fot-top-bar">
                 <div className="container">
                     <div className="innerBar">
@@ -166,7 +191,9 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
+            </div>
         </footer>
+        
     )
 }
 
