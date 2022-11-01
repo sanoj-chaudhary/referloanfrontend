@@ -7,17 +7,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import * as Yup from "yup";
 import TextField from '@material-ui/core/TextField';
-import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
 import Head from "next/head";
 import GenerateOtp from "./generateOtp";
 import Loader from "./loader";
-import $ from 'jquery';
-import Script from 'next/script';
 import Thanks from "./thanks";
+import { useRouter } from 'next/router';
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
@@ -31,6 +28,7 @@ const getToken = () => {
   }
 }
 const apply = (props) => {
+  const router = useRouter()
   //console.log("length",props.form_schema.length)
   //console.log("form_schema",props.form_schema)
   // const tokenkey = getToken();
@@ -94,7 +92,10 @@ const apply = (props) => {
               if (resData.data.status) {
                 setStep(step + 1)
                 if (typeof window !== 'undefined') {
-                  window.localStorage.removeItem("token"); 
+                  window.localStorage.removeItem("token");
+                  window.localStorage.removeItem("full_name");
+                  window.localStorage.removeItem("pan");
+                  window.localStorage.removeItem("phone");
                 }
               }
             } else {
@@ -117,9 +118,9 @@ const apply = (props) => {
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
-  }, [token])
+  }, [token,router])
 
-  console.log('props',props)
+  console.log('props', props)
   const mySentence = props.data[0].name.trim();
   const productName = mySentence.split(" ");
 
@@ -128,8 +129,8 @@ const apply = (props) => {
   }).join("_");
 
 
-console.log("formSchemaa",props.form_schema)
-console.log("schema length",props.form_schema.length)
+  console.log("formSchemaa", props.form_schema)
+  console.log("schema length", props.form_schema.length)
   return (
     <>
 
@@ -175,7 +176,7 @@ console.log("schema length",props.form_schema.length)
                 {(token == '' || token == null) && <GenerateOtp setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
 
-                {(token != null || token != undefined) && <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e)}} >
+                {(token != null || token != undefined) && <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
                     <div key={index}>
@@ -185,7 +186,7 @@ console.log("schema length",props.form_schema.length)
 
                           {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
 
-                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' ) && <TextField
+                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file') && <TextField
                             fullWidth
                             inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
                             required={elem.is_required}
@@ -198,24 +199,24 @@ console.log("schema length",props.form_schema.length)
                             onChange={handleChange}
 
                           />
-                         
-                          }
-                          {elem.type == 'date' && 
-                            <TextField
-                            fullWidth
-                            inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                            required={elem.is_required}
-                            className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                            name={elem.param_name}
-                            label={elem.field_name}
-                            id={elem.param_name}
-                            onFocus={(e) => (e.target.type = "date")}
-                            onBlur={(e) => (e.target.type = "text")}
-                            autoComplete="off"
-                            onChange={handleChange}
-                          />
 
-                           
+                          }
+                          {elem.type == 'date' &&
+                            <TextField
+                              fullWidth
+                              inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                              required={elem.is_required}
+                              className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                              name={elem.param_name}
+                              label={elem.field_name}
+                              id={elem.param_name}
+                              onFocus={(e) => (e.target.type = "date")}
+                              onBlur={(e) => (e.target.type = "text")}
+                              autoComplete="off"
+                              onChange={handleChange}
+                            />
+
+
                           }
                           {elem.type == 'select' && <SelectField {...elem} values={values} />}
 
