@@ -77,13 +77,13 @@ const Menu = () => {
                             <ul>
                                 {
                                     headermenu.map((item1, index) => (
-                                        item1.hierarchy == 'Product_BankProduct' ? <li key={index}><a href={'/'+item1.slug+process.env.UTM}>{item1.name}</a>
+                                        item1.hierarchy == 'Product_BankProduct' ? <li key={index}><Link href={'/'+item1.slug+process.env.UTM}><a>{item1.name}</a></Link>
                                         <i className="fa fa-caret-down"></i>
                                             <ul>
                                                 {
                                                     item1.product && item1.product.map((value1, key) => (
 
-                                                        <li key={key} ><a href={'/'+value1.slug+process.env.UTM}>{value1.name}</a>
+                                                        <li key={key} ><Link href={'/'+value1.slug+process.env.UTM} ><a >{value1.name}</a></Link>
                                                             <i className="fa fa-caret-down"></i>
 
                                                             <ul>
@@ -95,12 +95,12 @@ const Menu = () => {
 
                                             </ul>
                                         </li> :
-                                        <li key={index}><a href={'/'+item1.slug+process.env.UTM}>{item1.name}</a>
+                                        <li key={index}><Link href={'/'+item1.slug+process.env.UTM}><a >{item1.name}</a></Link>
                                         <i className="fa fa-caret-down"></i>
                                             <ul>
                                                 {
                                                     item1.page && item1.page.map((value1, key) => (
-                                                        <li key={key} ><a href={'/'+value1.slug+process.env.UTM}>{value1.name}</a></li>
+                                                        <li key={key} ><Link href={'/'+value1.slug+process.env.UTM}><a >{value1.name}</a></Link></li>
                                                     ))
                                                 }
                                             </ul>
