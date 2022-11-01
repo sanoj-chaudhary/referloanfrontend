@@ -1,11 +1,10 @@
 import TextField from '@material-ui/core/TextField';
 import { useState, useEffect } from "react";
-import Button from '@mui/material/Button';
 import axios from "axios";
 import { useFormik } from 'formik'
 import * as Yup from "yup";
 import Loader from "./loader";
-const GenerateOtp = ({ setToken, setPancard, setUserValues,data,setServerSideMsg,setServerSideStatus }) => {
+const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideMsg, setServerSideStatus }) => {
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(true)
   const [errmsg, setErrmsg] = useState('')
@@ -27,7 +26,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues,data,setServerSideMsg
 
       const { phone_no, otp } = values;
       const data = {
-        phone_no, otp, bank_product_id:genOtpData.bank_product_id
+        phone_no, otp, bank_product_id: genOtpData.bank_product_id
       }
       setOtpfieldval(true)
       if (otp == '') {
@@ -49,9 +48,12 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues,data,setServerSideMsg
 
           setTimeout(() => {
             if (typeof window !== 'undefined') {
-              window.localStorage.removeItem("token"); 
+              window.localStorage.removeItem("token");
+              window.localStorage.removeItem("full_name");
+              window.localStorage.removeItem("pan");
+              window.localStorage.removeItem("phone");
             }
-          }, 360000);
+          }, 3600000);
         }
       }
     } catch (error) {
@@ -60,11 +62,11 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues,data,setServerSideMsg
       console.log("message", error.message);
     }
   }
-  
+
   const OtpSchema = Yup.object({
     full_name: Yup.string().min(2).required("Please enter your name "),
-    phone_no: Yup.string().min(10).max(10).required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/,"Invalid phone number"),
-    pan_card: Yup.string().min(10).max(10).required("Please fill the pan card").matches(/([A-Z]){5}([0-9]){4}([A-Z]){1}$/,"Invalid Pancard"),
+    phone_no: Yup.string().min(10).max(10).required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/, "Invalid phone number"),
+    pan_card: Yup.string().min(10).max(10).required("Please fill the pan card").matches(/([A-Z]){5}([0-9]){4}([A-Z]){1}$/, "Invalid Pancard"),
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -90,24 +92,24 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues,data,setServerSideMsg
         setPancard(values.pan_card)
       }
     } catch (error) {
-      
+
       setServerSideStatus(false)
       setServerSideMsg('Fill the valid information')
       console.log("message", error.message);
     }
   }
 
- 
-     useEffect(() => {
-      setLoading(false)
-      setGenOtpData({...genOtpData,bank_product_id:data.bank_product_id})
-      
-    }, [data])
+
+  useEffect(() => {
+    setLoading(false)
+    setGenOtpData({ ...genOtpData, bank_product_id: data.bank_product_id })
+
+  }, [data])
   return (
     <>
-       {loading && <Loader/>}
+      {loading && <Loader />}
       <form>
- 
+
         {!otpStatus ? <>
 
           <TextField value={values.full_name} required name="full_name" fullWidth label="Full Name" variant="standard" onChange={handleChange} onBlur={handleBlur} />
@@ -125,7 +127,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues,data,setServerSideMsg
           ) : null}
           <div className="search-button">
             <button className="mt-4" type="submit" onClick={generateOtp}>Generate OTP</button>
-            </div></> : <>
+          </div></> : <>
           <TextField value={values.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={handleChange} onBlur={handleBlur} />
           {!otpfieldval ? (
             <p className="form-error">{errmsg}</p>
@@ -133,7 +135,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues,data,setServerSideMsg
           <div className="search-button"><button className="mt-4" type="submit" onClick={verifyItp}>verify OTP</button></div></>}
 
       </form>
-    
+
     </>
   )
 }
