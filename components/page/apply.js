@@ -131,9 +131,9 @@ console.log("schema length",props.form_schema.length)
     <>
 
       <Head>
-        <title>Referloan : Apply for {props.data[0].name}</title>
-        <meta name={'description'} content={'Referloan : Apply for ' + props.data[0].name} />
-        <meta name={'keywords'} content={'Referloan : Apply for ' + props.data[0].name} />
+        <title>{props.data[0].meta_title}</title>
+        <meta name={'description'} content={props.data[0].meta_description} />
+        <meta name={'keywords'} content={props.data[0].meta_keyword} />
       </Head>
       {loading ? <Loader loading={loading} /> :
         <div className="container">
