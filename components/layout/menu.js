@@ -68,7 +68,7 @@ const Menu = () => {
             <header id="moileheader" className="d-md-none d-block">
                 <div className="mheadWrapper">
                     <div className="header_left">
-                        <a className="logo" href="#"><img src="/images/logo.png" alt="logo" /></a>
+                        <a className="logo" href="/"><img src="/images/logo.png" alt="logo" /></a>
                     </div>
                     <div className="header_right">
                         <label htmlFor="menuTrigger" className="nav_ico"><i className="fa fa-bars"></i></label>
@@ -77,13 +77,13 @@ const Menu = () => {
                             <ul>
                                 {
                                     headermenu.map((item1, index) => (
-                                        <li key={index}><a href="#">{item1.name}</a>
+                                        <li key={index}><a href={'/'+item1.slug+process.env.UTM}>{item1.name}</a>
                                         <i className="fa fa-caret-down"></i>
                                             <ul>
                                                 {
                                                     item1.product && item1.product.map((value1, key) => (
 
-                                                        <li key={key} ><a href="#">{value1.name}</a>
+                                                        <li key={key} ><a href={'/'+value1.slug+process.env.UTM}>{value1.name}</a>
                                                             <i className="fa fa-caret-down"></i>
 
                                                             <ul>
@@ -98,9 +98,9 @@ const Menu = () => {
                                     ))
                                 }
                                
-                                <li><a href="#">Portfolio</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Contact Us</a></li>
+                                <li><Link href="/zero-investment-franchise"><a title="Franchise">Franchise</a></Link></li>
+                                <li><Link href="https://blog.referloan.in/"><a target="_blank" title="Blogs">Blogs</a></Link></li>
+                                <li><Link href="/contact"><a title="Contact">Contact</a></Link></li>
                             </ul>
                         </nav>
                     </div>
@@ -114,9 +114,7 @@ const Menu = () => {
                     <div className="container">
                         <div className="customContainer">
                           
-                            <Link href="/"><a className="logoSection"
-                            ><img
-                                    src="/images/top-logo.png" alt="" title=" referloan " /></a></Link>
+                            <Link href="/"><a className="logoSection"><img src="/images/top-logo.png" alt="" title="referloan" /></a></Link>
 
                             <div className="info_section">
                                 <ul>
