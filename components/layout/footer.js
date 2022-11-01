@@ -61,22 +61,22 @@ const Footer = () => {
 
         <footer >
            
-            <div class="sticky_nav">
-                    <a class="nav-item" href="#">
+            <div className="sticky_nav">
+                    <a className="nav-item" href="#">
                         <img src="/images/icon/pl-icon.png" alt="" /><span>Home</span>
                     </a>
 
-                    <a class="nav-item" href="#">
+                    <a className="nav-item" href="#">
                         <img src="/images/icon/ccard-icon.png" alt="" />
                         <span>Activity</span>
                     </a>
 
-                    <a class="nav-item" href="#">
+                    <a className="nav-item" href="#">
                         <img src="/images/icon/sa-icon.png" alt="" />
                         <span>Saving Account</span>
                     </a>
 
-                    <a class="nav-item" href="#">
+                    <a className="nav-item" href="#">
                         <img src="images/icon/eduL-icon.png" alt="" />
                         <span>Investment</span>
                     </a>

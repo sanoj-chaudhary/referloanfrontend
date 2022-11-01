@@ -42,7 +42,7 @@ const apply = (props) => {
   const [loading, setLoading] = useState(true)
   const [userValues, setUserValues] = useState({});
   const [serversidemsg, setServerSideMsg] = useState('')
-  const [serversideStatus, setServerSideStatus] = useState(true)
+  const [serversideStatus, setServerSideStatus] = useState(false)
   var initialValues = {};
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
@@ -81,7 +81,7 @@ const apply = (props) => {
           }
           console.log(values)
 
-          setLoading(true)
+          setLoading(false)
           const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
           if (res.data.status) {
 
@@ -93,6 +93,9 @@ const apply = (props) => {
               console.log('resData: ' + resData)
               if (resData.data.status) {
                 setStep(step + 1)
+                if (typeof window !== 'undefined') {
+                  window.localStorage.removeItem("token"); 
+                }
               }
             } else {
               setStep(step + 1)
@@ -172,7 +175,7 @@ console.log("schema length",props.form_schema.length)
                 {(token == '' || token == null) && <GenerateOtp setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
 
-                {(token != null || token != undefined) && <form onSubmit={handleSubmit}>
+                {(token != null || token != undefined) && <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e)}} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
                     <div key={index}>
@@ -182,22 +185,38 @@ console.log("schema length",props.form_schema.length)
 
                           {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
 
-                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'date') && <TextField
+                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' ) && <TextField
                             fullWidth
                             inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
                             required={elem.is_required}
                             className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                             name={elem.param_name}
-                            inputProps={(elem.param_name == 'first_name' || (elem.param_name == 'last_name' && last_name != '') || elem.param_name == 'phone' || elem.param_name == 'pan') ? { value: otpData[elem.param_name] } : {}}
+                            inputProps={(elem.global_name == 'first_name' || (elem.global_name == 'last_name' && last_name != '') || elem.global_name == 'phone' || elem.global_name == 'pan') ? { value: otpData[elem.param_name] } : {}}
                             label={elem.field_name}
-                            //inputProps={ ? { value:otpData[elem.param_name] } : {}}
                             id={elem.param_name}
+                            autoComplete="off"
+                            onChange={handleChange}
+
+                          />
+                         
+                          }
+                          {elem.type == 'date' && 
+                            <TextField
+                            fullWidth
+                            inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                            required={elem.is_required}
+                            className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                            name={elem.param_name}
+                            label={elem.field_name}
+                            id={elem.param_name}
+                            onFocus={(e) => (e.target.type = "date")}
+                            onBlur={(e) => (e.target.type = "text")}
                             autoComplete="off"
                             onChange={handleChange}
                           />
 
+                           
                           }
-
                           {elem.type == 'select' && <SelectField {...elem} values={values} />}
 
                           {elem.type == 'checkbox' && <FormControlLabel className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
