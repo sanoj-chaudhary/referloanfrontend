@@ -47,11 +47,11 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues,data,setServerSideMsg
             setToken(window.localStorage.getItem("token"))
           }
 
-          // setTimeout(() => {
-          //   if (typeof window !== 'undefined') {
-          //     window.localStorage.removeItem("token"); 
-          //   }
-          // }, 3600);
+          setTimeout(() => {
+            if (typeof window !== 'undefined') {
+              window.localStorage.removeItem("token"); 
+            }
+          }, 360000);
         }
       }
     } catch (error) {

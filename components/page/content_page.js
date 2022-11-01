@@ -21,19 +21,19 @@ const midcontent = ({ data, faq }) => {
             <div className="container">
               <div dangerouslySetInnerHTML={{ __html: data[0].description }}></div>
 
-              <div class="faqSetion">
+              <div className="faqSetion">
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>
                 <h2>Have a question? We've got answers!</h2>
-                <div class="faq_row">
+                <div className="faq_row">
                   <div
-                    class="accordion accordion-flush faqAccordion "
+                    className="accordion accordion-flush faqAccordion "
                     id="accordionFlushExample"
                   >
                     {faq.map((item, key) => (
-                      <div class="accordion-item">
-                        <h2 class="accordion-header" id={"flush-heading" + key}>
+                      <div className="accordion-item">
+                        <h2 className="accordion-header" id={"flush-heading" + key}>
                           <button
-                            class="accordion-button collapsed"
+                            className="accordion-button collapsed"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target={"#flush-collapse" + key}
@@ -45,11 +45,11 @@ const midcontent = ({ data, faq }) => {
                         </h2>
                         <div
                           id={"flush-collapse" + key}
-                          class="accordion-collapse collapse"
+                          className="accordion-collapse collapse"
                           aria-labelledby="flush-headingTwo"
                           data-bs-parent="#accordionFlushExample"
                         >
-                          <div class="accordion-body">
+                          <div className="accordion-body">
                             <div dangerouslySetInnerHTML={{ __html: item.answer}}></div>
                           </div>
                         </div>
@@ -57,7 +57,7 @@ const midcontent = ({ data, faq }) => {
                     ))}
                   </div>
 
-                  <div class="faqImg">
+                  <div className="faqImg">
                     <img src="/images/faq.png" alt="" />
                   </div>
                 </div>
