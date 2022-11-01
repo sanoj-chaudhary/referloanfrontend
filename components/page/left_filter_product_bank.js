@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from 'next/router';
-const leftfilter = ({ content, ProductByCat, searchProduct }) => {
+const leftfilter = ({ content, ProductByCat }) => {
   const router = useRouter()
   const [empType, setEmpType] = useState()
   const [searchData, setSearchData] = useState({
@@ -36,12 +36,12 @@ const leftfilter = ({ content, ProductByCat, searchProduct }) => {
     }
     setSearchData({ ...searchData, [e.target.name]: e.target.value })
   }
+
   const searchBankProduct = async (e) => {
     e.preventDefault()
     try {
       const hit = searchData.product_id + '/salary/' + searchData.salary + '/pincode/' + searchData.pincode + '?ref=web';
-      router.push(hit)
-      searchProduct()
+      const test = await router.push(hit)
     }
     catch (err) {
       console.log(err)
