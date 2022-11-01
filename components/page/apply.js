@@ -116,7 +116,8 @@ const apply = (props) => {
     }
   }, [token])
 
-  const mySentence = props.data[0].name;
+  console.log('props',props)
+  const mySentence = props.data[0].name.trim();
   const productName = mySentence.split(" ");
 
   const newProductName = productName.map((word) => {
