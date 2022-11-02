@@ -182,6 +182,7 @@ const Footer = () => {
                     <div className="copyRight_inner">
                         <span>Copyright 2022 © Referloan.in.</span>
                         <span>
+                            <Link href="/about-us"><a title="About Us">About Us</a></Link>
                             <Link href="/privacy-policy"><a title="Privacy Policy">Privacy Policy</a></Link>
                             <Link href="/faqs"><a title="Faq's">Faq's</a></Link>
                             <Link href="/terms-and-conditions"><a title="Terms and Conditions">Terms and Conditions</a></Link>
