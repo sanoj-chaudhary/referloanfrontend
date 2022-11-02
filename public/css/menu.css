@@ -160,7 +160,7 @@ nav.navBarContainer {
 .navBarContainer li .megaMenu_container ul.subMenuLevel2{
     max-width: 100%;
     display: flex;
-    height: max-content;
+    height: 300px;
 }
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li {
     max-width: 100%;
