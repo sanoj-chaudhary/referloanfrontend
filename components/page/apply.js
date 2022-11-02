@@ -115,6 +115,8 @@ const apply = (props) => {
 
   useEffect(() => {
     setLoading(false)
+    setServerSideStatus(false)
+    setServerSideMsg('')
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
@@ -128,7 +130,7 @@ const apply = (props) => {
     return word[0].toUpperCase() + word.substring(1);
   }).join("_");
 
-
+console.log('initialValues',initialValues)
   console.log("formSchemaa", props.form_schema)
   console.log("schema length", props.form_schema.length)
   return (
@@ -186,18 +188,18 @@ const apply = (props) => {
 
                           {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
 
-                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file') && <TextField
+                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'email') && <TextField
                             fullWidth
                             inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
                             required={elem.is_required}
                             className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                             name={elem.param_name}
-                            inputProps={(elem.global_name == 'first_name' || (elem.global_name == 'last_name' && last_name != '') || elem.global_name == 'phone' || elem.global_name == 'pan') ? { value: otpData[elem.param_name] } : {}}
+                           
                             label={elem.field_name}
                             id={elem.param_name}
                             autoComplete="off"
+                            defaultValue=''
                             onChange={handleChange}
-
                           />
 
                           }
@@ -218,7 +220,7 @@ const apply = (props) => {
 
 
                           }
-                          {elem.type == 'select' && <SelectField {...elem} values={values} />}
+                          {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
 
                           {elem.type == 'checkbox' && <FormControlLabel className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
 
@@ -289,42 +291,16 @@ const apply = (props) => {
           </div>
         </div>
       }
-
     </>
   )
-
-
 }
 
-
-
 export default apply
-
-// export function TextField(props) {
-//   console.log(props)
-//   const { field_name, param_name, type, ...rest } = props
-
-//   return (
-//     <>
-//       {field_name && <label >{field_name}</label>}
-//       <Field
-//         className="form-control"
-//         type={type}
-//         name={param_name}
-//         id={param_name}
-//         placeholder={field_name || ""}
-//         {...rest}
-//       />
-//       <ErrorMessage name={param_name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} />
-//     </>
-//   )
-// }
-
 
 export function SelectField(props) {
 
   console.log("select", props)
-  const { name, label, ParamOptions } = props
+  const { name, label, ParamOptions,handleChange  } = props
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
@@ -337,6 +313,7 @@ export function SelectField(props) {
           name={props.param_name}
           label={props.field_name}
           required
+          onChange={handleChange}
         >
           {ParamOptions.map((optn, ind) => (
             <MenuItem key={ind} value={optn.value
@@ -346,7 +323,6 @@ export function SelectField(props) {
           ))}
         </Select>
       </FormControl>
-      {/* <ErrorMessage name={name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} /> */}
     </>
   )
 }
