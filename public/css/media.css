@@ -62,6 +62,11 @@
         padding-bottom: 40px;
     }
 
+    .faqSetion .faq_row,
+    .faqSetion .faqAccordion {
+        width: 100% !important;
+    }
+
 
     .home_blogArea ul {
         display: flex;
@@ -69,6 +74,7 @@
         padding-top: 35px;
         flex-direction: column;
     }
+
     .home_blogArea ul li {
         margin-bottom: 20px;
     }
@@ -614,7 +620,7 @@
         display: inline-block;
     }
 
-   
+
     footer .footerWrapper {
         display: none;
     }
@@ -696,7 +702,7 @@
         max-width: 100%;
     }
 
-    .home_blogArea .blog_dis_area{
+    .home_blogArea .blog_dis_area {
         margin-bottom: 20px;
     }
 
@@ -722,7 +728,7 @@
 
 
 /* new table_with_img_content css */
-.table_with_img_content{
+.table_with_img_content {
     width: 100%;
     padding: 30px 0;
     display: flex;
@@ -732,6 +738,7 @@
     font-family: 'Poppins', sans-serif;
     line-height: 1.5;
 }
+
 .table_with_img_content img {
     max-width: 30%;
     height: auto;
@@ -739,38 +746,47 @@
 }
 
 .table_with_img_content .editor__contentBox {
-width: 100%;
-font-family: 'Poppins', sans-serif;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
 
 }
 
 
-.table_with_img_content h1, .table_with_img_content .editor__contentBox h1 {
+.table_with_img_content h1,
+.table_with_img_content .editor__contentBox h1 {
     font-size: 35px;
     font-weight: 500;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.table_with_img_content h2, .table_with_img_content .editor__contentBox h2 {
+
+.table_with_img_content h2,
+.table_with_img_content .editor__contentBox h2 {
     font-size: 24px;
     font-weight: 500;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.table_with_img_content h3, .table_with_img_content .editor__contentBox h3 {
+
+.table_with_img_content h3,
+.table_with_img_content .editor__contentBox h3 {
     font-size: 21px;
     font-weight: 500;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.table_with_img_content h4, .table_with_img_content .editor__contentBox h4 {
+
+.table_with_img_content h4,
+.table_with_img_content .editor__contentBox h4 {
     font-size: 18px;
     font-weight: 500;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-.table_with_img_content > .editor__contentBox h2, .table_with_img_content > .editor__contentBox p, .table_with_img_content > .editor__contentBox ul {
+.table_with_img_content>.editor__contentBox h2,
+.table_with_img_content>.editor__contentBox p,
+.table_with_img_content>.editor__contentBox ul {
     padding-top: 22px;
 }
 
@@ -779,28 +795,30 @@ font-family: 'Poppins', sans-serif;
     margin: 0;
 }
 
-.table_with_img_content > .editor__contentBox li{
+.table_with_img_content>.editor__contentBox li {
     padding-top: 7px;
     padding-bottom: 7px;
 }
 
 
 
-.table_with_img_content table{
+.table_with_img_content table {
     margin-top: 10px;
     width: 100%;
     background: #fff;
 }
 
 
-.table_with_img_content thead, .table_with_img_content th {
+.table_with_img_content thead,
+.table_with_img_content th {
     background: #6824cf;
     color: #fff;
     font-weight: 600;
 }
 
-.table_with_img_content thead tr, .table_with_img_content  th {
-padding: 8px 8px;
+.table_with_img_content thead tr,
+.table_with_img_content th {
+    padding: 8px 8px;
 }
 
 .table_with_img_content tr:nth-child(even) {
