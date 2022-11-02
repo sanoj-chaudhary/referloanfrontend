@@ -22,7 +22,7 @@ const midcontent = ({ data, faq }) => {
             <div dangerouslySetInnerHTML={{ __html: data[0].description }}></div>
             <div class="table_with_img_content">
 
-              <div className="faqSetion">
+            {faq != '' ? <div className="faqSetion">
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>
                 <h2>Have a question? We've got answers!</h2>
                 <div className="faq_row">
@@ -62,7 +62,8 @@ const midcontent = ({ data, faq }) => {
                     <img src="/images/faq.png" alt="" />
                   </div>
                 </div>
-              </div>
+              </div>:''}
+              
             </div>
           </div>
         </section>
