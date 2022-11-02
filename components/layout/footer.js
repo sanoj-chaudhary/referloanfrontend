@@ -61,22 +61,22 @@ const Footer = () => {
 
         <footer >
            
-            <div class="sticky_nav">
-                    <a class="nav-item" href="#">
+            <div className="sticky_nav">
+                    <a className="nav-item" href="#">
                         <img src="/images/icon/pl-icon.png" alt="" /><span>Home</span>
                     </a>
 
-                    <a class="nav-item" href="#">
+                    <a className="nav-item" href="#">
                         <img src="/images/icon/ccard-icon.png" alt="" />
                         <span>Activity</span>
                     </a>
 
-                    <a class="nav-item" href="#">
+                    <a className="nav-item" href="#">
                         <img src="/images/icon/sa-icon.png" alt="" />
                         <span>Saving Account</span>
                     </a>
 
-                    <a class="nav-item" href="#">
+                    <a className="nav-item" href="#">
                         <img src="images/icon/eduL-icon.png" alt="" />
                         <span>Investment</span>
                     </a>
@@ -182,6 +182,7 @@ const Footer = () => {
                     <div className="copyRight_inner">
                         <span>Copyright 2022 © Referloan.in.</span>
                         <span>
+                            <Link href="/about-us"><a title="About Us">About Us</a></Link>
                             <Link href="/privacy-policy"><a title="Privacy Policy">Privacy Policy</a></Link>
                             <Link href="/faqs"><a title="Faq's">Faq's</a></Link>
                             <Link href="/terms-and-conditions"><a title="Terms and Conditions">Terms and Conditions</a></Link>

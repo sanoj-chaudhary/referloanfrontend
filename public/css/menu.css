@@ -23,7 +23,7 @@ header a.logoSection img {
     width: auto;
 }
 
-header  .info_section {
+header .info_section {
     display: flex;
 }
 
@@ -34,23 +34,24 @@ header .info_section ul {
 }
 
 header .info_section ul li {
- display: flex;
- list-style: none;
- text-decoration: none;
- font-size: 18px;
- font-weight: 500;
- align-items: center;
-}
-header .info_section ul li a{
-color: #333333;
-font-size:17px;
-font-weight: 500;
+    display: flex;
+    list-style: none;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    align-items: center;
 }
 
-header .info_section ul li img{
- height: 20px;
- width: auto;
- margin-right: 10px;
+header .info_section ul li a {
+    color: #333333;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+header .info_section ul li img {
+    height: 20px;
+    width: auto;
+    margin-right: 10px;
 }
 
 
@@ -109,6 +110,7 @@ nav.navBarContainer {
     position: absolute;
     width: 100%;
     left: 0;
+    height: 40vh;
 }
 
 .navBarContainer li .megaMenu_container ul {
@@ -157,24 +159,29 @@ nav.navBarContainer {
     max-height: 130px;
     object-fit: contain;
 }
-.navBarContainer li .megaMenu_container ul.subMenuLevel2{
+
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 {
     max-width: 100%;
     display: flex;
-    height: max-content;
+    height: 300px;
 }
+
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li {
     max-width: 100%;
     /*width: 100%; */
     width: 260px;
 }
-.navBarContainer li .megaMenu_container ul.subMenuLevel2 li a{
+
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 li a {
     padding: 4px 10px;
     max-width: 100%;
     box-sizing: border-box;
 }
-.navBarContainer li .megaMenu_container ul.subMenuLevel2 li a:hover{    
-    background-color:#efefef!important;
+
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 li a:hover {
+    background-color: #efefef !important;
 }
+
 .navBarContainer li .megaMenu_container .submenuContainer {
     position: absolute;
     right: 0;
@@ -183,30 +190,37 @@ nav.navBarContainer {
     top: 0;
     display: none;
 }
+
 .navBarContainer li .megaMenu_container .submenuContainer ul {
     max-width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
-.navBarContainer li .megaMenu_container .submenuContainer ul li{
-     border-bottom: 1px Solid #efefef; list-style: initial;
+
+.navBarContainer li .megaMenu_container .submenuContainer ul li {
+    border-bottom: 1px Solid #efefef;
+    list-style: initial;
     /*flex: 30%;*/
 }
-.navBarContainer li .megaMenu_container .submenuContainer ul li a{
-    max-width:100%; 
+
+.navBarContainer li .megaMenu_container .submenuContainer ul li a {
+    max-width: 100%;
 }
 
 
-.navBarContainer li .megaMenu_container ul.subMenuLevel2 li.activeSubMenu a+.submenuContainer{
-    display: none
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 li.activeSubMenu a+.submenuContainer {
+    display: none;
+    -webkit-columns: 120px 3;
+    -moz-columns: 120px 3;
+    columns: 120px 3;
 }
 
 
 .navBarContainer li .megaMenu_container ul.subMenuLevel2 li:hover a+.submenuContainer {
     display: flex;
     background-color: #fff;
-    height: 100%;
+    height: 355px !important;
 }
 
 /* nav:not(.mm-menu) {
@@ -269,18 +283,22 @@ nav.navBarContainer {
 #mheader {
     display: none;
 }
+
 /* ++++++++++++++++ For Mobile ++++++++++++++++ */
 
 @media (min-width:320px) and (max-width:768px) {
     #mheader {
         display: block;
     }
+
     header .info_section {
         display: none;
     }
+
     header .customContainer {
         flex-direction: row-reverse;
     }
+
     .mm-menu--position-bottom.mm-menu--opened,
     .mm-menu--position-left-front.mm-menu--opened,
     .mm-menu--position-right-front.mm-menu--opened,
@@ -381,34 +399,36 @@ nav.navBarContainer {
         display: block;
     }
 
-    
+
     nav#menu,
     .mm-page {
-        display: block; 
+        display: block;
         /* width: 100%; */
 
     }
+
     #header {
         display: block;
     }
 
     .mm-navbar {
-        background: #092621!important;
+        background: #092621 !important;
     }
 
     .mm-navbar a {
-        color: #fff!important;
-        font-size: 25px!important;
+        color: #fff !important;
+        font-size: 25px !important;
     }
 
-    .mm-btn--next:after, .mm-btn--prev:before {
-        width: 14px!important;
-        height: 14px!important;
+    .mm-btn--next:after,
+    .mm-btn--prev:before {
+        width: 14px !important;
+        height: 14px !important;
         margin: auto;
     }
 
     .mm-btn:not(.mm-hidden)+.mm-navbar__title:last-child {
         color: #FFF;
     }
-    
+
 }

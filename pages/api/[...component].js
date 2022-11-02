@@ -135,7 +135,7 @@ const getHeaderMenu = async (req, res) => {
     let temp = [];
 
 
-    query_cat = await db.query("SELECT id,name,slug,hierarchy FROM `view_category` WHERE `status` = '1' and `is_menu` = '1' and `slug` != '' ");
+    query_cat = await db.query("SELECT * FROM `view_category` WHERE `status` = '1' and `is_menu` = '1' and `slug` != '' ");
 
     if (query_cat) {
       for (let i in query_cat) {
@@ -144,14 +144,14 @@ const getHeaderMenu = async (req, res) => {
 
         if(query_cat[i].hierarchy=='Product_BankProduct')
         {
-          query_product = await db.query("SELECT id,name , slug FROM `view_product` WHERE `cat_id` = '" + category_id + "' AND `status` = '1' and `is_menu` = '1' and `slug` != '' ");
+          query_product = await db.query("SELECT * FROM `view_product` WHERE `cat_id` = '" + category_id + "' AND `status` = '1' and `is_menu` = '1' and `slug` != '' ORDER BY `searial_by` ");
 
           if (query_product) {
             for (let j in query_product) {
               product_id = query_product[j].id;
               temp[i]['product'] = query_product;
  
-              query_bank_product = await db.query("SELECT id,name, slug FROM `view_bank_product` WHERE `product_id` = '" + product_id + "'  ");
+              query_bank_product = await db.query("SELECT *, IF(searial_by IS NULL, 99999, searial_by) as order_by FROM `view_bank_product` WHERE `status`='1' and `product_id` = '" + product_id + "' ORDER BY order_by  ");
               query_product[j]['bank_product'] = query_bank_product;
             }
           }

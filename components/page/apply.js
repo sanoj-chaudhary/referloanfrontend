@@ -7,17 +7,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import * as Yup from "yup";
 import TextField from '@material-ui/core/TextField';
-import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
 import Head from "next/head";
 import GenerateOtp from "./generateOtp";
 import Loader from "./loader";
-import $ from 'jquery';
-import Script from 'next/script';
 import Thanks from "./thanks";
+import { useRouter } from 'next/router';
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
@@ -31,6 +28,7 @@ const getToken = () => {
   }
 }
 const apply = (props) => {
+  const router = useRouter()
   //console.log("length",props.form_schema.length)
   //console.log("form_schema",props.form_schema)
   // const tokenkey = getToken();
@@ -42,7 +40,7 @@ const apply = (props) => {
   const [loading, setLoading] = useState(true)
   const [userValues, setUserValues] = useState({});
   const [serversidemsg, setServerSideMsg] = useState('')
-  const [serversideStatus, setServerSideStatus] = useState(true)
+  const [serversideStatus, setServerSideStatus] = useState(false)
   var initialValues = {};
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
@@ -81,7 +79,7 @@ const apply = (props) => {
           }
           console.log(values)
 
-          setLoading(true)
+          setLoading(false)
           const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
           if (res.data.status) {
 
@@ -93,6 +91,12 @@ const apply = (props) => {
               console.log('resData: ' + resData)
               if (resData.data.status) {
                 setStep(step + 1)
+                if (typeof window !== 'undefined') {
+                  window.localStorage.removeItem("token");
+                  window.localStorage.removeItem("full_name");
+                  window.localStorage.removeItem("pan");
+                  window.localStorage.removeItem("phone");
+                }
               }
             } else {
               setStep(step + 1)
@@ -111,28 +115,31 @@ const apply = (props) => {
 
   useEffect(() => {
     setLoading(false)
+    setServerSideStatus(false)
+    setServerSideMsg('')
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
-  }, [token])
+  }, [token,router])
 
-  const mySentence = props.data[0].name;
+  console.log('props', props)
+  const mySentence = props.data[0].name.trim();
   const productName = mySentence.split(" ");
 
   const newProductName = productName.map((word) => {
     return word[0].toUpperCase() + word.substring(1);
   }).join("_");
 
-
-console.log("formSchemaa",props.form_schema)
-console.log("schema length",props.form_schema.length)
+console.log('initialValues',initialValues)
+  console.log("formSchemaa", props.form_schema)
+  console.log("schema length", props.form_schema.length)
   return (
     <>
 
       <Head>
-        <title>Referloan : Apply for {props.data[0].name}</title>
-        <meta name={'description'} content={'Referloan : Apply for ' + props.data[0].name} />
-        <meta name={'keywords'} content={'Referloan : Apply for ' + props.data[0].name} />
+        <title>{props.data[0].meta_title}</title>
+        <meta name={'description'} content={props.data[0].meta_description} />
+        <meta name={'keywords'} content={props.data[0].meta_keyword} />
       </Head>
       {loading ? <Loader loading={loading} /> :
         <div className="container">
@@ -171,7 +178,7 @@ console.log("schema length",props.form_schema.length)
                 {(token == '' || token == null) && <GenerateOtp setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
 
-                {(token != null || token != undefined) && <form onSubmit={handleSubmit}>
+                {(token != null || token != undefined) && <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
                     <div key={index}>
@@ -181,23 +188,39 @@ console.log("schema length",props.form_schema.length)
 
                           {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
 
-                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'date') && <TextField
+                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'email') && <TextField
                             fullWidth
                             inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
                             required={elem.is_required}
                             className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                             name={elem.param_name}
-                            inputProps={(elem.param_name == 'first_name' || (elem.param_name == 'last_name' && last_name != '') || elem.param_name == 'phone' || elem.param_name == 'pan') ? { value: otpData[elem.param_name] } : {}}
+                           
                             label={elem.field_name}
-                            //inputProps={ ? { value:otpData[elem.param_name] } : {}}
                             id={elem.param_name}
                             autoComplete="off"
+                            defaultValue=''
                             onChange={handleChange}
                           />
 
                           }
+                          {elem.type == 'date' &&
+                            <TextField
+                              fullWidth
+                              inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                              required={elem.is_required}
+                              className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                              name={elem.param_name}
+                              label={elem.field_name}
+                              id={elem.param_name}
+                              onFocus={(e) => (e.target.type = "date")}
+                              onBlur={(e) => (e.target.type = "text")}
+                              autoComplete="off"
+                              onChange={handleChange}
+                            />
 
-                          {elem.type == 'select' && <SelectField {...elem} values={values} />}
+
+                          }
+                          {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
 
                           {elem.type == 'checkbox' && <FormControlLabel className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
 
@@ -236,7 +259,7 @@ console.log("schema length",props.form_schema.length)
                 <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
               </div>
 
-              <div className="faqSetion">
+              {props.faq != '' ? <div className="faqSetion">
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>
                 <h2>Have a question? We've got answers!</h2>
                 <div className="faq_row">
@@ -262,48 +285,23 @@ console.log("schema length",props.form_schema.length)
                     <img src="/images/faq.png" alt="faqImg" />
                   </div>
                 </div>
-              </div>
+              </div> : ''}
+              
 
             </section>
           </div>
         </div>
       }
-
     </>
   )
-
-
 }
 
-
-
 export default apply
-
-// export function TextField(props) {
-//   console.log(props)
-//   const { field_name, param_name, type, ...rest } = props
-
-//   return (
-//     <>
-//       {field_name && <label >{field_name}</label>}
-//       <Field
-//         className="form-control"
-//         type={type}
-//         name={param_name}
-//         id={param_name}
-//         placeholder={field_name || ""}
-//         {...rest}
-//       />
-//       <ErrorMessage name={param_name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} />
-//     </>
-//   )
-// }
-
 
 export function SelectField(props) {
 
   console.log("select", props)
-  const { name, label, ParamOptions } = props
+  const { name, label, ParamOptions,handleChange  } = props
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
@@ -316,6 +314,7 @@ export function SelectField(props) {
           name={props.param_name}
           label={props.field_name}
           required
+          onChange={handleChange}
         >
           {ParamOptions.map((optn, ind) => (
             <MenuItem key={ind} value={optn.value
@@ -325,7 +324,6 @@ export function SelectField(props) {
           ))}
         </Select>
       </FormControl>
-      {/* <ErrorMessage name={name} render={msg => <div style={{ color: 'red' }} >{msg}</div>} /> */}
     </>
   )
 }
