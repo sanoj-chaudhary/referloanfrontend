@@ -7,7 +7,7 @@ const midcontent = ({ data, faq }) => {
   useEffect(() => {
     setLoading(false)
   });
-    
+
   return (
     <>
       <Head>
@@ -15,11 +15,12 @@ const midcontent = ({ data, faq }) => {
         <meta name={"description"} content={data[0].meta_description} />
         <meta name={"keywords"} content={data[0].meta_keyword} />
       </Head>
-      {loading && <Loader/>}
-        <div className="innerpage_bg">
-          <section className="section_pad">
-            <div className="container">
-              <div dangerouslySetInnerHTML={{ __html: data[0].description }}></div>
+      {loading && <Loader />}
+      <div className="innerpage_bg">
+        <section className="section_pad">
+          <div className="container">
+            <div dangerouslySetInnerHTML={{ __html: data[0].description }}></div>
+            <div class="table_with_img_content">
 
               <div className="faqSetion">
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>
@@ -50,7 +51,7 @@ const midcontent = ({ data, faq }) => {
                           data-bs-parent="#accordionFlushExample"
                         >
                           <div className="accordion-body">
-                            <div dangerouslySetInnerHTML={{ __html: item.answer}}></div>
+                            <div dangerouslySetInnerHTML={{ __html: item.answer }}></div>
                           </div>
                         </div>
                       </div>
@@ -63,8 +64,9 @@ const midcontent = ({ data, faq }) => {
                 </div>
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
+      </div>
     </>
   );
 };
