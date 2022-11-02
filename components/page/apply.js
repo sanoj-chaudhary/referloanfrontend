@@ -259,7 +259,7 @@ console.log('initialValues',initialValues)
                 <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
               </div>
 
-              <div className="faqSetion">
+              {props.faq != '' ? <div className="faqSetion">
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>
                 <h2>Have a question? We've got answers!</h2>
                 <div className="faq_row">
@@ -285,7 +285,8 @@ console.log('initialValues',initialValues)
                     <img src="/images/faq.png" alt="faqImg" />
                   </div>
                 </div>
-              </div>
+              </div> : ''}
+              
 
             </section>
           </div>
