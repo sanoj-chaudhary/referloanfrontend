@@ -151,7 +151,7 @@ const getHeaderMenu = async (req, res) => {
               product_id = query_product[j].id;
               temp[i]['product'] = query_product;
  
-              query_bank_product = await db.query("SELECT * FROM `view_bank_product` WHERE `status`='1' and `product_id` = '" + product_id + "' ORDER BY `order_by`   ");
+              query_bank_product = await db.query("SELECT * FROM `view_bank_product` WHERE `status`='1' and `product_id` = '" + product_id + "' ORDER BY `order`   ");
               query_product[j]['bank_product'] = query_bank_product;
             }
           }
