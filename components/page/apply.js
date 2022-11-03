@@ -42,8 +42,9 @@ const apply = (props) => {
   const [userValues, setUserValues] = useState({});
   const [serversidemsg, setServerSideMsg] = useState('')
   const [serversideStatus, setServerSideStatus] = useState(false)
-  var initialValues = {};
-  if (typeof window !== 'undefined') {
+  //var initialValues = {};
+  
+  /*if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
     var pan = window.localStorage.getItem("pan");
     var phone = window.localStorage.getItem("phone");
@@ -64,16 +65,17 @@ const apply = (props) => {
 
   const otpData = {
     full_name, first_name, last_name, pan, phone
-  }
+  }*/
 
   //console.log('F: '+first_name);
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  const { values, errors, touched, handleBlur,setFieldValue, handleChange, handleSubmit } =
     useFormik({
-      initialValues,
+      initialValues:{},
       validationSchema: '',
 
       onSubmit: async (values) => {
+        //submitForm();
         try {
           const headers = {
             'Authorization': "Bearer " + token.slice(1, -1) + ""
@@ -93,15 +95,16 @@ const apply = (props) => {
               if (resData.data.status) {
                 setStep(step + 1)
                 if (typeof window !== 'undefined') {
-                  window.localStorage.removeItem("token");
+                  /*window.localStorage.removeItem("token");
                   window.localStorage.removeItem("full_name");
                   window.localStorage.removeItem("pan");
-                  window.localStorage.removeItem("phone");
+                  window.localStorage.removeItem("phone");*/
                 }
               }
             } else {
               setStep(step + 1)
             }
+             submitForm(values.pan);
           }
 
 
@@ -115,6 +118,7 @@ const apply = (props) => {
     });
 
   useEffect(() => {
+    //fillFormValues();
     setLoading(false)
     setServerSideStatus(false)
     setServerSideMsg('')
@@ -131,9 +135,25 @@ const apply = (props) => {
     return word[0].toUpperCase() + word.substring(1);
   }).join("_");
 
-console.log('initialValues',initialValues)
+  
   console.log("formSchemaa", props.form_schema)
   console.log("schema length", props.form_schema.length)
+
+  function submitForm(e) {
+    //alert('Val: '+e);
+    document.getElementById("myForm").reset();
+    //$('#pan').val(e);
+  }
+
+  function fillFormValues() {
+    alert('Val: '+pan);
+    // setFieldValue(...values,pan=pan)
+    // document.getElementById("pan").value = "pan";
+    // document.getElementById("phone").value = phone;
+    // document.getElementById("first_name").value = first_name;
+    // document.getElementById("last_name").value = last_name;
+  }
+
   return (
     <>
 
@@ -179,15 +199,14 @@ console.log('initialValues',initialValues)
                 {(token == '' || token == null) && <GenerateOtp setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
 
-                {(token != null || token != undefined) && <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
+                {(token != null || token != undefined) && <form id="myForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
-
-                    <div key={index}>
+                    
+                    <div key={index} >
+                      {/* {fillFormValues()} */}
                       <h3>{item.section_name}</h3>
                       {item.forms.map((elem, ind) => (
                         <div key={ind}>
-
-                          {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
 
                           {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'email') && <TextField
                             fullWidth
@@ -195,10 +214,9 @@ console.log('initialValues',initialValues)
                             required={elem.is_required}
                             className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                             name={elem.param_name}
-                           
                             label={elem.field_name}
                             id={elem.param_name}
-                            autoComplete="off"
+                            //autoComplete="off"
                             defaultValue=''
                             onChange={handleChange}
                           />
@@ -215,7 +233,7 @@ console.log('initialValues',initialValues)
                               id={elem.param_name}
                               onFocus={(e) => (e.target.type = "date")}
                               onBlur={(e) => (e.target.type = "text")}
-                              autoComplete="off"
+                              //autoComplete="off"
                               onChange={handleChange}
                             />
 
