@@ -38,7 +38,7 @@ const apply = (props) => {
   const [panCard, setPancard] = useState('');
   const [paramName, setParamName] = ('')
   const [loading, setLoading] = useState(true)
-  //const [userValues, setUserValues] = useState({});
+  const [userValues, setUserValues] = useState({});
   const [serversidemsg, setServerSideMsg] = useState('')
   const [serversideStatus, setServerSideStatus] = useState(false)
   //var initialValues = {};
@@ -103,7 +103,7 @@ const apply = (props) => {
             } else {
               setStep(step + 1)
             }
-             submitForm();
+             submitForm(values.pan);
           }
 
 
@@ -138,8 +138,10 @@ const apply = (props) => {
   console.log("formSchemaa", props.form_schema)
   console.log("schema length", props.form_schema.length)
 
-  function submitForm() {
+  function submitForm(e) {
+    //alert('Val: '+e);
     document.getElementById("myForm").reset();
+    //$('#pan').val(e);
   }
 
   function fillFormValues() {
