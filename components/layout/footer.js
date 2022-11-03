@@ -60,26 +60,26 @@ const Footer = () => {
 
 
         <footer >
-           
+             
             <div className="sticky_nav">
-                    <a className="nav-item" href="#">
-                        <img src="/images/icon/pl-icon.png" alt="" /><span>Home</span>
-                    </a>
+            <Link href={"/loans"+ process.env.UTM}><a className="nav-item"> 
+                        <img src="/images/icon/pl-icon.png" alt="" /><span>Loan</span>
+                    </a></Link>
 
-                    <a className="nav-item" href="#">
+                    <Link href={"/credit-card"+ process.env.UTM}><a className="nav-item">
                         <img src="/images/icon/ccard-icon.png" alt="" />
-                        <span>Activity</span>
-                    </a>
+                        <span>Credit Card</span>
+                    </a></Link>
 
-                    <a className="nav-item" href="#">
+                    <Link href={"/other-product/investment"+ process.env.UTM}><a className="nav-item">
                         <img src="/images/icon/sa-icon.png" alt="" />
-                        <span>Saving Account</span>
-                    </a>
-
-                    <a className="nav-item" href="#">
-                        <img src="images/icon/eduL-icon.png" alt="" />
                         <span>Investment</span>
-                    </a>
+                    </a></Link>
+
+                    <Link href={"/subsidy"+ process.env.UTM}><a className="nav-item">
+                        <img src="images/icon/eduL-icon.png" alt="" />
+                        <span>Subsidy</span>
+                    </a></Link>
                 </div>
           <div className='footerWrapper'>
             <div className="fot-top-bar">
