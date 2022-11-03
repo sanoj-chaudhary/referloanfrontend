@@ -77,8 +77,9 @@ const Menu = () => {
                             <ul>
                                 {
                                     headermenu.map((item1, index) => (
+                                       
                                         item1.hierarchy == 'Product_BankProduct' ? <li key={index}><Link href={'/'+item1.slug+process.env.UTM}><a>{item1.name}</a></Link>
-                                        <i className="fa fa-caret-down"></i>
+                                       {!item1.bank_product  && <i className="fa fa-caret-down"></i>} 
                                             <ul>
                                                 {
                                                     item1.product && item1.product.map((value1, key) => (
@@ -95,12 +96,14 @@ const Menu = () => {
 
                                             </ul>
                                         </li> :
-                                        <li key={index}><Link href={'/'+item1.slug+process.env.UTM}><a >{item1.name}</a></Link>
-                                        <i className="fa fa-caret-down"></i>
+                                        <li key={index}><Link href={'/'+item1.slug+process.env.UTM}><a >{item1.name}</a></Link>                       
+                                        {item1.page  && <i className="fa fa-caret-down"></i>} 
+   
                                             <ul>
                                                 {
                                                     item1.page && item1.page.map((value1, key) => (
-                                                        <li key={key} ><Link href={'/'+value1.slug+process.env.UTM}><a >{value1.name}</a></Link></li>
+                                                        <li key={key} ><Link href={'/'+value1.slug+process.env.UTM}><a >{value1.name}</a></Link>
+                                                        </li>
                                                     ))
                                                 }
                                             </ul>
