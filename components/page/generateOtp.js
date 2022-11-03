@@ -74,9 +74,9 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
       initialValues: genOtpData,
       validationSchema: OtpSchema,
       onSubmit: async (values) => {
-        localStorage.setItem("full_name", values.full_name);
-        localStorage.setItem("pan", values.pan_card);
-        localStorage.setItem("phone", values.phone_no);
+        // localStorage.setItem("full_name", values.full_name);
+        // localStorage.setItem("pan", values.pan_card);
+        // localStorage.setItem("phone", values.phone_no);
       },
     });
 
