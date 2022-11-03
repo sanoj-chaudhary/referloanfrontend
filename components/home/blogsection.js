@@ -27,7 +27,7 @@ const insuranceInvestment = () => {
             <div className="col-lg-3 order-lg-12">
                 <div className="step-imgBox blog_subheading_shadow"><img src="/images/digital-banking.png" className="blog_pic" alt="" /></div>
                 <div className="blog_dis_area">
-                <h2 className="blog_subheading">The development of digital banking </h2>
+                <h2 className="blog_subheading">Development of digital banking </h2>
                 <p className="blog_subheadingPar">On Sunday, India launched 75 digital banking facilities in rural and small-town locations to increase access to financial services. To promote digital banking throughout the country, India established 75 these digital banking units. <a className="blog_subheading_readmore" href="https://blog.referloan.in/the-development-of-digital-banking-in-rural-india-and-its-significance/" target={"_blank"}> Read More</a></p>
                 </div>
                 
