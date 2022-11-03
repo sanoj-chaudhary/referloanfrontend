@@ -172,10 +172,10 @@ const apply = (props) => {
             <div className="dealStep__leftArea">
               <div className="CardImg_box">
                 <img
-                  src={`/uploads/product_bank/${newProductName}.png`}
+                  src={`/uploads/product_bank/${newProductName}.webp`}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
-                    currentTarget.src = '/uploads/product_bank/' + props.data[0].categories_id + '.png';
+                    currentTarget.src = '/uploads/product_bank/' + props.data[0].categories_id + '.webp';
                   }}
                 />
 
