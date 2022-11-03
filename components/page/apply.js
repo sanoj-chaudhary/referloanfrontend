@@ -15,6 +15,7 @@ import GenerateOtp from "./generateOtp";
 import Loader from "./loader";
 import Thanks from "./thanks";
 import { useRouter } from 'next/router';
+import CustomApply from './customApply'
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
@@ -247,8 +248,11 @@ console.log('initialValues',initialValues)
 
                   {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} /> : ""}
 
-                  {props.form_schema.length == 0 ? <img src="/images/coming-soon.png" width="100" /> : ''}
+                  
                 </form>}
+
+                {(token != null || token != undefined) &&  props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
+              
               </div>
             </div>
           </section>
