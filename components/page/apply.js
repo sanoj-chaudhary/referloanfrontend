@@ -214,7 +214,7 @@ const apply = (props) => {
                         <div key={ind}>
 
 
-                          {elem.type === 'text' && (elem.global_name === 'pan' || elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name')
+                          {elem.type === 'text' && (elem.global_name === 'pan' || elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
                             ? <TextField
                                 fullWidth
                                 inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
@@ -224,7 +224,7 @@ const apply = (props) => {
                                 label={elem.field_name}
                                 id={elem.param_name}
                                 //autoComplete="off"
-                                inputProps={{ value: otpData[elem.global_name] }}
+                                inputProps={ otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
                                 //value={values.pan}
                                 defaultValue=''
                                 onChange={handleChange}
@@ -232,7 +232,7 @@ const apply = (props) => {
                             : ''
                           }
 
-                          {(elem.type === 'text' || elem.type === 'number' || elem.type === 'file' || elem.type === 'email') && elem.global_name != 'pan' && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name'
+                          {(elem.type === 'text' || elem.type === 'number' || elem.type === 'file' || elem.type === 'email') && elem.global_name != 'pan' && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name'
                             ? <TextField
                                 fullWidth
                                 inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
