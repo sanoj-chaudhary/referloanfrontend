@@ -34,6 +34,7 @@ const apply = (props) => {
   //console.log("form_schema",props.form_schema)
   // const tokenkey = getToken();
   const [step, setStep] = useState(0)
+  const [thank, setThank] = useState(false)
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
   const [panCard, setPancard] = useState('');
@@ -44,7 +45,7 @@ const apply = (props) => {
   const [serversideStatus, setServerSideStatus] = useState(false)
   //var initialValues = {};
   
-  /*if (typeof window !== 'undefined') {
+  if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
     var pan = window.localStorage.getItem("pan");
     var phone = window.localStorage.getItem("phone");
@@ -62,12 +63,6 @@ const apply = (props) => {
     var first_name = '';
     var last_name = '';
   }
-
-  const otpData = {
-    full_name, first_name, last_name, pan, phone
-  }*/
-
-  //console.log('F: '+first_name);
 
   const { values, errors, touched, handleBlur,setFieldValue, handleChange, handleSubmit } =
     useFormik({
@@ -95,11 +90,13 @@ const apply = (props) => {
               if (resData.data.status) {
                 setStep(step + 1)
                 if (typeof window !== 'undefined') {
-                  /*window.localStorage.removeItem("token");
+                  window.localStorage.removeItem("token");
                   window.localStorage.removeItem("full_name");
                   window.localStorage.removeItem("pan");
-                  window.localStorage.removeItem("phone");*/
+                  window.localStorage.removeItem("phone");
                 }
+                setThank(true)
+                setStep(0)
               }
             } else {
               setStep(step + 1)
@@ -119,12 +116,14 @@ const apply = (props) => {
 
   useEffect(() => {
     //fillFormValues();
+    setFieldValue('pan',pan)
     setLoading(false)
     setServerSideStatus(false)
     setServerSideMsg('')
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
+    setStep(0)
   }, [token,router])
 
   console.log('props', props)
@@ -140,18 +139,8 @@ const apply = (props) => {
   console.log("schema length", props.form_schema.length)
 
   function submitForm(e) {
-    //alert('Val: '+e);
     document.getElementById("myForm").reset();
-    //$('#pan').val(e);
-  }
-
-  function fillFormValues() {
-    alert('Val: '+pan);
-    // setFieldValue(...values,pan=pan)
-    // document.getElementById("pan").value = "pan";
-    // document.getElementById("phone").value = phone;
-    // document.getElementById("first_name").value = first_name;
-    // document.getElementById("last_name").value = last_name;
+   
   }
 
   return (
@@ -208,7 +197,21 @@ const apply = (props) => {
                       {item.forms.map((elem, ind) => (
                         <div key={ind}>
 
-                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'email') && <TextField
+                          {elem.type == 'text' && elem.global_name == 'pan' ? <TextField
+                            fullWidth
+                            inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                            required={elem.is_required}
+                            className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                            name={elem.param_name}
+                            label={elem.field_name}
+                            id={elem.param_name}
+                            //autoComplete="off"
+                            value={values.pan}
+                            defaultValue=''
+                            onChange={handleChange}
+                          />:"" }
+
+                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'email') && elem.global_name != 'pan' && <TextField
                             fullWidth
                             inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
                             required={elem.is_required}
@@ -264,7 +267,7 @@ const apply = (props) => {
 
                   )}
 
-                  {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} /> : ""}
+                  {props.form_schema.length != 0 && thank ? <Thanks product={props.data[0].name} /> : ""}
 
                   
                 </form>}
