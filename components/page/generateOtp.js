@@ -5,12 +5,11 @@ import { useFormik } from 'formik'
 import * as Yup from "yup";
 import Loader from "./loader";
 import { useRouter } from 'next/router';
-const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideMsg, setServerSideStatus,serversidemsg,serversideStatus }) => {
-
+const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideMsg, setServerSideStatus, serversidemsg, serversideStatus, utmData }) => {
   const router = useRouter()
- const {utm_campaign,utm_id,utm_medium,utm_source} = router.query
+  const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
 
-console.log(utm_source)
+  console.log(utm_source)
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(false)
   const [errmsg, setErrmsg] = useState('')
@@ -30,15 +29,31 @@ console.log(utm_source)
 
       const { phone_no, otp } = values;
       const data = {
-        phone_no, otp, bank_product_id: genOtpData.bank_product_id,utm_campaign,utm_id,utm_medium,utm_source,offer:""
+        phone_no, otp, bank_product_id: genOtpData.bank_product_id, utm_campaign, utm_id, utm_medium, utm_source, offer: ""
       }
-      
-     
 
-        const res = await axios.post('https://api.referloan.in/api/verify-otp', data);
-        if (!res.data.status) {
+      const res = await axios.post('https://api.referloan.in/api/verify-otp', data);
+      if (!res.data.status) {
+
+        setServerSideStatus(true)
+
+        setTimeout(() => {
+          if (typeof window !== 'undefined') {
+            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("full_name");
+            window.localStorage.removeItem("pan");
+            window.localStorage.removeItem("phone");
+          }
+        }, 3600000);
+        if (utmData.param_name == 'redirect') {
+          setTimeout(() => {
+            router.push('/')
+          }, 3000);
+          const newWindow = window.open(utmData.live_default, '_blank', 'noopener,noreferrer')
+          if (newWindow) newWindow.opener = null
+
+        } else {
           localStorage.setItem("token", JSON.stringify(res.data.token));
-          setServerSideStatus(true)
           if (typeof window !== 'undefined') {
             setToken(window.localStorage.getItem("token"))
             localStorage.setItem("full_name", values.full_name);
@@ -46,19 +61,13 @@ console.log(utm_source)
             localStorage.setItem("phone", values.phone_no);
           }
 
-          setTimeout(() => {
-            if (typeof window !== 'undefined') {
-              window.localStorage.removeItem("token");
-              window.localStorage.removeItem("full_name");
-              window.localStorage.removeItem("pan");
-              window.localStorage.removeItem("phone");
-            }
-          }, 3600000);
-        }else{
-          setServerSideStatus(false)
-          setServerSideMsg(res.data.message)
         }
-   
+
+      } else {
+        setServerSideStatus(false)
+        setServerSideMsg(res.data.message)
+      }
+
     } catch (error) {
       setServerSideStatus(false)
       setServerSideMsg('Something Went Wrong')
@@ -96,7 +105,7 @@ console.log(utm_source)
       if (res.data.success) {
         setOtpStatus(true)
         setPancard(values.pan_card)
-      }else{
+      } else {
         setServerSideStatus(false)
         setServerSideMsg(res.data.message)
       }
@@ -141,7 +150,7 @@ console.log(utm_source)
           {errors.otp && touched.otp ? (
             <p className="form-error">{errors.otp}</p>
           ) : null}
-         
+
           <div className="search-button"><button className="mt-4" type="submit" onClick={verifyItp}>verify OTP</button></div></>}
 
       </form>
