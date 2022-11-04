@@ -4,12 +4,16 @@ import axios from "axios";
 import { useFormik } from 'formik'
 import * as Yup from "yup";
 import Loader from "./loader";
-const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideMsg, setServerSideStatus }) => {
+import { useRouter } from 'next/router';
+const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideMsg, setServerSideStatus,serversidemsg,serversideStatus }) => {
+
+  const router = useRouter()
+ const {utm_campaign,utm_id,utm_medium,utm_source} = router.query
+
+console.log(utm_source)
   const [otpStatus, setOtpStatus] = useState(false);
-  const [otpfieldval, setOtpfieldval] = useState(true)
+  const [otpfieldval, setOtpfieldval] = useState(false)
   const [errmsg, setErrmsg] = useState('')
-  // const [serversidemsg,setServerSideMsg] = useState('')
-  // const [serversideStatus,setServerSideStatus] = useState(true)
   const [loading, setLoading] = useState(true)
   const [genOtpData, setGenOtpData] = useState({
     "full_name": '',
@@ -26,20 +30,13 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
 
       const { phone_no, otp } = values;
       const data = {
-        phone_no, otp, bank_product_id: genOtpData.bank_product_id
+        phone_no, otp, bank_product_id: genOtpData.bank_product_id,utm_campaign,utm_id,utm_medium,utm_source,offer:""
       }
-      setOtpfieldval(true)
-      if (otp == '') {
-        setOtpfieldval(false)
-        setErrmsg('This field is required')
-      } else if (otp.length != 4) {
-        setOtpfieldval(false)
-        setErrmsg('Invalid OTP')
-      }
+      
+     
 
-      if (otpfieldval) {
         const res = await axios.post('https://api.referloan.in/api/verify-otp', data);
-        if (res) {
+        if (!res.data.status) {
           localStorage.setItem("token", JSON.stringify(res.data.token));
           setServerSideStatus(true)
           if (typeof window !== 'undefined') {
@@ -54,8 +51,11 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
               window.localStorage.removeItem("phone");
             }
           }, 3600000);
+        }else{
+          setServerSideStatus(false)
+          setServerSideMsg(res.data.message)
         }
-      }
+   
     } catch (error) {
       setServerSideStatus(false)
       setServerSideMsg('Something Went Wrong')
@@ -65,8 +65,10 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
 
   const OtpSchema = Yup.object({
     full_name: Yup.string().min(2).required("Please enter your name "),
+
     phone_no: Yup.string().min(10).max(10).required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/, "Invalid phone number"),
     pan_card: Yup.string().min(10).max(10).required("Please fill the pan card").matches(/([A-Z]){5}([0-9]){4}([A-Z]){1}$/, "Invalid Pancard"),
+    otp: Yup.string().min(4).max(4).required("Enter OTP "),
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -90,6 +92,9 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
       if (res.data.success) {
         setOtpStatus(true)
         setPancard(values.pan_card)
+      }else{
+        setServerSideStatus(false)
+        setServerSideMsg(res.data.message)
       }
     } catch (error) {
 
@@ -121,7 +126,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
           {errors.phone_no && touched.phone_no ? (
             <p className="form-error">{errors.phone_no}</p>
           ) : null}
-          <TextField value={values.pan_card} required name="pan_card" fullWidth label="Pan Card" variant="standard" onChange={handleChange} onBlur={handleBlur} />
+          <TextField value={values.pan_card.toUpperCase()} required name="pan_card" fullWidth label="Pan Card" variant="standard" onChange={handleChange} onBlur={handleBlur} />
           {errors.pan_card && touched.pan_card ? (
             <p className="form-error">{errors.pan_card}</p>
           ) : null}
@@ -129,9 +134,10 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
             <button className="mt-4" type="submit" onClick={generateOtp}>Generate OTP</button>
           </div></> : <>
           <TextField value={values.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={handleChange} onBlur={handleBlur} />
-          {!otpfieldval ? (
-            <p className="form-error">{errmsg}</p>
+          {errors.otp && touched.otp ? (
+            <p className="form-error">{errors.otp}</p>
           ) : null}
+         
           <div className="search-button"><button className="mt-4" type="submit" onClick={verifyItp}>verify OTP</button></div></>}
 
       </form>
