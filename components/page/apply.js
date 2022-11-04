@@ -15,7 +15,9 @@ import GenerateOtp from "./generateOtp";
 import Loader from "./loader";
 import Thanks from "./thanks";
 import { useRouter } from 'next/router';
-import CustomApply from './customApply'
+import CustomApply from './customApply';
+//import $ from 'jQuery';
+
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
@@ -43,6 +45,7 @@ const apply = (props) => {
   const [userValues, setUserValues] = useState({});
   const [serversidemsg, setServerSideMsg] = useState('')
   const [serversideStatus, setServerSideStatus] = useState(false)
+  const [active, setActive] = useState(false)
   //var initialValues = {};
 
   if (typeof window !== 'undefined') {
@@ -64,12 +67,17 @@ const apply = (props) => {
     var last_name = '';
   }
 
-  const { values, errors, touched, handleBlur, setFieldValue, handleChange, handleSubmit } =
+  const otpData = {
+    full_name, first_name, last_name, pan, phone
+  }
+
+  const { values, errors, touched, handleBlur,setFieldValue, handleChange, handleSubmit } =
     useFormik({
       initialValues: {},
       validationSchema: '',
 
       onSubmit: async (values) => {
+        
         //submitForm();
         try {
           const headers = {
@@ -78,6 +86,7 @@ const apply = (props) => {
           console.log(values)
 
           setLoading(false)
+          setActive(true)
           const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
           if (res.data.status) {
 
@@ -99,7 +108,10 @@ const apply = (props) => {
             } else {
               setStep(step + 1)
             }
-            submitForm(values.pan);
+
+             submitForm(values.pan);
+             setActive(false)
+
           }
 
 
@@ -108,6 +120,7 @@ const apply = (props) => {
           setServerSideMsg('Fill the valid information')
           console.log("message", error.message);
           setLoading(false)
+          setActive(false)
         }
       },
     });
@@ -122,7 +135,8 @@ const apply = (props) => {
       setToken(window.localStorage.getItem("token"))
     }
     setStep(0)
-  }, [token, router])
+    setThank(false)
+  }, [token,router])
 
   console.log('props', props)
   const mySentence = props.data[0].name.trim();
@@ -137,8 +151,7 @@ const apply = (props) => {
   console.log("schema length", props.form_schema.length)
 
   function submitForm(e) {
-    document.getElementById("myForm").reset();
-
+    document.getElementById("dynamicMyForm").reset();
   }
 
   return (
@@ -186,7 +199,7 @@ const apply = (props) => {
                 {(token == '' || token == null) && <GenerateOtp serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
 
-                {(token != null || token != undefined) && <form id="myForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
+                {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
                     <div key={index} >
@@ -195,34 +208,41 @@ const apply = (props) => {
                       {item.forms.map((elem, ind) => (
                         <div key={ind}>
 
-                          {elem.type == 'text' && elem.global_name == 'pan' ? <TextField
-                            fullWidth
-                            inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                            required={elem.is_required}
-                            className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                            name={elem.param_name}
-                            label={elem.field_name}
-                            id={elem.param_name}
-                            //autoComplete="off"
-                            value={values.pan}
-                            defaultValue=''
-                            onChange={handleChange}
-                          /> : ""}
 
-                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'email') && elem.global_name != 'pan' && <TextField
-                            fullWidth
-                            inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                            required={elem.is_required}
-                            className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                            name={elem.param_name}
-                            label={elem.field_name}
-                            id={elem.param_name}
-                            //autoComplete="off"
-                            defaultValue=''
-                            onChange={handleChange}
-                          />
-
+                          {elem.type === 'text' && (elem.global_name === 'pan' || elem.global_name === 'phone' || elem.global_name === 'full_name' || elem.global_name === 'last_name')
+                            ? <TextField
+                                fullWidth
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                                required={elem.is_required}
+                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                                name={elem.param_name}
+                                label={elem.field_name}
+                                id={elem.param_name}
+                                //autoComplete="off"
+                                inputProps={{ value: otpData[elem.global_name] }}
+                                //value={values.pan}
+                                defaultValue=''
+                                onChange={handleChange}
+                              />
+                            : ''
                           }
+
+                          {(elem.type === 'text' || elem.type === 'number' || elem.type === 'file' || elem.type === 'email') && elem.global_name != 'pan' && elem.global_name != 'phone' && elem.global_name != 'full_name' && elem.global_name != 'last_name'
+                            ? <TextField
+                                fullWidth
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                                required={elem.is_required}
+                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                                name={elem.param_name}
+                                label={elem.field_name}
+                                id={elem.param_name}
+                                //autoComplete="off"
+                                defaultValue=''
+                                onChange={handleChange}
+                              />
+                            : ''
+                          }
+
                           {elem.type == 'date' &&
                             <TextField
                               fullWidth
@@ -259,7 +279,11 @@ const apply = (props) => {
                           </FormControl>}
                         </div>
                       ))}
-                      <div className="search-button"><button className="mt-4" type="submit" >Save & Next</button></div>
+
+                      <div className="search-button">
+                        <button className="mt-4" type="submit" disabled={active} >Save & Next {active?<i class="fa fa-spinner fa-spin"></i>:''}</button>
+                      </div>
+
                     </div>
 
                   )}
@@ -346,3 +370,4 @@ export function SelectField(props) {
     </>
   )
 }
+
