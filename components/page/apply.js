@@ -46,6 +46,7 @@ const apply = (props) => {
   const [serversidemsg, setServerSideMsg] = useState('')
   const [serversideStatus, setServerSideStatus] = useState(false)
   const [active, setActive] = useState(false)
+  const [apiResponse, setApiResponse] = useState('')
   //var initialValues = {};
 
   if (typeof window !== 'undefined') {
@@ -95,8 +96,13 @@ const apply = (props) => {
             if (props.form_schema.length - 1 == step) {
               var bank_product_id = { "bank_product_id": props.data[0].bank_product_id }
               const resData = await axios.post('https://api.referloan.in/api/banks/process', bank_product_id, { headers });
-              console.log('resData: ' + resData)
+              
               if (resData.data.status) {
+                if(typeof resData.data.data.reference_key !== 'undefined'){
+                  setApiResponse(resData.data.data.reference_key);
+                  console.log('API Response: ' + resData.data.data.reference_key);
+                }
+                
                 setStep(step + 1)
                 if (typeof window !== 'undefined') {
                   window.localStorage.removeItem("token");
@@ -117,7 +123,7 @@ const apply = (props) => {
 
         } catch (error) {
           setServerSideStatus(false)
-          setServerSideMsg('Fill the valid information')
+          setServerSideMsg('Something went wrong!')
           console.log("message", error.message);
           setLoading(false)
           setActive(false)
@@ -286,7 +292,7 @@ const apply = (props) => {
                     </div>
 
                   )}
-                  {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.product} /> : ""}
+                  {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.product} result={apiResponse} /> : ""}
                 </form>}
 
                 {(token != null || token != undefined) && props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
