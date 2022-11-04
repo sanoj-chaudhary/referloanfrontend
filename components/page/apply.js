@@ -20,7 +20,7 @@ const getToken = () => {
 
   if (typeof window !== 'undefined') {
     const items = localStorage.getItem('token');
-    console.log(items)
+   
     if (items && items !== undefined) {
       return JSON.parse(localStorage.getItem('token'));
     } else {
@@ -176,7 +176,7 @@ const apply = (props) => {
             <div className="dealStep__wrapper">
               <div className="dealStep__Area">
                 {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
-                {(token == '' || token == null) && <GenerateOtp utmData={props.form_schema[0].forms[0]} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
+                {(token == '' || token == null) && <GenerateOtp utmData={props.form_schema.length !=0?props.form_schema[0].forms[0]:''} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
 
                 {(token != null || token != undefined) && <form id="myForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
