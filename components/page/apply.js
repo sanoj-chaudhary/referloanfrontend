@@ -20,8 +20,8 @@ const getToken = () => {
 
   if (typeof window !== 'undefined') {
     const items = localStorage.getItem('token');
-
-    if (items) {
+    console.log(items)
+    if (items && items != undefined) {
       return JSON.parse(localStorage.getItem('token'));
     } else {
       return [];
@@ -34,7 +34,7 @@ const apply = (props) => {
   //console.log("form_schema",props.form_schema)
   // const tokenkey = getToken();
   const [step, setStep] = useState(0)
-  const [thank, setThank] = useState(false)
+
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
   const [panCard, setPancard] = useState('');
@@ -44,7 +44,7 @@ const apply = (props) => {
   const [serversidemsg, setServerSideMsg] = useState('')
   const [serversideStatus, setServerSideStatus] = useState(false)
   //var initialValues = {};
-  
+
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
     var pan = window.localStorage.getItem("pan");
@@ -64,9 +64,9 @@ const apply = (props) => {
     var last_name = '';
   }
 
-  const { values, errors, touched, handleBlur,setFieldValue, handleChange, handleSubmit } =
+  const { values, errors, touched, handleBlur, setFieldValue, handleChange, handleSubmit } =
     useFormik({
-      initialValues:{},
+      initialValues: {},
       validationSchema: '',
 
       onSubmit: async (values) => {
@@ -95,13 +95,11 @@ const apply = (props) => {
                   window.localStorage.removeItem("pan");
                   window.localStorage.removeItem("phone");
                 }
-                setThank(true)
-                setStep(0)
               }
             } else {
               setStep(step + 1)
             }
-             submitForm(values.pan);
+            submitForm(values.pan);
           }
 
 
@@ -116,7 +114,7 @@ const apply = (props) => {
 
   useEffect(() => {
     //fillFormValues();
-    setFieldValue('pan',pan)
+    setFieldValue('pan', pan)
     setLoading(false)
     setServerSideStatus(false)
     setServerSideMsg('')
@@ -124,7 +122,7 @@ const apply = (props) => {
       setToken(window.localStorage.getItem("token"))
     }
     setStep(0)
-  }, [token,router])
+  }, [token, router])
 
   console.log('props', props)
   const mySentence = props.data[0].name.trim();
@@ -134,13 +132,13 @@ const apply = (props) => {
     return word[0].toUpperCase() + word.substring(1);
   }).join("_");
 
-  
+
   console.log("formSchemaa", props.form_schema)
   console.log("schema length", props.form_schema.length)
 
   function submitForm(e) {
     document.getElementById("myForm").reset();
-   
+
   }
 
   return (
@@ -185,12 +183,12 @@ const apply = (props) => {
             <div className="dealStep__wrapper">
               <div className="dealStep__Area">
                 {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
-                {(token == '' || token == null) && <GenerateOtp setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
+                {(token == '' || token == null) && <GenerateOtp serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
 
                 {(token != null || token != undefined) && <form id="myForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
-                    
+
                     <div key={index} >
                       {/* {fillFormValues()} */}
                       <h3>{item.section_name}</h3>
@@ -209,7 +207,7 @@ const apply = (props) => {
                             value={values.pan}
                             defaultValue=''
                             onChange={handleChange}
-                          />:"" }
+                          /> : ""}
 
                           {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'email') && elem.global_name != 'pan' && <TextField
                             fullWidth
@@ -262,18 +260,14 @@ const apply = (props) => {
                         </div>
                       ))}
                       <div className="search-button"><button className="mt-4" type="submit" >Save & Next</button></div>
-
                     </div>
 
                   )}
-
-                  {props.form_schema.length != 0 && thank ? <Thanks product={props.data[0].name} /> : ""}
-
-                  
+                  {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.product} /> : ""}
                 </form>}
 
-                {(token != null || token != undefined) &&  props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
-              
+                {(token != null || token != undefined) && props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
+
               </div>
             </div>
           </section>
@@ -311,7 +305,7 @@ const apply = (props) => {
                   </div>
                 </div>
               </div> : ''}
-              
+
 
             </section>
           </div>
@@ -326,7 +320,7 @@ export default apply
 export function SelectField(props) {
 
   console.log("select", props)
-  const { name, label, ParamOptions,handleChange  } = props
+  const { name, label, ParamOptions, handleChange } = props
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
