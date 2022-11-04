@@ -135,7 +135,6 @@ const apply = (props) => {
       setToken(window.localStorage.getItem("token"))
     }
     setStep(0)
-    setThank(false)
   }, [token,router])
 
   console.log('props', props)
