@@ -1,4 +1,6 @@
-
+.navBarContainer li .megaMenu_container ul.subMenuLevel2 li.activeSubMenu a+.submenuContainer {
+    padding-top: 15px;
+}
 
 .navBarContainer li .megaMenu_container .submenuContainer ul li {
     /* flex: 30%;*/ 
@@ -15,6 +17,7 @@
     /* flex-direction: row; */
     flex-wrap: wrap;
     /*background: aliceblue;*/
+    padding: 0;
 }
 
 .navBarContainer li .megaMenu_container ul {
