@@ -21,7 +21,7 @@ const getToken = () => {
   if (typeof window !== 'undefined') {
     const items = localStorage.getItem('token');
     console.log(items)
-    if (items && items != undefined) {
+    if (items && items !== undefined) {
       return JSON.parse(localStorage.getItem('token'));
     } else {
       return [];
@@ -30,11 +30,7 @@ const getToken = () => {
 }
 const apply = (props) => {
   const router = useRouter()
-  //console.log("length",props.form_schema.length)
-  //console.log("form_schema",props.form_schema)
-  // const tokenkey = getToken();
   const [step, setStep] = useState(0)
-
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
   const [panCard, setPancard] = useState('');
@@ -75,8 +71,6 @@ const apply = (props) => {
           const headers = {
             'Authorization': "Bearer " + token.slice(1, -1) + ""
           }
-          console.log(values)
-
           setLoading(false)
           const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
           if (res.data.status) {
@@ -124,7 +118,6 @@ const apply = (props) => {
     setStep(0)
   }, [token, router])
 
-  console.log('props', props)
   const mySentence = props.data[0].name.trim();
   const productName = mySentence.split(" ");
 
@@ -183,7 +176,7 @@ const apply = (props) => {
             <div className="dealStep__wrapper">
               <div className="dealStep__Area">
                 {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
-                {(token == '' || token == null) && <GenerateOtp serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
+                {(token == '' || token == null) && <GenerateOtp utmData={props.form_schema[0].forms[0]} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
 
                 {(token != null || token != undefined) && <form id="myForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
