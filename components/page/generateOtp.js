@@ -41,6 +41,9 @@ console.log(utm_source)
           setServerSideStatus(true)
           if (typeof window !== 'undefined') {
             setToken(window.localStorage.getItem("token"))
+            localStorage.setItem("full_name", values.full_name);
+            localStorage.setItem("pan", values.pan_card);
+            localStorage.setItem("phone", values.phone_no);
           }
 
           setTimeout(() => {
@@ -76,13 +79,14 @@ console.log(utm_source)
       initialValues: genOtpData,
       validationSchema: OtpSchema,
       onSubmit: async (values) => {
-        localStorage.setItem("full_name", values.full_name);
-        localStorage.setItem("pan", values.pan_card);
-        localStorage.setItem("phone", values.phone_no);
+        // localStorage.setItem("full_name", values.full_name);
+        // localStorage.setItem("pan", values.pan_card);
+        // localStorage.setItem("phone", values.phone_no);
       },
     });
 
   const generateOtp = async (e) => {
+    //alert('Set');
     e.preventDefault();
     setServerSideStatus(true)
     try {
