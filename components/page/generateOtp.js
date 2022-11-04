@@ -4,12 +4,16 @@ import axios from "axios";
 import { useFormik } from 'formik'
 import * as Yup from "yup";
 import Loader from "./loader";
+import { useRouter } from 'next/router';
 const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideMsg, setServerSideStatus,serversidemsg,serversideStatus }) => {
+
+  const router = useRouter()
+ const {utm_campaign,utm_id,utm_medium,utm_source} = router.query
+
+console.log(utm_source)
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(false)
   const [errmsg, setErrmsg] = useState('')
-  // const [serversidemsg,setServerSideMsg] = useState('')
-  // const [serversideStatus,setServerSideStatus] = useState(true)
   const [loading, setLoading] = useState(true)
   const [genOtpData, setGenOtpData] = useState({
     "full_name": '',
@@ -26,7 +30,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
 
       const { phone_no, otp } = values;
       const data = {
-        phone_no, otp, bank_product_id: genOtpData.bank_product_id
+        phone_no, otp, bank_product_id: genOtpData.bank_product_id,utm_campaign,utm_id,utm_medium,utm_source,offer:""
       }
       
      
@@ -122,7 +126,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
           {errors.phone_no && touched.phone_no ? (
             <p className="form-error">{errors.phone_no}</p>
           ) : null}
-          <TextField value={values.pan_card} required name="pan_card" fullWidth label="Pan Card" variant="standard" onChange={handleChange} onBlur={handleBlur} />
+          <TextField value={values.pan_card.toUpperCase()} required name="pan_card" fullWidth label="Pan Card" variant="standard" onChange={handleChange} onBlur={handleBlur} />
           {errors.pan_card && touched.pan_card ? (
             <p className="form-error">{errors.pan_card}</p>
           ) : null}
