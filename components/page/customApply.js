@@ -89,6 +89,7 @@ console.log(initialValues,"initialValues")
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
+    setStep(0)
   }, [token, router])
   return (
     <>

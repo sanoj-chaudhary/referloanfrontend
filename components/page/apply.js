@@ -15,13 +15,15 @@ import GenerateOtp from "./generateOtp";
 import Loader from "./loader";
 import Thanks from "./thanks";
 import { useRouter } from 'next/router';
-import CustomApply from './customApply'
+import CustomApply from './customApply';
+//import $ from 'jQuery';
+
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
     const items = localStorage.getItem('token');
-
-    if (items) {
+   
+    if (items && items !== undefined) {
       return JSON.parse(localStorage.getItem('token'));
     } else {
       return [];
@@ -30,9 +32,6 @@ const getToken = () => {
 }
 const apply = (props) => {
   const router = useRouter()
-  //console.log("length",props.form_schema.length)
-  //console.log("form_schema",props.form_schema)
-  // const tokenkey = getToken();
   const [step, setStep] = useState(0)
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
@@ -42,9 +41,11 @@ const apply = (props) => {
   const [userValues, setUserValues] = useState({});
   const [serversidemsg, setServerSideMsg] = useState('')
   const [serversideStatus, setServerSideStatus] = useState(false)
+  const [active, setActive] = useState(false)
+  const [apiResponse, setApiResponse] = useState('')
   //var initialValues = {};
-  
-  /*if (typeof window !== 'undefined') {
+
+  if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
     var pan = window.localStorage.getItem("pan");
     var phone = window.localStorage.getItem("phone");
@@ -65,24 +66,22 @@ const apply = (props) => {
 
   const otpData = {
     full_name, first_name, last_name, pan, phone
-  }*/
-
-  //console.log('F: '+first_name);
+  }
 
   const { values, errors, touched, handleBlur,setFieldValue, handleChange, handleSubmit } =
     useFormik({
-      initialValues:{},
+      initialValues: {},
       validationSchema: '',
 
       onSubmit: async (values) => {
+        
         //submitForm();
         try {
           const headers = {
             'Authorization': "Bearer " + token.slice(1, -1) + ""
           }
-          console.log(values)
-
           setLoading(false)
+          setActive(true)
           const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
           if (res.data.status) {
 
@@ -91,43 +90,53 @@ const apply = (props) => {
             if (props.form_schema.length - 1 == step) {
               var bank_product_id = { "bank_product_id": props.data[0].bank_product_id }
               const resData = await axios.post('https://api.referloan.in/api/banks/process', bank_product_id, { headers });
-              console.log('resData: ' + resData)
+              
               if (resData.data.status) {
+                if(typeof resData.data.data.reference_key !== 'undefined'){
+                  setApiResponse(resData.data.data.reference_key);
+                  console.log('API Response: ' + resData.data.data.reference_key);
+                }
+                
                 setStep(step + 1)
                 if (typeof window !== 'undefined') {
-                  /*window.localStorage.removeItem("token");
+                  window.localStorage.removeItem("token");
                   window.localStorage.removeItem("full_name");
                   window.localStorage.removeItem("pan");
-                  window.localStorage.removeItem("phone");*/
+                  window.localStorage.removeItem("phone");
                 }
               }
             } else {
               setStep(step + 1)
             }
+
              submitForm(values.pan);
+             setActive(false)
+
           }
 
 
         } catch (error) {
           setServerSideStatus(false)
-          setServerSideMsg('Fill the valid information')
+          setServerSideMsg('Something went wrong!')
           console.log("message", error.message);
           setLoading(false)
+          setActive(false)
         }
       },
     });
 
   useEffect(() => {
     //fillFormValues();
+    setFieldValue('pan', pan)
     setLoading(false)
     setServerSideStatus(false)
     setServerSideMsg('')
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
+    setStep(0)
   }, [token,router])
 
-  console.log('props', props)
   const mySentence = props.data[0].name.trim();
   const productName = mySentence.split(" ");
 
@@ -135,23 +144,12 @@ const apply = (props) => {
     return word[0].toUpperCase() + word.substring(1);
   }).join("_");
 
-  
+
   console.log("formSchemaa", props.form_schema)
   console.log("schema length", props.form_schema.length)
 
   function submitForm(e) {
-    //alert('Val: '+e);
-    document.getElementById("myForm").reset();
-    //$('#pan').val(e);
-  }
-
-  function fillFormValues() {
-    alert('Val: '+pan);
-    // setFieldValue(...values,pan=pan)
-    // document.getElementById("pan").value = "pan";
-    // document.getElementById("phone").value = phone;
-    // document.getElementById("first_name").value = first_name;
-    // document.getElementById("last_name").value = last_name;
+    document.getElementById("dynamicMyForm").reset();
   }
 
   return (
@@ -196,32 +194,53 @@ const apply = (props) => {
             <div className="dealStep__wrapper">
               <div className="dealStep__Area">
                 {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
-                {(token == '' || token == null) && <GenerateOtp setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
+                {(token == '' || token == null) && <GenerateOtp utmData={props.form_schema.length !=0?props.form_schema[0].forms[0]:''} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
 
-                {(token != null || token != undefined) && <form id="myForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
+                {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
-                    
+
                     <div key={index} >
                       {/* {fillFormValues()} */}
                       <h3>{item.section_name}</h3>
                       {item.forms.map((elem, ind) => (
                         <div key={ind}>
 
-                          {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'email') && <TextField
-                            fullWidth
-                            inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                            required={elem.is_required}
-                            className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                            name={elem.param_name}
-                            label={elem.field_name}
-                            id={elem.param_name}
-                            //autoComplete="off"
-                            defaultValue=''
-                            onChange={handleChange}
-                          />
 
+                          {elem.type === 'text' && (elem.global_name === 'pan' || elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
+                            ? <TextField
+                                fullWidth
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                                required={elem.is_required}
+                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                                name={elem.param_name}
+                                label={elem.field_name}
+                                id={elem.param_name}
+                                //autoComplete="off"
+                                inputProps={ otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
+                                //value={values.pan}
+                                defaultValue=''
+                                onChange={handleChange}
+                              />
+                            : ''
                           }
+
+                          {(elem.type === 'text' || elem.type === 'number' || elem.type === 'file' || elem.type === 'email') && elem.global_name != 'pan' && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name'
+                            ? <TextField
+                                fullWidth
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                                required={elem.is_required}
+                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                                name={elem.param_name}
+                                label={elem.field_name}
+                                id={elem.param_name}
+                                //autoComplete="off"
+                                defaultValue=''
+                                onChange={handleChange}
+                              />
+                            : ''
+                          }
+
                           {elem.type == 'date' &&
                             <TextField
                               fullWidth
@@ -258,19 +277,19 @@ const apply = (props) => {
                           </FormControl>}
                         </div>
                       ))}
-                      <div className="search-button"><button className="mt-4" type="submit" >Save & Next</button></div>
+
+                      <div className="search-button">
+                        <button className="mt-4" type="submit" disabled={active} >Save & Next {active?<i class="fa fa-spinner fa-spin"></i>:''}</button>
+                      </div>
 
                     </div>
 
                   )}
-
-                  {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} /> : ""}
-
-                  
+                  {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.product} result={apiResponse} /> : ""}
                 </form>}
 
-                {(token != null || token != undefined) &&  props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
-              
+                {(token != null || token != undefined) && props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
+
               </div>
             </div>
           </section>
@@ -308,7 +327,7 @@ const apply = (props) => {
                   </div>
                 </div>
               </div> : ''}
-              
+
 
             </section>
           </div>
@@ -323,7 +342,7 @@ export default apply
 export function SelectField(props) {
 
   console.log("select", props)
-  const { name, label, ParamOptions,handleChange  } = props
+  const { name, label, ParamOptions, handleChange } = props
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
@@ -349,3 +368,4 @@ export function SelectField(props) {
     </>
   )
 }
+
