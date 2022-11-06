@@ -32,7 +32,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
       }
 if(otp){
       const res = await axios.post('https://api.referloan.in/api/verify-otp', data);
-      if (!res.data.status) {
+      if (res) {
 
         setServerSideStatus(true)
 
@@ -44,7 +44,7 @@ if(otp){
             window.localStorage.removeItem("phone");
           }
         }, 3600000);
-        if (utmData.param_name == 'redirect') {
+        if (utmData && utmData.param_name == 'redirect') {
           setTimeout(() => {
             router.push('/')
           }, 3000);
@@ -121,7 +121,7 @@ if(otp){
   useEffect(() => {
     setLoading(false)
     setGenOtpData({ ...genOtpData, bank_product_id: data.bank_product_id })
-
+ 
   }, [data])
   return (
     <>
