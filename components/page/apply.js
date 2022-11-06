@@ -134,6 +134,12 @@ const apply = (props) => {
     }
 
     setStep(0)
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem("token");
+      window.localStorage.removeItem("full_name");
+      window.localStorage.removeItem("pan");
+      window.localStorage.removeItem("phone");
+    }
 
   }, [token, router])
 
