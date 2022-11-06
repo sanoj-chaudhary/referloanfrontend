@@ -9,7 +9,6 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
   const router = useRouter()
   const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
 
-  console.log(utm_source)
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(false)
   const [errmsg, setErrmsg] = useState('')
@@ -31,9 +30,9 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
       const data = {
         phone_no, otp, bank_product_id: genOtpData.bank_product_id, utm_campaign, utm_id, utm_medium, utm_source, offer: ""
       }
-
+if(otp){
       const res = await axios.post('https://api.referloan.in/api/verify-otp', data);
-      if (!res.data.status) {
+      if (res) {
 
         setServerSideStatus(true)
 
@@ -45,7 +44,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
             window.localStorage.removeItem("phone");
           }
         }, 3600000);
-        if (utmData.param_name == 'redirect') {
+        if (utmData && utmData.param_name == 'redirect') {
           setTimeout(() => {
             router.push('/')
           }, 3000);
@@ -67,6 +66,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
         setServerSideStatus(false)
         setServerSideMsg(res.data.message)
       }
+    }
 
     } catch (error) {
       setServerSideStatus(false)
@@ -80,7 +80,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
 
     phone_no: Yup.string().min(10).max(10).required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/, "Invalid phone number"),
     pan_card: Yup.string().min(10).max(10).required("Please fill the pan card").matches(/([A-Z]){5}([0-9]){4}([A-Z]){1}$/, "Invalid Pancard"),
-    otp: Yup.string().min(4).max(4).required("Enter OTP "),
+    otp: Yup.string().min(4).max(4).required('Enter OTP')
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -95,7 +95,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
     });
 
   const generateOtp = async (e) => {
-    //alert('Set');
+  
     e.preventDefault();
     setServerSideStatus(true)
     try {
@@ -121,7 +121,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
   useEffect(() => {
     setLoading(false)
     setGenOtpData({ ...genOtpData, bank_product_id: data.bank_product_id })
-
+ 
   }, [data])
   return (
     <>
@@ -146,7 +146,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
           <div className="search-button">
             <button className="mt-4" type="submit" onClick={generateOtp}>Generate OTP</button>
           </div></> : <>
-          <TextField value={values.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={handleChange} onBlur={handleBlur} />
+          <TextField value={values.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={handleChange}  />
           {errors.otp && touched.otp ? (
             <p className="form-error">{errors.otp}</p>
           ) : null}

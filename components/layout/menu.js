@@ -44,8 +44,8 @@ const Menu = () => {
                 </ul>
             </div>
         </li> : <li key={item.id}><Link href={'/'+item.slug+process.env.UTM} ><a className={item.page ? "hasSub_menu" : ''} title={item.name}>{item.name}</a></Link>
-            <div className={item.page ? "megaMenu_container" : ''} >
-                <ul className={item.page ? "subMenuLevel2" : ''}>
+            
+                <ul className={item.page ? "subMenuLevel2 smallDropMenu" : ''}>
                     {item.page && item.page.map((value, Indexkey) => (
                         <li key={value.id}
                             className={Indexkey ? "activeSubMenu" : "activeSubMenu menu-active" && isHovering ? 'activeSubMenu' : 'activeSubMenu menu-active'}
@@ -55,7 +55,7 @@ const Menu = () => {
                         </li>
                     ))}
                 </ul>
-            </div>
+           
         </li>
 
     ))
