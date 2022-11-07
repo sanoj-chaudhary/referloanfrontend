@@ -1,7 +1,15 @@
 import Carousel from "react-slick";
 import Link from "next/link"
-
+import { useRouter } from 'next/router';
 const cardLoan = () => {
+  const router = useRouter()
+  let  utmData = '';
+  const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
+  if(!utm_campaign){
+    utmData = `?utm_source=direct_visitors&utm_medium=self&utm_campaign=&utm_id=`
+}else{
+    utmData = `?utm_source=${utm_source}&utm_medium=${utm_medium}&utm_campaign=${utm_campaign}&utm_id=${utm_id}`
+}
 
   const settings = {
     dots: true,
@@ -44,7 +52,7 @@ const cardLoan = () => {
             <div className="slickItem">
               <div className="slide_item">
                 <li className="greenBox">
-                  <Link href={'/loans/personal-loan' + process.env.UTM}><a>
+                  <Link href={'/loans/personal-loan' + utmData}><a>
                     <div className="contentArea">
                       <h2>Personal Loan</h2>
                       <p>Instant approval on loans upto Rs. 25 lakh</p>
@@ -62,7 +70,7 @@ const cardLoan = () => {
             <div className="slickItem">
               <div className="slide_item">
                 <li className="blueBox">
-                  <Link href={'/credit-card' + process.env.UTM}><a>
+                  <Link href={'/credit-card' + utmData}><a>
                     <div className="contentArea">
                       <h2>Credit Card</h2>
                       <p>Get a card limit of up to Rs. 2 lakh*</p>
@@ -80,7 +88,7 @@ const cardLoan = () => {
             <div className="slickItem">
               <div className="slide_item">
                 <li className="purpleBox">
-                  <Link href={"/loans/business-loan" + process.env.UTM}><a>
+                  <Link href={"/loans/business-loan" + utmData}><a>
                     <div className="contentArea">
                       <h2>Business Loan</h2>
                       <p>Purchases into easy EMIS with a limit of up to Rs. 2 lakh*</p>
@@ -97,7 +105,7 @@ const cardLoan = () => {
             <div className="slickItem">
               <div className="slide_item">
                 <li className="yellowBox">
-                  <Link href={"/loans/gold-loan" + process.env.UTM}><a>
+                  <Link href={"/loans/gold-loan" + utmData}><a>
                     <div className="contentArea">
                       <h2>Gold Loan</h2>
                       <p>Instant approval on loans upto Rs. 25 lakh</p>
