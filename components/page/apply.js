@@ -323,7 +323,7 @@ const apply = (props) => {
                   </div>
 
                   <div className="faqImg">
-                    <img src="/images/faq.png" alt="faqImg" />
+                    <img src="/images/faq.webp" alt="faqImg" />
                   </div>
                 </div>
               </div> : ''}

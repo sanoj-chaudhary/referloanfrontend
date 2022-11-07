@@ -51,7 +51,7 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/bnplicon.png" alt="personal-loan" />
+                      <img src="/images/bnplicon.webp" alt="personal-loan" />
                     </div>
                   </a>
                   </Link>
@@ -69,7 +69,7 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/ccard-bnr-icon.png" alt="credit-card" />
+                      <img src="/images/ccard-bnr-icon.webp" alt="credit-card" />
                     </div>
                   </a>
                   </Link>
@@ -87,7 +87,7 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/bnblicon.png" alt="business-loan" />
+                      <img src="/images/bnblicon.webp" alt="business-loan" />
                     </div>
                   </a>
                   </Link>
@@ -104,7 +104,7 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/pl-bnr-icon.png" alt="gold-loan" />
+                      <img src="/images/pl-bnr-icon.webp" alt="gold-loan" />
                     </div>
                   </a>
                   </Link>

@@ -177,7 +177,7 @@
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    background-image: url(../assets/images/drop-icon.png);
+    background-image: url(../assets/images/drop-icon.webp);
     background-repeat: no-repeat;
     background-position: 97% 50%;
     background-size: 26px;
@@ -724,7 +724,7 @@ ul.vdoArea {
     content: '';
     position: absolute;
     top: 0;
-    background: url(../assets/images/abstract-bg.png) 100% 100%;
+    background: url(../assets/images/abstract-bg.webp) 100% 100%;
     background-repeat: no-repeat;
     width: 100%;
     height: 100%;
@@ -829,7 +829,7 @@ ul.vdoArea {
 
 .getApp .left::before {
     content: '';
-    background: url(../assets/images/apple-icon.png) bottom left no-repeat;
+    background: url(../assets/images/apple-icon.webp) bottom left no-repeat;
     width: 200px;
     height: 216px;
     z-index: 999;
@@ -840,7 +840,7 @@ ul.vdoArea {
 
 .getApp .left::after {
     content: '';
-    background: url(../assets/images/android-icon.png) bottom left no-repeat;
+    background: url(../assets/images/android-icon.webp) bottom left no-repeat;
     width: 200px;
     height: 316px;
     position: absolute;
@@ -1832,7 +1832,7 @@ note {
 
 .testimonial_Area li::after {
     content: '';
-    background: url(../assets/images/qoute-icon.png) bottom center no-repeat;
+    background: url(../assets/images/qoute-icon.webp) bottom center no-repeat;
     background-size: 37px;
     width: 40px;
     height: 46px;

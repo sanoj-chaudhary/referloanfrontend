@@ -68,7 +68,7 @@ const Menu = () => {
             <header id="moileheader" className="d-md-none d-block">
                 <div className="mheadWrapper">
                     <div className="header_left">
-                        <a className="logo" href="/"><img src="/images/logo.png" alt="logo" /></a>
+                        <a className="logo" href="/"><img src="/images/logo.webp" alt="logo" /></a>
                     </div>
                     <div className="header_right">
                         <label htmlFor="menuTrigger" className="nav_ico"><i className="fa fa-bars"></i></label>
@@ -127,7 +127,7 @@ const Menu = () => {
                     <div className="container">
                         <div className="customContainer">
                           
-                            <Link href="/"><a className="logoSection"><img src="/images/top-logo.png" alt="" title="referloan" /></a></Link>
+                            <Link href="/"><a className="logoSection"><img src="/images/top-logo.webp" alt="" title="referloan" /></a></Link>
 
                             <div className="info_section">
                                 <ul>

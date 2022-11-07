@@ -10,15 +10,15 @@ const insuranceInvestment = () => {
             offers from multiple, vetted lenders in real time.</p>
         <ul className="stepArea">
             <li>
-                <div className="step-imgBox"><img src="/images/step1.png" alt="" /></div>
+                <div className="step-imgBox"><img src="/images/step1.webp" alt="" /></div>
                 <h2>Discover</h2>
             </li>
             <li>
-                <div className="step-imgBox"><img src="/images/step2.png" alt="" /></div>
+                <div className="step-imgBox"><img src="/images/step2.webp" alt="" /></div>
                 <h2>Compare</h2>
             </li>
             <li>
-                <div className="step-imgBox"><img src="/images/step3.png" alt="" /></div>
+                <div className="step-imgBox"><img src="/images/step3.webp" alt="" /></div>
                 <h2>Apply</h2>
             </li>
         </ul>
