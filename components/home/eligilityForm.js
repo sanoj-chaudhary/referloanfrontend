@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 const eligilityForm = ({ loanProduct, creditProduct }) => {
 const router = useRouter()
   const signupSchema = Yup.object({
-    pincode: Yup.string().min(6).max(6),
+    pincode: Yup.string().min(6,'Invalid pincode').max(6,'Invalid pincode'),
   });
 
   const [searchData, setSearchData] = useState({
