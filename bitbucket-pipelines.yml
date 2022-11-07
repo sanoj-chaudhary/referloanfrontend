@@ -7,9 +7,18 @@ image: atlassian/default-image:latest
 
 pipelines:
   branches:
-    develop:
+    master:
       - step:
+          clone:
+            enabled: false
           deployment: staging
+          script:
+            - echo "------> Ready to deploy <------"
+      - step:
+          clone:
+            enabled: false
+          deployment: production
+          trigger: manual
           script:
             - pipe: atlassian/ssh-run:0.4.1
               variables:
@@ -18,4 +27,4 @@ pipelines:
                 SSH_KEY: $MY_SSH_KEY
                 MODE: "command"
                 PORT: "8824"
-                COMMAND: "cd /www/wwwroot/app.referloan.in/ && ./pull.sh" # path to a script in your repository 
+                COMMAND: "cd /www/wwwroot/referloan.in/ && ./pull.sh" # path to a script in your repository
