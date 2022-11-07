@@ -27,22 +27,22 @@ function HeroSection({ loanProduct, creditProduct }) {
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
-                                                                              <img src="/images/loan-w-icon.png" alt="" />
+                                                                              <img src="/images/loan-w-icon.webp" alt="" />
                                                                               <h3>Low-Interest Rates </h3>
                                                                         </li>
                                                                         <li>
-                                                                              <img src="/images/interst-icon.png" alt="" />
+                                                                              <img src="/images/interst-icon.webp" alt="" />
                                                                               <h3>Easy Application Process </h3>
                                                                         </li>
                                                                         <li>
-                                                                              <img src="/images/loan-term-icon.png" alt="" />
+                                                                              <img src="/images/loan-term-icon.webp" alt="" />
                                                                               <h3> Quick Disbursal </h3>
                                                                         </li>
                                                                   </ul>
                                                             </div>
                                                       </div>
                                                       <div className="img-box">
-                                                            <img src="/images/home-loan.png" alt="" />
+                                                            <img src="/images/home-loan.webp" alt="" />
                                                       </div>
                                                 </div>
 
@@ -54,23 +54,23 @@ function HeroSection({ loanProduct, creditProduct }) {
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
-                                                                              <img src="/images/loan-w-icon.png" alt="" />
+                                                                              <img src="/images/loan-w-icon.webp" alt="" />
                                                                               <h3>Easy EMIs</h3>
 
                                                                         </li>
                                                                         <li>
-                                                                              <img src="/images/interst-icon.png" alt="" />
+                                                                              <img src="/images/interst-icon.webp" alt="" />
                                                                               <h3>Financing <br />All Models </h3>
                                                                         </li>
                                                                         <li>
-                                                                              <img src="/images/loan-term-icon.png" alt="" />
+                                                                              <img src="/images/loan-term-icon.webp" alt="" />
                                                                               <h3>Flexible <br /> loan tenure</h3>
                                                                         </li>
                                                                   </ul>
                                                             </div>
                                                       </div>
                                                       <div className="img-box">
-                                                            <img src="/images/car-loan.png" alt="" />
+                                                            <img src="/images/car-loan.webp" alt="" />
                                                       </div>
                                                 </div>
 
@@ -82,22 +82,22 @@ function HeroSection({ loanProduct, creditProduct }) {
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
-                                                                              <img src="/images/loan-w-icon.png" alt="" />
+                                                                              <img src="/images/loan-w-icon.webp" alt="" />
                                                                               <h3>Instant Approvals</h3>
                                                                         </li>
                                                                         <li>
-                                                                              <img src="/images/interst-icon.png" alt="" />
+                                                                              <img src="/images/interst-icon.webp" alt="" />
                                                                               <h3>Cashbacks & Rewards</h3>
                                                                         </li>
                                                                         <li>
-                                                                              <img src="/images/loan-term-icon.png" alt="" />
+                                                                              <img src="/images/loan-term-icon.webp" alt="" />
                                                                               <h3>Wide Range to Choose From </h3>
                                                                         </li>
                                                                   </ul>
                                                             </div>
                                                       </div>
                                                       <div className="img-box">
-                                                            <img src="/images/hd-img.png" alt="" />
+                                                            <img src="/images/hd-img.webp" alt="" />
                                                       </div>
                                                 </div>
                                           </div>

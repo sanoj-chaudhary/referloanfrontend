@@ -1,11 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
-import vcard from './../../public/images/v-card.png'
-import aecard from './../../public/images/ae-card.png'
-import mcard from './../../public/images/m-card.png'
-import rpcard from './../../public/images/rp-card.png'
-import mescard from './../../public/images/mes-card.png'
-import indicard from './../../public/images/ind-flag.png'
+import vcard from './../../public/images/v-card.webp'
+import aecard from './../../public/images/ae-card.webp'
+import mcard from './../../public/images/m-card.webp'
+import rpcard from './../../public/images/rp-card.webp'
+import mescard from './../../public/images/mes-card.webp'
+import indicard from './../../public/images/ind-flag.webp'
 import { useEffect, useState } from "react"
 import { useRouter } from 'next/router';
 import axios from 'axios'
@@ -74,21 +74,21 @@ const Footer = () => {
              
             <div className="sticky_nav">
             <Link href={"/loans"+ utmData}><a className="nav-item"> 
-                        <img src="/images/icon/pl-icon.png" alt="" /><span>Loan</span>
+                        <img src="/images/icon/pl-icon.webp" alt="" /><span>Loan</span>
                     </a></Link>
 
                     <Link href={"/credit-card"+ utmData}><a className="nav-item">
-                        <img src="/images/icon/ccard-icon.png" alt="" />
+                        <img src="/images/icon/ccard-icon.webp" alt="" />
                         <span>Credit Card</span>
                     </a></Link>
 
                     <Link href={"/other-product/investment"+ utmData}><a className="nav-item">
-                        <img src="/images/icon/sa-icon.png" alt="" />
+                        <img src="/images/icon/sa-icon.webp" alt="" />
                         <span>Investment</span>
                     </a></Link>
 
                     <Link href={"/subsidy"+ utmData}><a className="nav-item">
-                        <img src="images/icon/eduL-icon.png" alt="" />
+                        <img src="images/icon/eduL-icon.webp" alt="" />
                         <span>Subsidy</span>
                     </a></Link>
                 </div>
@@ -146,7 +146,7 @@ const Footer = () => {
                         <div className="growArea">
                             <h2>Save, Fastest Loan &amp; Grow</h2>
                             <p>Our goal at Refer Loan is to provide access to personal loans and education loan, car loan, home loan at insight competitive interest rates. We are the loan provider, you can use our loan product.</p>
-                            <img src="/images/logo.png" alt="" className="footerlogo" />
+                            <img src="/images/logo.webp" alt="" className="footerlogo" />
                         </div>
 
                         {/* <!-- link Area --> */}
