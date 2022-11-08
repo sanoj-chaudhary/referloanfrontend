@@ -44,10 +44,6 @@ const apply = (props) => {
   const [serversideStatus, setServerSideStatus] = useState(false)
   const [active, setActive] = useState(false)
   const [apiResponse, setApiResponse] = useState('')
-  
-  //var initialValues = {};
- 
-
 
   // console.log(formData,"formData")
   if (typeof window !== 'undefined') {
@@ -79,12 +75,17 @@ const apply = (props) => {
       validationSchema: '',
       onSubmit: async (values) => {
         try {
+
+          const data = new FormData();
+          for (const property in values) {
+            data.append(`'${property}'`, `'${values[property]}'`)
+          }
           const headers = {
             'Authorization': "Bearer " + token.slice(1, -1) + ""
           }
           setLoading(false)
           setActive(true)
-          const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
+          const res = await axios.post('https://api.referloan.in/api/customers/', data, { headers });
           if (res.data.status) {
 
             setLoading(false)
@@ -134,7 +135,7 @@ const apply = (props) => {
     }
 
     setStep(0)
-    
+
   }, [token, router])
 
   const mySentence = props.data[0].name.trim();
@@ -225,7 +226,24 @@ const apply = (props) => {
                             : ''
                           }
 
-                          {(elem.type === 'text' || elem.type === 'number' || elem.type === 'file' || elem.type === 'email') && elem.global_name != 'pan' && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name'
+                          {elem.type == 'file' && <TextField
+                            fullWidth
+                            required={elem.is_required}
+                            className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                            name={elem.param_name}
+                            type={elem.type}
+                            label={elem.field_name}
+                            id={elem.param_name}
+                            autoComplete="off"
+                            defaultValue=''
+                            onChange={(event) => {
+                              setFieldValue(elem.param_name, event.currentTarget.files[0]);
+                            }}
+                          />
+
+                          }
+
+                          {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email') && elem.global_name != 'pan' && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name'
                             ? <TextField
                               fullWidth
                               inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
@@ -279,7 +297,7 @@ const apply = (props) => {
                       ))}
 
                       <div className="search-button">
-                        <button className="mt-4" type="submit" disabled={active} >Save & Next {active ? <i class="fa fa-spinner fa-spin"></i> : ''}</button>
+                        <button className="mt-4" type="submit" disabled={active} >Save & Next {active ? <i className="fa fa-spinner fa-spin"></i> : ''}</button>
                       </div>
 
                     </div>
