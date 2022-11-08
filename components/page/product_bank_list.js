@@ -64,7 +64,7 @@ const midcontent = ({ url, refer, data }) => {
       setProductByCat(data3)
     }
     catch (error) {
-      alert('product info - failed')
+      console.log('message', error.message)
       setLoading(false)
     }
   }
