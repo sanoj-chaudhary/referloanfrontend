@@ -22,7 +22,6 @@ const CustomApply = (props) => {
   const [loading, setLoading] = useState(true)
   var initialValues = {};
 
-  console.log(initialValues, "initialValues")
   const CustomApplyForm = Yup.object({
     title: Yup.string().min(2).required("Please select title"),
     full_name: Yup.string().min(2).required("Please enter your name "),
@@ -38,11 +37,10 @@ const CustomApply = (props) => {
   });
 
 
-  const { values, errors, touched,setFieldValue, handleBlur, handleChange, handleSubmit } =
+  const { values, errors, touched, setFieldValue, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
       validationSchema: CustomApplyForm,
-
       onSubmit: async (values) => {
       },
     });
@@ -55,8 +53,6 @@ const CustomApply = (props) => {
       for (const property in values) {
         formData.append(property, values[property])
       }
-      console.log(values.email)
-      console.log(formData)
       const headers = {
         'Authorization': "Bearer " + token.slice(1, -1) + "",
       }
@@ -95,11 +91,10 @@ const CustomApply = (props) => {
 
                 {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
 
-                {(elem.type == 'text' || elem.type == 'number' ||  elem.type == 'email') && <TextField
+                {(elem.type == 'text' || elem.type == 'number' || elem.type == 'email') && <TextField
                   fullWidth
-
                   inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                  // required={elem.is_required}
+                  required={elem.is_required}
                   className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                   name={elem.param_name}
                   type={elem.type}
@@ -178,7 +173,7 @@ export function SelectField(props) {
           id="demo-simple-select-standard"
           name={props.param_name}
           label={props.field_name}
-         
+          required
           onChange={handleChange}
           defaultValue=""
         >
