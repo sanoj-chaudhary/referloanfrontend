@@ -211,8 +211,7 @@ width: 200px;
     font-size: 36px;
 
   } 
-
-  .header_right .main_nav {
+  .main_nav {
     position: fixed;
     left: 0;
     top: 72px;
@@ -270,7 +269,7 @@ width: 200px;
     height: 0;
     margin: 0
   }
-  #menuTrigger:checked + #firstLevelUlMobile{
+  #menuTrigger:checked + .main_nav{
     transform: translateX(0%);
   }
 
