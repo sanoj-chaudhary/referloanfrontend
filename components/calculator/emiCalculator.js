@@ -104,7 +104,7 @@ const emiCalculator = () => {
   const [pAmount, setpAmount] = useState(100000);
   const [interest, setInterest] = useState(9.56);
   const [duration, setDuration] = useState(12)
-  const maxvalue = 10000000;
+  const maxvalue = 1000000;
   const maxint = 20;
   const maxduration = 360;
 
@@ -125,12 +125,12 @@ const emiCalculator = () => {
           <h2>Loan Amount</h2>
           <small>(Up to 1 Crore)</small>
           <div className="outputArea">
-            <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check outline-none" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> ₹ </span>
+            <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> ₹ </span>
           </div>
 
         </div>
 
-        <PrettoSlider value={pAmount} onChange={(e) => { setpAmount(e.target.value) }} max={maxvalue} getAriaValueText={valuetext}
+        <PrettoSlider value={pAmount} aria-label ="Default" valueLabelDisplay="auto" onChange={(e) => { setpAmount(e.target.value) }} max={maxvalue} getAriaValueText={valuetext}
         ></PrettoSlider>
       </div>
       <div className="rangeArea">
