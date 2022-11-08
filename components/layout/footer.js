@@ -165,6 +165,8 @@ const Footer = () => {
                                 {cc.map((item)=>(
                                     <li key={item.id}><Link href={'/'+item.slug+utmData} ><a title="{item.name}">{item.name}</a></Link></li>
                                 ))}
+                                <li><Link href="https://cms.referloan.in/admin/login">Employee Login</Link></li>
+                                <li><Link href="https://cms.referloan.in/admin/login">Franchise Login</Link></li>
                             </ul>
                         </div>
 
@@ -181,7 +183,7 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className="mad-in-india">
-                            <Image className="footerIndialogo" src={indicard} />
+                            <Image className="footerIndialogo" src={indicard} alt="Indialogo" />
                             <span className="made-india">Made In India</span>
 
                         </div>
