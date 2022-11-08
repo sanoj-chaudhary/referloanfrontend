@@ -56,11 +56,11 @@ const router = useRouter()
         <ul className="nav nav-tabs" id="myTab" role="tablist">
           <li className="nav-item" role="presentation">
             <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#loan" data-id="2" value="2"
-              type="button" role="tab" aria-controls="home" aria-selected="true">Loan</button>
+              type="button" role="tab" aria-selected="true">Loan</button>
           </li>
           <li className="nav-item" role="presentation">
             <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#creditCard" data-id="1" value="1" 
-              type="button" role="tab" aria-controls="creditCard" aria-selected="false">Credit
+              type="button" role="tab" aria-selected="false">Credit
               Card</button>
           </li>
 
