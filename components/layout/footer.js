@@ -104,10 +104,10 @@ const Footer = () => {
                                 <Link href="mailto:helpdesk@referloan.in"><a> <i className="fas fa-envelope-open-text"></i> helpdesk@referloan.in</a></Link>
                             </div>
                             <ul className="socialIcon">
-                                <li><Link href="https://www.facebook.com/referloan"><a target="_blank"><i className="fab fa-facebook-f"></i></a></Link></li>
-                                <li><Link href="https://www.linkedin.com/company/referloan"><a target="_blank"><i className="fab fa-linkedin-in"></i></a></Link></li>
-                                <li><Link href="https://twitter.com/loan_refer"><a target="_blank"><i className="fab fa-twitter"></i></a></Link></li>
-                                <li><Link href="https://www.youtube.com/channel/UClDi-QICJKLCQ4uLTJVsc2A"><a target="_blank"><i className="fab fa-youtube"></i></a></Link></li>
+                                <li><Link href="https://www.facebook.com/referloan"><a aria-label="facebook" target="_blank"><i className="fab fa-facebook-f"></i></a></Link></li>
+                                <li><Link href="https://www.linkedin.com/company/referloan"><a aria-label="linkedin" target="_blank"><i className="fab fa-linkedin-in"></i></a></Link></li>
+                                <li><Link href="https://twitter.com/loan_refer"><a aria-label="twitter" target="_blank"><i className="fab fa-twitter"></i></a></Link></li>
+                                <li><Link href="https://www.youtube.com/channel/UClDi-QICJKLCQ4uLTJVsc2A"><a aria-label="youtube" target="_blank"><i className="fab fa-youtube"></i></a></Link></li>
                             </ul>
                         </div>
                     </div>
