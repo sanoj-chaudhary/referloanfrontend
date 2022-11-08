@@ -97,18 +97,17 @@ const Footer = () => {
                 <div className="container">
                     <div className="innerBar">
 
-                        {/* <!-- <a href="#"> MOST SEARCHED LINKS <i className="fas fa-angle-down"></i></a> --> */}
                         <button className="footerMenu-Btn" id="footerBtn" onClick={footerMenu}>MOST SEARCHED LINKS <i className="fas fa-angle-down"></i></button>
 
                         <div className="socialArea">
                             <div className="emailBox">
-                                <a href="mailto:helpdesk@referloan.in"> <i className="fas fa-envelope-open-text"></i> helpdesk@referloan.in</a>
+                                <Link href="mailto:helpdesk@referloan.in"><a> <i className="fas fa-envelope-open-text"></i> helpdesk@referloan.in</a></Link>
                             </div>
                             <ul className="socialIcon">
-                                <li><a href="https://www.facebook.com/referloan" target="_blank"><i className="fab fa-facebook-f"></i></a></li>
-                                <li><a href="https://www.linkedin.com/company/referloan" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="https://twitter.com/loan_refer" target="_blank"><i className="fab fa-twitter"></i></a></li>
-                                <li><a href="https://www.youtube.com/channel/UClDi-QICJKLCQ4uLTJVsc2A" target="_blank"><i className="fab fa-youtube"></i></a></li>
+                                <li><Link href="https://www.facebook.com/referloan"><a target="_blank"><i className="fab fa-facebook-f"></i></a></Link></li>
+                                <li><Link href="https://www.linkedin.com/company/referloan"><a target="_blank"><i className="fab fa-linkedin-in"></i></a></Link></li>
+                                <li><Link href="https://twitter.com/loan_refer"><a target="_blank"><i className="fab fa-twitter"></i></a></Link></li>
+                                <li><Link href="https://www.youtube.com/channel/UClDi-QICJKLCQ4uLTJVsc2A"><a target="_blank"><i className="fab fa-youtube"></i></a></Link></li>
                             </ul>
                         </div>
                     </div>
