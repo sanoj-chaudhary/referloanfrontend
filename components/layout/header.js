@@ -1,5 +1,6 @@
 import Head from "next/head"
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 export default function Header(children) {
     const router = useRouter();
     const title = (children.title || 'Apply Personal Loan, Gold Loan, Home Loan, Business Loan, Education Loan Online India - ReferLoan');
@@ -49,8 +50,8 @@ export default function Header(children) {
             <link href={'/css/menu-new.css'} rel={'stylesheet'} />
 
             {/* <!-- Global site tag (gtag.js) - Google Ads: 513485835 --> */}
-            <script async src="https://www.googletagmanager.com/gtag/js?id=AW-513485835"></script>
-            <script>
+            <Script src="https://www.googletagmanager.com/gtag/js?id=AW-513485835"></Script>
+            <Script>
                 {` window.dataLayer = window.dataLayer || [];
                     function gtag() {
                         dataLayer.push(arguments)
@@ -58,11 +59,11 @@ export default function Header(children) {
                     gtag('js', new Date());
                     gtag('config', 'AW-513485835');
                 `}
-            </script>
+            </Script>
 
             {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-226709847-1"></script>
-            <script>
+            <Script src="https://www.googletagmanager.com/gtag/js?id=UA-226709847-1"></Script>
+            <Script>
                 {` window.dataLayer = window.dataLayer || [];
                 function gtag() {
                     dataLayer.push(arguments)
@@ -70,7 +71,7 @@ export default function Header(children) {
                 gtag('js', new Date());
                 gtag('config', 'UA-226709847-1');
             `}
-            </script>
+            </Script>
         </Head>
     )
 }

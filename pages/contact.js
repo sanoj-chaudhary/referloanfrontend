@@ -1,3 +1,4 @@
+import Link from "next/link"
 
 const contact = () => {
     return (
@@ -50,7 +51,7 @@ const contact = () => {
                                 </div>
                                 <div className="noArea">
                                     <span>Mail us</span>
-                                    <h2><a href="mailto:info@referloan.in">info@referloan.in</a></h2>
+                                    <h2><Link href="mailto:info@referloan.in"><a>info@referloan.in</a></Link></h2>
                                 </div>
                             </div>
                             <p>If you need to ask anything related to our products or any general query, you can always drop us

@@ -79,11 +79,11 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
   }
 
   const OtpSchema = Yup.object({
-    full_name: Yup.string().min(2).required("Please enter your name "),
+    full_name: Yup.string().min(2,'Invalid name').required("Please enter your name "),
 
-    phone_no: Yup.string().min(10).max(10).required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/, "Invalid phone number"),
-    pan_card: Yup.string().min(10).max(10).required("Please fill the pan card").matches("[A-Z]{5}[0-9]{4}[A-Z]{1}", "Invalid Pancard"),
-    otp: Yup.string().min(4).max(4).required('Enter OTP')
+    phone_no: Yup.string().min(10,'Invalid phonenumber').max(10,'Invalid phone number').required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/, "Invalid phone number"),
+    pan_card: Yup.string().min(10,'Invalid pancard').max(10,'Invalid pancard').required("Please fill the pan card").matches("[A-Z]{5}[0-9]{4}[A-Z]{1}", "Invalid Pancard"),
+    otp: Yup.string().min(4,'Invalid Otp').max(4,'Invalid Otp').required('Enter OTP')
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
