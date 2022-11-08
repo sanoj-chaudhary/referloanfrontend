@@ -32,7 +32,6 @@ export default function Header(children) {
             <meta name={ 'revisit-after' } content={ '3 days' } />
             <meta name={ 'Robots' } content={ 'INDEX,NOFOLLOW' } />
             <meta name={ 'country' } content={ 'India' } />
-
             {/* Favicon */ }
             <link href={ '/favicon.ico' } rel={ 'icon' } type={ 'image/x-icon' } />
             {/* core Custom css */ }
