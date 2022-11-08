@@ -22,8 +22,7 @@ function HeroSection({ loanProduct, creditProduct }) {
                                                 <div className="topArea">
                                                       <div className="left">
 
-                                                            <h1>Looking to get a personal loan? You're in the right place.
-                                                            </h1>                                            
+                                                            <h2>Looking to get a personal loan? You're in the right place.</h2>                                            
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
@@ -50,7 +49,7 @@ function HeroSection({ loanProduct, creditProduct }) {
                                           <div className="slickItem">
                                                 <div className="topArea">
                                                       <div className="left">
-                                                            <h1>Get Your Car Financed in a Jiffy!</h1>
+                                                            <h2>Get Your Car Financed in a Jiffy!</h2>
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
@@ -78,7 +77,7 @@ function HeroSection({ loanProduct, creditProduct }) {
                                           <div className="slickItem">
                                                 <div className="topArea">
                                                       <div className="left">
-                                                            <h1>Check Out a New Way to Get Approved for Credit Cards</h1>
+                                                            <h2>Check Out a New Way to Get Approved for Credit Cards</h2>
                                                             <div className="pointsArea">
                                                                   <ul>
                                                                         <li>
