@@ -120,8 +120,8 @@ const Menu = () => {
                                     ))
                                 }
                                
-                                <li><Link href="/zero-investment-franchise"><a title="Franchise">Franchise</a></Link></li>
-                                <li><Link href="https://blog.referloan.in/"><a  title="Blogs">Blogs</a></Link></li>
+                                <li><Link href="/zero-investment-franchise"><a title="Franchise">Partners</a></Link></li>
+                                {/* <li><Link href="https://blog.referloan.in/"><a  title="Blogs">Blogs</a></Link></li> */}
                                 <li><Link href="/contact"><a title="Contact">Contact</a></Link></li>
                             </ul>
                         </nav>
@@ -159,8 +159,8 @@ const Menu = () => {
                     <div className="container">
                         <ul>
                             {items}
-                            <li><Link href="/zero-investment-franchise"><a title="Franchise">Franchise</a></Link></li>
-                            <li><Link href="https://blog.referloan.in/"><a target="_blank" title="Blogs">Blogs</a></Link></li>
+                            <li><Link href="/zero-investment-franchise"><a title="Franchise">Partners</a></Link></li>
+                            {/* <li><Link href="https://blog.referloan.in/"><a target="_blank" title="Blogs">Blogs</a></Link></li> */}
                             <li><Link href="/contact"><a title="Contact">Contact</a></Link></li>
                         </ul>
                     </div>
