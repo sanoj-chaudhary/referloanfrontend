@@ -121,7 +121,6 @@ const Menu = () => {
                                 }
                                
                                 <li><Link href="/zero-investment-franchise"><a title="Franchise">Partners</a></Link></li>
-                                {/* <li><Link href="https://blog.referloan.in/"><a  title="Blogs">Blogs</a></Link></li> */}
                                 <li><Link href="/contact"><a title="Contact">Contact</a></Link></li>
                             </ul>
                         </nav>
@@ -147,7 +146,7 @@ const Menu = () => {
                                         <Link href="tel:0124-4847123"><a > <i className="fas fa-phone-square-alt"></i>  0124-4847123</a></Link>
                                     </li>
                                 </ul>
-                                <Link href="#"><a ><img src="/images/CIBIL Score.gif" alt="" /></a></Link>
+                                <Link href="/"><a><img src="/images/CIBIL Score.gif" alt="" /></a></Link>
                             </div>
 
                         </div>
@@ -160,7 +159,6 @@ const Menu = () => {
                         <ul>
                             {items}
                             <li><Link href="/zero-investment-franchise"><a title="Franchise">Partners</a></Link></li>
-                            {/* <li><Link href="https://blog.referloan.in/"><a target="_blank" title="Blogs">Blogs</a></Link></li> */}
                             <li><Link href="/contact"><a title="Contact">Contact</a></Link></li>
                         </ul>
                     </div>
