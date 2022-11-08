@@ -99,13 +99,13 @@ const midcontent = ({ url, refer, data }) => {
               <div className="lstRow" key={key}>
                 <div className="topPnl">
                   <div className="cardImg">
-                    <Image src={'/uploads/product_bank/' + item.bankProductName.replace(/\s/g, '_') + '.png'} height="214" width="340" />
+                    <Image src={'/uploads/product_bank/' + item.bankProductName.replace(/\s/g, '_') + '.webp'} height="214" width="340" />
                   </div>
                   <div className="cardDtl_pnl">
                     <div className="headingBar">
                       <h2>{item.bankProductName}</h2>
                       <div className="cibilBox">
-                        <h3><img src="/images/cibil-meter.png" alt="" />Excellent</h3>
+                        <h3><img src="/images/cibil-meter.webp" alt="" />Excellent</h3>
                         <p>Approval Chances {item.chance} %</p>
                       </div>
                     </div>

@@ -7,25 +7,25 @@ const customerSupport = () => {
         <div className="item_pnl">
           <div className="item_col">
             <div className="item-img">
-              <img src="/images/icon/advice-icon.png" alt="" />
+              <img src="/images/icon/advice-icon.webp" alt="" />
             </div>
             <p>Unbiased<br />Advice and Suggestions </p>
           </div>
           <div className="item_col">
             <div className="item-img">
-              <img src="/images/icon/customerSupport-icon.png" alt="" />
+              <img src="/images/icon/customerSupport-icon.webp" alt="" />
             </div>
             <p>24*7<br /> Customer Support </p>
           </div>
           <div className="item_col">
             <div className="item-img">
-              <img src="/images/icon/reliability-icon.png" alt="" />
+              <img src="/images/icon/reliability-icon.webp" alt="" />
             </div>
             <p>Out-and-out <br />Reliability</p>
           </div>
           <div className="item_col">
             <div className="item-img">
-              <img src="/images/icon/financial-icon.png" alt="" />
+              <img src="/images/icon/financial-icon.webp" alt="" />
             </div>
             <p>175+ Financial<br /> Institutions Association</p>
           </div>

@@ -1,15 +1,26 @@
 import Image from "next/image"
 import Link from "next/link"
-import vcard from './../../public/images/v-card.png'
-import aecard from './../../public/images/ae-card.png'
-import mcard from './../../public/images/m-card.png'
-import rpcard from './../../public/images/rp-card.png'
-import mescard from './../../public/images/mes-card.png'
-import indicard from './../../public/images/ind-flag.png'
+import vcard from './../../public/images/v-card.webp'
+import aecard from './../../public/images/ae-card.webp'
+import mcard from './../../public/images/m-card.webp'
+import rpcard from './../../public/images/rp-card.webp'
+import mescard from './../../public/images/mes-card.webp'
+import indicard from './../../public/images/ind-flag.webp'
 import { useEffect, useState } from "react"
+import { useRouter } from 'next/router';
 import axios from 'axios'
 
 const Footer = () => {
+    const router = useRouter()
+    let  utmData = '';
+    const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
+    if(!utm_campaign){
+      utmData = `?utm_source=direct_visitors&utm_medium=self&utm_campaign=&utm_id=`
+  }else{
+      utmData = `?utm_source=${utm_source}&utm_medium=${utm_medium}&utm_campaign=${utm_campaign}&utm_id=${utm_id}`
+  }
+
+
     const [loanP, setLoanp] = useState([]);
     const [loanBP, setLoanbp] = useState([]);
     const [ccBP, setCcbp] = useState([]);
@@ -62,22 +73,22 @@ const Footer = () => {
         <footer >
              
             <div className="sticky_nav">
-            <Link href={"/loans"+ process.env.UTM}><a className="nav-item"> 
-                        <img src="/images/icon/pl-icon.png" alt="" /><span>Loan</span>
+            <Link href={"/loans"+ utmData}><a className="nav-item"> 
+                        <img src="/images/icon/pl-icon.webp" alt="" /><span>Loan</span>
                     </a></Link>
 
-                    <Link href={"/credit-card"+ process.env.UTM}><a className="nav-item">
-                        <img src="/images/icon/ccard-icon.png" alt="" />
+                    <Link href={"/credit-card"+ utmData}><a className="nav-item">
+                        <img src="/images/icon/ccard-icon.webp" alt="" />
                         <span>Credit Card</span>
                     </a></Link>
 
-                    <Link href={"/other-product/investment"+ process.env.UTM}><a className="nav-item">
-                        <img src="/images/icon/sa-icon.png" alt="" />
+                    <Link href={"/other-product/investment"+ utmData}><a className="nav-item">
+                        <img src="/images/icon/sa-icon.webp" alt="" />
                         <span>Investment</span>
                     </a></Link>
 
-                    <Link href={"/subsidy"+ process.env.UTM}><a className="nav-item">
-                        <img src="images/icon/eduL-icon.png" alt="" />
+                    <Link href={"/subsidy"+ utmData}><a className="nav-item">
+                        <img src="images/icon/eduL-icon.webp" alt="" />
                         <span>Subsidy</span>
                     </a></Link>
                 </div>
@@ -110,19 +121,19 @@ const Footer = () => {
                         <div className="footerNav">
                             <ul>
                                 {loanP.map((value) => (
-                                    <li key={value.id}><Link href={'/'+value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+utmData} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 
                             <ul>
                                 {loanBP.map((value) => (
-                                    <li key={value.id}><Link href={'/'+value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+utmData} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 
                             <ul>
                                 {ccBP.map((value) => (
-                                    <li key={value.id}><Link href={'/'+value.slug+process.env.UTM} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+utmData} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 
@@ -135,7 +146,7 @@ const Footer = () => {
                         <div className="growArea">
                             <h2>Save, Fastest Loan &amp; Grow</h2>
                             <p>Our goal at Refer Loan is to provide access to personal loans and education loan, car loan, home loan at insight competitive interest rates. We are the loan provider, you can use our loan product.</p>
-                            <img src="/images/logo.png" alt="" className="footerlogo" />
+                            <img src="/images/logo.webp" alt="" className="footerlogo" />
                         </div>
 
                         {/* <!-- link Area --> */}
@@ -143,7 +154,7 @@ const Footer = () => {
                             <h2> Loan </h2>
                             <ul>
                                 {loan.map((item)=>(
-                                    <li key={item.id}><Link href={'/'+item.slug+process.env.UTM} ><a title="{item.name}">{item.name}</a></Link></li>
+                                    <li key={item.id}><Link href={'/'+item.slug+utmData} ><a title="{item.name}">{item.name}</a></Link></li>
                                 ))}
                             </ul>
                         </div>
@@ -152,7 +163,7 @@ const Footer = () => {
                             <h2>Credit Cards</h2>
                             <ul>
                                 {cc.map((item)=>(
-                                    <li key={item.id}><Link href={'/'+item.slug+process.env.UTM} ><a title="{item.name}">{item.name}</a></Link></li>
+                                    <li key={item.id}><Link href={'/'+item.slug+utmData} ><a title="{item.name}">{item.name}</a></Link></li>
                                 ))}
                             </ul>
                         </div>

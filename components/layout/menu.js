@@ -2,8 +2,17 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import SubMenu from './subMenu';
-
+import { useRouter } from 'next/router';
 const Menu = () => {
+    const router = useRouter()
+    let  utmData = '';
+    const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
+    if(!utm_campaign){
+        utmData = `?utm_source=direct_visitors&utm_medium=self&utm_campaign=&utm_id=`
+    }else{
+        utmData = `?utm_source=${utm_source}&utm_medium=${utm_medium}&utm_campaign=${utm_campaign}&utm_id=${utm_id}`
+    }
+
     const [headermenu, setHeaderMenu] = useState([]);
     const [isHovering, setIsHovering] = useState(false);
     const handleMouseOver = () => {
@@ -24,7 +33,7 @@ const Menu = () => {
         }
     }
     const items = headermenu.map((item, index) => (
-        item.hierarchy == 'Product_BankProduct' ? <li key={item.id}><Link href={'/'+item.slug+process.env.UTM} ><a className={item.product ? "hasSub_menu" : ''} title={item.name}>{item.name}</a></Link>
+        item.hierarchy == 'Product_BankProduct' ? <li key={item.id}><Link href={'/'+item.slug+utmData} ><a className={item.product ? "hasSub_menu" : ''} title={item.name}>{item.name}</a></Link>
             <div className={item.product ? "megaMenu_container" : ''} >
                 <ul className={item.product ? "subMenuLevel2" : ''}>
                     {item.product && item.product.map((value, Indexkey) => (
@@ -32,10 +41,10 @@ const Menu = () => {
                             className={Indexkey ? "activeSubMenu" : "activeSubMenu menu-active" && isHovering ? 'activeSubMenu' : 'activeSubMenu menu-active'}
                             onMouseOver={handleMouseOver}
                             onMouseOut={handleMouseOut}
-                        > <Link href={'/'+value.slug+process.env.UTM}  ><a title={value.name}>{value.name}</a></Link>
+                        > <Link href={'/'+value.slug+utmData}  ><a title={value.name}>{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul>
-                                    {value.bank_product && <SubMenu utm={process.env.UTM} data={value.bank_product} />}
+                                    {value.bank_product && <SubMenu utm={utmData} data={value.bank_product} />}
                                 </ul>
                             </div>
 
@@ -43,7 +52,7 @@ const Menu = () => {
                     ))}
                 </ul>
             </div>
-        </li> : <li key={item.id}><Link href={'/'+item.slug+process.env.UTM} ><a className={item.page ? "hasSub_menu" : ''} title={item.name}>{item.name}</a></Link>
+        </li> : <li key={item.id}><Link href={'/'+item.slug+utmData} ><a className={item.page ? "hasSub_menu" : ''} title={item.name}>{item.name}</a></Link>
             
                 <ul className={item.page ? "subMenuLevel2 smallDropMenu" : ''}>
                     {item.page && item.page.map((value, Indexkey) => (
@@ -51,7 +60,7 @@ const Menu = () => {
                             className={Indexkey ? "activeSubMenu" : "activeSubMenu menu-active" && isHovering ? 'activeSubMenu' : 'activeSubMenu menu-active'}
                             onMouseOver={handleMouseOver}
                             onMouseOut={handleMouseOut}
-                        > <Link href={'/'+value.slug+process.env.UTM}  ><a style={{ textTransform: 'capitalize' }} title={value.name}>{value.name}</a></Link>
+                        > <Link href={'/'+value.slug+utmData}  ><a style={{ textTransform: 'capitalize' }} title={value.name}>{value.name}</a></Link>
                         </li>
                     ))}
                 </ul>
@@ -68,7 +77,7 @@ const Menu = () => {
             <header id="moileheader" className="d-md-none d-block">
                 <div className="mheadWrapper">
                     <div className="header_left">
-                        <a className="logo" href="/"><img src="/images/logo.png" alt="logo" /></a>
+                    <Link href={'/'+utmData}><a className="logo" ><img src="/images/logo.webp" alt="logo" /></a></Link>
                     </div>
                     <div className="header_right">
                         <label htmlFor="menuTrigger" className="nav_ico"><i className="fa fa-bars"></i></label>
@@ -78,13 +87,13 @@ const Menu = () => {
                                 {
                                     headermenu.map((item1, index) => (
                                        
-                                        item1.hierarchy == 'Product_BankProduct' ? <li key={index}><Link href={'/'+item1.slug+process.env.UTM}><a>{item1.name}</a></Link>
+                                        item1.hierarchy == 'Product_BankProduct' ? <li key={index}><Link href={'/'+item1.slug+utmData}><a>{item1.name}</a></Link>
                                        {!item1.bank_product  && <i className="fa fa-caret-down"></i>} 
                                             <ul>
                                                 {
                                                     item1.product && item1.product.map((value1, key) => (
 
-                                                        <li key={key} ><Link href={'/'+value1.slug+process.env.UTM} ><a >{value1.name}</a></Link>
+                                                        <li key={key} ><Link href={'/'+value1.slug+utmData} ><a >{value1.name}</a></Link>
                                                             <i className="fa fa-caret-down"></i>
 
                                                             <ul>
@@ -96,13 +105,13 @@ const Menu = () => {
 
                                             </ul>
                                         </li> :
-                                        <li key={index}><Link href={'/'+item1.slug+process.env.UTM}><a >{item1.name}</a></Link>                       
+                                        <li key={index}><Link href={'/'+item1.slug+utmData}><a >{item1.name}</a></Link>                       
                                         {item1.page  && <i className="fa fa-caret-down"></i>} 
    
                                             <ul>
                                                 {
                                                     item1.page && item1.page.map((value1, key) => (
-                                                        <li key={key} ><Link href={'/'+value1.slug+process.env.UTM}><a >{value1.name}</a></Link>
+                                                        <li key={key} ><Link href={'/'+value1.slug+utmData}><a >{value1.name}</a></Link>
                                                         </li>
                                                     ))
                                                 }
@@ -127,7 +136,7 @@ const Menu = () => {
                     <div className="container">
                         <div className="customContainer">
                           
-                            <Link href="/"><a className="logoSection"><img src="/images/top-logo.png" alt="" title="referloan" /></a></Link>
+                            <Link href={'/'+utmData}><a className="logoSection"><img src="/images/top-logo.webp" alt="" title="referloan" /></a></Link>
 
                             <div className="info_section">
                                 <ul>
