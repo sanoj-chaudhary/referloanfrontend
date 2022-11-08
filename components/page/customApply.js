@@ -12,8 +12,8 @@ import { useRouter } from 'next/router';
 import * as Yup from "yup";
 import Thanks from "./thanks";
 
+
 const CustomApply = (props) => {
-  console.log("Custom", props)
   const [step, setStep] = useState(0)
   const [token, setToken] = useState();
   const router = useRouter()
@@ -22,55 +22,42 @@ const CustomApply = (props) => {
   const [loading, setLoading] = useState(true)
   var initialValues = {};
 
-console.log(initialValues,"initialValues")
   const CustomApplyForm = Yup.object({
     title: Yup.string().min(2).required("Please select title"),
     full_name: Yup.string().min(2).required("Please enter your name "),
     phone_number: Yup.string().min(10).max(10).required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/, "Invalid phone number"),
-    email:Yup.string().email().required('Please enter email'),
-    gender:Yup.string().required('Please select gender'),
-    marital_status:Yup.string().required('Please select marital status'),
+    email: Yup.string().email().required('Please enter email'),
+    gender: Yup.string().required('Please select gender'),
+    marital_status: Yup.string().required('Please select marital status'),
     pan: Yup.string().min(10).max(10).required("Please fill the pan card").matches(/([A-Z]){5}([0-9]){4}([A-Z]){1}$/, "Invalid Pancard"),
-    residence_type:Yup.string().required('Please select residence type'),
-    residence_pincode:Yup.string().min(6).max(6).required('Please enter pincode'),
-    qualification:Yup.string().required('Please select residence type'),
-    occupation:Yup.string().required('Please select occupation'),
+    residence_type: Yup.string().required('Please select residence type'),
+    residence_pincode: Yup.string().min(6).max(6).required('Please enter pincode'),
+    qualification: Yup.string().required('Please select residence type'),
+    occupation: Yup.string().required('Please select occupation'),
   });
 
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  const { values, errors, touched, setFieldValue, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
       validationSchema: CustomApplyForm,
-
       onSubmit: async (values) => {
-        alert('jhsdjhhjhjdfsjhjhhbjdsfjhhdsfhjasdfjhbfsdkhjsfdhjdshfdsjkdfshjdffdshj')
-        try {
-          const headers = {
-            'Authorization': "Bearer " + token.slice(1, -1) + ""
-          }
-          setLoading(false)
-          const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
-          if (res.data.status) {
-            setLoading(false)
-            setStep(step + 1)
-          }
-        } catch (error) {
-          setServerSideStatus(false)
-          setServerSideMsg('Fill the valid information')
-          console.log("message", error.message);
-        }
       },
     });
 
   const applyForm = async (e) => {
     e.preventDefault();
+
     try {
-      const headers = {
-        'Authorization': "Bearer " + token.slice(1, -1) + ""
+      const formData = new FormData();
+      for (const property in values) {
+        formData.append(property, values[property])
       }
-      setLoading(false)
-      const res = await axios.post('https://api.referloan.in/api/customers/', values, { headers });
+      const headers = {
+        'Authorization': "Bearer " + token.slice(1, -1) + "",
+      }
+      setLoading(true)
+      const res = await axios.post('https://api.referloan.in/api/customers/', formData, { headers });
       if (res.data.status) {
         setLoading(false)
         setStep(step + 1)
@@ -94,7 +81,7 @@ console.log(initialValues,"initialValues")
   return (
     <>
       {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
-      <form onSubmit={(e)=>{applyForm(e)}} >
+      <form onSubmit={(e) => { applyForm(e) }} >
         {data && data.slice(step, step + 1).map((item, index) =>
 
           <div key={index}>
@@ -104,21 +91,37 @@ console.log(initialValues,"initialValues")
 
                 {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
 
-                {(elem.type == 'text' || elem.type == 'number' || elem.type == 'file' || elem.type == 'email') && <TextField
+                {(elem.type == 'text' || elem.type == 'number' || elem.type == 'email') && <TextField
                   fullWidth
-                 
                   inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
                   required={elem.is_required}
                   className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                   name={elem.param_name}
-
+                  type={elem.type}
                   label={elem.field_name}
                   id={elem.param_name}
                   autoComplete="off"
                   defaultValue=''
                   onChange={handleChange}
                 />
-               
+
+                }
+
+                {elem.type == 'file' && <TextField
+                  fullWidth
+                  required={elem.is_required}
+                  className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                  name={elem.param_name}
+                  type={elem.type}
+                  label={elem.field_name}
+                  id={elem.param_name}
+                  autoComplete="off"
+                  defaultValue=''
+                  onChange={(event) => {
+                    setFieldValue(elem.param_name, event.target.files[0]);
+                  }}
+                />
+
                 }
                 {elem.type == 'date' &&
                   <TextField
@@ -133,6 +136,7 @@ console.log(initialValues,"initialValues")
                     onBlur={(e) => (e.target.type = "text")}
                     autoComplete="off"
                     onChange={handleChange}
+                    type={elem.type}
                   />
                 }
                 {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
@@ -144,7 +148,7 @@ console.log(initialValues,"initialValues")
           </div>
 
         )}
-  {data.length != 0 && data.length == step ? <Thanks product={props.product} /> : ""}
+        {data.length != 0 && data.length == step ? <Thanks product={props.product} /> : ""}
 
 
       </form>

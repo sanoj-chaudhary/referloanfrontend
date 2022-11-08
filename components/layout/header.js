@@ -8,9 +8,7 @@ export default function Header(children) {
     const path = 'https://referloan.in' + router.pathname;
     return (
         <Head>
-
             {/* Meta */}
-
             <meta charSet={'utf-8'} />
             <meta name={'viewport'} content={'width=device-width, initial-scale=1, shrink-to-fit=no'} />
             <meta name="google-site-verification" content="A-2wTKInJgPeZBUQnYLPGAffZ_YmNF-ARQxpu3twdGw" />
@@ -35,14 +33,8 @@ export default function Header(children) {
             <meta name={'revisit-after'} content={'3 days'} />
             <meta name={'robots'} content={'index,follow'} />
             <meta name={'country'} content={'India'} />
-
             {/* Favicon */}
             <link href={'/favicon.ico'} rel={'icon'} type={'image/x-icon'} />
-
-            {/* Core theme CSS (includes Bootstrap) */}
-            <link href={'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'} rel={'stylesheet'} />
-            <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-
             {/* core Custom css */}
             <link href={'/css/global.css'} rel={'stylesheet'} />
             <link href={'/css/styles.css'} rel={'stylesheet'} />
@@ -54,8 +46,6 @@ export default function Header(children) {
             <link href={'/css/innerPages.css'} rel={'stylesheet'} />
             <link href={'/css/custom.css'} rel={'stylesheet'} />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-            <script src={'/js/common-validation.js'} />
-            <script src={'/js/menu.js'} />
             <link href={'/css/menu-new.css'} rel={'stylesheet'} />
 
             {/* <!-- Global site tag (gtag.js) - Google Ads: 513485835 --> */}
