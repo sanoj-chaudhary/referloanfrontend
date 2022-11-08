@@ -110,7 +110,13 @@ const midcontent = ({ url, refer, data }) => {
                       </div>
                     </div>
 
-                    <div className="benefitRow">
+                    {JSON.parse(item.bankProductInfo)['interest_min'] == 0 ? <div className="benefitRow">
+                      <ul>
+                        <li>
+                          <span>Processing Fees</span>{JSON.parse(item.bankProductInfo)['processing_fee']} 
+                        </li>
+                      </ul>
+                    </div> : <div className="benefitRow">
                       <ul>
                         <li>
                           <span>Min Interest</span>{JSON.parse(item.bankProductInfo)['interest_min']} %
@@ -119,13 +125,14 @@ const midcontent = ({ url, refer, data }) => {
                           <span>Max Interest</span>{JSON.parse(item.bankProductInfo)['interest_max']} %
                         </li>
                         <li>
-                          <span>Processing Fees</span>{JSON.parse(item.bankProductInfo)['processing_fee']}
+                          <span>Processing Fees</span>{JSON.parse(item.bankProductInfo)['processing_fee']} 
                         </li>
-                        <li>
-                          <span>Fees</span>{JSON.parse(item.bankProductInfo)['fee']} %
+                        <li>             
+                          <span>Fees</span>{JSON.parse(item.bankProductInfo)['fee']} {JSON.parse(item.bankProductInfo)['processing_fee'] == 'fixed'?" %":"" }
                         </li>
                       </ul>
-                    </div>
+                    </div>}
+
                   </div>
                 </div>
 
