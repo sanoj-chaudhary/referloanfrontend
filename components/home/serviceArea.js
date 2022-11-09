@@ -1,5 +1,7 @@
 import Link from "next/link"
 import { useRouter } from 'next/router';
+import Image from "next/image";
+
 const serviceArea = () => {
     const router = useRouter()
     let  utmData = '';
@@ -17,7 +19,7 @@ const serviceArea = () => {
                     <ul className="iconPnl">
                         <li>
                             <Link href={"/loans/personal-loan" + utmData}><a>
-                                <img src="/images/icon/pl-iocn-w.webp" alt="" />
+                                <Image src="/images/icon/pl-iocn-w.webp" alt="" loading='lazy' width="31" height="31"   />
                                 <h3>Personal</h3>
                             </a>
                             </Link>
@@ -25,7 +27,7 @@ const serviceArea = () => {
 
                         <li>
                             <Link href={"/loans/business-loan" + utmData}><a>
-                                <img src="/images/icon/bl-icon-w.webp" alt="" />
+                                <Image src="/images/icon/bl-icon-w.webp" alt="" loading='lazy' width="32" height="32"  />
                                 <h3>Business</h3>
                             </a>
                             </Link>
@@ -33,7 +35,7 @@ const serviceArea = () => {
 
                         <li>
                             <Link href={"/loans/education-loan" + utmData}><a>
-                                <img src="/images/icon/ed-icon-w.webp" alt="" />
+                                <Image src="/images/icon/ed-icon-w.webp" alt="" loading='lazy' width="38" height="32"  />
                                 <h3>Education</h3>
                             </a>
                             </Link>
@@ -41,7 +43,7 @@ const serviceArea = () => {
 
                         <li>
                             <Link href={"/loans/gold-loan" + utmData}><a>
-                                <img src="/images/icon/offer-icon-w.webp" alt="" />
+                                <Image src="/images/icon/offer-icon-w.webp" alt="" loading='lazy' width="36" height="31" />
                                 <h3>Gold</h3>
                             </a>
                             </Link>
@@ -53,7 +55,7 @@ const serviceArea = () => {
                     <ul className="iconPnl">
                         <li>
                             <Link href={"/bank-axis" + utmData}><a>
-                                <img src="/images/icon/axis-icon.webp" alt="" />
+                                <Image src="/images/icon/axis-icon.webp" alt="" loading='lazy' width="40" height="35" />
                                 <h3>Axis</h3>
                             </a>
                             </Link>
@@ -61,7 +63,7 @@ const serviceArea = () => {
 
                         <li>
                             <Link href={"/bank-kotak" + utmData}><a>
-                                <img src="/images/icon/kotak-icon.webp" alt="" />
+                                <Image src="/images/icon/kotak-icon.webp" alt="" loading='lazy' width="38" height="32" />
                                 <h3>Kotak</h3>
                             </a>
                             </Link>
@@ -69,7 +71,7 @@ const serviceArea = () => {
 
                         <li>
                             <Link href={"/bank-icici" + utmData}><a>
-                                <img src="/images/icon/icici-icon-w.webp" alt="" />
+                                <Image src="/images/icon/icici-icon-w.webp" alt="" loading='lazy' width="35" height="32" />
                                 <h3>ICICI</h3>
                             </a>
                             </Link>
@@ -77,7 +79,7 @@ const serviceArea = () => {
 
                         <li>
                             <Link href={"/bank-sbi" + utmData}><a>
-                                <img src="/images/icon/sbi-icon.webp" alt="" />
+                                <Image src="/images/icon/sbi-icon.webp" alt=""  loading='lazy' width="35" height="35"/>
                                 <h3>SBI</h3>
                             </a>
                             </Link>
@@ -89,7 +91,7 @@ const serviceArea = () => {
                     <ul className="iconPnl">
                         <li>
                             <Link href={"/other-product/health-insurance" + utmData}><a>
-                                <img src="/images/icon/health-icon.webp" alt="" />
+                                <Image src="/images/icon/health-icon.webp" alt="" loading='lazy' width="38" height="32" />
                                 <h3>Health</h3>
                             </a>
                             </Link>
@@ -97,7 +99,7 @@ const serviceArea = () => {
 
                         <li>
                             <Link href={"/other-product/life-insurance" + utmData}><a>
-                                <img src="/images/icon/life-icon.webp" alt="" />
+                                <Image src="/images/icon/life-icon.webp" alt="" loading='lazy' width="38" height="32" />
                                 <h3>Life</h3>
                             </a>
                             </Link>
@@ -105,7 +107,7 @@ const serviceArea = () => {
 
                         <li>
                             <Link href={"/insurance-and-investment/guaranteed-return-plan" + utmData}><a>
-                                <img src="/images/icon/return-icon.webp" alt="" />
+                                <Image src="/images/icon/return-icon.webp" alt="" loading='lazy' width="38" height="32" />
                                 <h3>Return</h3>
                             </a>
                             </Link>
@@ -113,7 +115,7 @@ const serviceArea = () => {
 
                         <li>
                             <Link href={"/insurance-and-investment/direct-mutual-funds" + utmData}><a>
-                                <img src="/images/icon/mutual-icon.webp" alt="" />
+                                <Image src="/images/icon/mutual-icon.webp" alt="" loading='lazy' width="38" height="32" />
                                 <h3>Mutual</h3>
                             </a>
                             </Link>

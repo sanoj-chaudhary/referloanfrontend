@@ -1,5 +1,8 @@
 
 import Carousel from "react-slick";
+import Image from "next/image";
+
+
 const testimonial = (props) => {
 
   const settings = {
@@ -51,7 +54,7 @@ const testimonial = (props) => {
                     </div>
                     <p>{item.client_message}</p>
                     <div className="profileBxo">
-                      <div className="profile-img"><img src={`/uploads/testimonial/${item.client_pic}`} layout='fill' alt="" /></div>
+                      <div className="profile-img"><Image src={`/uploads/testimonial/${item.client_pic}`}  width="50" height="50" loading='lazy' alt="" /></div>
                       {item.client_name}
                     </div>
                   </li>
