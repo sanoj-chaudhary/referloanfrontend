@@ -164,8 +164,8 @@ const Footer = () => {
                                 {cc.map((item)=>(
                                     <li key={item.id}><Link href={'/'+item.slug+utmData} ><a title="{item.name}">{item.name}</a></Link></li>
                                 ))}
-                                <li><Link href="https://cms.referloan.in/admin/login">Employee Login</Link></li>
-                                <li><Link href="https://cms.referloan.in/admin/login">Franchise Login</Link></li>
+                                <li> <Link href="https://cms.referloan.in/admin/login"><a target="_blank">Employee Login</a></Link></li>
+                                <li> <Link href="https://cms.referloan.in/admin/login" ><a target="_blank">Franchise Login</a></Link></li>
                             </ul>
                         </div>
 
