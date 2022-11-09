@@ -1,6 +1,8 @@
 import Carousel from "react-slick";
 import Link from "next/link"
 import { useRouter } from 'next/router';
+import Image from "next/image";
+
 const cardLoan = () => {
   const router = useRouter()
   let  utmData = '';
@@ -47,11 +49,11 @@ const cardLoan = () => {
 
     <section className="servicesBanner__Section">
       <div className="container">
-        <ul className="loanCard_carousel">
+        <div className="loanCard_carousel">
           <Carousel {...settings}>
             <div className="slickItem">
               <div className="slide_item">
-                <li className="greenBox">
+                <div className="greenBox loanCrouselitem">
                   <Link href={'/loans/personal-loan' + utmData}><a>
                     <div className="contentArea">
                       <h2>Personal Loan</h2>
@@ -59,17 +61,17 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/bnplicon.webp" alt="personal-loan" />
+                      <Image src="/images/bnplicon.webp" alt="personal-loan" width="70" height="72" loading='lazy' />
                     </div>
                   </a>
                   </Link>
-                </li>
+                </div>
               </div>
             </div>
 
             <div className="slickItem">
               <div className="slide_item">
-                <li className="blueBox">
+                <div className="blueBox loanCrouselitem">
                   <Link href={'/credit-card' + utmData}><a>
                     <div className="contentArea">
                       <h2>Credit Card</h2>
@@ -77,17 +79,17 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/ccard-bnr-icon.webp" alt="credit-card" />
+                      <Image src="/images/ccard-bnr-icon.webp" alt="credit-card" width="70" height="72" loading='lazy' />
                     </div>
                   </a>
                   </Link>
-                </li>
+                </div>
               </div>
             </div>
 
             <div className="slickItem">
               <div className="slide_item">
-                <li className="purpleBox">
+                <div className="purpleBox loanCrouselitem">
                   <Link href={"/loans/business-loan" + utmData}><a>
                     <div className="contentArea">
                       <h2>Business Loan</h2>
@@ -95,16 +97,16 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/bnblicon.webp" alt="business-loan" />
+                      <Image src="/images/bnblicon.webp" alt="business-loan" width="70" height="72" loading='lazy' />
                     </div>
                   </a>
                   </Link>
-                </li>
+                </div>
               </div>
             </div>
             <div className="slickItem">
               <div className="slide_item">
-                <li className="yellowBox">
+                <div className="yellowBox loanCrouselitem">
                   <Link href={"/loans/gold-loan" + utmData}><a>
                     <div className="contentArea">
                       <h2>Gold Loan</h2>
@@ -112,16 +114,16 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/pl-bnr-icon.webp" alt="gold-loan" />
+                      <Image src="/images/pl-bnr-icon.webp" alt="gold-loan" width="70" height="72" loading='lazy' />
                     </div>
                   </a>
                   </Link>
-                </li>
+                </div>
               </div>
             </div>
           </Carousel>
 
-        </ul>
+        </div>
       </div>
     </section>
 

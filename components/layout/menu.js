@@ -4,6 +4,8 @@ import Link from "next/link";
 import SubMenu from './subMenu';
 import { useRouter } from 'next/router';
 import $ from 'jquery'
+import Image from "next/image";
+
 const Menu = () => {
     const router = useRouter()
     let utmData = '';
@@ -16,6 +18,7 @@ const Menu = () => {
 
     const [headermenu, setHeaderMenu] = useState([]);
     const [isHovering, setIsHovering] = useState(false);
+    const [active,setActive] = useState('')
     const handleMouseOver = () => {
         setIsHovering(true);
     };
@@ -47,7 +50,7 @@ const Menu = () => {
                         > <Link href={'/' + value.slug + utmData}  ><a title={value.name}>{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul className="secondLevelUl">
-                                    {value.bank_product && <SubMenu utm={utmData} data={value.bank_product} />}
+                                    {value.bank_product && <SubMenu setActive={setActive}  data={value.bank_product} />}
                                 </ul>
                             </div>
 
@@ -67,34 +70,26 @@ const Menu = () => {
                     </li>
                 ))}
             </ul>
-
         </li>
-
     ))
 
     useEffect(() => {
         getheaderMenu();
-
-
     }, []);
 
     if (typeof window !== 'undefined') {
-        $('.secondLevelUl li,.subMenuLevel2 li').on('click', function () {
+
+        $('.secondLevelUl li,.subMenuLevel2 li,#mainNavUl li').on('click', function () {
             $('.megaMenu_container').addClass('d-none')
         })
 
         $('#mainNavUl li').on('mouseenter', function () {
             $('.megaMenu_container').removeClass('d-none')
         })
+    }
 
-        // mobile menu
-        $('#menuTrigger').on('click', function () {
-            $('.main_nav').removeClass('d-none')
-        })
-
-        $('.thirdLevelUl li').on('click', function () {
-            $('.main_nav').addClass('d-none')
-        })
+    const activeFunction = ()=>{
+      active !=''?setActive(''):setActive('active')
     }
     return (
         <>
@@ -102,12 +97,12 @@ const Menu = () => {
             <header id="moileheader" className="d-md-none d-block">
                 <div className="mheadWrapper">
                     <div className="header_left">
-                        <Link href={'/' + utmData}><a className="logo" ><img src="/images/logo.webp" alt="logo" /></a></Link>
+                        <Link href={'/' + utmData}><a className="logo" ><Image src="/images/logo.webp" alt="logo" width="175" height="36" loading='lazy' /></a></Link>
                     </div>
                     <div className="header_right">
                         <label htmlFor="menuTrigger" className="nav_ico"><i className="fa fa-bars"></i></label>
-                        <input id="menuTrigger" type="checkbox" name="" />
-                        <nav className="main_nav " id="firstLevelUlMobile">
+                        <input id="menuTrigger" onClick={()=>{activeFunction()}} type="checkbox" name="" />
+                        <nav id="firstLevelUlMobile" className={`main_nav ${active} `} >
                             <ul className="_firtlevelul">
                                 {
                                     headermenu.map((item1, index) => (
@@ -122,7 +117,7 @@ const Menu = () => {
                                                             <i className="fa fa-caret-down"></i>
 
                                                             <ul className="thirdLevelUl">
-                                                                {value1.bank_product && <SubMenu data={value1.bank_product} />}
+                                                                {value1.bank_product && <SubMenu setActive={setActive} data={value1.bank_product} />}
                                                             </ul>
                                                         </li>
                                                     ))
@@ -133,7 +128,7 @@ const Menu = () => {
                                             <li key={index}><Link href={'/' + item1.slug + utmData}><a >{item1.name}</a></Link>
                                                 {item1.page && <i className="fa fa-caret-down"></i>}
 
-                                                <ul>
+                                                <ul className="thirdLevelUl">
                                                     {
                                                         item1.page && item1.page.map((value1, key) => (
                                                             <li key={key} ><Link href={'/' + value1.slug + utmData}><a >{value1.name}</a></Link>
@@ -159,18 +154,18 @@ const Menu = () => {
                     <div className="container">
                         <div className="customContainer">
 
-                            <Link href={'/' + utmData}><a className="logoSection"><img src="/images/top-logo.webp" alt="" title="referloan" /></a></Link>
+                            <Link href={'/' + utmData}><a className="logoSection" aria-label="Referloan"><Image src="/images/top-logo.webp" alt="" title="referloan" width="233" height="47" loading='lazy' /></a></Link>
 
                             <div className="info_section">
                                 <ul>
                                     <li>
-                                        <Link href="mailto:info@referloan.in"><a><i className="fa fa-envelope" aria-hidden="true"></i> info@referloan.in</a></Link>
+                                        <Link href="mailto:info@referloan.in"><a><i className="fa fa-envelope"></i> info@referloan.in</a></Link>
                                     </li>
                                     <li>
                                         <Link href="tel:0124-4847123"><a > <i className="fas fa-phone-square-alt"></i>  0124-4847123</a></Link>
                                     </li>
                                 </ul>
-                                <Link href="/"><a><img src="/images/CIBIL Score.gif" alt="" /></a></Link>
+                                <Link href="/"><a aria-label="Cibil"><Image src="/images/CIBIL Score.gif" alt=""  width="160" height="36" loading='lazy' /></a></Link>
                             </div>
 
                         </div>
