@@ -53,7 +53,7 @@ const cardLoan = () => {
           <Carousel {...settings}>
             <div className="slickItem">
               <div className="slide_item">
-                <div className="greenBox">
+                <div className="greenBox loanCrouselitem">
                   <Link href={'/loans/personal-loan' + utmData}><a>
                     <div className="contentArea">
                       <h2>Personal Loan</h2>
@@ -71,7 +71,7 @@ const cardLoan = () => {
 
             <div className="slickItem">
               <div className="slide_item">
-                <div className="blueBox">
+                <div className="blueBox loanCrouselitem">
                   <Link href={'/credit-card' + utmData}><a>
                     <div className="contentArea">
                       <h2>Credit Card</h2>
@@ -89,7 +89,7 @@ const cardLoan = () => {
 
             <div className="slickItem">
               <div className="slide_item">
-                <div className="purpleBox">
+                <div className="purpleBox loanCrouselitem">
                   <Link href={"/loans/business-loan" + utmData}><a>
                     <div className="contentArea">
                       <h2>Business Loan</h2>
@@ -106,7 +106,7 @@ const cardLoan = () => {
             </div>
             <div className="slickItem">
               <div className="slide_item">
-                <div className="yellowBox">
+                <div className="yellowBox loanCrouselitem">
                   <Link href={"/loans/gold-loan" + utmData}><a>
                     <div className="contentArea">
                       <h2>Gold Loan</h2>
