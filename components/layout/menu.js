@@ -67,18 +67,18 @@ const Menu = () => {
                     </li>
                 ))}
             </ul>
-
         </li>
-
     ))
 
     useEffect(() => {
         getheaderMenu();
-
-
     }, []);
 
     if (typeof window !== 'undefined') {
+
+        $(document).ready(function(){
+            
+        })
         $('.secondLevelUl li,.subMenuLevel2 li').on('click', function () {
             $('.megaMenu_container').addClass('d-none')
         })
@@ -107,7 +107,7 @@ const Menu = () => {
                     <div className="header_right">
                         <label htmlFor="menuTrigger" className="nav_ico"><i className="fa fa-bars"></i></label>
                         <input id="menuTrigger" type="checkbox" name="" />
-                        <nav className="main_nav " id="firstLevelUlMobile">
+                        <nav id="firstLevelUlMobile" className="main_nav " >
                             <ul className="_firtlevelul">
                                 {
                                     headermenu.map((item1, index) => (
@@ -133,7 +133,7 @@ const Menu = () => {
                                             <li key={index}><Link href={'/' + item1.slug + utmData}><a >{item1.name}</a></Link>
                                                 {item1.page && <i className="fa fa-caret-down"></i>}
 
-                                                <ul>
+                                                <ul className="thirdLevelUl">
                                                     {
                                                         item1.page && item1.page.map((value1, key) => (
                                                             <li key={key} ><Link href={'/' + value1.slug + utmData}><a >{value1.name}</a></Link>
