@@ -98,10 +98,10 @@
     width: fit-content;
 }
 
-.heroSection .heroContent .topArea .img-box img {
+/* .heroSection .heroContent .topArea .img-box img {
     height: 225px;
     width: auto;
-}
+} */
 
 .header-form-area {
     margin-top: 0px;
@@ -520,10 +520,10 @@ ul.vdoArea {
     padding-top: 8px;
 }
 
-.applyLoans__Section .loanCol ul.iconPnl img {
+/* .applyLoans__Section .loanCol ul.iconPnl img {
     height: 35px;
     width: auto;
-}
+} */
 
 
 .applyLoans__Section .cardBanner {
