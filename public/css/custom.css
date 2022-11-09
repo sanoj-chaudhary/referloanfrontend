@@ -100,7 +100,7 @@ margin-bottom: 0 !important;
   justify-content: space-between;
 }
 .mheadWrapper .header_left a img{
-  width: 170px;
+width: 200px;
 }
 .nav_ico{
   display: block;
@@ -208,13 +208,12 @@ margin-bottom: 0 !important;
     position: relative;
     z-index: 10;
     color: #fff;
-    font-size: 30px;
+    font-size: 36px;
 
   } 
- 
-  .header_right .main_nav {
+  .main_nav {
     position: fixed;
-   left: 0;
+    left: 0;
     top: 72px;
     padding:0;
     background: #022329;
@@ -224,12 +223,6 @@ margin-bottom: 0 !important;
     width: calc(100% - 20px);
     transition: all 0.3s ease-out;
     transform: translateX(-100%);
-  }
-
-  .header_right .active{
-    transition: all 0.3s ease-out;
-    transform: translateX(0%) !important;
-   
   }
   .main_nav ul li {
     float: none;
@@ -265,10 +258,7 @@ margin-bottom: 0 !important;
   .main_nav ul li:hover > ul {
     height: auto;
   }
-  .main_nav ul li i{ 
-    padding-left: 100px !important;
-    right: 10px !important; 
-  }
+  .main_nav ul li i{ right: 10px !important; }
   .main_nav ul li:hover > i{ color: #fff }
   .main_nav ul ul li i{transform: rotate(0deg);}
 
@@ -279,12 +269,10 @@ margin-bottom: 0 !important;
     height: 0;
     margin: 0
   }
-  #menuTrigger:checked + #firstLevelUlMobile{
-    /* transform: translateX(0%); */
+  #menuTrigger:checked + .main_nav{
+    transform: translateX(0%);
   }
-}
 
-.subMenuLevel2 li a{
-  font-size: 13px !important;
-  font-weight: 400;
+  
+
 }
