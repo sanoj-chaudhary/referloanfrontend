@@ -1795,25 +1795,25 @@ note {
 }
 
 
-.testimaolSlider ul {
+.testimaolSlider .testimaol_carousel {
     display: flex;
     flex-wrap: wrap;
     column-gap: 20px;
     margin-top: 35px;
 }
 
-.testimaolSlider ul.slick-dots {
+.testimaolSlider .testimaol_carousel.slick-dots {
     margin: auto;
     column-gap: 0;
     text-align: center;
     justify-content: center;
 }
 
-.testimaol_carousel ul.slick-dots li {
+.testimaol_carousel .testimaol_carousel.slick-dots .testimonialItem {
     border: none;
 }
 
-.testimonial_Area li {
+.testimonial_Area .testimonialItem {
     padding: 20px;
     max-width: calc(100% - 14px);
     width: 100%;
@@ -1831,7 +1831,7 @@ note {
     /* margin-left: 10px; */
 }
 
-.testimonial_Area li::after {
+.testimonial_Area .testimonialItem::after {
     content: '';
     background: url(../assets/images/qoute-icon.webp) bottom center no-repeat;
     background-size: 37px;

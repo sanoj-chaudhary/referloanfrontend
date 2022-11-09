@@ -33,39 +33,37 @@ const testimonial = (props) => {
           slidesToShow: 4,
         },
       },
-      ],
+    ],
   };
 
   return (
     <section className="testimonial_Area">
       <div className="container">
         <h2 className="heading text-center">What Our Patrons Have to Say About Our Services</h2>
-          <ul className="testimaol_carousel  ">
+        <div className="testimaol_carousel  ">
           <Carousel {...settings}>
             {
-              props.testimonial && props.testimonial.map((item,index)=>(
-                <li key={index}>
-                    <div className="ratingPnl">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                    </div>
-                    <p>{item.client_message}</p>
-                    <div className="profileBxo">
-                      <div className="profile-img"><Image src={`/uploads/testimonial/${item.client_pic}`}  width="50" height="50" loading='lazy' alt="" /></div>
-                      {item.client_name}
-                    </div>
-                  </li>
+              props.testimonial && props.testimonial.map((item, index) => (
+                <div className="testimonialItem" key={index}>
+                  <div className="ratingPnl">
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                  </div>
+                  <p>{item.client_message}</p>
+                  <div className="profileBxo">
+                    <div className="profile-img"><Image src={`/uploads/testimonial/${item.client_pic}`} width="50" height="50" loading='lazy' alt="" /></div>
+                    {item.client_name}
+                  </div>
+                </div>
               ))
             }
-              </Carousel>
-          </ul>
+          </Carousel>
+        </div>
       </div>
     </section>
-
-
   )
 }
 
