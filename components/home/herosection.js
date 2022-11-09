@@ -43,7 +43,7 @@ function HeroSection({ loanProduct, creditProduct }) {
                                                             </div>
                                                       </div>
                                                       <div className="img-box">
-                                                            <Image src="/images/home-loan.webp" alt="" loading='lazy' width="250" height="250"  />
+                                                            <Image src="/images/home-loan.webp" alt="" loading='lazy' width="244" height="226"  />
                                                       </div>
                                                 </div>
 
@@ -71,7 +71,7 @@ function HeroSection({ loanProduct, creditProduct }) {
                                                             </div>
                                                       </div>
                                                       <div className="img-box">
-                                                            <Image src="/images/car-loan.webp" alt="" loading='lazy' width="500" height="220" />
+                                                            <Image src="/images/car-loan.webp" alt="" loading='lazy' width="512" height="226" />
                                                       </div>
                                                 </div>
 
@@ -98,7 +98,8 @@ function HeroSection({ loanProduct, creditProduct }) {
                                                             </div>
                                                       </div>
                                                       <div className="img-box">
-                                                            <Image src="/images/hd-img.webp" alt="" loading='lazy' width="160" height="220" />
+                                                            <Image src="/images/hd-img.webp" alt="" loading='lazy' width="184" height="226" />
+                                                            {/* width="256" height="322"  */}
                                                       </div>
                                                 </div>
                                           </div>
