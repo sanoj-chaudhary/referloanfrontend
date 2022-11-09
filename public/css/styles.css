@@ -447,7 +447,7 @@ ul.vdoArea {
     transition: all 0.3s;
 }
 
-.servicesBanner__Section .loanCard_carousel .contentArea:hover button {
+.servicesBanner__Section ul li .contentArea:hover button {
     background-color: rgb(255 255 255 / 1);
 }
 
@@ -1795,25 +1795,25 @@ note {
 }
 
 
-.testimaolSlider .testimaol_carousel {
+.testimaolSlider ul {
     display: flex;
     flex-wrap: wrap;
     column-gap: 20px;
     margin-top: 35px;
 }
 
-.testimaolSlider .testimaol_carousel.slick-dots {
+.testimaolSlider ul.slick-dots {
     margin: auto;
     column-gap: 0;
     text-align: center;
     justify-content: center;
 }
 
-.testimaol_carousel .testimaol_carousel.slick-dots .testimonialItem {
+.testimaol_carousel ul.slick-dots li {
     border: none;
 }
 
-.testimonial_Area .testimonialItem {
+.testimonial_Area li {
     padding: 20px;
     max-width: calc(100% - 14px);
     width: 100%;
@@ -1831,7 +1831,7 @@ note {
     /* margin-left: 10px; */
 }
 
-.testimonial_Area .testimonialItem::after {
+.testimonial_Area li::after {
     content: '';
     background: url(../assets/images/qoute-icon.webp) bottom center no-repeat;
     background-size: 37px;

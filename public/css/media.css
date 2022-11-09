@@ -51,6 +51,7 @@
     transition: .2s;
 }
 
+
 *:focus {
     outline: none;
     border: none;
@@ -79,9 +80,6 @@
         margin-bottom: 20px;
     }
 
-    .sticky_nav {
-        display: flex;
-    }
 
     .heroSection {
         min-height: auto;
@@ -163,30 +161,7 @@
         width: 100%;
     }
 
-    .getApp {
-        height: auto;
-        margin-top: 0;
-    }
-
-    .getApp .left {
-        max-width: 100%;
-        overflow: hidden;
-        padding: 30px;
-        font-size: 32px;
-    }
-
-    .getApp .right {
-        display: none;
-    }
-
-    .buttonArea img {
-        height: 40px;
-    }
-
-    .getApp .left::after,
-    .getApp .left::before {
-        display: none;
-    }
+    
 
     .footerNav {
         flex-wrap: wrap;
@@ -256,24 +231,6 @@
     }
 
     /* inner Pages css */
-
-    .content_with_img_section {
-        flex-direction: column;
-    }
-
-    .content_with_img_section .content_box {
-        width: 100%;
-    }
-
-    .content_with_img_section .img_box {
-        display: none;
-    }
-
-    .content_section,
-    .content_with_img_section {
-        padding: 15px 0;
-    }
-
     table.table_cards_Table {
         margin-top: 15px;
     }
@@ -281,56 +238,6 @@
     .content_section h2 {
         width: 100%;
         font-size: 21px;
-    }
-
-    .city__Section {
-        padding: 20px 0;
-    }
-
-    .city__Section h2 {
-        font-size: 22px;
-    }
-
-    .city__Section p {
-        font-size: 18px;
-    }
-
-    .city__Section .city_container .inner_box {
-        width: 33%;
-    }
-
-    .city__Section .city_container .city_box .icon-box img {
-        height: 50px;
-        width: auto;
-    }
-
-    .city__Section .city_container .city_box {
-        height: 110px;
-    }
-
-    .city__Section .city_container .city_box .icon-title {
-        font-size: 11px;
-    }
-
-    .detail_card_Area {
-        flex-direction: column;
-    }
-
-    .detail_card_Area .detail_card {
-        padding: 20px;
-        border-radius: 10px;
-    }
-
-    .detail_card_Area .detail_card h2 {
-        font-size: 24px;
-    }
-
-    .detail_card_Area .detail_card .img_pnl img {
-        height: 220px;
-    }
-
-    .detail_card_Area {
-        row-gap: 20px;
     }
 
     .faqSetion .faq_row {
@@ -361,208 +268,16 @@
     #loanForm_container .detail_area {
         margin-top: 20px;
     }
-
-    .card_content_pnl {
-        row-gap: 35px;
-    }
-
-    .card_content_pnl .cnt_pnl .content_box {
-        padding: 20px;
-    }
-
-    .card_content_pnl .cnt_pnl .content_box h2 {
-        font-size: 21px;
-    }
-
-    .card_content_pnl .cnt_pnl {
-        flex-direction: column;
-    }
-
-    .card_content_pnl .cnt_pnl .mobile_frame,
-    .card_content_pnl .cnt_pnl:nth-child(even) .mobile_frame {
-        background-image: none;
-        padding: 20px 10px;
-        margin: 0;
-        width: 100%;
-        height: auto;
-        justify-content: center;
-        box-sizing: border-box;
-        align-items: flex-end;
-    }
-
-    .card_content_pnl .cnt_pnl:nth-child(even) {
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .innerHeader .innerTab_head .nav-tabs {
-        width: 100%;
-        display: flex;
-        flex-wrap: nowrap;
-        max-width: max-content;
-        overflow: scroll;
-    }
-
-    .apply-card-bg .stepRow ul,
-    .reward_Area {
-        flex-direction: column;
-        row-gap: 10px;
-    }
-
-    .apply_loan_form_area .innerContainer .formPnl .form_row {
-        flex-direction: column;
-        row-gap: 10px;
-    }
-
-    .apply_loan_form_area {
-        padding: 20px 0;
-    }
-
-    .apply_loan_form_area .innerContainer>* {
-        width: 100% !important;
-    }
-
-    .apply_loan_form_area .innerContainer {
-        flex-direction: column;
-    }
-
-    .apply_loan_form_area .innerContainer .formPnl {
-        padding: 10px 0 10px;
-    }
+   
 
     .date_MainPnl input {
         width: 100%;
     }
 
-    .apply_loan_form_area .innerContainer {
-        flex-direction: column;
-        margin-bottom: 30px;
-    }
-
-    .apply_loan_form_area .innerContainer:last-child {
-        margin-bottom: 0px;
-    }
-
-    .about_container .about_inner {
-        flex-direction: column;
-    }
-
-    .about_container .about_inner>* {
-        width: 100% !important;
-    }
-
-    .about_container .about_inner .left_col h2 {
-        font-size: 21px;
-        padding-bottom: 15px;
-    }
-
-    .about_container .about_inner .join_col {
-        margin-top: 20px;
-    }
-
-    .vision_section .inner_col {
-        padding-bottom: 20px;
-    }
-
-    .vision_section {
-        flex-direction: column;
-    }
-
-    .vision_section .inner_col h2 {
-        font-weight: 500;
-        margin-bottom: 10px;
-        font-size: 21px;
-    }
-
-    .values_section .imgPnl {
-        display: none;
-    }
-
-    .values_section .contentPnl {
-        word-break: break-all;
-        width: 100%;
-    }
-
-    .activities_section h2 {
-        font-size: 24px;
-        text-align: center;
-    }
-
-    .activities_section h2 {
-        font-size: 18px;
-    }
-
-    .activities_section p {
-        font-size: 19px;
-        font-weight: 400;
-        letter-spacing: 0;
-        padding-top: 7px;
-    }
-
-    .activities_section .activities_row {
-        flex-direction: column;
-        padding: 25px 0 0;
-    }
-
-    .activities_section .activities_row>* {
-        width: 100% !important;
-    }
-
-    .activities_section .activities_row .activities_col h2 {
-        font-size: 16px;
-    }
-
-    .activities_section .activities_row .activities_col h2 span {
-        max-width: 40px;
-        width: 100%;
-        height: 40px;
-        font-size: 17px;
-        font-weight: 700;
-        color: #fff;
-        line-height: 42px;
-        margin-right: 10px;
-    }
-
-    .activities_section .activities_row .activities_col ul {
-        margin: 10px 0 0 67px;
-    }
-
-    .activities_section .activities_row .activities_col li {
-        font-size: 14px;
-        padding: 2px 0;
-    }
-
-    .activities_section .activities_row .activities_col p {
-        font-size: 16px;
-        padding: 10px 0 0 50px;
-    }
-
-    .activities_section .activities_row .activities_col {
-        padding-bottom: 30px;
-    }
-
-    .activities_section .activities_row .activities_col:last-child {
-        padding-bottom: 0 !important
-    }
-
-    .benefits_area h2 {
-        font-size: 25px;
-    }
-
-    .benefits_area .benefitBox {
-        width: 100%;
-        flex-direction: column;
-    }
-
     .benefitBox .imgPnl {
         height: 230px;
     }
-
-    .benefits_area .benefitBox .contentPnl {
-        width: 100%;
-        margin-top: 20px;
-    }
-
+   
     .contact_container .contact_inner h2 {
         width: 100%;
         font-size: 24px;
