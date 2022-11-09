@@ -62,7 +62,7 @@ const leftfilter = ({ content, ProductByCat }) => {
         <div className="filterArea">
           <div className="inputRow">
             <label>Choose Product</label>
-            <select className="form-select" value={searchData.product_id}  aria-label="Type of loan " name='product_id' onChange={handleChange}>
+            <select className="form-select" aria-label="Type of loan " name='product_id' onChange={handleChange}>
 
               {ProductByCat.map((item, key) => (
                 <option defaultValue='' selected={content.p_name == item.name} key={key} value={item.slug}>{item.name}</option>
@@ -71,9 +71,9 @@ const leftfilter = ({ content, ProductByCat }) => {
           </div>
           <div className="inputRow">
             <label>Profession Type</label>
-            <select className="form-select" value={searchData.employemnt_type} name="employemnt_type" aria-label="Type of loan " onChange={handleChange} required>
-              <option  value=''>Profession Type </option>
-              <option value="Salaried">Salaried</option>
+            <select className="form-select" name="employemnt_type" aria-label="Type of loan " onChange={handleChange} required>
+              <option defaultValue='' value=''>Profession Type </option>
+              <option selected value="Salaried">Salaried</option>
               <option value="Self employed">Self employed</option>
             </select>
           </div>
@@ -121,8 +121,14 @@ const leftfilter = ({ content, ProductByCat }) => {
               onChange={handleChange}
 
               required />
-           
+            {/* {errors.pincode && <p style={{ color: 'red', fontSize: '12px' }}>{errors.pincode}</p>} */}
           </div>
+          {/* <div className="inputRow">
+              <label>Interest</label>
+              <input type="text" placeholder="min" value="" onChange={handleChange} /> <input type="text" placeholder="max" value="" onChange={handleChange} />
+            </div> */}
+
+
           <button className="applyBtn" id="myBtn" title="Apply Filter" type="submit">Apply Filter</button>
         </div>
       </form>
