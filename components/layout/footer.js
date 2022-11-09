@@ -153,7 +153,7 @@ const Footer = () => {
                             <h2> Loan </h2>
                             <ul>
                                 {loan.map((item)=>(
-                                    <li key={item.id}><Link href={'/'+item.slug+utmData} ><a title="{item.name}">{item.name}</a></Link></li>
+                                    <li key={item.id}><Link href={'/'+item.slug+utmData} ><a title={item.name}>{item.name}</a></Link></li>
                                 ))}
                             </ul>
                         </div>
@@ -162,7 +162,7 @@ const Footer = () => {
                             <h2>Credit Cards</h2>
                             <ul>
                                 {cc.map((item)=>(
-                                    <li key={item.id}><Link href={'/'+item.slug+utmData} ><a title="{item.name}">{item.name}</a></Link></li>
+                                    <li key={item.id}><Link href={'/'+item.slug+utmData} ><a title={item.name}>{item.name}</a></Link></li>
                                 ))}
                                 <li> <Link href="https://cms.referloan.in/admin/login"><a target="_blank">Employee Login</a></Link></li>
                                 <li> <Link href="https://cms.referloan.in/admin/login" ><a target="_blank">Franchise Login</a></Link></li>
