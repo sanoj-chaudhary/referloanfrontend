@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router';
-const subMenu = (props) => {
+const subMenu = ({data,setActive}) => {
   const router = useRouter()
   let  utmData = '';
     const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
@@ -9,9 +9,16 @@ const subMenu = (props) => {
   }else{
       utmData = `?utm_source=${utm_source}&utm_medium=${utm_medium}&utm_campaign=${utm_campaign}&utm_id=${utm_id}`
   }
-  const items = props.data.map((item, index) => (
+
+const setMenuStatus = ()=>{
+  setActive('');
+}
+
+
+
+  const items = data.map((item, index) => (
     item.id != null
-      ? (<li key={index}><Link href={'/'+item.slug+utmData}><a tabIndex="-1" >{item.name}</a></Link></li>)
+      ? (<li onClick={()=>{setMenuStatus()}} key={index}><Link href={'/'+item.slug+utmData}><a tabIndex="-1" >{item.name}</a></Link></li>)
       : null
 
   ))

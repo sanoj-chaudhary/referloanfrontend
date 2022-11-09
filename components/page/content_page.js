@@ -31,7 +31,7 @@ const midcontent = ({ data, faq }) => {
                     id="accordionFlushExample"
                   >
                     {faq.map((item, key) => (
-                      <div className="accordion-item">
+                      <div key={key} className="accordion-item">
                         <h2 className="accordion-header" id={"flush-heading" + key}>
                           <button
                             className="accordion-button collapsed"
