@@ -72,6 +72,8 @@ export default function Header(children) {
                 gtag('config', 'UA-226709847-1');
             `}
             </Script>
+
+            <Script src="/js/script.js" rel="javascript" />
         </Head>
     )
 }

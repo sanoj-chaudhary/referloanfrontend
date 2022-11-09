@@ -16,6 +16,7 @@ const Menu = () => {
 
     const [headermenu, setHeaderMenu] = useState([]);
     const [isHovering, setIsHovering] = useState(false);
+    const [active,setActive] = useState('')
     const handleMouseOver = () => {
         setIsHovering(true);
     };
@@ -47,7 +48,7 @@ const Menu = () => {
                         > <Link href={'/' + value.slug + utmData}  ><a title={value.name}>{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul className="secondLevelUl">
-                                    {value.bank_product && <SubMenu utm={utmData} data={value.bank_product} />}
+                                    {value.bank_product && <SubMenu setActive={setActive}  data={value.bank_product} />}
                                 </ul>
                             </div>
 
@@ -76,25 +77,17 @@ const Menu = () => {
 
     if (typeof window !== 'undefined') {
 
-        $(document).ready(function(){
-            
-        })
-        $('.secondLevelUl li,.subMenuLevel2 li').on('click', function () {
+        $('.secondLevelUl li,.subMenuLevel2 li,#mainNavUl li').on('click', function () {
             $('.megaMenu_container').addClass('d-none')
         })
 
         $('#mainNavUl li').on('mouseenter', function () {
             $('.megaMenu_container').removeClass('d-none')
         })
+    }
 
-        // mobile menu
-        $('#menuTrigger').on('click', function () {
-            $('.main_nav').removeClass('d-none')
-        })
-
-        $('.thirdLevelUl li').on('click', function () {
-            $('.main_nav').addClass('d-none')
-        })
+    const activeFunction = ()=>{
+      active !=''?setActive(''):setActive('active')
     }
     return (
         <>
@@ -106,8 +99,8 @@ const Menu = () => {
                     </div>
                     <div className="header_right">
                         <label htmlFor="menuTrigger" className="nav_ico"><i className="fa fa-bars"></i></label>
-                        <input id="menuTrigger" type="checkbox" name="" />
-                        <nav id="firstLevelUlMobile" className="main_nav " >
+                        <input id="menuTrigger" onClick={()=>{activeFunction()}} type="checkbox" name="" />
+                        <nav id="firstLevelUlMobile" className={`main_nav ${active} `} >
                             <ul className="_firtlevelul">
                                 {
                                     headermenu.map((item1, index) => (
@@ -122,7 +115,7 @@ const Menu = () => {
                                                             <i className="fa fa-caret-down"></i>
 
                                                             <ul className="thirdLevelUl">
-                                                                {value1.bank_product && <SubMenu data={value1.bank_product} />}
+                                                                {value1.bank_product && <SubMenu setActive={setActive} data={value1.bank_product} />}
                                                             </ul>
                                                         </li>
                                                     ))
