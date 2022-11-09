@@ -6,6 +6,8 @@ import mcard from './../../public/images/m-card.webp'
 import rpcard from './../../public/images/rp-card.webp'
 import mescard from './../../public/images/mes-card.webp'
 import indicard from './../../public/images/ind-flag.webp'
+import footerlogo from './../../public/images/logo.webp'
+
 import { useEffect, useState } from "react"
 import { useRouter } from 'next/router';
 import axios from 'axios'
@@ -91,7 +93,8 @@ const Footer = () => {
                         <img src="images/icon/eduL-icon.webp" alt="" />
                         <span>Subsidy</span>
                     </a></Link>
-                </div>
+            </div>
+
           <div className='footerWrapper'>
             <div className="fot-top-bar">
                 <div className="container">
@@ -145,7 +148,7 @@ const Footer = () => {
                         <div className="growArea">
                             <h2>Save, Fastest Loan &amp; Grow</h2>
                             <p>Our goal at Refer Loan is to provide access to personal loans and education loan, car loan, home loan at insight competitive interest rates. We are the loan provider, you can use our loan product.</p>
-                            <img src="/images/logo.webp" alt="" className="footerlogo" />
+                            <Image src={footerlogo} alt=""  loading='lazy' height='38' width='173' />
                         </div>
 
                         {/* <!-- link Area --> */}
@@ -174,15 +177,15 @@ const Footer = () => {
                     <div className="footer-card-area">
                         <div className="card-pnl">
                             <ul>
-                                <li><Image src={vcard} alt="" /></li>
-                                <li><Image src={aecard} alt="" /></li>
-                                <li><Image src={mcard} alt="" /></li>
-                                <li><Image src={rpcard} alt="" /></li>
-                                <li><Image src={mescard} alt="" /></li>
+                                <li><Image src={vcard} alt="" loading='lazy' /></li>
+                                <li><Image src={aecard} alt="" loading='lazy' /></li>
+                                <li><Image src={mcard} alt="" loading='lazy' /></li>
+                                <li><Image src={rpcard} alt="" loading='lazy' /></li>
+                                <li><Image src={mescard} alt="" loading='lazy' /></li>
                             </ul>
                         </div>
                         <div className="mad-in-india">
-                            <Image className="footerIndialogo" src={indicard} alt="Indialogo" />
+                            <Image className="footerIndialogo" src={indicard} alt="Indialogo" loading='lazy'  />
                             <span className="made-india">Made In India</span>
 
                         </div>

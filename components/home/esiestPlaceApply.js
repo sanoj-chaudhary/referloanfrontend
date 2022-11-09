@@ -2,6 +2,8 @@ import React from 'react'
 import Link from "next/link"
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import axisBanner from './../../public/images/axisBanner.webp'
+
 
 const esiestPlaceApply = () => {
   const router = useRouter()
@@ -94,7 +96,7 @@ const esiestPlaceApply = () => {
         </div>
 
         <div className="cardBanner">
-          <Link href="/"><a><img src="/images/axisBanner.webp" alt="Ad" /></a></Link>
+          <Link href="/"><a><Image src={axisBanner} alt="Ad" loading='lazy'  /></a></Link>
         </div>
 
 
