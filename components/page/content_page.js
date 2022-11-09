@@ -20,7 +20,7 @@ const midcontent = ({ data, faq }) => {
         <section className="section_pad">
           <div className="container">
             <div dangerouslySetInnerHTML={{ __html: data[0].description }}></div>
-            <div class="table_with_img_content">
+            <div className="table_with_img_content">
 
             {faq != '' ? <div className="faqSetion">
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>

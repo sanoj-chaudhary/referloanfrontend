@@ -12,7 +12,9 @@
 }
 
 
-
+.blog_dis_area{
+  min-height: 280px;
+}
 .header-form-area{
   z-index: 0 !important;
 }
