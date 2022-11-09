@@ -429,10 +429,10 @@ ul.vdoArea {
     margin-left: auto;
 }
 
-.servicesBanner__Section .loanCard_carousel .imgSection img {
+/* .servicesBanner__Section .loanCard_carousel .imgSection img {
     max-width: 70px;
     height: auto;
-}
+} */
 
 .servicesBanner__Section .loanCard_carousel .contentArea button {
     border: none;
