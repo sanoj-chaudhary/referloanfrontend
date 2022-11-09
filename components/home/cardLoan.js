@@ -1,6 +1,8 @@
 import Carousel from "react-slick";
 import Link from "next/link"
 import { useRouter } from 'next/router';
+import Image from "next/image";
+
 const cardLoan = () => {
   const router = useRouter()
   let  utmData = '';
@@ -59,7 +61,7 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/bnplicon.webp" alt="personal-loan" />
+                      <Image src="/images/bnplicon.webp" alt="personal-loan" width="70" height="72" loading='lazy' />
                     </div>
                   </a>
                   </Link>
@@ -77,7 +79,7 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/ccard-bnr-icon.webp" alt="credit-card" />
+                      <Image src="/images/ccard-bnr-icon.webp" alt="credit-card" width="70" height="72" loading='lazy' />
                     </div>
                   </a>
                   </Link>
@@ -95,7 +97,7 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/bnblicon.webp" alt="business-loan" />
+                      <Image src="/images/bnblicon.webp" alt="business-loan" width="70" height="72" loading='lazy' />
                     </div>
                   </a>
                   </Link>
@@ -112,7 +114,7 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <img src="/images/pl-bnr-icon.webp" alt="gold-loan" />
+                      <Image src="/images/pl-bnr-icon.webp" alt="gold-loan" width="70" height="72" loading='lazy' />
                     </div>
                   </a>
                   </Link>
