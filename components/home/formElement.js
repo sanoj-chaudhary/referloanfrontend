@@ -7,7 +7,6 @@ import React, { useState, useEffect } from 'react'
 
 import { useRouter } from 'next/router';
 const formElement = ({data}) => {
-
   const router = useRouter()
   const signupSchema = Yup.object({
     pincode: Yup.string().min(6,'Invalid pincode').max(6,'Invalid pincode'),
@@ -43,12 +42,11 @@ const formElement = ({data}) => {
           }
           else
           {
-           hit = values.product_id+'/turnover/'+values.tenure+'/pincode/'+values.pincode+'?ref=web';
-            console.log(hit)
+           hit = values.product_id+'/turnover/'+values.tenure+'/pincode/'+values.pincode+'?ref=web';            
           }
-
           router.push(hit)
       }
+      
       catch (err) {
           console.log(err)
       }
@@ -58,7 +56,7 @@ const formElement = ({data}) => {
     <div className="loan-form-area">
       <div className="loanType">
         <select name='product_id' onChange={handleChange} value={values.product_id} required>
-          <option defaultValue=''>Type of loan </option>
+         {data.length == '6'?<option defaultValue='' value=''>Type of Card</option>:<option defaultValue='' value=''>Type of Loan</option>} 
           {data && data.map((item, key) => (
             <option key={key} value={item.slug}>{item.name}</option>
           ))}
@@ -75,11 +73,7 @@ const formElement = ({data}) => {
       </div>
 
       {values.employemnt_type &&
-
-
         <div className="loanType ">
-
-
           {
             values.employemnt_type === 'Salaried' &&
             <input
@@ -116,14 +110,16 @@ const formElement = ({data}) => {
       <div className="loanType">
 
         <input
-          type="number"
+          type="text"
           autoComplete="off"
           name="pincode"
           id="pincode"
           placeholder="Residential Pincode"
           value={values.pincode}
           onChange={handleChange}
-          onBlur={handleBlur}
+          onBlur={handleBlur} 
+          pattern="[0-9]{6}" 
+          title="Five digit zip code"
           required
         />
         {errors.pincode && <p style={{ color: 'red', fontSize:'12px' }}>{errors.pincode}</p>}

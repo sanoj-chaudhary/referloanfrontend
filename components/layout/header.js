@@ -44,7 +44,7 @@ export default function Header(children) {
             <link href={'/css/media.css'} rel={'stylesheet'} />
             <link href={'/css/innerPages.css'} rel={'stylesheet'} />
             <link href={'/css/custom.css'} rel={'stylesheet'} />
-            <link href={'/css/fontawesome.min.css'} rel={'stylesheet'} />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
             <link href={'/css/menu-new.css'} rel={'stylesheet'} />
 
             {/* <!-- Global site tag (gtag.js) - Google Ads: 513485835 --> */}
