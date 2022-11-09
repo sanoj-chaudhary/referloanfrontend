@@ -49,11 +49,11 @@ const cardLoan = () => {
 
     <section className="servicesBanner__Section">
       <div className="container">
-        <ul className="loanCard_carousel">
+        <div className="loanCard_carousel">
           <Carousel {...settings}>
             <div className="slickItem">
               <div className="slide_item">
-                <li className="greenBox">
+                <div className="greenBox">
                   <Link href={'/loans/personal-loan' + utmData}><a>
                     <div className="contentArea">
                       <h2>Personal Loan</h2>
@@ -65,13 +65,13 @@ const cardLoan = () => {
                     </div>
                   </a>
                   </Link>
-                </li>
+                </div>
               </div>
             </div>
 
             <div className="slickItem">
               <div className="slide_item">
-                <li className="blueBox">
+                <div className="blueBox">
                   <Link href={'/credit-card' + utmData}><a>
                     <div className="contentArea">
                       <h2>Credit Card</h2>
@@ -83,13 +83,13 @@ const cardLoan = () => {
                     </div>
                   </a>
                   </Link>
-                </li>
+                </div>
               </div>
             </div>
 
             <div className="slickItem">
               <div className="slide_item">
-                <li className="purpleBox">
+                <div className="purpleBox">
                   <Link href={"/loans/business-loan" + utmData}><a>
                     <div className="contentArea">
                       <h2>Business Loan</h2>
@@ -101,12 +101,12 @@ const cardLoan = () => {
                     </div>
                   </a>
                   </Link>
-                </li>
+                </div>
               </div>
             </div>
             <div className="slickItem">
               <div className="slide_item">
-                <li className="yellowBox">
+                <div className="yellowBox">
                   <Link href={"/loans/gold-loan" + utmData}><a>
                     <div className="contentArea">
                       <h2>Gold Loan</h2>
@@ -118,12 +118,12 @@ const cardLoan = () => {
                     </div>
                   </a>
                   </Link>
-                </li>
+                </div>
               </div>
             </div>
           </Carousel>
 
-        </ul>
+        </div>
       </div>
     </section>
 
