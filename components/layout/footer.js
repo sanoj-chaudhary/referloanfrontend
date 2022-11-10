@@ -7,7 +7,6 @@ import rpcard from './../../public/images/rp-card.webp'
 import mescard from './../../public/images/mes-card.webp'
 import indicard from './../../public/images/ind-flag.webp'
 import footerlogo from './../../public/images/logo.webp'
-
 import { useEffect, useState } from "react"
 import { useRouter } from 'next/router';
 import axios from 'axios'
@@ -123,19 +122,19 @@ const Footer = () => {
                         <div className="footerNav">
                             <ul>
                                 {loanP.map((value) => (
-                                    <li key={value.id}><Link href={'/'+value.slug+utmData} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+utmData} ><a><span className="material-icons"><i className="fa fa-arrow-right"></i></span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 
                             <ul>
                                 {loanBP.map((value) => (
-                                    <li key={value.id}><Link href={'/'+value.slug+utmData} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+utmData} ><a><span className="material-icons"><i className="fa fa-arrow-right"></i></span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 
                             <ul>
                                 {ccBP.map((value) => (
-                                    <li key={value.id}><Link href={'/'+value.slug+utmData} ><a><span className="material-icons">east</span>{value.name}</a></Link></li>
+                                    <li key={value.id}><Link href={'/'+value.slug+utmData} ><a><span className="material-icons"><i className="fa fa-arrow-right"></i></span>{value.name}</a></Link></li>
                                 ))}
                             </ul>
 

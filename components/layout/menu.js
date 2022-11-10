@@ -154,7 +154,7 @@ const Menu = () => {
                     <div className="container">
                         <div className="customContainer">
 
-                            <Link href={'/' + utmData}><a className="logoSection" aria-label="Referloan"><Image src="/images/top-logo.webp" alt="" title="referloan" width="233" height="47" loading='lazy' /></a></Link>
+                            <Link href={'/' + utmData}><a className="logoSection" aria-label="Referloan"><Image src="/images/top-logo.webp" alt="" title="referloan" width="231" height="50" loading='lazy' /></a></Link>
 
                             <div className="info_section">
                                 <ul>
@@ -165,7 +165,7 @@ const Menu = () => {
                                         <Link href="tel:0124-4847123"><a > <i className="fas fa-phone-square-alt"></i>  0124-4847123</a></Link>
                                     </li>
                                 </ul>
-                                <Link href="/"><a aria-label="Cibil"><Image src="/images/CIBIL Score.gif" alt=""  width="160" height="36" loading='lazy' /></a></Link>
+                                <Link href="/"><a aria-label="Cibil"><Image src="/images/CIBIL Score.gif" alt=""  width="156" height="40" loading='lazy' /></a></Link>
                             </div>
 
                         </div>
