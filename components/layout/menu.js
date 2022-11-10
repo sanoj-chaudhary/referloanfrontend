@@ -75,6 +75,12 @@ const Menu = () => {
 
     useEffect(() => {
         getheaderMenu();
+        if (typeof window !== 'undefined') {
+            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("full_name");
+            window.localStorage.removeItem("pan");
+            window.localStorage.removeItem("phone");
+          }
     }, []);
 
     if (typeof window !== 'undefined') {
