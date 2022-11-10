@@ -79,7 +79,7 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <Image src="/images/ccard-bnr-icon.webp" alt="credit-card" width="70" height="72" loading='lazy' />
+                      <Image src="/images/ccard-bnr-icon.png" alt="credit-card" width="70" height="72" loading='lazy' />
                     </div>
                   </a>
                   </Link>
