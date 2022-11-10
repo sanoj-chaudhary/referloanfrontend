@@ -28,8 +28,9 @@ const calculator = ({ data,content }) => {
         <p style={{ textTransform:"uppercase" }}>{data}</p>
       </div>
 
-      <div className='emicontainer'>
-        <div className='left'>
+      <div className='emicontainer container'>
+        <div className='row'>
+        <div className='left col-md-9 col-12'>
 
           {data=='emi-calculator' && <EmiCalculator  />}
           {data=='sip-calculator' && <SipCalculator  />}
@@ -42,10 +43,10 @@ const calculator = ({ data,content }) => {
           {data == 'mf-calculator' && <Mfcalculator />}
           
         </div>
-        <div className='right'>
+        <div className='right col-md-3 col-12'>
           <CalcSidebar setCalcName={setCalcName} calcName={calcName} />
         </div>
- 
+        </div>
       </div>
     </div>
 
