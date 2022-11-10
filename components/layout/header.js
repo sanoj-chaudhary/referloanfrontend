@@ -48,8 +48,8 @@ export default function Header(children) {
             <link href={'/css/menu-new.css'} rel={'stylesheet'} />
 
             {/* <!-- Global site tag (gtag.js) - Google Ads: 513485835 --> */}
-            <Script src="https://www.googletagmanager.com/gtag/js?id=AW-513485835"></Script>
-            <Script>
+            <script src="https://www.googletagmanager.com/gtag/js?id=AW-513485835"></script>
+            <script>
                 {` window.dataLayer = window.dataLayer || [];
                     function gtag() {
                         dataLayer.push(arguments)
@@ -57,11 +57,11 @@ export default function Header(children) {
                     gtag('js', new Date());
                     gtag('config', 'AW-513485835');
                 `}
-            </Script>
+            </script>
 
             {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-            <Script src="https://www.googletagmanager.com/gtag/js?id=UA-226709847-1"></Script>
-            <Script>
+            <script src="https://www.googletagmanager.com/gtag/js?id=UA-226709847-1"></script>
+            <script>
                 {` window.dataLayer = window.dataLayer || [];
                 function gtag() {
                     dataLayer.push(arguments)
@@ -69,7 +69,7 @@ export default function Header(children) {
                 gtag('js', new Date());
                 gtag('config', 'UA-226709847-1');
             `}
-            </Script>
+            </script>
         </Head>
     )
 }
