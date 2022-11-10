@@ -184,7 +184,7 @@ const apply = (props) => {
                   <li key={key}>
                     <div className="price_row">
                       <label >{item.title}</label>
-                      <span>₹ {item.value}</span>
+                      <span> {item.value}</span>
                     </div>
                     <p>{item.short_description}</p>
                   </li>
