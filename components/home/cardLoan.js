@@ -17,9 +17,9 @@ const cardLoan = () => {
     dots: true,
 
     infinite: true,
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     speed: 1000,
     autoplaySpeed: 4000,
     arrows: false,
@@ -49,8 +49,8 @@ const cardLoan = () => {
 
     <section className="servicesBanner__Section">
       <div className="container">
-        <div className="loanCard_carousel">
-          <Carousel {...settings}>
+        <div className="loanCard_carousel" >
+          {/* <Carousel {...settings}> */}
             <div className="slickItem">
               <div className="slide_item">
                 <div className="greenBox loanCrouselitem">
@@ -89,23 +89,6 @@ const cardLoan = () => {
 
             <div className="slickItem">
               <div className="slide_item">
-                <div className="purpleBox loanCrouselitem">
-                  <Link href={"/loans/business-loan" + utmData}><a>
-                    <div className="contentArea">
-                      <h2>Business Loan</h2>
-                      <p>Purchases into easy EMIS with a limit of up to Rs. 2 lakh*</p>
-                      <button>Apply Now</button>
-                    </div>
-                    <div className="imgSection">
-                      <Image src="/images/bnblicon.webp" alt="business-loan" width="70" height="72" loading='lazy' />
-                    </div>
-                  </a>
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div className="slickItem">
-              <div className="slide_item">
                 <div className="yellowBox loanCrouselitem">
                   <Link href={"/loans/gold-loan" + utmData}><a>
                     <div className="contentArea">
@@ -121,7 +104,7 @@ const cardLoan = () => {
                 </div>
               </div>
             </div>
-          </Carousel>
+          {/* </Carousel> */}
 
         </div>
       </div>
