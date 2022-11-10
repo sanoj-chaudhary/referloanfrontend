@@ -11,9 +11,8 @@
   --large-font: 1.125rem !important;
 }
 
-.blog_dis_area{
-  min-height: 280px;
-}
+
+
 .header-form-area{
   z-index: 0 !important;
 }
@@ -101,7 +100,7 @@ margin-bottom: 0 !important;
   justify-content: space-between;
 }
 .mheadWrapper .header_left a img{
-width: 200px;
+  width: 170px;
 }
 .nav_ico{
   display: block;
@@ -153,6 +152,25 @@ width: 200px;
   transition: all 0.3s ease-out;
   pointer-events: none;
 }
+.header_right .main_nav {
+  position: fixed;
+    left: 0;
+   left: 0;
+  top: 72px;
+  padding:0;
+  background: #022329;
+  z-index: 5;
+  height: calc(100vh - 74px);
+  overflow: auto;
+  width: calc(100% - 20px);
+  transition: all 0.3s ease-out;
+  transform: translateX(-100%);
+}
+.header_right .active{
+      transition: all 0.3s ease-out;
+    transform: translateX(0%) !important;
+    
+    }
 .main_nav ul ul li{
   float: none;
   margin:0;
@@ -209,12 +227,13 @@ width: 200px;
     position: relative;
     z-index: 10;
     color: #fff;
-    font-size: 36px;
+    font-size: 30px;
 
   } 
-  .main_nav {
+ 
+  .header_right .main_nav {
     position: fixed;
-    left: 0;
+
     top: 72px;
     padding:0;
     background: #022329;
@@ -224,6 +243,12 @@ width: 200px;
     width: calc(100% - 20px);
     transition: all 0.3s ease-out;
     transform: translateX(-100%);
+  }
+
+  .header_right .active{
+    transition: all 0.3s ease-out;
+    left: 0;
+    transform: translateX(0%) !important;
   }
   .main_nav ul li {
     float: none;
@@ -259,7 +284,10 @@ width: 200px;
   .main_nav ul li:hover > ul {
     height: auto;
   }
-  .main_nav ul li i{ right: 10px !important; }
+  .main_nav ul li i{ 
+    padding-left: 100px !important;
+    right: 10px !important; 
+  }
   .main_nav ul li:hover > i{ color: #fff }
   .main_nav ul ul li i{transform: rotate(0deg);}
 
@@ -270,10 +298,18 @@ width: 200px;
     height: 0;
     margin: 0
   }
-  #menuTrigger:checked + .main_nav{
-    transform: translateX(0%);
+  #menuTrigger:checked + #firstLevelUlMobile{
+    /* transform: translateX(0%); */
   }
+}
 
-  
+.subMenuLevel2 li a{
+  font-size: 13px !important;
+  font-weight: 400;
+}
 
+.loanCrouselitem .imgSection{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
