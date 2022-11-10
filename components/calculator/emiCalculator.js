@@ -160,12 +160,22 @@ const emiCalculator = () => {
       </div>
 
       <div>
-        <Table>
+
+        <div className='container'>
+          <div className='row gy-1'>
+            <div className='col-md-6 col-12'>
+            <Table className="mb-1">
           <TableRow style={{ borderBottom: "2px solid white" }}>
             <TableCell>
               <TableDetails emi={emi} loanamt={pAmount} interest={interest} tenure={duration} totalIntrest={totalAmountofInterest} tatalpayment={payableAmt} />
             </TableCell>
-
+          </TableRow>
+        </Table>
+            </div>
+            <div className='col-md-6 col-12 ' style={{ borderBottom: "2px solid white" }}>
+            <Table className="mt-5">
+          <TableRow  >
+            
             <TableCell>
               <Pie className='clChart'
                 data={{
@@ -176,13 +186,17 @@ const emiCalculator = () => {
                   }],
                   labels: ['Total Interest', 'Total Amount']
                 }}
-                width={100}
-                height={100}
+                width={150}
+                height={150}
                 options={{ maintainAspectRatio: false }}
               />
             </TableCell>
           </TableRow>
         </Table>
+            </div>
+          </div>
+        </div>
+       
       </div>
 
 
