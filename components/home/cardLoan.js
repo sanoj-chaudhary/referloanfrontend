@@ -49,9 +49,12 @@ const cardLoan = () => {
 
     <section className="servicesBanner__Section">
       <div className="container">
+       
+          
         <div className="loanCard_carousel" >
+        <div className="row">
           {/* <Carousel {...settings}> */}
-            <div className="slickItem">
+            <div className="col-sm-4 col-12 my-1 px-0 slickItem">
               <div className="slide_item">
                 <div className="greenBox loanCrouselitem">
                   <Link href={'/loans/personal-loan' + utmData}><a>
@@ -61,7 +64,7 @@ const cardLoan = () => {
                       <button>Apply Now</button>
                     </div>
                     <div className="imgSection">
-                      <Image src="/images/bnplicon.webp" alt="personal-loan" width="70" height="72" loading='lazy' />
+                      <Image src="/images/bnplicon.png" alt="personal-loan" width="70" height="72" loading='lazy' />
                     </div>
                   </a>
                   </Link>
@@ -69,7 +72,7 @@ const cardLoan = () => {
               </div>
             </div>
 
-            <div className="slickItem">
+            <div className="col-sm-4 col-12 my-1 px-0 slickItem">
               <div className="slide_item">
                 <div className="blueBox loanCrouselitem">
                   <Link href={'/credit-card' + utmData}><a>
@@ -87,7 +90,7 @@ const cardLoan = () => {
               </div>
             </div>
 
-            <div className="slickItem">
+            <div className="col-sm-4 col-12 my-1 px-0 slickItem">
               <div className="slide_item">
                 <div className="yellowBox loanCrouselitem">
                   <Link href={"/loans/gold-loan" + utmData}><a>
@@ -107,6 +110,7 @@ const cardLoan = () => {
           {/* </Carousel> */}
 
         </div>
+      </div>
       </div>
     </section>
 
