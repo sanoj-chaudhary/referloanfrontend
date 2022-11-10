@@ -32,5 +32,8 @@
     "serverless-mysql": "^1.5.4",
     "slick-carousel": "^1.8.1",
     "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/bootstrap": "^5.2.6"
   }
 }
