@@ -8,7 +8,7 @@ import Apply from '../components/page/apply';
 import Error from '../components/page/error';
 
 function contentPage({ url, refer, Component, data, form_schema, specification, faq }) {
- 
+
   const router = useRouter();
   return (
     <>
