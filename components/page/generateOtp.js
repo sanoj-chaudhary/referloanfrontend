@@ -43,7 +43,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
               window.localStorage.removeItem("pan");
               window.localStorage.removeItem("phone");
             }
-          }, 900000);
+          }, 1200000);
           if (utmData && utmData.param_name == 'redirect') {
             setTimeout(() => {
               router.push('/')
@@ -80,7 +80,6 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
 
   const OtpSchema = Yup.object({
     full_name: Yup.string().min(2,'Invalid name').required("Please enter your name "),
-
     phone_no: Yup.string().min(10,'Invalid phonenumber').max(10,'Invalid phone number').required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/, "Invalid phone number"),
     pan_card: Yup.string().min(10,'Invalid pancard').max(10,'Invalid pancard').required("Please fill the pan card").matches("[A-Z]{5}[0-9]{4}[A-Z]{1}", "Invalid Pancard"),
     otp: Yup.string().min(4,'Invalid Otp').max(4,'Invalid Otp').required('Enter OTP')

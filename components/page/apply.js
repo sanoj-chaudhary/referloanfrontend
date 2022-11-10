@@ -135,7 +135,6 @@ const apply = (props) => {
     }
 
     setStep(0)
-
   }, [token, router])
 
   const mySentence = props.data[0].name.trim();

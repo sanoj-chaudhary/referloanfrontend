@@ -14,7 +14,14 @@ const midcontent = ({ url, refer, data }) => {
   const [content, setContent] = useState([])
   const [ProductByCat, setProductByCat] = useState([])
   const [loading, setLoading] = useState(true);
-
+const deleteSession = () =>{
+  if (typeof window !== 'undefined') {
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("full_name");
+    window.localStorage.removeItem("pan");
+    window.localStorage.removeItem("phone");
+  }
+}
   const searchProduct = async () => {
     try {
       const split = await url.split("/");
@@ -138,7 +145,7 @@ const midcontent = ({ url, refer, data }) => {
 
                 <div className="actionPnl">
                   <div className="actBtnArea">
-                    <Link href={item.slug + process.env.UTM}><a className="grabDeal">Grab Deal</a></Link>
+                    <Link href={item.slug + process.env.UTM}><a className="grabDeal" onClick={deleteSession}>Grab Deal</a></Link>
                   </div>
                 </div>
               </div>
