@@ -7,8 +7,13 @@ import Loader from "./loader";
 import { useRouter } from 'next/router';
 const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideMsg, setServerSideStatus, serversidemsg, serversideStatus, utmData }) => {
   const router = useRouter()
+  let utmId = '';
   const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
-
+  if (utm_id === undefined) {
+    utmId = utm_campaign
+  } else {
+    utmId = utm_id;
+  }
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(false)
   const [errmsg, setErrmsg] = useState('')
@@ -28,7 +33,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
 
       const { phone_no, otp } = values;
       const data = {
-        phone_no, otp, bank_product_id: genOtpData.bank_product_id, utm_campaign, utm_id, utm_medium, utm_source, offer: ""
+        phone_no, otp, bank_product_id: genOtpData.bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
       }
       if (otp) {
         const res = await axios.post('https://api.referloan.in/api/verify-otp', data);
@@ -79,10 +84,10 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
   }
 
   const OtpSchema = Yup.object({
-    full_name: Yup.string().min(2,'Invalid name').required("Please enter your name "),
-    phone_no: Yup.string().min(10,'Invalid phonenumber').max(10,'Invalid phone number').required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/, "Invalid phone number"),
-    pan_card: Yup.string().min(10,'Invalid pancard').max(10,'Invalid pancard').required("Please fill the pan card").matches("[A-Z]{5}[0-9]{4}[A-Z]{1}", "Invalid Pancard"),
-    otp: Yup.string().min(4,'Invalid Otp').max(4,'Invalid Otp').required('Enter OTP')
+    full_name: Yup.string().min(2, 'Invalid name').required("Please enter your name "),
+    phone_no: Yup.string().min(10, 'Invalid phonenumber').max(10, 'Invalid phone number').required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/, "Invalid phone number"),
+    pan_card: Yup.string().min(10, 'Invalid pancard').max(10, 'Invalid pancard').required("Please fill the pan card").matches("[A-Z]{5}[0-9]{4}[A-Z]{1}", "Invalid Pancard"),
+    otp: Yup.string().min(4, 'Invalid Otp').max(4, 'Invalid Otp').required('Enter OTP')
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -114,7 +119,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
     } catch (error) {
 
       setServerSideStatus(false)
-      setServerSideMsg('Fill the valid information')
+      setServerSideMsg('Something went wrong!')
       console.log("message", error.message);
     }
   }
@@ -123,7 +128,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
   useEffect(() => {
     setLoading(false)
     setGenOtpData({ ...genOtpData, bank_product_id: data.bank_product_id })
- 
+
   }, [data])
   return (
     <>
