@@ -54,7 +54,7 @@ const serviceArea = () => {
                     <h2>Get a credit card </h2>
                     <ul className="iconPnl">
                         <li>
-                            <Link href={"/bank-axis" + utmData}><a>
+                            <Link href={"/credit-card/axis-bank-credit-card" + utmData}><a>
                                 <Image src="/images/icon/axis-icon.webp" alt="" loading='lazy' width="40" height="35" />
                                 <h3>Axis</h3>
                             </a>
@@ -62,7 +62,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href={"/bank-kotak" + utmData}><a>
+                            <Link href={"/credit-card/kotak-mahindra-credit-card" + utmData}><a>
                                 <Image src="/images/icon/kotak-icon.webp" alt="" loading='lazy' width="38" height="32" />
                                 <h3>Kotak</h3>
                             </a>
@@ -70,7 +70,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href={"/bank-icici" + utmData}><a>
+                            <Link href={"/credit-card/icici-bank-credit-card" + utmData}><a>
                                 <Image src="/images/icon/icici-icon-w.webp" alt="" loading='lazy' width="35" height="32" />
                                 <h3>ICICI</h3>
                             </a>
@@ -78,7 +78,7 @@ const serviceArea = () => {
                         </li>
 
                         <li>
-                            <Link href={"/bank-sbi" + utmData}><a>
+                            <Link href={"/credit-card/sbi-credit-card" + utmData}><a>
                                 <Image src="/images/icon/sbi-icon.webp" alt=""  loading='lazy' width="35" height="35"/>
                                 <h3>SBI</h3>
                             </a>
