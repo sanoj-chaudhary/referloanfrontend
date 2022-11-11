@@ -44,6 +44,11 @@ const apply = (props) => {
   const [serversideStatus, setServerSideStatus] = useState(false)
   const [active, setActive] = useState(false)
   const [apiResponse, setApiResponse] = useState('')
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    console.log(hostname)
+  
+ }
 
   // console.log(formData,"formData")
   if (typeof window !== 'undefined') {
@@ -85,14 +90,15 @@ const apply = (props) => {
           }
           setLoading(false)
           setActive(true)
-          const res = await axios.post('https://api.referloan.in/api/customers/', data, { headers });
+          console.log(process.env.APIHOST);
+          const res = await axios.post(`${process.env.APIHOST}/api/customers/`, data, { headers });
           if (res.data.status) {
 
             setLoading(false)
 
             if (props.form_schema.length - 1 == step) {
               var bank_product_id = { "bank_product_id": props.data[0].bank_product_id }
-              const resData = await axios.post('https://api.referloan.in/api/banks/process', bank_product_id, { headers });
+              const resData = await axios.post(`${process.env.APIHOST}/api/banks/process`, bank_product_id, { headers });
 
               if (resData.data.status) {
                 if (typeof resData.data.data.reference_key !== 'undefined') {
