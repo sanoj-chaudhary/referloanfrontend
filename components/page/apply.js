@@ -78,7 +78,7 @@ const apply = (props) => {
 
           const data = new FormData();
           for (const property in values) {
-            data.append(`'${property}'`, `'${values[property]}'`)
+            data.append(property, values[property])
           }
           const headers = {
             'Authorization': "Bearer " + token.slice(1, -1) + ""
