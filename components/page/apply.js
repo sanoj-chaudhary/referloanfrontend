@@ -78,7 +78,7 @@ const apply = (props) => {
 
           const data = new FormData();
           for (const property in values) {
-            data.append(`'${property}'`, `'${values[property]}'`)
+            data.append(property, values[property])
           }
           const headers = {
             'Authorization': "Bearer " + token.slice(1, -1) + ""
@@ -251,8 +251,9 @@ const apply = (props) => {
                               name={elem.param_name}
                               label={elem.field_name}
                               id={elem.param_name}
-                              //autoComplete="off"
+                              type={elem.type}
                               defaultValue=''
+                              onWheel={(e) => e.target.blur()}
                               onChange={handleChange}
                             />
                             : ''
