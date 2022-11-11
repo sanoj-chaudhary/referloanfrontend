@@ -36,7 +36,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
         phone_no, otp, bank_product_id: genOtpData.bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
       }
       if (otp) {
-        const res = await axios.post('https://api.referloan.in/api/verify-otp', data);
+        const res = await axios.post(`${process.env.APIHOST}/api/verify-otp`, data);
         if (res.data.status) {
 
           setServerSideStatus(true)
@@ -108,7 +108,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
     try {
       handleSubmit()
       setUserValues(values)
-      const res = await axios.post('https://api.referloan.in/api/generate-otp', values);
+      const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, values);
       if (res.data.success) {
         setOtpStatus(true)
         setPancard(values.pan_card)
