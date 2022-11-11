@@ -8,6 +8,7 @@ export default function Header(children) {
     const keywords = children.keywords || 'Apply for Loans, Apply for credit card, Apply for Insurance, Loans Apply';
     const path = 'https://referloan.in' + router.pathname;
     return (
+        <>
         <Head>
             {/* Meta */}
             <meta charSet={'utf-8'} />
@@ -46,30 +47,29 @@ export default function Header(children) {
             <link href={'/css/custom.css'} rel={'stylesheet'} />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
             <link href={'/css/menu-new.css'} rel={'stylesheet'} />
+        </Head>
 
-            {/* <!-- Global site tag (gtag.js) - Google Ads: 513485835 --> */}
-            <script src="https://www.googletagmanager.com/gtag/js?id=AW-513485835"></script>
-            <script>
-                {` window.dataLayer = window.dataLayer || [];
-                    function gtag() {
-                        dataLayer.push(arguments)
-                    }
-                    gtag('js', new Date());
-                    gtag('config', 'AW-513485835');
-                `}
-            </script>
-
-            {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-            <script src="https://www.googletagmanager.com/gtag/js?id=UA-226709847-1"></script>
-            <script>
-                {` window.dataLayer = window.dataLayer || [];
+        <Script src="https://www.googletagmanager.com/gtag/js?id=AW-513485835" />
+        <Script>
+            {` window.dataLayer = window.dataLayer || [];
                 function gtag() {
                     dataLayer.push(arguments)
                 }
                 gtag('js', new Date());
-                gtag('config', 'UA-226709847-1');
+                gtag('config', 'AW-513485835');
             `}
-            </script>
-        </Head>
+        </Script>
+
+        <Script src="https://www.googletagmanager.com/gtag/js?id=UA-226709847-1"></Script>
+        <Script>
+            {` window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments)
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-226709847-1');
+        `}
+        </Script>
+        </>
     )
 }
