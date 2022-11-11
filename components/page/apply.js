@@ -251,8 +251,9 @@ const apply = (props) => {
                               name={elem.param_name}
                               label={elem.field_name}
                               id={elem.param_name}
-                              //autoComplete="off"
+                              type={elem.type}
                               defaultValue=''
+                              onWheel={(e) => e.target.blur()}
                               onChange={handleChange}
                             />
                             : ''

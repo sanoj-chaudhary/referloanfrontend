@@ -142,7 +142,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
             <p className="form-error">{errors.full_name}</p>
           ) : null}
 
-          <TextField value={values.phone_no} required name="phone_no" fullWidth label="Phone Number" variant="standard" onChange={handleChange} onBlur={handleBlur} />
+          <TextField type="number" value={values.phone_no} required name="phone_no" fullWidth label="Phone Number" variant="standard" onChange={handleChange} onBlur={handleBlur} onWheel={(e) => e.target.blur()} />
           {errors.phone_no && touched.phone_no ? (
             <p className="form-error">{errors.phone_no}</p>
           ) : null}
