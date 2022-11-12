@@ -3,10 +3,25 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 export default function Header(children) {
     const router = useRouter();
-    const title = (children.title || 'Apply Personal Loan, Gold Loan, Home Loan, Business Loan, Education Loan Online India - ReferLoan');
-    const description = children.description || 'We provide wide range of services like loans, Credit Card, Insurance and Investment. We aim to bring a stronghold in the market and aim to build a satisfied community that reaches out to us anytime and everytime they need.';
-    const keywords = children.keywords || 'Apply for Loans, Apply for credit card, Apply for Insurance, Loans Apply';
-    const path = 'https://referloan.in' + router.pathname;
+    let meta_description = '';
+    let meta_keyword ='';
+    let meta_title ='';
+    let slug ='';
+    if(children.children.props.data !== undefined){
+        meta_description = children.children.props.data[0].meta_description;
+        meta_keyword = children.children.props.data[0].meta_keyword;
+        meta_title = children.children.props.data[0].meta_title;
+        slug = children.children.props.data[0].slug;
+
+    }else{
+       
+       
+    }
+    
+    const titles = (meta_title|| 'Apply Personal Loan, Gold Loan, Home Loan, Business Loan, Education Loan Online India - ReferLoan');
+    const description = meta_description || 'We provide wide range of services like loans, Credit Card, Insurance and Investment. We aim to bring a stronghold in the market and aim to build a satisfied community that reaches out to us anytime and everytime they need.';
+    const keywords = meta_keyword || 'Apply for Loans, Apply for credit card, Apply for Insurance, Loans Apply';
+    const path =  slug? 'https://referloan.in/'+slug : 'https://referloan.in';
     return (
         <>
         <Head>
@@ -15,11 +30,11 @@ export default function Header(children) {
             <meta name={'viewport'} content={'width=device-width, initial-scale=1, shrink-to-fit=no'} />
             <meta name="google-site-verification" content="A-2wTKInJgPeZBUQnYLPGAffZ_YmNF-ARQxpu3twdGw" />
             <meta http-equiv="ScreenOrientation" content="autoRotate:disabled"></meta>
-            <title>{title}</title>
+            <title>{titles}</title>
             <meta name={'description'} content={description} />
             <meta name={'keywords'} content={keywords} />
             <link rel={'canonical'} href={path} />
-            <meta property={'og:title'} content={title} />
+            <meta property={'og:title'} content={titles} />
             <meta property={'og:description'} content={description} />
             <meta property={'og:url'} content={path} />
             <meta property={'og:type'} content={'website'} />
