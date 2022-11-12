@@ -24,7 +24,9 @@ export default function Header(children) {
     const path =  slug? 'https://referloan.in/'+slug : 'https://referloan.in';
     return (
         <>
+       
         <Head>
+      
             {/* Meta */}
             <meta charSet={'utf-8'} />
             <meta name={'viewport'} content={'width=device-width, initial-scale=1, shrink-to-fit=no'} />
@@ -63,7 +65,7 @@ export default function Header(children) {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
             <link href={'/css/menu-new.css'} rel={'stylesheet'} />
         </Head>
-
+        { process.env.SITEHOST == 'referloan.in'?<>
         <Script src="https://www.googletagmanager.com/gtag/js?id=AW-513485835" />
         <Script>
             {` window.dataLayer = window.dataLayer || [];
@@ -85,6 +87,8 @@ export default function Header(children) {
             gtag('config', 'UA-226709847-1');
         `}
         </Script>
+        </>:'' }
+        
         <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous" />
         </>
     )
