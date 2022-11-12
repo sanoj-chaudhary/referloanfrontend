@@ -10,11 +10,6 @@ const midcontent = ({ data, faq }) => {
 
   return (
     <>
-      <Head>
-        <title>{data[0].meta_title}</title>
-        <meta name={"description"} content={data[0].meta_description} />
-        <meta name={"keywords"} content={data[0].meta_keyword} />
-      </Head>
       {loading && <Loader />}
       <div className="innerpage_bg">
         <section className="section_pad">
