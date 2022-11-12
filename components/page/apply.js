@@ -162,11 +162,7 @@ const apply = (props) => {
   return (
     <>
 
-      <Head>
-        <title>{props.data[0].meta_title}</title>
-        <meta name={'description'} content={props.data[0].meta_description} />
-        <meta name={'keywords'} content={props.data[0].meta_keyword} />
-      </Head>
+     
       {loading ? <Loader loading={loading} /> :
         <div className="container">
           <div className="applyHeaderCard">
