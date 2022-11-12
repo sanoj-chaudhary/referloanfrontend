@@ -153,6 +153,7 @@ const apply = (props) => {
 
   console.log("formSchemaa", props.form_schema)
   console.log("schema length", token)
+  console.log("title", props.data)
 
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
