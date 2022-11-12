@@ -196,12 +196,12 @@ const Footer = () => {
                     <div className="copyRight_inner">
                         <span>Copyright 2022 © Referloan.in.</span>
                         <span>
-                            <Link href="/about-us"><a title="About Us">About Us</a></Link>
-                            <Link href="/privacy-policy"><a title="Privacy Policy">Privacy Policy</a></Link>
-                            <Link href="/faqs"><a title="Faq's">Faq's</a></Link>
-                            <Link href="/terms-and-conditions"><a title="Terms and Conditions">Terms and Conditions</a></Link>
-                            <Link href="/app-privacy-policy"><a title="App Privacy Policy">App Privacy Policy</a></Link>
-                            <Link href="/franchise-map"><a title="Our Franchises">Our Franchises</a></Link>
+                            <Link href="/about-us"><a title="About Us" target="_blank">About Us</a></Link>
+                            <Link href="/privacy-policy"><a title="Privacy Policy" target="_blank">Privacy Policy</a></Link>
+                            <Link href="/faqs"><a title="Faq's" target="_blank">Faq's</a></Link>
+                            <Link href="/terms-and-conditions"><a title="Terms and Conditions" target="_blank">Terms and Conditions</a></Link>
+                            <Link href="/app-privacy-policy"><a title="App Privacy Policy" target="_blank">App Privacy Policy</a></Link>
+                            <Link href="/franchise-map"><a title="Our Franchises" target="_blank">Our Franchises</a></Link>
                         </span>
                     </div>
                 </div>
