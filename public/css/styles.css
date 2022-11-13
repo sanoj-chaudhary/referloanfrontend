@@ -2141,7 +2141,7 @@ footer img.footerlogo {
 
 .loanForm__Container .search-button {
     width: 140px;
-    position: absolute;
+    /* position: absolute; */
     /* bottom: 22px; */
 }
 
