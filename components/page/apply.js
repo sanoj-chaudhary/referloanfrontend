@@ -203,9 +203,11 @@ const apply = (props) => {
                 {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
-                      {/* {fillFormValues()} */}
-                      <h3>{item.section_name}</h3>
+                   
                       <div key={index} className="feild_MainPnl">
+                           {/* {fillFormValues()} */}
+                      <h3>{item.section_name}</h3>
+                      <div className="formBox__new">
                       {item.forms.map((elem, ind) => (
                         <div key={ind} className="feildPnl__02">
 
@@ -298,6 +300,8 @@ const apply = (props) => {
                           </FormControl>}
                         </div>
                       ))}
+
+                      </div>
 
                       <div className="search-button">
                         <button className="mt-4" type="submit" disabled={active} >Save & Next {active ? <i className="fa fa-spinner fa-spin"></i> : ''}</button>
