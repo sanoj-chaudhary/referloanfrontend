@@ -165,7 +165,7 @@ const apply = (props) => {
      
       {loading ? <Loader loading={loading} /> :
         <div className="container">
-          <div className="applyHeaderCard">
+          <div className="applyHeaderCard text-center p-4">
             <h3>Start with <span style={{ textTransform: 'capitalize' }}>{props.data[0].name}</span> in few steps</h3>
             <p>Please Enter your mobile number and name to generate OTP</p>
           </div>
@@ -203,9 +203,9 @@ const apply = (props) => {
                 {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
-                    <div key={index} >
                       {/* {fillFormValues()} */}
                       <h3>{item.section_name}</h3>
+                      <div key={index} className="feild_MainPnl">
                       {item.forms.map((elem, ind) => (
                         <div key={ind} className="feildPnl__02">
 
