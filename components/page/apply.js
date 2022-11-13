@@ -207,7 +207,7 @@ const apply = (props) => {
                       {/* {fillFormValues()} */}
                       <h3>{item.section_name}</h3>
                       {item.forms.map((elem, ind) => (
-                        <div key={ind}>
+                        <div key={ind} className="feildPnl__02">
 
 
                           {elem.type === 'text' && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
