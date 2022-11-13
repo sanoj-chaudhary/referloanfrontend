@@ -165,7 +165,7 @@ const apply = (props) => {
      
       {loading ? <Loader loading={loading} /> :
         <div className="container">
-          <div className="applyHeaderCard">
+          <div className="applyHeaderCard text-center p-4">
             <h3>Start with <span style={{ textTransform: 'capitalize' }}>{props.data[0].name}</span> in few steps</h3>
             <p>Please Enter your mobile number and name to generate OTP</p>
           </div>
@@ -194,8 +194,8 @@ const apply = (props) => {
                 ))}
               </ul>
             </div>
-            <div className="dealStep__wrapper">
-              <div className="dealStep__Area">
+            <div className="loanStep__wrapper">
+              <div className="loanForm__Container">
                 {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
                 {(token == '' || token == null) && <GenerateOtp utmData={props.form_schema.length != 0 ? props.form_schema[0].forms[0] : ''} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
                 }
@@ -203,11 +203,13 @@ const apply = (props) => {
                 {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
-                    <div key={index} >
-                      {/* {fillFormValues()} */}
+                   
+                      <div key={index} className="feild_MainPnl">
+                           {/* {fillFormValues()} */}
                       <h3>{item.section_name}</h3>
+                      <div className="formBox__new">
                       {item.forms.map((elem, ind) => (
-                        <div key={ind}>
+                        <div key={ind} className="feildPnl__02">
 
 
                           {elem.type === 'text' && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
@@ -298,6 +300,8 @@ const apply = (props) => {
                           </FormControl>}
                         </div>
                       ))}
+
+                      </div>
 
                       <div className="search-button">
                         <button className="mt-4" type="submit" disabled={active} >Save & Next {active ? <i className="fa fa-spinner fa-spin"></i> : ''}</button>
