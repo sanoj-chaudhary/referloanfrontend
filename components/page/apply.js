@@ -167,7 +167,7 @@ const apply = (props) => {
         <div className="container">
           <div className="applyHeaderCard">
             <h3>Start with <span style={{ textTransform: 'capitalize' }}>{props.data[0].name}</span> in few steps</h3>
-            <p>Enter your mobile number,name and pancard and request for OTP to continue</p>
+            <p>Please Enter your mobile number and name to generate OTP</p>
           </div>
           <section className="cardOffer_area">
             <div className="dealStep__leftArea">
