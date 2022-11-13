@@ -165,7 +165,7 @@ const apply = (props) => {
      
       {loading ? <Loader loading={loading} /> :
         <div className="container">
-          <div className="applyHeaderCard">
+          <div className="ssad">
             <h3>Start with <span style={{ textTransform: 'capitalize' }}>{props.data[0].name}</span> in few steps</h3>
             <p>Please Enter your mobile number and name to generate OTP</p>
           </div>
