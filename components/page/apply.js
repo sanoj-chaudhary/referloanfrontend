@@ -325,22 +325,22 @@ const apply = (props) => {
                 <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
               </div>
 
-              {props.faq != '' ? <div className="faqSetion">
+              {props.faq != '' ? <div className="faqSetion" itemscope="true" itemtype="https://schema.org/FAQPage">
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>
                 <h2>Have a question? We've got answers!</h2>
                 <div className="faq_row">
                   <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
 
                     {props.faq.map((item, key) => (
-                      <div key={key} className="accordion-item">
-                        <h2 className="accordion-header" id={'flush-heading' + key}>
+                      <div key={key} className="accordion-item" itemscope="true" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h2 className="accordion-header" id={'flush-heading' + key} itemprop="name">
                           <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse' + key} aria-expanded="false" aria-controls={'flush-collapse' + key}>
                             {item.question}
                           </button>
                         </h2>
                         <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                          <div className="accordion-body">
-                            <div dangerouslySetInnerHTML={{ __html: item.answer }}></div>
+                          <div className="accordion-body" itemscope="true" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
                           </div>
                         </div>
                       </div>
