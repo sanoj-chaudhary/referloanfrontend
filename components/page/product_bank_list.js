@@ -79,14 +79,25 @@ const deleteSession = () =>{
   useEffect(() => {
     searchProduct()
     setLoading(false)
+   
   }, [router]);
+  const datas = url.split("/");
+  const bankProduct = datas[1].split('-')
+   let label = '';
+   bankProduct.map((item, key) => (
+    label += ' '+item.charAt(0).toUpperCase()+item.substring(1)
+  ))
+
+  let meta_title = 'Apply'+ label+ ' Online | Pincode : ' + datas[5]+'| Salary INR ' +datas[3];
+  let description = 'Apply'+ label+ ' Online at Area Pincode : ' + datas[5]+ ', Minimum Salary Required : ' +datas[3]+ '. Minimal Documentation, Fast Process'
+  let keyword = label+ ', Apply' + label + ' at Pincode : '+  datas[5]+','+label+' at '+datas[3]+ " Salary"
 
   return (
     <>
       <Head>
-        <title>Referloan : {content.p_name + ' | ' + content.label + ' : ' + content.salary + ' | Pincode : ' + content.pincode}</title>
-        <meta name={'description'} content={content.p_name + ' | ' + content.label + ' : ' + content.salary + ' | Pincode : ' + content.pincode} />
-        <meta name={'keywords'} content={content.p_name + ' | ' + content.label + ' : ' + content.salary + ' | Pincode : ' + content.pincode} />
+        <title>{meta_title}</title>
+        <meta name={'description'} content={description} />
+        <meta name={'keywords'} content={keyword} />
       </Head>
       {loading && <Loader />}
       <section className="grabDeal_header">

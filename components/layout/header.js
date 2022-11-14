@@ -3,19 +3,18 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 export default function Header(children) {
     const router = useRouter();
+    console.log("hjfdshj",children.children.props.data)
     let meta_description = '';
     let meta_keyword ='';
     let meta_title ='';
     let slug ='';
     if(children.children.props.data !== undefined){
-        meta_description = children.children.props.data[0].meta_description;
-        meta_keyword = children.children.props.data[0].meta_keyword;
-        meta_title = children.children.props.data[0].meta_title;
-        slug = children.children.props.data[0].slug;
-
-    }else{
-       
-       
+        if(children.children.props.data.length !=0){
+            meta_description = children.children.props.data[0].meta_description;
+            meta_keyword = children.children.props.data[0].meta_keyword;
+            meta_title = children.children.props.data[0].meta_title;
+            slug = children.children.props.data[0].slug;
+        }
     }
     
     const titles = (meta_title|| 'Apply Personal Loan, Gold Loan, Home Loan, Business Loan, Education Loan Online India - ReferLoan');

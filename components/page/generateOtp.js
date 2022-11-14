@@ -19,6 +19,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
   const [otpfieldval, setOtpfieldval] = useState(false)
   const [errmsg, setErrmsg] = useState('')
   const [loading, setLoading] = useState(true)
+  const [resendActive, setResendActive] = useState(true)
   const [genOtpData, setGenOtpData] = useState({
     "full_name": '',
     "phone_no": '',
@@ -117,7 +118,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
   useEffect(() => {
     setLoading(false)
     setGenOtpData({ ...genOtpData, bank_product_id: data.bank_product_id })
-
+    
   }, [data])
   return (
     <>
