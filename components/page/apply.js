@@ -18,7 +18,7 @@ import { useRouter } from 'next/router';
 import CustomApply from './customApply';
 //import $ from 'jQuery';
 import FormData from 'form-data'
-
+export const config = { amp: 'hybrid' };
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
@@ -150,19 +150,14 @@ const apply = (props) => {
     return word[0].toUpperCase() + word.substring(1);
   }).join("_");
 
-
   console.log("formSchemaa", props.form_schema)
-  console.log("schema length", token)
-  console.log("title", props.data)
 
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
   }
-
+  
   return (
     <>
-
-     
       {loading ? <Loader loading={loading} /> :
         <div className="container">
           <div className="applyHeaderCard text-center p-4">
@@ -352,8 +347,6 @@ const apply = (props) => {
                   </div>
                 </div>
               </div> : ''}
-
-
             </section>
           </div>
         </div>
