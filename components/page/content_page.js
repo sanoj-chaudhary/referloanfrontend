@@ -43,9 +43,9 @@ const midcontent = ({ data, faq }) => {
                           id={"flush-collapse" + key}
                           className="accordion-collapse collapse"
                           aria-labelledby="flush-headingTwo"
-                          data-bs-parent="#accordionFlushExample" itemscope="true" 
+                          data-bs-parent="#accordionFlushExample" 
                         >
-                          <div className="accordion-body" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                          <div className="accordion-body" itemscope="true" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                             <div  itemprop="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
                           </div>
                         </div>
