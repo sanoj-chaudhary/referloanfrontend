@@ -88,7 +88,7 @@ const deleteSession = () =>{
     label += ' '+item.charAt(0).toUpperCase()+item.substring(1)
   ))
 
-  let meta_title = 'Apply'+ label+ ' Online | Pincode : ' + datas[5]+'| Salary INR ' +datas[3];
+  let meta_title = 'Apply'+ label+ ' Online | Pincode : ' + datas[5]+' | Salary INR ' +datas[3];
   let description = 'Apply'+ label+ ' Online at Area Pincode : ' + datas[5]+ ', Minimum Salary Required : ' +datas[3]+ '. Minimal Documentation, Fast Process'
   let keyword = label+ ', Apply' + label + ' at Pincode : '+  datas[5]+','+label+' at '+datas[3]+ " Salary"
 
