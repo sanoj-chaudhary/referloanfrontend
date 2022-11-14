@@ -26,8 +26,8 @@ const midcontent = ({ data, faq }) => {
                     id="accordionFlushExample"
                   >
                     {faq.map((item, key) => (
-                      <div key={key} className="accordion-item">
-                        <h2 className="accordion-header" id={"flush-heading" + key}>
+                      <div key={key} className="accordion-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h2 className="accordion-header" id={"flush-heading" + key} itemprop="name">
                           <button
                             className="accordion-button collapsed"
                             type="button"
@@ -43,10 +43,10 @@ const midcontent = ({ data, faq }) => {
                           id={"flush-collapse" + key}
                           className="accordion-collapse collapse"
                           aria-labelledby="flush-headingTwo"
-                          data-bs-parent="#accordionFlushExample"
+                          data-bs-parent="#accordionFlushExample" itemscope 
                         >
-                          <div className="accordion-body">
-                            <div dangerouslySetInnerHTML={{ __html: item.answer }}></div>
+                          <div className="accordion-body" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div  itemprop="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
                           </div>
                         </div>
                       </div>
