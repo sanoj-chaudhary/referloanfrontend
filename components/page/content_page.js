@@ -17,7 +17,7 @@ const midcontent = ({ data, faq }) => {
             <div dangerouslySetInnerHTML={{ __html: data[0].description }}></div>
             <div className="table_with_img_content">
 
-            {faq != '' ? <div className="faqSetion">
+            {faq != '' ? <div className="faqSetion" itemscope="true" itemtype="https://schema.org/FAQPage">
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>
                 <h2>Have a question? We've got answers!</h2>
                 <div className="faq_row">
@@ -26,8 +26,8 @@ const midcontent = ({ data, faq }) => {
                     id="accordionFlushExample"
                   >
                     {faq.map((item, key) => (
-                      <div key={key} className="accordion-item">
-                        <h2 className="accordion-header" id={"flush-heading" + key}>
+                      <div key={key} className="accordion-item" itemscope="true" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <h2 className="accordion-header" id={"flush-heading" + key} itemprop="name">
                           <button
                             className="accordion-button collapsed"
                             type="button"
@@ -43,10 +43,10 @@ const midcontent = ({ data, faq }) => {
                           id={"flush-collapse" + key}
                           className="accordion-collapse collapse"
                           aria-labelledby="flush-headingTwo"
-                          data-bs-parent="#accordionFlushExample"
+                          data-bs-parent="#accordionFlushExample" 
                         >
-                          <div className="accordion-body">
-                            <div dangerouslySetInnerHTML={{ __html: item.answer }}></div>
+                          <div className="accordion-body" itemscope="true" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div  itemprop="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
                           </div>
                         </div>
                       </div>
