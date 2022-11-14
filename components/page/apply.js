@@ -356,7 +356,17 @@ const apply = (props) => {
 
             </section>
           </div>
+
+          {/* google structure - product schema */}
+          <div itemtype="https://schema.org/Product" itemscope="true">
+            <meta itemprop="mpn" content={props.data[0].id} />
+            <meta itemprop="name" content={props.data[0].name} />
+            <link itemprop="image" href={`/uploads/product_bank/${newProductName}.webp`} />
+            <meta itemprop="description" content={props.data[0].description} />
+          </div>
+
         </div>
+        
       }
     </>
   )
