@@ -17,7 +17,7 @@ const midcontent = ({ data, faq }) => {
             <div dangerouslySetInnerHTML={{ __html: data[0].description }}></div>
             <div className="table_with_img_content">
 
-            {faq != '' ? <div className="faqSetion">
+            {faq != '' ? <div className="faqSetion" itemscope itemtype="https://schema.org/FAQPage">
                 <h3>FREQUENTLY ASKED QUESTIONS</h3>
                 <h2>Have a question? We've got answers!</h2>
                 <div className="faq_row">
