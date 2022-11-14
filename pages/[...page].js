@@ -45,7 +45,7 @@ export async function getServerSideProps(context) {
   url = url.join("/");
   console.log(ref)
 
-  const res = await db.query("SELECT * FROM `pages` WHERE `slug` =  '" + url + "' AND `status` = '1' ");
+  const res = await db.query("SELECT * FROM `pages` WHERE `slug` =  '" + url + "' ");
   if (res.length != 0) {
     bank_product_id = res[0].bank_product_id;
     if (bank_product_id != null) {
