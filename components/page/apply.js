@@ -199,27 +199,24 @@ const apply = (props) => {
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
                    
-                      <div key={index} className="feild_MainPnl">
+                      <div key={index} className=" container">
                            {/* {fillFormValues()} */}
                       <h3>{item.section_name}</h3>
-                      <div className="formBox__new">
+                      <div className="row">
                       {item.forms.map((elem, ind) => (
-                        <div key={ind} className="feildPnl__02">
+                        <div key={ind} className=" col-lg-4 col-md-6 col-12 mt-2" data-type={elem.type}>
 
-
-                          {elem.type === 'text' && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
+                          {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
                             ? <TextField
                               fullWidth
-                              inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                              inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : otpData[elem.global_name] != ''?{value: otpData[elem.global_name]} : {}}
                               required={elem.is_required}
                               className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                               name={elem.param_name}
                               label={elem.field_name}
                               id={elem.param_name}
-                              //autoComplete="off"
-                              inputProps={otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
-                              //value={values.pan}
                               defaultValue=''
+                              type={elem.type}
                               onChange={handleChange}
                             />
                             : ''
@@ -256,7 +253,7 @@ const apply = (props) => {
                               onWheel={(e) => e.target.blur()}
                               onChange={handleChange}
                             />
-                            : ''
+                            :''
                           }
 
                           {elem.type == 'date' &&
@@ -278,7 +275,7 @@ const apply = (props) => {
                           }
                           {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
 
-                          {elem.type == 'checkbox' && <FormControlLabel className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
+                          {elem.type == 'checkbox' && <FormControlLabel className={` ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
 
                           {elem.type == 'radio' && <FormControl className="mt-2" >
                             <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
@@ -374,7 +371,7 @@ export function SelectField(props) {
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
-      <FormControl variant="standard" className="mt-2" fullWidth>
+      <FormControl variant="standard" className="" fullWidth>
 
         <InputLabel id="demo-simple-select-standard-label">{props.field_name}</InputLabel>
         <Select
