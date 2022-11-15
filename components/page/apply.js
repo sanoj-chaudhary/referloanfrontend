@@ -361,7 +361,7 @@ const apply = (props) => {
           <meta itemprop="mpn" content={props.data[0].id} />
           <meta itemprop="name" content={props.data[0].name} />
           <link itemprop="image" href={`/uploads/product_bank/${newProductName}.webp`} />
-          <meta itemprop="description" content={props.data[0].description} />
+          <meta itemprop="description" content={props.data[0].meta_description} />
         </div>
 
     </div>
