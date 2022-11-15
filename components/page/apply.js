@@ -18,6 +18,8 @@ import { useRouter } from 'next/router';
 import CustomApply from './customApply';
 //import $ from 'jQuery';
 import FormData from 'form-data'
+import StarRating from './rating';
+
 export const config = { amp: 'hybrid' };
 const getToken = () => {
 
@@ -322,7 +324,14 @@ const apply = (props) => {
       }
 
     <div className="container">
-       
+        
+        <section>
+          <div className="faqSetion">
+            <h3>Product Rating</h3>
+            <div style={{textAlign:'center',fontSize:'30px'}}><StarRating /></div>
+          </div>
+        </section>
+
         <section>
           {props.faq != '' ? <div className="faqSetion" itemscope="true" itemtype="https://schema.org/FAQPage">
             <h3>FREQUENTLY ASKED QUESTIONS</h3>
