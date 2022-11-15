@@ -316,48 +316,56 @@ const apply = (props) => {
               <div className="container">
                 <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
               </div>
-
-              {props.faq != '' ? <div className="faqSetion" itemscope="true" itemtype="https://schema.org/FAQPage">
-                <h3>FREQUENTLY ASKED QUESTIONS</h3>
-                <h2>Have a question? We've got answers!</h2>
-                <div className="faq_row">
-                  <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
-
-                    {props.faq.map((item, key) => (
-                      <div key={key} className="accordion-item" itemscope="true" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                        <h2 className="accordion-header" id={'flush-heading' + key} itemprop="name">
-                          <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse' + key} aria-expanded="false" aria-controls={'flush-collapse' + key}>
-                            {item.question}
-                          </button>
-                        </h2>
-                        <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                          <div className="accordion-body" itemscope="true" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <div itemprop="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="faqImg">
-                    <img src="/images/faq.webp" alt="faqImg" />
-                  </div>
-                </div>
-              </div> : ''}
             </section>
           </div>
+        </div>
+      }
 
-          {/* google structure - product schema */}
-          <div itemtype="https://schema.org/Product" itemscope="true">
-            <meta itemprop="mpn" content={props.data[0].id} />
-            <meta itemprop="name" content={props.data[0].name} />
-            <link itemprop="image" href={`/uploads/product_bank/${newProductName}.webp`} />
-            <meta itemprop="description" content={props.data[0].description} />
+    <div className="container">
+       
+        <section>
+          {props.faq != '' ? <div className="faqSetion" itemscope="true" itemtype="https://schema.org/FAQPage">
+            <h3>FREQUENTLY ASKED QUESTIONS</h3>
+            <h2>Have a question? We've got answers!</h2>
+            <div className="faq_row">
+              <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
+
+                {props.faq.map((item, key) => (
+                  <div key={key} className="accordion-item" itemscope="true" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h2 className="accordion-header" id={'flush-heading' + key} itemprop="name">
+                      <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse' + key} aria-expanded="false" aria-controls={'flush-collapse' + key}>
+                        {item.question}
+                      </button>
+                    </h2>
+                    <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                      <div className="accordion-body" itemscope="true" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div itemprop="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="faqImg">
+                <img src="/images/faq.webp" alt="faqImg" />
+              </div>
+            </div>
+          </div> : ''}
+        </section>
+
+        {/* google structure - product schema */}
+        <div itemtype="https://schema.org/Product" itemscope="true">
+          <meta itemprop="sku" content={props.data[0].id} />
+          <meta itemprop="name" content={props.data[0].name} />
+          <link itemprop="image" href={`/uploads/product_bank/${newProductName}.webp`} />
+          <meta itemprop="description" content={props.data[0].meta_description} />
+          <div itemprop="aggregateRating" itemtype="https://schema.org/AggregateRating" itemscope>
+            <meta itemprop="reviewCount" content="" />
+            <meta itemprop="ratingValue" content="" />
           </div>
-
         </div>
 
-      }
+    </div>
     </>
   )
 }
