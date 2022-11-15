@@ -381,7 +381,7 @@ button {
   cursor: pointer;
 }
 .on {
-  color: #000;
+  color: rgb(226, 196, 24);
 }
 .off {
   color: #ccc;
