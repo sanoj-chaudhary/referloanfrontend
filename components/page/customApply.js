@@ -83,11 +83,11 @@ const CustomApply = (props) => {
       {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
       <form onSubmit={(e) => { applyForm(e) }} >
         {data && data.slice(step, step + 1).map((item, index) =>
-
-          <div key={index}>
+<>
+          <div key={index} className="row">
             <h3>{item.section_name}</h3>
             {item.forms.map((elem, ind) => (
-              <div key={ind}>
+              <div key={ind} className="col-lg-4 col-md-6 col-12 mt-2">
 
                 {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
 
@@ -144,9 +144,10 @@ const CustomApply = (props) => {
                 {elem.type == 'checkbox' && <FormControlLabel className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
               </div>
             ))}
-            <div className="search-button"><button className="mt-4" type="submit" >Save & Next</button></div>
+            
           </div>
-
+          <div className="search-button"><button className="mt-4" type="submit" >Save & Next</button></div>
+          </>
         )}
         {data.length != 0 && data.length == step ? <Thanks product={props.product} /> : ""}
 
@@ -165,7 +166,7 @@ export function SelectField(props) {
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
-      <FormControl variant="standard" className="mt-2" fullWidth>
+      <FormControl variant="standard" fullWidth>
 
         <InputLabel id="demo-simple-select-standard-label">{props.field_name}</InputLabel>
         <Select
