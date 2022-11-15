@@ -358,10 +358,14 @@ const apply = (props) => {
 
         {/* google structure - product schema */}
         <div itemtype="https://schema.org/Product" itemscope="true">
-          <meta itemprop="mpn" content={props.data[0].id} />
+          <meta itemprop="sku" content={props.data[0].id} />
           <meta itemprop="name" content={props.data[0].name} />
           <link itemprop="image" href={`/uploads/product_bank/${newProductName}.webp`} />
           <meta itemprop="description" content={props.data[0].meta_description} />
+          <div itemprop="aggregateRating" itemtype="https://schema.org/AggregateRating" itemscope>
+            <meta itemprop="reviewCount" content="" />
+            <meta itemprop="ratingValue" content="" />
+          </div>
         </div>
 
     </div>
