@@ -5,8 +5,8 @@ import { useFormik } from 'formik'
 import * as Yup from "yup";
 import Loader from "./loader";
 import { useRouter } from 'next/router';
-import Link from 'next/link'
-const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideMsg, setServerSideStatus, serversidemsg, serversideStatus, utmData }) => {
+import Link from 'next/link';
+const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServerSideStatus, serversidemsg, serversideStatus, utmData }) => {
   const router = useRouter()
   let utmId = '';
   const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
@@ -20,12 +20,12 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
   const [errmsg, setErrmsg] = useState('')
   const [loading, setLoading] = useState(true)
   const [resendActive, setResendActive] = useState(true)
+  const [bank_product_id, setBankProductId ] = useState('');
+  const [time, setTime] = useState(0)
   const [genOtpData, setGenOtpData] = useState({
     "full_name": '',
     "phone_no": '',
-    // "pan_card": '',
     "otp": '',
-    "bank_product_id": ""
   })
 
   const verifyOtp = async (e) => {
@@ -34,7 +34,7 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
     try {
       const { phone_no, otp } = values;
       const data = {
-        phone_no, otp, bank_product_id: genOtpData.bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
+        phone_no, otp, bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
       }
       if (otp) {
         const res = await axios.post(`${process.env.APIHOST}/api/verify-otp`, data);
@@ -46,7 +46,6 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
             if (typeof window !== 'undefined') {
               window.localStorage.removeItem("token");
               window.localStorage.removeItem("full_name");
-              // window.localStorage.removeItem("pan");
               window.localStorage.removeItem("phone");
             }
           }, 1200000);
@@ -61,7 +60,6 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
 
             if (typeof window !== 'undefined') {
               localStorage.setItem("full_name", values.full_name);
-              // localStorage.setItem("pan", values.pan_card);
               localStorage.setItem("phone", values.phone_no);
               localStorage.setItem("token", JSON.stringify(res.data.token));
 
@@ -85,8 +83,6 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
   const OtpSchema = Yup.object({
     full_name: Yup.string().min(2, 'Invalid name').required("Please enter your name "),
     phone_no: Yup.string().min(10, 'Invalid phonenumber').max(10, 'Invalid phone number').required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/, "Invalid phone number"),
-    // pan_card: Yup.string().min(10, 'Invalid pancard').max(10, 'Invalid pancard').required("Please fill the pan card").matches("[A-Z]{5}[0-9]{4}[A-Z]{1}", "Invalid Pancard"),
-    // otp: Yup.string().min(4, 'Invalid Otp').max(4, 'Invalid Otp').required('Enter OTP')
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -102,7 +98,20 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
           const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, values);
           if (res.data.success) {
             setOtpStatus(true)
-            setPancard(values.pan_card)
+       
+            setTimeout(() => {
+              if (typeof window !== 'undefined') {
+                setResendActive(false)
+              }
+            }, 30000);
+            
+            let timeleft = 30;
+            var downloadTimer = setInterval(function(){
+              timeleft--;
+            setTime(timeleft)
+              if(timeleft <= 0)
+                  clearInterval(downloadTimer);
+              },1000);
           } else {
             setServerSideStatus(false)
             setServerSideMsg(res.data.message)
@@ -117,9 +126,10 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
 
   useEffect(() => {
     setLoading(false)
-    setGenOtpData({ ...genOtpData, bank_product_id: data.bank_product_id })
-    
+    setBankProductId(data.bank_product_id)
   }, [data])
+
+
   return (
     <>
       {loading && <Loader />}
@@ -148,13 +158,22 @@ const GenerateOtp = ({ setToken, setPancard, setUserValues, data, setServerSideM
           <div className="search-button">
             <button className="mt-4" type="submit" >Generate OTP</button>
           </div>
-        </form> : <form onSubmit={verifyOtp}>
+        </form> :
+
+        <form onSubmit={verifyOtp}>
+          <span> Enter the OTP sent to <span className='fw-bold'>+91-{values.phone_no}</span></span>
           <TextField type='text' inputProps={{ pattern: "[0-9]{4}", title: "OTP must be 4 digit" }} value={values.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={handleChange} />
           {errors.otp && touched.otp ? (
             <p className="form-error">{errors.otp}</p>
           ) : null}
 
-          <div className="search-button"><button className="mt-4" type="submit" >verify OTP</button></div></form>}
+          <div className='mt-4'> Dont receive the OTP ?  <a className={`resendBtn ${resendActive ? "active" : "inActive"}`} >RESEND OTP</a> <span id="verifiBtn"> {time != 0?'in ' +time+ ' Seconds':''}  </span></div>
+ 
+          <div className="search-button">
+            <button className="mt-4" type="submit" >verify OTP</button>
+          </div>
+        </form>
+      }
 
 
     </>
