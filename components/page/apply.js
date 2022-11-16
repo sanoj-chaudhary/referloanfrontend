@@ -18,7 +18,9 @@ import { useRouter } from 'next/router';
 import CustomApply from './customApply';
 //import $ from 'jQuery';
 import FormData from 'form-data'
+import StarRating from './rating';
 
+export const config = { amp: 'hybrid' };
 const getToken = () => {
 
   if (typeof window !== 'undefined') {
@@ -47,8 +49,8 @@ const apply = (props) => {
   if (typeof window !== 'undefined') {
     const hostname = window.location.hostname;
     console.log(hostname)
-  
- }
+
+  }
 
   // console.log(formData,"formData")
   if (typeof window !== 'undefined') {
@@ -150,10 +152,7 @@ const apply = (props) => {
     return word[0].toUpperCase() + word.substring(1);
   }).join("_");
 
-
   console.log("formSchemaa", props.form_schema)
-  console.log("schema length", token)
-  console.log("title", props.data)
 
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
@@ -161,8 +160,6 @@ const apply = (props) => {
 
   return (
     <>
-
-     
       {loading ? <Loader loading={loading} /> :
         <div className="container">
           <div className="applyHeaderCard text-center p-4">
@@ -203,103 +200,100 @@ const apply = (props) => {
                 {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
 
-                   
-                      <div key={index} className="feild_MainPnl">
-                           {/* {fillFormValues()} */}
+
+                    <div key={index} className=" container">
+                      {/* {fillFormValues()} */}
                       <h3>{item.section_name}</h3>
-                      <div className="formBox__new">
-                      {item.forms.map((elem, ind) => (
-                        <div key={ind} className="feildPnl__02">
+                      <div className="row">
+                        {item.forms.map((elem, ind) => (
+                          <div key={ind} className=" col-lg-4 col-md-6 col-12 mt-2" data-type={elem.type}>
 
+                            {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
+                              ? <TextField
+                                fullWidth
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
+                                required={elem.is_required}
+                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                                name={elem.param_name}
+                                label={elem.field_name}
+                                id={elem.param_name}
+                                defaultValue=''
+                                type={elem.type}
+                                onChange={handleChange}
+                              />
+                              : ''
+                            }
 
-                          {elem.type === 'text' && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
-                            ? <TextField
+                            {elem.type == 'file' && <TextField
                               fullWidth
-                              inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
                               required={elem.is_required}
                               className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                               name={elem.param_name}
-                              label={elem.field_name}
-                              id={elem.param_name}
-                              //autoComplete="off"
-                              inputProps={otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
-                              //value={values.pan}
-                              defaultValue=''
-                              onChange={handleChange}
-                            />
-                            : ''
-                          }
-
-                          {elem.type == 'file' && <TextField
-                            fullWidth
-                            required={elem.is_required}
-                            className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                            name={elem.param_name}
-                            type={elem.type}
-                            label={elem.field_name}
-                            id={elem.param_name}
-                            autoComplete="off"
-                            defaultValue=''
-                            onChange={(event) => {
-                              setFieldValue(elem.param_name, event.currentTarget.files[0]);
-                            }}
-                          />
-
-                          }
-
-                          {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email') && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name'
-                            ? <TextField
-                              fullWidth
-                              inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                              required={elem.is_required}
-                              className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                              name={elem.param_name}
-                              label={elem.field_name}
-                              id={elem.param_name}
                               type={elem.type}
-                              defaultValue=''
-                              onWheel={(e) => e.target.blur()}
-                              onChange={handleChange}
-                            />
-                            : ''
-                          }
-
-                          {elem.type == 'date' &&
-                            <TextField
-                              fullWidth
-                              inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                              required={elem.is_required}
-                              className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                              name={elem.param_name}
                               label={elem.field_name}
                               id={elem.param_name}
-                              onFocus={(e) => (e.target.type = "date")}
-                              onBlur={(e) => (e.target.type = "text")}
-                              //autoComplete="off"
-                              onChange={handleChange}
+                              autoComplete="off"
+                              defaultValue=''
+                              onChange={(event) => {
+                                setFieldValue(elem.param_name, event.currentTarget.files[0]);
+                              }}
                             />
 
+                            }
 
-                          }
-                          {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
+                            {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email') && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name'
+                              ? <TextField
+                                fullWidth
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                                required={elem.is_required}
+                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                                name={elem.param_name}
+                                label={elem.field_name}
+                                id={elem.param_name}
+                                type={elem.type}
+                                defaultValue=''
+                                onWheel={(e) => e.target.blur()}
+                                onChange={handleChange}
+                              />
+                              : ''
+                            }
 
-                          {elem.type == 'checkbox' && <FormControlLabel className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
+                            {elem.type == 'date' &&
+                              <TextField
+                                fullWidth
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                                required={elem.is_required}
+                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                                name={elem.param_name}
+                                label={elem.field_name}
+                                id={elem.param_name}
+                                onFocus={(e) => (e.target.type = "date")}
+                                onBlur={(e) => (e.target.type = "text")}
+                                //autoComplete="off"
+                                onChange={handleChange}
+                              />
 
-                          {elem.type == 'radio' && <FormControl className="mt-2" >
-                            <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-                            <RadioGroup
-                              aria-labelledby="demo-radio-buttons-group-label"
 
-                              name="radio-buttons-group"
-                              required
-                            >
-                              <FormControlLabel value="female" control={<Radio />} label="Female" />
-                              <FormControlLabel value="male" control={<Radio />} label="Male" />
-                              <FormControlLabel value="other" control={<Radio />} label="Other" />
-                            </RadioGroup>
-                          </FormControl>}
-                        </div>
-                      ))}
+                            }
+                            {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
+
+                            {elem.type == 'checkbox' && <FormControlLabel className={` ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
+
+                            {elem.type == 'radio' && <FormControl className="mt-2" >
+                              <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+                              <RadioGroup
+                                aria-labelledby="demo-radio-buttons-group-label"
+
+                                name="radio-buttons-group"
+                                required
+                              >
+                                <FormControlLabel value="female" control={<Radio />} label="Female" />
+                                <FormControlLabel value="male" control={<Radio />} label="Male" />
+                                <FormControlLabel value="other" control={<Radio />} label="Other" />
+                              </RadioGroup>
+                            </FormControl>}
+                          </div>
+                        ))}
 
                       </div>
 
@@ -324,40 +318,63 @@ const apply = (props) => {
               <div className="container">
                 <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
               </div>
-
-              {props.faq != '' ? <div className="faqSetion">
-                <h3>FREQUENTLY ASKED QUESTIONS</h3>
-                <h2>Have a question? We've got answers!</h2>
-                <div className="faq_row">
-                  <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
-
-                    {props.faq.map((item, key) => (
-                      <div key={key} className="accordion-item">
-                        <h2 className="accordion-header" id={'flush-heading' + key}>
-                          <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse' + key} aria-expanded="false" aria-controls={'flush-collapse' + key}>
-                            {item.question}
-                          </button>
-                        </h2>
-                        <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                          <div className="accordion-body">
-                            <div dangerouslySetInnerHTML={{ __html: item.answer }}></div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="faqImg">
-                    <img src="/images/faq.webp" alt="faqImg" />
-                  </div>
-                </div>
-              </div> : ''}
-
-
             </section>
           </div>
         </div>
       }
+
+    <div className="container">
+        
+        <section>
+          <div className="faqSetion">
+            <h3>Product Rating</h3>
+            <div style={{textAlign:'center',fontSize:'30px'}}><StarRating /></div>
+          </div>
+        </section>
+
+        <section>
+          {props.faq != '' ? <div className="faqSetion" itemscope="true" itemtype="https://schema.org/FAQPage">
+            <h3>FREQUENTLY ASKED QUESTIONS</h3>
+            <h2>Have a question? We've got answers!</h2>
+            <div className="faq_row">
+              <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
+
+                {props.faq.map((item, key) => (
+                  <div key={key} className="accordion-item" itemscope="true" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h2 className="accordion-header" id={'flush-heading' + key} itemprop="name">
+                      <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse' + key} aria-expanded="false" aria-controls={'flush-collapse' + key}>
+                        {item.question}
+                      </button>
+                    </h2>
+                    <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                      <div className="accordion-body" itemscope="true" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <div itemprop="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="faqImg">
+                <img src="/images/faq.webp" alt="faqImg" />
+              </div>
+            </div>
+          </div> : ''}
+        </section>
+
+        {/* google structure - product schema */}
+        <div itemtype="https://schema.org/Product" itemscope="true">
+          <meta itemprop="sku" content={props.data[0].id} />
+          <meta itemprop="name" content={props.data[0].name} />
+          <link itemprop="image" href={`/uploads/product_bank/${newProductName}.webp`} />
+          <meta itemprop="description" content={props.data[0].meta_description} />
+          <div itemprop="aggregateRating" itemtype="https://schema.org/AggregateRating" itemscope>
+            <meta itemprop="reviewCount" content="" />
+            <meta itemprop="ratingValue" content="" />
+          </div>
+        </div>
+
+    </div>
     </>
   )
 }
@@ -371,7 +388,7 @@ export function SelectField(props) {
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
-      <FormControl variant="standard" className="mt-2" fullWidth>
+      <FormControl variant="standard" className="" fullWidth>
 
         <InputLabel id="demo-simple-select-standard-label">{props.field_name}</InputLabel>
         <Select

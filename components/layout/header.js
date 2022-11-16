@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 export default function Header(children) {
     const router = useRouter();
-    console.log("hjfdshj",children.children.props.data)
     let meta_description = '';
     let meta_keyword ='';
     let meta_title ='';
@@ -63,6 +62,7 @@ export default function Header(children) {
             <link href={'/css/custom.css'} rel={'stylesheet'} />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
             <link href={'/css/menu-new.css'} rel={'stylesheet'} />
+            <script async src="https://cdn.ampproject.org/v0.js"></script>
         </Head>
         { process.env.SITEHOST == 'referloan.in'?<>
         <Script src="https://www.googletagmanager.com/gtag/js?id=AW-513485835" />
