@@ -136,7 +136,7 @@ const emiCalculator = () => {
       </div>
       <div className="rangeArea">
         <div className="rangeHead">
-          <h2>Loan Tenure</h2>
+          <h2>Investment Tenure </h2>
           <small>(1 year - 30 years)</small>
           <div className="outputArea">
             <input type="number" value={year} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setYear(e.target.value) }} min="1" max="30" /> <span className="emi-icon" >Yr
