@@ -372,9 +372,6 @@
   line-height: 1.3;
   margin-top: 10px;
 }
-
-/* resend otp */
-
 .resendBtn{
   cursor: pointer;
   text-decoration: none;
@@ -387,4 +384,17 @@
 }
 .resendBtn.active{
   pointer-events: none;
+}
+/* Product Page - Rating */
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: rgb(226, 196, 24);
+}
+.off {
+  color: #ccc;
 }

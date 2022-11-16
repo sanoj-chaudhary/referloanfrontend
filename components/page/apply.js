@@ -18,6 +18,8 @@ import { useRouter } from 'next/router';
 import CustomApply from './customApply';
 //import $ from 'jQuery';
 import FormData from 'form-data'
+import StarRating from './rating';
+
 export const config = { amp: 'hybrid' };
 const getToken = () => {
 
@@ -312,24 +314,31 @@ console.log('values',values)
       }
 
     <div className="container">
-       
+        
         <section>
-          {props.faq != '' ? <div className="faqSetion" itemscope="true" itemtype="https://schema.org/FAQPage">
+          <div className="faqSetion">
+            <h3>Product Rating</h3>
+            <div style={{textAlign:'center',fontSize:'30px'}}><StarRating /></div>
+          </div>
+        </section>
+
+        <section>
+          {props.faq != '' ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
             <h3>FREQUENTLY ASKED QUESTIONS</h3>
             <h2>Have a question? We've got answers!</h2>
             <div className="faq_row">
               <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
 
                 {props.faq.map((item, key) => (
-                  <div key={key} className="accordion-item" itemscope="true" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                    <h2 className="accordion-header" id={'flush-heading' + key} itemprop="name">
+                  <div key={key} className="accordion-item" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                    <h2 className="accordion-header" id={'flush-heading' + key} itemProp="name">
                       <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse' + key} aria-expanded="false" aria-controls={'flush-collapse' + key}>
                         {item.question}
                       </button>
                     </h2>
                     <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                      <div className="accordion-body" itemscope="true" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <div itemprop="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
+                      <div className="accordion-body" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                        <div itemProp="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
                       </div>
                     </div>
                   </div>
@@ -344,14 +353,14 @@ console.log('values',values)
         </section>
 
         {/* google structure - product schema */}
-        <div itemtype="https://schema.org/Product" itemscope="true">
-          <meta itemprop="sku" content={props.data[0].id} />
-          <meta itemprop="name" content={props.data[0].name} />
-          <link itemprop="image" href={`/uploads/product_bank/${newProductName}.webp`} />
-          <meta itemprop="description" content={props.data[0].meta_description} />
-          <div itemprop="aggregateRating" itemtype="https://schema.org/AggregateRating" itemscope>
-            <meta itemprop="reviewCount" content="" />
-            <meta itemprop="ratingValue" content="" />
+        <div itemType="https://schema.org/Product" itemScope>
+          <meta itemProp="sku" content={props.data[0].id} />
+          <meta itemProp="name" content={props.data[0].name} />
+          <link itemProp="image" href={`/uploads/product_bank/${newProductName}.webp`} />
+          <meta itemProp="description" content={props.data[0].meta_description} />
+          <div itemProp="aggregateRating" itemType="https://schema.org/AggregateRating" itemScope>
+            <meta itemProp="reviewCount" content="" />
+            <meta itemProp="ratingValue" content="" />
           </div>
         </div>
 
