@@ -38,24 +38,17 @@ const apply = (props) => {
   const [step, setStep] = useState(0)
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
-  const [panCard, setPancard] = useState('');
-  const [paramName, setParamName] = ('')
+
   const [loading, setLoading] = useState(true)
   const [userValues, setUserValues] = useState({});
   const [serversidemsg, setServerSideMsg] = useState('')
   const [serversideStatus, setServerSideStatus] = useState(false)
   const [active, setActive] = useState(false)
   const [apiResponse, setApiResponse] = useState('')
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    console.log(hostname)
-
-  }
 
   // console.log(formData,"formData")
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
-    var pan = window.localStorage.getItem("pan");
     var phone = window.localStorage.getItem("phone");
     if (full_name != null) {
       var first_name = full_name.split(' ').slice(0, 1).join(' ');
@@ -66,14 +59,14 @@ const apply = (props) => {
     }
   } else {
     var full_name = '';
-    var pan = '';
+ 
     var phone = '';
     var first_name = '';
     var last_name = '';
   }
 
   const otpData = {
-    full_name, first_name, last_name, pan, phone
+    full_name, first_name, last_name, phone
   }
 
   const { values, errors, touched, handleBlur, setFieldValue, handleChange, handleSubmit } =
@@ -82,7 +75,7 @@ const apply = (props) => {
       validationSchema: '',
       onSubmit: async (values) => {
         try {
-
+console.log('values',values)
           const data = new FormData();
           for (const property in values) {
             data.append(property, values[property])
@@ -92,7 +85,6 @@ const apply = (props) => {
           }
           setLoading(false)
           setActive(true)
-          console.log(process.env.APIHOST);
           const res = await axios.post(`${process.env.APIHOST}/api/customers/`, data, { headers });
           if (res.data.status) {
 
@@ -112,7 +104,6 @@ const apply = (props) => {
                 if (typeof window !== 'undefined') {
                   window.localStorage.removeItem("token");
                   window.localStorage.removeItem("full_name");
-                  window.localStorage.removeItem("pan");
                   window.localStorage.removeItem("phone");
                 }
               }
@@ -133,15 +124,12 @@ const apply = (props) => {
     });
 
   useEffect(() => {
-    //fillFormValues();
-    setFieldValue('pan', pan)
-    setLoading(false)
+   setLoading(false)
     setServerSideStatus(false)
     setServerSideMsg('')
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
-
     setStep(0)
   }, [token, router])
 
@@ -194,7 +182,7 @@ const apply = (props) => {
             <div className="loanStep__wrapper">
               <div className="loanForm__Container">
                 {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
-                {(token == '' || token == null) && <GenerateOtp utmData={props.form_schema.length != 0 ? props.form_schema[0].forms[0] : ''} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setPancard={setPancard} setToken={setToken} />
+                {(token == '' || token == null) && <GenerateOtp utmData={props.form_schema.length != 0 ? props.form_schema[0].forms[0] : ''} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setToken={setToken} />
                 }
 
                 {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
@@ -211,16 +199,18 @@ const apply = (props) => {
                             {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
                               ? <TextField
                                 fullWidth
-                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
                                 required={elem.is_required}
-                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                                className={`${elem.is_visible ? '' : 'd-none'}`}
                                 name={elem.param_name}
                                 label={elem.field_name}
                                 id={elem.param_name}
-                                defaultValue=''
                                 type={elem.type}
+                                
                                 onChange={handleChange}
                               />
+
+                         
                               : ''
                             }
 
@@ -233,7 +223,7 @@ const apply = (props) => {
                               label={elem.field_name}
                               id={elem.param_name}
                               autoComplete="off"
-                              defaultValue=''
+                          
                               onChange={(event) => {
                                 setFieldValue(elem.param_name, event.currentTarget.files[0]);
                               }}
@@ -251,7 +241,7 @@ const apply = (props) => {
                                 label={elem.field_name}
                                 id={elem.param_name}
                                 type={elem.type}
-                                defaultValue=''
+                               
                                 onWheel={(e) => e.target.blur()}
                                 onChange={handleChange}
                               />
@@ -333,22 +323,22 @@ const apply = (props) => {
         </section>
 
         <section>
-          {props.faq != '' ? <div className="faqSetion" itemscope="true" itemtype="https://schema.org/FAQPage">
+          {props.faq != '' ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
             <h3>FREQUENTLY ASKED QUESTIONS</h3>
             <h2>Have a question? We've got answers!</h2>
             <div className="faq_row">
               <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
 
                 {props.faq.map((item, key) => (
-                  <div key={key} className="accordion-item" itemscope="true" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                    <h2 className="accordion-header" id={'flush-heading' + key} itemprop="name">
+                  <div key={key} className="accordion-item" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                    <h2 className="accordion-header" id={'flush-heading' + key} itemProp="name">
                       <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse' + key} aria-expanded="false" aria-controls={'flush-collapse' + key}>
                         {item.question}
                       </button>
                     </h2>
                     <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                      <div className="accordion-body" itemscope="true" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <div itemprop="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
+                      <div className="accordion-body" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                        <div itemProp="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
                       </div>
                     </div>
                   </div>
@@ -363,14 +353,14 @@ const apply = (props) => {
         </section>
 
         {/* google structure - product schema */}
-        <div itemtype="https://schema.org/Product" itemscope="true">
-          <meta itemprop="sku" content={props.data[0].id} />
-          <meta itemprop="name" content={props.data[0].name} />
-          <link itemprop="image" href={`/uploads/product_bank/${newProductName}.webp`} />
-          <meta itemprop="description" content={props.data[0].meta_description} />
-          <div itemprop="aggregateRating" itemtype="https://schema.org/AggregateRating" itemscope>
-            <meta itemprop="reviewCount" content="" />
-            <meta itemprop="ratingValue" content="" />
+        <div itemType="https://schema.org/Product" itemScope>
+          <meta itemProp="sku" content={props.data[0].id} />
+          <meta itemProp="name" content={props.data[0].name} />
+          <link itemProp="image" href={`/uploads/product_bank/${newProductName}.webp`} />
+          <meta itemProp="description" content={props.data[0].meta_description} />
+          <div itemProp="aggregateRating" itemType="https://schema.org/AggregateRating" itemScope>
+            <meta itemProp="reviewCount" content="" />
+            <meta itemProp="ratingValue" content="" />
           </div>
         </div>
 
