@@ -206,7 +206,7 @@ console.log('values',values)
                                 label={elem.field_name}
                                 id={elem.param_name}
                                 type={elem.type}
-                                defaultValue={otpData[elem.global_name] }
+                                
                                 onChange={handleChange}
                               />
 
