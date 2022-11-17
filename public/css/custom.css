@@ -398,3 +398,13 @@ button {
 .off {
   color: #ccc;
 }
+
+.btn-bg{
+  background-color: var(--secondryColor) !important;
+transition: all 0.3s !important;
+color: white !important;
+}
+
+.btn-bg:hover{
+  background-color: var(--primaryColor) !important;
+}

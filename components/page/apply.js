@@ -298,7 +298,7 @@ const apply = (props) => {
                       </div>
                     </div>
                   )}
-                  {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.product} result={apiResponse} /> : ""}
+                  {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} result={apiResponse} /> : ""}
                 </form>}
                 {(token != null || token != undefined) && props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
               </div>
