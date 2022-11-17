@@ -128,7 +128,7 @@ const mfcalculator = () => {
               <h2>Investment Amount</h2>
               <small>(Up to 1 Crore)</small>
               <div className="outputArea">
-                <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
+                <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} maxlength="8" /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
               </div>
 
             </div>
@@ -141,7 +141,7 @@ const mfcalculator = () => {
               <h2>Expected Return Rate (p.a)</h2>
               <small>(9.50% to 19.55%)</small>
               <div className="outputArea">
-                <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
+                <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} min="1" max="20" /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
               </div>
             </div>
             <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
@@ -151,7 +151,7 @@ const mfcalculator = () => {
               <h2>Investment Period (in Years)</h2>
               <small>(1 year - 30 years)</small>
               <div className="outputArea">
-                <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> years <span className="emi-icon" >
+                <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} min="1" max="30" /> years <span className="emi-icon" >
                 </span></div>
 
             </div>

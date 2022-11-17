@@ -105,7 +105,7 @@ const sipCalculator = () => {
   const [pAmount, setpAmount] = useState(100000);
   const [interest, setInterest] = useState(9.56);
   const [duration, setDuration] = useState(12)
-  const maxvalue = 100000000;
+  const maxvalue = 10000000;
   const maxint = 20;
   const maxduration = 30;
 
@@ -130,7 +130,7 @@ const sipCalculator = () => {
               <h2>Monthly SIP Amount</h2>
               <small>(Up to 1 Crore)</small>
               <div className="outputArea">
-                <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
+                <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} maxlength="8" /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
               </div>
 
             </div>
@@ -143,7 +143,7 @@ const sipCalculator = () => {
               <h2>Expected Return Rate (p.a)</h2>
               <small>(9.50% to 19.55%)</small>
               <div className="outputArea">
-                <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
+                <input type="number" min="1" max="30" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
               </div>
             </div>
             <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
@@ -153,7 +153,7 @@ const sipCalculator = () => {
               <h2>SIP Period</h2>
               <small>(1 year - 30 years)</small>
               <div className="outputArea">
-                <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" > Years
+                <input type="number" min="1" max="30" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" > Years
                 </span></div>
 
             </div>
