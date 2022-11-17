@@ -167,7 +167,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
             <p className="form-error">{errors.otp}</p>
           ) : null}
 
-          <div className='mt-4'> Dont receive the OTP ?  <a className={`resendBtn ${resendActive ? "active" : "inActive"}`} >RESEND OTP</a> <span id="verifiBtn"> {time != 0?'in ' +time+ ' Seconds':''}  </span></div>
+          <div className='mt-4'> Dont receive the OTP ?  <a className={`resendBtn ${resendActive ? "active" : "inActive"}`}>RESEND OTP</a> <span id="verifiBtn"> {time != 0?'in ' +time+ ' Seconds':''}  </span></div>
  
           <div className="search-button">
             <button className="mt-4" type="submit" >verify OTP</button>

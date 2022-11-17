@@ -45,7 +45,8 @@ const apply = (props) => {
   const [serversideStatus, setServerSideStatus] = useState(false)
   const [active, setActive] = useState(false)
   const [apiResponse, setApiResponse] = useState('')
-
+  let initialValues = {}
+  let paramName;
   // console.log(formData,"formData")
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
@@ -59,7 +60,7 @@ const apply = (props) => {
     }
   } else {
     var full_name = '';
- 
+
     var phone = '';
     var first_name = '';
     var last_name = '';
@@ -69,16 +70,18 @@ const apply = (props) => {
     full_name, first_name, last_name, phone
   }
 
-  const { values, errors, touched, handleBlur, setFieldValue, handleChange, handleSubmit } =
+  const { values, setFieldValue, handleChange, handleSubmit } =
     useFormik({
-      initialValues: {},
+      initialValues,
       validationSchema: '',
-      onSubmit: async (values) => {
+      onSubmit: async (values, actions) => {
         try {
-console.log('values',values)
           const data = new FormData();
           for (const property in values) {
             data.append(property, values[property])
+          }
+          for (const property in initialValues) {
+            data.append(property, initialValues[property])
           }
           const headers = {
             'Authorization': "Bearer " + token.slice(1, -1) + ""
@@ -124,7 +127,7 @@ console.log('values',values)
     });
 
   useEffect(() => {
-   setLoading(false)
+    setLoading(false)
     setServerSideStatus(false)
     setServerSideMsg('')
     if (typeof window !== 'undefined') {
@@ -140,11 +143,12 @@ console.log('values',values)
     return word[0].toUpperCase() + word.substring(1);
   }).join("_");
 
-  console.log("formSchemaa", props.form_schema)
+  console.log("formSchema", props.form_schema)
 
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
   }
+
 
   return (
     <>
@@ -187,31 +191,51 @@ console.log('values',values)
 
                 {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                   {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
-
-
                     <div key={index} className=" container">
-                      {/* {fillFormValues()} */}
                       <h3>{item.section_name}</h3>
                       <div className="row">
                         {item.forms.map((elem, ind) => (
                           <div key={ind} className=" col-lg-4 col-md-6 col-12 mt-2" data-type={elem.type}>
 
                             {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
-                              ? <TextField
+                              ? <>
+                                <div className="d-none">{otpData[elem.global_name] != '' ? initialValues[elem.param_name] = otpData[elem.global_name] : ''}</div>
+                                <TextField
+                                  fullWidth
+                                  inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
+                                  required={elem.is_required}
+                                  className={`${elem.is_visible ? '' : 'd-none'}`}
+                                  name={elem.param_name}
+                                  label={elem.field_name}
+                                  type={elem.type}
+                                  // inputProps={otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
+                                  onChange={handleChange}
+                                  // value={otpData[elem.global_name]}
+                                  {...elem}
+                                />
+
+                              </>
+                              : ''
+                            }
+                            {elem.type === 'text' && elem.global_name === 'pan' &&
+                            <>
+                           <div className="d-none"> { paramName = elem.param_name }</div>
+                              <TextField
                                 fullWidth
-                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, value: values.paramName, title: "Please Fill Valid Pan Card" } : {}}
                                 required={elem.is_required}
                                 className={`${elem.is_visible ? '' : 'd-none'}`}
                                 name={elem.param_name}
                                 label={elem.field_name}
-                                id={elem.param_name}
                                 type={elem.type}
-                                
-                                onChange={handleChange}
+                                inputProps={{ style: { textTransform: "uppercase" } }}
+                                onChange={(e)=>{
+                                  setFieldValue([e.target.name], e.target.value.toUpperCase())
+                                }}
+                               
+                                {...elem}
                               />
-
-                         
-                              : ''
+</>
                             }
 
                             {elem.type == 'file' && <TextField
@@ -223,7 +247,7 @@ console.log('values',values)
                               label={elem.field_name}
                               id={elem.param_name}
                               autoComplete="off"
-                          
+
                               onChange={(event) => {
                                 setFieldValue(elem.param_name, event.currentTarget.files[0]);
                               }}
@@ -231,7 +255,7 @@ console.log('values',values)
 
                             }
 
-                            {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email') && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name'
+                            {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email') && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name' && elem.global_name != 'pan'
                               ? <TextField
                                 fullWidth
                                 inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
@@ -241,7 +265,7 @@ console.log('values',values)
                                 label={elem.field_name}
                                 id={elem.param_name}
                                 type={elem.type}
-                               
+
                                 onWheel={(e) => e.target.blur()}
                                 onChange={handleChange}
                               />
@@ -262,43 +286,21 @@ console.log('values',values)
                                 //autoComplete="off"
                                 onChange={handleChange}
                               />
-
-
                             }
                             {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
 
                             {elem.type == 'checkbox' && <FormControlLabel className={` ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
-
-                            {elem.type == 'radio' && <FormControl className="mt-2" >
-                              <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-                              <RadioGroup
-                                aria-labelledby="demo-radio-buttons-group-label"
-
-                                name="radio-buttons-group"
-                                required
-                              >
-                                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                                <FormControlLabel value="other" control={<Radio />} label="Other" />
-                              </RadioGroup>
-                            </FormControl>}
                           </div>
                         ))}
-
                       </div>
-
                       <div className="search-button">
                         <button className="mt-4" type="submit" disabled={active} >Save & Next {active ? <i className="fa fa-spinner fa-spin"></i> : ''}</button>
                       </div>
-
                     </div>
-
                   )}
                   {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.product} result={apiResponse} /> : ""}
                 </form>}
-
                 {(token != null || token != undefined) && props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
-
               </div>
             </div>
           </section>
@@ -313,12 +315,12 @@ console.log('values',values)
         </div>
       }
 
-    <div className="container">
-        
+      <div className="container">
+
         <section>
           <div className="faqSetion">
             <h3>Product Rating</h3>
-            <div style={{textAlign:'center',fontSize:'30px'}}><StarRating /></div>
+            <div style={{ textAlign: 'center', fontSize: '30px' }}><StarRating /></div>
           </div>
         </section>
 
@@ -364,7 +366,7 @@ console.log('values',values)
           </div>
         </div>
 
-    </div>
+      </div>
     </>
   )
 }

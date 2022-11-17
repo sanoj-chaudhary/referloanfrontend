@@ -138,7 +138,7 @@ const emiCalculator = () => {
           <h2>Interest Rate</h2>
           <small>(9.50% to 19.55%)</small>
           <div className="outputArea">
-            <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> % </span>
+            <input type="number"  value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> % </span>
           </div>
         </div>
         <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
