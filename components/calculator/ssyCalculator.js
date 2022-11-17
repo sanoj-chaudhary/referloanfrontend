@@ -138,7 +138,7 @@ const SsyCalculator = () => {
               <h2>Yearly Investment </h2>
               <small>(Up to 150000)</small>
               <div className="outputArea">
-                <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-rupee"></i> </span>
+                <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} maxlength="6" /> <span className="emi-icon"> <i className="fa fa-rupee"></i> </span>
               </div>
 
             </div>
@@ -151,7 +151,7 @@ const SsyCalculator = () => {
               <h2>Expected Girl Age </h2>
               <small>(10 years)</small>
               <div className="outputArea">
-                <input type="number" value={age} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setAge(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
+                <input type="number" value={age} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setAge(e.target.value) }} min="1" max="10" /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
               </div>
             </div>
             <PrettoSlider value={age} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setAge(vamt) }} max={maxage} ></PrettoSlider>

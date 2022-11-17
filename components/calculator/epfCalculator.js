@@ -155,7 +155,7 @@ const ppfCalculator = () => {
               <h2>Your age</h2>
               <small>(15 to 59)</small>
               <div className="outputArea">
-                <input type="number" value={age} name="age" id="age" className="age_check" onChange={(e) => { setAge(e.target.value) }} /> <span className="emi-icon" > Years
+                <input type="number" value={age} name="age" id="age" min="15" max="59" className="age_check" onChange={(e) => { setAge(e.target.value) }} /> <span className="emi-icon" > Years
                 </span>
               </div>
             </div>
@@ -167,7 +167,7 @@ const ppfCalculator = () => {
               <h2>Retirement age</h2>
               <small>(Up to 60)</small>
               <div className="outputArea">
-                <input type="number" value={retirement_age} name="retirement_age" id="retirement_age" className="retirement_age_check" onChange={(e) => { setRetirementAge(e.target.value) }} /> <span className="emi-icon" > Years
+                <input type="number" value={retirement_age} name="retirement_age" id="retirement_age" max="60" className="retirement_age_check" onChange={(e) => { setRetirementAge(e.target.value) }} /> <span className="emi-icon" > Years
                 </span>
               </div>
             </div>
@@ -179,7 +179,7 @@ const ppfCalculator = () => {
               <h2>Basic component of monthly salary</h2>
               <small>(Up to 150000)</small>
               <div className="outputArea">
-                <input type="text" value={bcom_salary} name="bcom_salary" id="bcom_salary" className="emi_check" onChange={(e) => { setBCOMSalary(e.target.value) }} /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
+                <input type="text" value={bcom_salary} name="bcom_salary" id="bcom_salary" className="emi_check" onChange={(e) => { setBCOMSalary(e.target.value) }} maxlength="6" /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
               </div>
             </div>
             <PrettoSlider onChange={(e) => { setBCOMSalary(e.target.value) }} value={bcom_salary} max={maxBCOMSalary} getAriaValueText={valuetext} valueLabelDisplay="auto" />
@@ -190,7 +190,7 @@ const ppfCalculator = () => {
               <h2>Current EPF Balance</h2>
               <small>(Up to 1Cr)</small>
               <div className="outputArea">
-                <input type="text" value={current_epf_amount} name="current_epf_amount" id="current_epf_amount" className="current_epf_check" onChange={(e) => { setEPFAmount(e.target.value) }} /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
+                <input type="text" value={current_epf_amount} name="current_epf_amount" id="current_epf_amount" className="current_epf_check" onChange={(e) => { setEPFAmount(e.target.value) }} maxlength="8" /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
               </div>
             </div>
             <PrettoSlider value={current_epf_amount} onChange={(e) => { setEPFAmount(e.target.value) }} max={maxEPFAmount} getAriaValueText={valuetext}
@@ -202,7 +202,7 @@ const ppfCalculator = () => {
               <h2>Your expected yearly salary growth</h2>
               <small>(Up to 20%)</small>
               <div className="outputArea">
-                <input type="number" value={yearly_growth} name="yearly_growth" id="yearly_growth" className="yearly_growth_check" onChange={(e) => { setYearlyGrowth(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
+                <input type="number" value={yearly_growth} name="yearly_growth" id="yearly_growth" className="yearly_growth_check" onChange={(e) => { setYearlyGrowth(e.target.value) }} min="1" max="20" /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
               </div>
             </div>
             <PrettoSlider value={yearly_growth} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setYearlyGrowth(vamt) }} max={maxYearlyGrowth} ></PrettoSlider>
@@ -213,7 +213,7 @@ const ppfCalculator = () => {
               <h2>Rate of interest</h2>
               <small>(8.1%)</small>
               <div className="outputArea">
-                <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
+                <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} min="1" max="20"/> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
               </div>
             </div>
             <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
