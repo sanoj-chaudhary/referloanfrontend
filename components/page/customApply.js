@@ -78,6 +78,8 @@ const CustomApply = (props) => {
     }
     setStep(0)
   }, [token, router])
+
+  console.log(initialValues)
   return (
     <>
       {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}

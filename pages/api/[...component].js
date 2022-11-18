@@ -24,20 +24,23 @@ export default async function handler(req, res) {
       if (req.query.component == 'footerlink2') {
         return await getFooterLink2(req, res);
       }
-      if (req.query.component[0] == 'get_search_info_local') {
-        return await GetSearchInfoLocal(req, res);
-      }
       if (req.query.component[0] == 'get_product_by_slug') {
         return await GetProductBySlug(req, res);
       }
       if (req.query.component[0] == 'get_product_by_catid') {
         return await GetProductByCatId(req, res);
       }
+      if (req.query.component[0] == 'get_rating_bybpid') {
+        return await GetRatingByBankProductId(req, res);
+      }
+
+      // Mobile APP API
       if (req.query.component == 'allcategory') {
         return await getAllCategory(req, res);
       }
-      
-      
+      if (req.query.component[0] == 'get_all_data_by_catid') {
+        return await getAllDataByCatId(req, res);
+      }
     case "POST":
       if (req.query.component == 'insert_search_info_local') {
         return await insertSearchInfoLocal(req, res);
@@ -47,35 +50,6 @@ export default async function handler(req, res) {
       return res.status(400).send("Method not allowed");
   }
 }
-
-const insertSearchInfoLocal = async (req, res) => {
-  try {
-    let cat_id = req.body.cat_id;
-    let product_id = req.body.product_id;
-    let employemnt_type = req.body.employemnt_type;
-    let salary = req.body.salary;
-    let turnover = req.body.turnover;
-    let pincode = req.body.pincode;
-    let interest_min = req.body.interest_min;
-    let interest_max = req.body.interest_max;
-    
-    const split = product_id.split("_");
-    
-    const results = await db.query("INSERT INTO `search_info_local` SET `cat_id` = '"+cat_id+"',`product_id` = '"+split[0]+"',`slug` = '"+split[1]+"',`name` = '"+split[2]+"',`employemnt_type` = '"+employemnt_type+"', `salary` = '"+salary+"', `turnover` = '"+turnover+"', `pincode` = '"+pincode+"', `interest_min` = '"+interest_min+"', `interest_max` = '"+interest_max+"' ");
-    return res.status(200).json(results);
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-};
-
-const GetSearchInfoLocal = async (req, res) => {
-  try {
-    const results = await db.query("SELECT * FROM `search_info_local` WHERE `id` = '"+req.query.component[1]+"' ");
-    return res.status(200).json(results);
-  } catch (error) {
-    return res.status(500).json({ error });
-  }
-};
 
 const GetProductBySlug = async (req, res) => {
   try {
@@ -220,10 +194,43 @@ const getFooterLink2 = async (req, res) => {
   }
 };
 
+const GetRatingByBankProductId = async (req, res) => {
+  try {
+    let bank_product_id = req.query.component[1];
+
+    const results = await db.query("SELECT * FROM `view_rating` WHERE `bank_product_id` = '"+bank_product_id +"' ");
+    return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+
 // Make API For Mobile APP
 const getAllCategory = async (req, res) => {
   try {
-    const results = await db.query("SELECT * FROM `categories` WHERE `status` = '1' AND `is_menu` = '1' ");
+    const results = await db.query(" SELECT * FROM `view_category` WHERE `status` = '1' and `is_menu` = '1' and `slug` != ''  ");
+    return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const getAllDataByCatId = async (req, res) => {
+  try {
+    let catid = req.query.component[1];
+    let result1 = await db.query(" SELECT * FROM `view_category` WHERE `id` = '" + catid + "'  ");
+    let hierarchy = result1[0]['hierarchy'];
+    let results;
+
+    if(hierarchy=='Product_BankProduct')
+    {
+      results = await db.query(" SELECT * FROM `view_product` WHERE `cat_id` = '" + catid + "' AND `status` = '1' ORDER BY `searial_by` ");
+    }
+    else
+    {
+      results = await db.query("SELECT * FROM `pages` WHERE `categories_id` = '" + catid + "' AND status = '1' ");
+    }
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });

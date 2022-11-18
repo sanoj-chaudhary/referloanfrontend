@@ -9,8 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@mui/material/Checkbox';
-import Radio from '@mui/material/Radio';
-import Head from "next/head";
+import * as Yup from 'yup';
 import GenerateOtp from "./generateOtp";
 import Loader from "./loader";
 import Thanks from "./thanks";
@@ -45,9 +44,12 @@ const apply = (props) => {
   const [serversideStatus, setServerSideStatus] = useState(false)
   const [active, setActive] = useState(false)
   const [apiResponse, setApiResponse] = useState('')
+
+  let preassignValue = {}
   let initialValues = {}
+  let _validationSchema = {};
   let paramName;
-  // console.log(formData,"formData")
+
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
     var phone = window.localStorage.getItem("phone");
@@ -60,7 +62,6 @@ const apply = (props) => {
     }
   } else {
     var full_name = '';
-
     var phone = '';
     var first_name = '';
     var last_name = '';
@@ -69,20 +70,22 @@ const apply = (props) => {
   const otpData = {
     full_name, first_name, last_name, phone
   }
-
-  const { values, setFieldValue, handleChange, handleSubmit } =
+  const { values, handleBlur, setFieldValue, handleChange, handleSubmit, errors, touched, setFieldTouched } =
     useFormik({
       initialValues,
-      validationSchema: '',
+      validationSchema: validationSchema,
       onSubmit: async (values, actions) => {
         try {
+
+
           const data = new FormData();
           for (const property in values) {
             data.append(property, values[property])
           }
-          for (const property in initialValues) {
-            data.append(property, initialValues[property])
+          for (const property in preassignValue) {
+            data.append(property, preassignValue[property])
           }
+
           const headers = {
             'Authorization': "Bearer " + token.slice(1, -1) + ""
           }
@@ -94,24 +97,34 @@ const apply = (props) => {
             setLoading(false)
 
             if (props.form_schema.length - 1 == step) {
-              var bank_product_id = { "bank_product_id": props.data[0].bank_product_id }
-              const resData = await axios.post(`${process.env.APIHOST}/api/banks/process`, bank_product_id, { headers });
+              try {
+                var bank_product_id = { "bank_product_id": props.data[0].bank_product_id }
+                const resData = await axios.post(`${process.env.APIHOST}/api/banks/process`, bank_product_id, { headers });
 
-              if (resData.data.status) {
-                if (typeof resData.data.data.reference_key !== 'undefined') {
-                  setApiResponse(resData.data.data.reference_key);
-                  console.log('API Response: ' + resData.data.data.reference_key);
+                if (resData.data.status) {
+                  if (typeof resData.data.data.reference_key !== 'undefined') {
+                    setApiResponse(resData.data.data.reference_key);
+                  }
+                  setStep(step + 1)
+                  if (typeof window !== 'undefined') {
+                    window.localStorage.removeItem("token");
+                    window.localStorage.removeItem("full_name");
+                    window.localStorage.removeItem("phone");
+                  }
                 }
-
+              } catch (error) {
                 setStep(step + 1)
                 if (typeof window !== 'undefined') {
                   window.localStorage.removeItem("token");
                   window.localStorage.removeItem("full_name");
                   window.localStorage.removeItem("phone");
                 }
+                
               }
+
             } else {
               setStep(step + 1)
+
             }
             submitForm(values.pan);
             setActive(false)
@@ -133,8 +146,11 @@ const apply = (props) => {
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
-    setStep(0)
-  }, [token, router])
+    for (const property in initialValues) {
+      _validationSchema[property] = Yup.string().required('This is required field');
+    }
+    setValidationSchema(Yup.object().shape({ ..._validationSchema }));
+  }, [token, router, step])
 
   const mySentence = props.data[0].name.trim();
   const productName = mySentence.split(" ");
@@ -149,180 +165,203 @@ const apply = (props) => {
     document.getElementById("dynamicMyForm").reset();
   }
 
-
   return (
     <>
-      {loading ? <Loader loading={loading} /> :
-        <div className="container">
-          <div className="applyHeaderCard text-center p-4">
-            <h3>Start with <span style={{ textTransform: 'capitalize' }}>{props.data[0].name}</span> in few steps</h3>
-            <p>Please Enter your mobile number and name to generate OTP</p>
-          </div>
-          <section className="cardOffer_area">
-            <div className="dealStep__leftArea">
-              <div className="CardImg_box">
-                <img
-                  src={`/uploads/product_bank/${newProductName}.webp`}
-                  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null; // prevents looping
-                    currentTarget.src = '/uploads/product_bank/' + props.data[0].categories_id + '.webp';
-                  }}
-                />
+      {loading && <Loader loading={loading} />}
+      <div className="container">
 
-              </div>
-              <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
-              <ul>
-                {props.specification.map((item, key) => (
-                  <li key={key}>
-                    <div className="price_row">
-                      <label >{item.title}</label>
-                      <span> {item.value}</span>
-                    </div>
-                    <p>{item.short_description}</p>
-                  </li>
-                ))}
-              </ul>
+        <div className="applyHeaderCard text-center p-4">
+          <h3>Start with <span style={{ textTransform: 'capitalize' }}>{props.data[0].name}</span> in few steps</h3>
+          <p>Please Enter your mobile number and name to generate OTP</p>
+        </div>
+
+        <section className="cardOffer_area">
+          <div className="dealStep__leftArea">
+            <div className="CardImg_box">
+              <img
+                src={`/uploads/product_bank/${newProductName}.webp`}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.src = '/uploads/product_bank/' + props.data[0].categories_id + '.webp';
+                }}
+              />
+
             </div>
-            <div className="loanStep__wrapper">
-              <div className="loanForm__Container">
-                {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
-                {(token == '' || token == null) && <GenerateOtp utmData={props.form_schema.length != 0 ? props.form_schema[0].forms[0] : ''} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setToken={setToken} />
-                }
+            <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
+            <ul>
+              {props.specification.map((item, key) => (
+                <li key={key}>
+                  <div className="price_row">
+                    <label >{item.title}</label>
+                    <span> {item.value}</span>
+                  </div>
+                  <p>{item.short_description}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="loanStep__wrapper">
+            <div className="loanForm__Container">
+              {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
+              {(token == '' || token == null) && <GenerateOtp utmData={props.form_schema.length != 0 ? props.form_schema[0].forms[0] : ''} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setToken={setToken} />
+              }
 
-                {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
-                  {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
-                    <div key={index} className=" container">
-                      <h3>{item.section_name}</h3>
-                      <div className="row">
-                        {item.forms.map((elem, ind) => (
-                          <div key={ind} className=" col-lg-4 col-md-6 col-12 mt-2" data-type={elem.type}>
+              {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
+                {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
+                  <div key={index} className=" container">
+                    <h3>{item.section_name}</h3>
+                    <div className="row">
+                      {item.forms.map((elem, ind) => (
+                        <div key={ind} className=" col-lg-4 col-md-6 col-12 mt-2" data-type={elem.type}>
 
-                            {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
-                              ? <>
-                                <div className="d-none">{otpData[elem.global_name] != '' ? initialValues[elem.param_name] = otpData[elem.global_name] : ''}</div>
-                                <TextField
-                                  fullWidth
-                                  inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
-                                  required={elem.is_required}
-                                  className={`${elem.is_visible ? '' : 'd-none'}`}
-                                  name={elem.param_name}
-                                  label={elem.field_name}
-                                  type={elem.type}
-                                  // inputProps={otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
-                                  onChange={handleChange}
-                                  // value={otpData[elem.global_name]}
-                                  {...elem}
-                                />
+                          <div className="d-none"> {paramName = elem.param_name.trim()}</div>
+                          <div className="d-none">{(otpData[elem.global_name] !== undefined || elem.is_visible == false) ? '' : initialValues[elem.param_name] = ''}</div>
 
-                              </>
-                              : ''
-                            }
-                            {elem.type === 'text' && elem.global_name === 'pan' &&
-                            <>
-                           <div className="d-none"> { paramName = elem.param_name }</div>
+                          {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
+                            ? <>
+                              <div className="d-none">{otpData[elem.global_name] != '' ? preassignValue[elem.param_name] = otpData[elem.global_name] : ''}</div>
                               <TextField
                                 fullWidth
-                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, value: values.paramName, title: "Please Fill Valid Pan Card" } : {}}
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
                                 required={elem.is_required}
                                 className={`${elem.is_visible ? '' : 'd-none'}`}
                                 name={elem.param_name}
                                 label={elem.field_name}
                                 type={elem.type}
-                                inputProps={{ style: { textTransform: "uppercase" } }}
-                                onChange={(e)=>{
+                                onBlur={handleBlur}
+                                error={touched[elem.param_name] && errors[elem.param_name] && true}
+                                onChange={handleChange}
+                              />
+                              {errors[elem.param_name] && touched[elem.param_name] ? (
+                                <p className="form-error">{errors[elem.param_name]}</p>
+                              ) : null}
+                            </>
+                            : ''
+                          }
+                          {elem.type === 'text' && elem.global_name === 'pan' &&
+                            <>
+                              <TextField
+                                fullWidth
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, value: values.paramName, title: "Please Fill Valid Pan Card", style: { textTransform: "uppercase" } } : {}}
+                                required={elem.is_required}
+                                className={`${elem.is_visible ? '' : 'd-none'}`}
+                                name={elem.param_name}
+                                label={elem.field_name}
+                                type={elem.type}
+                                onChange={(e) => {
+                                  setFieldTouched(elem.param_name);
                                   setFieldValue([e.target.name], e.target.value.toUpperCase())
                                 }}
-                               
-                                {...elem}
-                              />
-</>
-                            }
+                                error={touched[elem.param_name] && errors[elem.param_name] && true}
 
-                            {elem.type == 'file' && <TextField
+                              />
+                              {errors[elem.param_name] && touched[elem.param_name] ? (
+                                <p className="form-error">{errors[elem.param_name]}</p>
+                              ) : null}
+                            </>
+                          }
+
+                          {elem.type == 'file' && <> <TextField
+                            fullWidth
+                            required={elem.is_required}
+                            className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                            name={elem.param_name}
+                            type={elem.type}
+                            label={elem.field_name}
+                            id={elem.param_name}
+                            autoComplete="off"
+                            error={touched[elem.param_name] && errors[elem.param_name] && true}
+                            onChange={(event) => {
+                              setFieldValue(elem.param_name, event.currentTarget.files[0]);
+                            }}
+                          />
+                            {errors[elem.param_name] && touched[elem.param_name] ? (
+                              <p className="form-error">{errors[elem.param_name]}</p>
+                            ) : null}
+                          </>
+
+                          }
+
+                          {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email') && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name' && elem.global_name != 'pan'
+                            ? <><TextField
                               fullWidth
+                              inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
                               required={elem.is_required}
                               className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
                               name={elem.param_name}
-                              type={elem.type}
                               label={elem.field_name}
                               id={elem.param_name}
-                              autoComplete="off"
+                              type={elem.type}
+                              error={touched[elem.param_name] && errors[elem.param_name] && true}
+                              onWheel={(e) => e.target.blur()}
 
-                              onChange={(event) => {
-                                setFieldValue(elem.param_name, event.currentTarget.files[0]);
+                              onChange={(e) => {
+                                setFieldTouched(elem.param_name);
+                                handleChange(e)
                               }}
                             />
+                              {errors[elem.param_name] && touched[elem.param_name] ? (
+                                <p className="form-error">{errors[elem.param_name]}</p>
+                              ) : null}
 
-                            }
+                            </>
+                            : ''
+                          }
 
-                            {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email') && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name' && elem.global_name != 'pan'
-                              ? <TextField
-                                fullWidth
-                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                                required={elem.is_required}
-                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                                name={elem.param_name}
-                                label={elem.field_name}
-                                id={elem.param_name}
-                                type={elem.type}
+                          {elem.type == 'date' &&
+                            <>  <TextField
+                              fullWidth
+                              inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                              required={elem.is_required}
+                              className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                              name={elem.param_name}
+                              label={elem.field_name}
+                              id={elem.param_name}
+                              onFocus={(e) => (e.target.type = "date")}
+                              onBlur={(e) => (e.target.type = "text")}
+                              //autoComplete="off"
+                              error={touched[elem.param_name] && errors[elem.param_name] && true}
+                              onChange={(e) => {
+                                setFieldTouched(elem.param_name);
+                                handleChange(e)
+                              }}
+                            />
+                              {errors[elem.param_name] && touched[elem.param_name] ? (
+                                <p className="form-error">{errors[elem.param_name]}</p>
+                              ) : null}
+                            </>
+                          }
+                          {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
 
-                                onWheel={(e) => e.target.blur()}
-                                onChange={handleChange}
-                              />
-                              : ''
-                            }
-
-                            {elem.type == 'date' &&
-                              <TextField
-                                fullWidth
-                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                                required={elem.is_required}
-                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                                name={elem.param_name}
-                                label={elem.field_name}
-                                id={elem.param_name}
-                                onFocus={(e) => (e.target.type = "date")}
-                                onBlur={(e) => (e.target.type = "text")}
-                                //autoComplete="off"
-                                onChange={handleChange}
-                              />
-                            }
-                            {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
-
-                            {elem.type == 'checkbox' && <FormControlLabel className={` ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
-                          </div>
-                        ))}
-                      </div>
-                      <div className="search-button">
-                        <button className="mt-4" type="submit" disabled={active} >Save & Next {active ? <i className="fa fa-spinner fa-spin"></i> : ''}</button>
-                      </div>
+                          {elem.type == 'checkbox' && <FormControlLabel className={` ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
+                        </div>
+                      ))}
                     </div>
-                  )}
-                  {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} result={apiResponse} /> : ""}
-                </form>}
-                {(token != null || token != undefined) && props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
-              </div>
+                    <div className="search-button">
+                      <button className="mt-4" type="submit" disabled={active} >Save & Next {active ? <i className="fa fa-spinner fa-spin"></i> : ''}</button>
+                    </div>
+                  </div>
+                )}
+                {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} result={apiResponse} /> : ""}
+              </form>}
+              {(token != null || token != undefined) && props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
             </div>
-          </section>
-
-          <div className="innerpage_bg">
-            <section className="section_pad">
-              <div className="container">
-                <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
-              </div>
-            </section>
           </div>
-        </div>
-      }
-
-      <div className="container">
+        </section>
 
         <section>
           <div className="faqSetion">
-            <h3>Product Rating</h3>
-            <div style={{ textAlign: 'center', fontSize: '30px' }}><StarRating /></div>
+            <div style={{ textAlign: 'center', fontSize: '30px' }}><StarRating data={props.data[0]} /></div>
           </div>
         </section>
+
+        <div className="innerpage_bg">
+          <section className="section_pad">
+            <div className="container">
+              <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
+            </div>
+          </section>
+        </div>
 
         <section>
           {props.faq != '' ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
@@ -354,18 +393,6 @@ const apply = (props) => {
           </div> : ''}
         </section>
 
-        {/* google structure - product schema */}
-        <div itemType="https://schema.org/Product" itemScope>
-          <meta itemProp="sku" content={props.data[0].id} />
-          <meta itemProp="name" content={props.data[0].name} />
-          <link itemProp="image" href={`/uploads/product_bank/${newProductName}.webp`} />
-          <meta itemProp="description" content={props.data[0].meta_description} />
-          <div itemProp="aggregateRating" itemType="https://schema.org/AggregateRating" itemScope>
-            <meta itemProp="reviewCount" content="" />
-            <meta itemProp="ratingValue" content="" />
-          </div>
-        </div>
-
       </div>
     </>
   )
@@ -375,8 +402,7 @@ export default apply
 
 export function SelectField(props) {
 
-  console.log("select", props)
-  const { name, label, ParamOptions, handleChange } = props
+  const { values, name, label, ParamOptions, handleChange, param_name } = props
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
@@ -389,10 +415,15 @@ export function SelectField(props) {
           name={props.param_name}
           label={props.field_name}
           required
-          onChange={handleChange}
+          placeholder={props.field_name}
+          value={values.param_name}
+          onChange={(e) => {
+
+            handleChange(e)
+          }}
         >
           {ParamOptions.map((optn, ind) => (
-            <MenuItem key={ind} value={optn.value
+            <MenuItem key={optn.value} value={optn.value
             }>
               <em>{optn.name}</em>
             </MenuItem>
