@@ -417,6 +417,7 @@ color: white !important;
   box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
   padding: 33px;
 }
+
 .ratingWrapper .heading {
   font-size: 25px;
   margin-right: 25px;
@@ -428,6 +429,7 @@ color: white !important;
 
 .ratingWrapper .fafa {
   font-size: 16px;
+  margin-left: 5px;
 }
 
 .ratingWrapper .checked {
@@ -440,6 +442,7 @@ color: white !important;
   width: 15%;
   margin-top:10px;
   font-size: 15px;
+  display: flex;
 }
 
 .ratingWrapper .middle {
@@ -478,13 +481,10 @@ color: white !important;
 .ratingWrapper .bar-1 { border-radius: 15px; width: 15%; height: 18px; background-color: #f44336;}
 .ratingWrapper .bar   { border-radius: 15px; height: 18px;background-color: #ff9800;}
 
-/* Responsive layout - make the columns stack on top of each other instead of next to each other */
-@media (max-width: 400px) {
-  .ratingWrapper .side, .ratingWrapper .middle {
-    width: 100%;
-  }
-  .ratingWrapper .right {
-    display: none;
+
+@media only screen and (max-width:991px) {
+  .ratingWrapper {
+    width: 100% !important;
   }
 }
 
