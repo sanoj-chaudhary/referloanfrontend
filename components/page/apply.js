@@ -152,12 +152,14 @@ const apply = (props) => {
 
   return (
     <>
-      {loading ? <Loader loading={loading} /> :
+      {loading && <Loader loading={loading} />}
         <div className="container">
+       
           <div className="applyHeaderCard text-center p-4">
             <h3>Start with <span style={{ textTransform: 'capitalize' }}>{props.data[0].name}</span> in few steps</h3>
             <p>Please Enter your mobile number and name to generate OTP</p>
           </div>
+
           <section className="cardOffer_area">
             <div className="dealStep__leftArea">
               <div className="CardImg_box">
@@ -305,6 +307,13 @@ const apply = (props) => {
             </div>
           </section>
 
+          <section>
+            <div className="faqSetion">
+              <h3>Product Rating</h3>
+              <div style={{ textAlign: 'center', fontSize: '30px' }}><StarRating  data={props.data[0]} /></div>
+            </div>
+          </section>
+          
           <div className="innerpage_bg">
             <section className="section_pad">
               <div className="container">
@@ -312,19 +321,8 @@ const apply = (props) => {
               </div>
             </section>
           </div>
-        </div>
-      }
 
-      <div className="container">
-
-        <section>
-          <div className="faqSetion">
-            <h3>Product Rating</h3>
-            <div style={{ textAlign: 'center', fontSize: '30px' }}><StarRating /></div>
-          </div>
-        </section>
-
-        <section>
+          <section>
           {props.faq != '' ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
             <h3>FREQUENTLY ASKED QUESTIONS</h3>
             <h2>Have a question? We've got answers!</h2>
@@ -352,21 +350,9 @@ const apply = (props) => {
               </div>
             </div>
           </div> : ''}
-        </section>
+          </section> 
 
-        {/* google structure - product schema */}
-        <div itemType="https://schema.org/Product" itemScope>
-          <meta itemProp="sku" content={props.data[0].id} />
-          <meta itemProp="name" content={props.data[0].name} />
-          <link itemProp="image" href={`/uploads/product_bank/${newProductName}.webp`} />
-          <meta itemProp="description" content={props.data[0].meta_description} />
-          <div itemProp="aggregateRating" itemType="https://schema.org/AggregateRating" itemScope>
-            <meta itemProp="reviewCount" content="" />
-            <meta itemProp="ratingValue" content="" />
-          </div>
         </div>
-
-      </div>
     </>
   )
 }
