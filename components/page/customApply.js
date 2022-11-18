@@ -57,7 +57,7 @@ const CustomApply = (props) => {
         'Authorization': "Bearer " + token.slice(1, -1) + "",
       }
       setLoading(true)
-      const res = await axios.post('https://api.referloan.in/api/customers/', formData, { headers });
+      const res = await axios.post(`${process.env.APIHOST}/api/customers/`, formData, { headers });
       if (res.data.status) {
         setLoading(false)
         setStep(step + 1)
