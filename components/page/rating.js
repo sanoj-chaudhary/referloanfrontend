@@ -30,12 +30,12 @@ const StarRating = ({ data }) => {
   useEffect(() => {
     getRating()
   },[])
-
+console.log(ratinginfo['average_rating'])
   return (
     <>
         <div className="ratingWrapper">
           <span className="heading">Product Rating</span>
-          <p>{ratinginfo['average_rating']}/5</p>
+          <p>{ratinginfo['average_rating']} /5</p>
           
           {[...Array(5)].map((star, index) => {
             index += 1;

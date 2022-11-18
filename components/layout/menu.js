@@ -81,6 +81,7 @@ const Menu = () => {
             window.localStorage.removeItem("pan");
             window.localStorage.removeItem("phone");
           }
+
     }, []);
 
     if (typeof window !== 'undefined') {
