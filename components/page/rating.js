@@ -30,12 +30,12 @@ const StarRating = ({ data }) => {
   useEffect(() => {
     getRating()
   },[])
-console.log(ratinginfo['average_rating'])
+
   return (
     <>
         <div className="ratingWrapper">
           <span className="heading">Product Rating</span>
-          <p>{ratinginfo['average_rating']} /5</p>
+          <p>{ratinginfo?ratinginfo['average_rating']:0} /5</p>
           
           {[...Array(5)].map((star, index) => {
             index += 1;
@@ -55,7 +55,7 @@ console.log(ratinginfo['average_rating'])
             );
           })}
             
-          <p>Total - {ratinginfo['total_ratings']} ratings</p>
+          <p>Total - {ratinginfo?ratinginfo['total_ratings']:0} ratings</p>
 
           <div className="row">
             
@@ -65,11 +65,11 @@ console.log(ratinginfo['average_rating'])
             </div>
             <div className="middle">
               <div className="bar-container">
-                <div className="bar" style={{ width: ratinginfo['total_rating_5']/ratinginfo['total_ratings']*100+'%'}}> </div>
+                <div className="bar" style={{ width: ratinginfo?ratinginfo['total_rating_5']/ratinginfo['total_ratings']*100+'%':"0%"}}> </div>
               </div>
             </div>
             <div className="side right">
-              <div>{ratinginfo['total_rating_5']}</div>
+              <div>{ratinginfo?ratinginfo['total_rating_5']:0}</div>
             </div>
 
             {/* Rating 4 */}
@@ -78,11 +78,11 @@ console.log(ratinginfo['average_rating'])
             </div>
             <div className="middle">
               <div className="bar-container">
-                <div className="bar" style={{ width: ratinginfo['total_rating_4']/ratinginfo['total_ratings']*100+'%'}}></div>
+                <div className="bar" style={{ width: ratinginfo?ratinginfo['total_rating_4']/ratinginfo['total_ratings']*100+'%':"0%"}}></div>
               </div>
             </div>
             <div className="side right">
-              <div>{ratinginfo['total_rating_4']}</div>
+            <div>{ratinginfo?ratinginfo['total_rating_4']:0}</div>
             </div>
 
             {/* Rating 3 */}
@@ -91,11 +91,11 @@ console.log(ratinginfo['average_rating'])
             </div>
             <div className="middle">
               <div className="bar-container">
-                <div className="bar" style={{ width:  ratinginfo['total_rating_3']/ratinginfo['total_ratings']*100+'%'}}></div>
+                <div className="bar" style={{ width: ratinginfo?ratinginfo['total_rating_3']/ratinginfo['total_ratings']*100+'%':"0%"}}></div>
               </div>
             </div>
             <div className="side right">
-              <div>{ratinginfo['total_rating_3']}</div>
+            <div>{ratinginfo?ratinginfo['total_rating_3']:0}</div>
             </div>
 
             {/* Rating 2 */}
@@ -104,11 +104,11 @@ console.log(ratinginfo['average_rating'])
             </div>
             <div className="middle">
               <div className="bar-container">
-                <div className="bar" style={{ width:  ratinginfo['total_rating_2']/ratinginfo['total_ratings']*100+'%'}}></div>
+                <div className="bar" style={{ width: ratinginfo?ratinginfo['total_rating_2']/ratinginfo['total_ratings']*100+'%':"0%"}}></div>
               </div>
             </div>
             <div className="side right">
-              <div>{ratinginfo['total_rating_2']}</div>
+            <div>{ratinginfo?ratinginfo['total_rating_2']:0}</div>
             </div>
 
             {/* Rating 1 */}
@@ -117,11 +117,11 @@ console.log(ratinginfo['average_rating'])
             </div>
             <div className="middle">
               <div className="bar-container">
-                <div className="bar" style={{ width: ratinginfo['total_rating_1']/ratinginfo['total_ratings']*100+'%'}}></div>
+                <div className="bar" style={{ width: ratinginfo?ratinginfo['total_rating_1']/ratinginfo['total_ratings']*100+'%':"0%"}}></div>
               </div>
             </div>
             <div className="side right">
-              <div>{ratinginfo['total_rating_1']}</div>
+            <div>{ratinginfo?ratinginfo['total_rating_1']:0}</div>
             </div>
 
           </div>
@@ -135,8 +135,8 @@ console.log(ratinginfo['average_rating'])
         <link itemProp="image" href={`/uploads/product_bank/${newProductName}.webp`} />
         <meta itemProp="description" content={data.meta_description} />
         <div itemProp="aggregateRating" itemType="https://schema.org/AggregateRating" itemScope>
-          <meta itemProp="reviewCount" content={ratinginfo['total_ratings']} />
-          <meta itemProp="ratingValue" content={ratinginfo['average_rating']} />
+          <meta itemProp="reviewCount" content={ ratinginfo?ratinginfo['total_ratings']:"0"} />
+          <meta itemProp="ratingValue" content={ ratinginfo?ratinginfo['average_rating']:"0"} />
         </div>
       </div>
 
