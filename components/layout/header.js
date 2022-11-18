@@ -29,7 +29,7 @@ export default function Header(children) {
             <meta charSet={'utf-8'} />
             <meta name={'viewport'} content={'width=device-width, initial-scale=1, shrink-to-fit=no'} />
             <meta name="google-site-verification" content="A-2wTKInJgPeZBUQnYLPGAffZ_YmNF-ARQxpu3twdGw" />
-            <meta http-equiv="ScreenOrientation" content="autoRotate:disabled"></meta>
+            <meta httpEquiv="ScreenOrientation" content="autoRotate:disabled"></meta>
             <title>{titles}</title>
             <meta name={'description'} content={description} />
             <meta name={'keywords'} content={keywords} />
@@ -44,7 +44,7 @@ export default function Header(children) {
             <meta name={'coverage'} content="India" />
             <meta name={'Geography'} content={'1/25, 1rd floor, Lalita Park, Laxmi Nagar, (Land mark near Gurudawara)110092 Delhi, India'} />
             <meta name={'Language'} content={'English'} />
-            <meta http-equiv={'CACHE-CONTROL'} content={'PUBLIC'} />
+            <meta httpEquiv={'CACHE-CONTROL'} content={'PUBLIC'} />
             <meta name={'distribution'} content={'Global'} />
             <meta name={'audience'} content={'All'} />
             <meta name={'revisit-after'} content={'3 days'} />
