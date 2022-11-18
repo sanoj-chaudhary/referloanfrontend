@@ -338,11 +338,11 @@ const apply = (props) => {
             </div>
           </section>
 
-          {/* <section>
+          <section>
             <div className="faqSetion">
               <div style={{ textAlign: 'center', fontSize: '30px' }}><StarRating  data={props.data[0]} /></div>
             </div>
-          </section> */}
+          </section>
           
           <div className="innerpage_bg">
             <section className="section_pad">
