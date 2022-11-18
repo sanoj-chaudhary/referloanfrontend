@@ -119,6 +119,7 @@ const apply = (props) => {
                   window.localStorage.removeItem("full_name");
                   window.localStorage.removeItem("phone");
                 }
+                
               }
 
             } else {
