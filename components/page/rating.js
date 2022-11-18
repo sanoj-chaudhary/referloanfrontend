@@ -61,7 +61,7 @@ console.log(ratinginfo['average_rating'])
             
             {/* Rating 5 */}
             <div className="side">
-              <div>5 <span className="star fafa">&#9733;</span></div>
+              5 <span className="star fafa">&#9733;</span>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -74,7 +74,7 @@ console.log(ratinginfo['average_rating'])
 
             {/* Rating 4 */}
             <div className="side">
-              <div>4 <span className="star fafa">&#9733;</span></div>
+              4 <span className="star fafa">&#9733;</span>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -87,7 +87,7 @@ console.log(ratinginfo['average_rating'])
 
             {/* Rating 3 */}
             <div className="side">
-              <div>3 <span className="star fafa">&#9733;</span></div>
+              3 <span className="star fafa">&#9733;</span>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -100,7 +100,7 @@ console.log(ratinginfo['average_rating'])
 
             {/* Rating 2 */}
             <div className="side">
-              <div>2 <span className="star fafa">&#9733;</span></div>
+              2 <span className="star fafa">&#9733;</span>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -113,7 +113,7 @@ console.log(ratinginfo['average_rating'])
 
             {/* Rating 1 */}
             <div className="side">
-              <div>1 <span className="star fafa">&#9733;</span></div>
+              1 <span className="star fafa">&#9733;</span>
             </div>
             <div className="middle">
               <div className="bar-container">
