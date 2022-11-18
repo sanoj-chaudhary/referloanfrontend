@@ -309,7 +309,6 @@ const apply = (props) => {
 
           <section>
             <div className="faqSetion">
-              <h3>Product Rating</h3>
               <div style={{ textAlign: 'center', fontSize: '30px' }}><StarRating  data={props.data[0]} /></div>
             </div>
           </section>
