@@ -20,8 +20,6 @@ const StarRating = ({data}) => {
     console.log(data1)
   }
 
-  
-
   return (
     <>
     <div className="star-rating">
