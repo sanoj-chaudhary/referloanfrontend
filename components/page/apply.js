@@ -62,7 +62,6 @@ const apply = (props) => {
     }
   } else {
     var full_name = '';
-
     var phone = '';
     var first_name = '';
     var last_name = '';
@@ -71,8 +70,6 @@ const apply = (props) => {
   const otpData = {
     full_name, first_name, last_name, phone
   }
-
-
   const { values, handleBlur, setFieldValue, handleChange, handleSubmit, errors, touched, setFieldTouched } =
     useFormik({
       initialValues,
@@ -108,7 +105,6 @@ const apply = (props) => {
                   setApiResponse(resData.data.data.reference_key);
                 }
                 setStep(step + 1)
-                setValidationSchema(Yup.object().shape({ ..._validationSchema }));
                 if (typeof window !== 'undefined') {
                   window.localStorage.removeItem("token");
                   window.localStorage.removeItem("full_name");
@@ -117,12 +113,7 @@ const apply = (props) => {
               }
             } else {
               setStep(step + 1)
-              for (const property in initialValues) {
-                _validationSchema[property] = Yup.string().required();
-               
-              }
-              console.log('_validationSchema',_validationSchema,"<br />",initialValues)
-              setValidationSchema(Yup.object().shape({ ..._validationSchema }));
+
             }
             submitForm(values.pan);
             setActive(false)
@@ -144,12 +135,11 @@ const apply = (props) => {
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
-    setStep(0)
     for (const property in initialValues) {
-      _validationSchema[property] = Yup.string().required();
+      _validationSchema[property] = Yup.string().required('This is required field');
     }
     setValidationSchema(Yup.object().shape({ ..._validationSchema }));
-  }, [token, router])
+  }, [token, router, step])
 
   const mySentence = props.data[0].name.trim();
   const productName = mySentence.split(" ");
@@ -158,7 +148,6 @@ const apply = (props) => {
     return word[0].toUpperCase() + word.substring(1);
   }).join("_");
 
-  console.log("formSchema", props.form_schema)
   console.log("formSchema", props.form_schema)
 
   function submitForm(e) {
@@ -213,32 +202,23 @@ const apply = (props) => {
                           <div key={ind} className=" col-lg-4 col-md-6 col-12 mt-2" data-type={elem.type}>
 
                             <div className="d-none"> {paramName = elem.param_name.trim()}</div>
-                            <div className="d-none">{(otpData[elem.global_name] !== undefined || elem.is_visible == false ) ? '' : initialValues[elem.param_name] = ''}</div>
+                            <div className="d-none">{(otpData[elem.global_name] !== undefined || elem.is_visible == false) ? '' : initialValues[elem.param_name] = ''}</div>
 
-                            {/* {console.log('otpData',elem.param_name)} */}
                             {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
                               ? <>
                                 <div className="d-none">{otpData[elem.global_name] != '' ? preassignValue[elem.param_name] = otpData[elem.global_name] : ''}</div>
                                 <TextField
                                   fullWidth
-                                  
                                   inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
                                   required={elem.is_required}
-                                  className={`${elem.is_visible ? '' : 'd-none' }` }
+                                  className={`${elem.is_visible ? '' : 'd-none'}`}
                                   name={elem.param_name}
                                   label={elem.field_name}
                                   type={elem.type}
                                   onBlur={handleBlur}
-                                  // inputProps={otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
                                   error={touched[elem.param_name] && errors[elem.param_name] && true}
-                                  isValid={touched[elem.param_name] && !errors[elem.param_name]}
-                                  isInvalid={touched[elem.param_name] && errors[elem.param_name]}
                                   onChange={handleChange}
-                                  // value={otpData[elem.global_name]}
-                                  {...elem}
                                 />
-
-                                {/* { console.log(touched[elem.param_name]) } */}
                                 {errors[elem.param_name] && touched[elem.param_name] ? (
                                   <p className="form-error">{errors[elem.param_name]}</p>
                                 ) : null}
@@ -247,29 +227,24 @@ const apply = (props) => {
                             }
                             {elem.type === 'text' && elem.global_name === 'pan' &&
                               <>
-                                {/* <div className="d-none"> {paramName = elem.param_name}</div> */}
                                 <TextField
                                   fullWidth
-                                  inputProps={elem.patterns != '' ? { pattern: elem.patterns, value: values.paramName, title: "Please Fill Valid Pan Card" } : {}}
+                                  inputProps={elem.patterns != '' ? { pattern: elem.patterns, value: values.paramName, title: "Please Fill Valid Pan Card", style: { textTransform: "uppercase" } } : {}}
                                   required={elem.is_required}
                                   className={`${elem.is_visible ? '' : 'd-none'}`}
                                   name={elem.param_name}
                                   label={elem.field_name}
                                   type={elem.type}
-                                  inputProps={{ style: { textTransform: "uppercase" } }}
                                   onChange={(e) => {
                                     setFieldTouched(elem.param_name);
                                     setFieldValue([e.target.name], e.target.value.toUpperCase())
                                   }}
                                   error={touched[elem.param_name] && errors[elem.param_name] && true}
-                                  {...elem}
+
                                 />
-
-
                                 {errors[elem.param_name] && touched[elem.param_name] ? (
                                   <p className="form-error">{errors[elem.param_name]}</p>
                                 ) : null}
-
                               </>
                             }
 
@@ -306,13 +281,13 @@ const apply = (props) => {
                                 type={elem.type}
                                 error={touched[elem.param_name] && errors[elem.param_name] && true}
                                 onWheel={(e) => e.target.blur()}
-                              
+
                                 onChange={(e) => {
                                   setFieldTouched(elem.param_name);
                                   handleChange(e)
                                 }}
                               />
-                               {errors[elem.param_name] && touched[elem.param_name] ? (
+                                {errors[elem.param_name] && touched[elem.param_name] ? (
                                   <p className="form-error">{errors[elem.param_name]}</p>
                                 ) : null}
 
@@ -431,8 +406,7 @@ export default apply
 
 export function SelectField(props) {
 
-  console.log("select", props)
-  const { name, label, ParamOptions, handleChange } = props
+  const { values, name, label, ParamOptions, handleChange, param_name } = props
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
@@ -445,10 +419,15 @@ export function SelectField(props) {
           name={props.param_name}
           label={props.field_name}
           required
-          onChange={handleChange}
+          placeholder={props.field_name}
+          value={values.param_name}
+          onChange={(e) => {
+
+            handleChange(e)
+          }}
         >
           {ParamOptions.map((optn, ind) => (
-            <MenuItem key={ind} value={optn.value
+            <MenuItem key={optn.value} value={optn.value
             }>
               <em>{optn.name}</em>
             </MenuItem>
