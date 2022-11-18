@@ -34,7 +34,7 @@ const StarRating = ({ data }) => {
   return (
     <>
         <div className="ratingWrapper">
-          <span class="heading">Product Rating</span>
+          <span className="heading">Product Rating</span>
           <p>{ratinginfo['average_rating']}/5</p>
           
           {[...Array(5)].map((star, index) => {
@@ -57,70 +57,70 @@ const StarRating = ({ data }) => {
             
           <p>Total - {ratinginfo['total_ratings']} ratings</p>
 
-          <div class="row">
+          <div className="row">
             
             {/* Rating 5 */}
-            <div class="side">
+            <div className="side">
               <div>5 <span className="star fafa">&#9733;</span></div>
             </div>
-            <div class="middle">
-              <div class="bar-container">
-                <div class="bar" style={{ width: ratinginfo['total_rating_5']/ratinginfo['total_ratings']*100+'%'}}> </div>
+            <div className="middle">
+              <div className="bar-container">
+                <div className="bar" style={{ width: ratinginfo['total_rating_5']/ratinginfo['total_ratings']*100+'%'}}> </div>
               </div>
             </div>
-            <div class="side right">
+            <div className="side right">
               <div>{ratinginfo['total_rating_5']}</div>
             </div>
 
             {/* Rating 4 */}
-            <div class="side">
+            <div className="side">
               <div>4 <span className="star fafa">&#9733;</span></div>
             </div>
-            <div class="middle">
-              <div class="bar-container">
-                <div class="bar" style={{ width: ratinginfo['total_rating_4']/ratinginfo['total_ratings']*100+'%'}}></div>
+            <div className="middle">
+              <div className="bar-container">
+                <div className="bar" style={{ width: ratinginfo['total_rating_4']/ratinginfo['total_ratings']*100+'%'}}></div>
               </div>
             </div>
-            <div class="side right">
+            <div className="side right">
               <div>{ratinginfo['total_rating_4']}</div>
             </div>
 
             {/* Rating 3 */}
-            <div class="side">
+            <div className="side">
               <div>3 <span className="star fafa">&#9733;</span></div>
             </div>
-            <div class="middle">
-              <div class="bar-container">
-                <div class="bar" style={{ width:  ratinginfo['total_rating_3']/ratinginfo['total_ratings']*100+'%'}}></div>
+            <div className="middle">
+              <div className="bar-container">
+                <div className="bar" style={{ width:  ratinginfo['total_rating_3']/ratinginfo['total_ratings']*100+'%'}}></div>
               </div>
             </div>
-            <div class="side right">
+            <div className="side right">
               <div>{ratinginfo['total_rating_3']}</div>
             </div>
 
             {/* Rating 2 */}
-            <div class="side">
+            <div className="side">
               <div>2 <span className="star fafa">&#9733;</span></div>
             </div>
-            <div class="middle">
-              <div class="bar-container">
-                <div class="bar" style={{ width:  ratinginfo['total_rating_2']/ratinginfo['total_ratings']*100+'%'}}></div>
+            <div className="middle">
+              <div className="bar-container">
+                <div className="bar" style={{ width:  ratinginfo['total_rating_2']/ratinginfo['total_ratings']*100+'%'}}></div>
               </div>
             </div>
-            <div class="side right">
+            <div className="side right">
               <div>{ratinginfo['total_rating_2']}</div>
             </div>
 
             {/* Rating 1 */}
-            <div class="side">
+            <div className="side">
               <div>1 <span className="star fafa">&#9733;</span></div>
             </div>
-            <div class="middle">
-              <div class="bar-container">
-                <div class="bar" style={{ width: ratinginfo['total_rating_1']/ratinginfo['total_ratings']*100+'%'}}></div>
+            <div className="middle">
+              <div className="bar-container">
+                <div className="bar" style={{ width: ratinginfo['total_rating_1']/ratinginfo['total_ratings']*100+'%'}}></div>
               </div>
             </div>
-            <div class="side right">
+            <div className="side right">
               <div>{ratinginfo['total_rating_1']}</div>
             </div>
 
