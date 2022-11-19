@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { db } from './../../config/db'
+import { useRouter } from 'next/router';
 
 const StarRating = ({ data }) => {
 
@@ -18,6 +18,7 @@ const StarRating = ({ data }) => {
   }
 
   // Get Rating
+  const router = useRouter()
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [ratinginfo, setRatinginfo] = useState(0);
@@ -29,7 +30,7 @@ const StarRating = ({ data }) => {
 
   useEffect(() => {
     getRating()
-  },[])
+  },[router])
 
   return (
     <>
