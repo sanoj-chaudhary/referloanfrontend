@@ -349,12 +349,6 @@ const apply = (props) => {
           </div>
         </section>
 
-        <section>
-          <div className="faqSetion">
-            <div style={{ textAlign: 'center', fontSize: '30px' }}><StarRating data={props.data[0]} /></div>
-          </div>
-        </section>
-
         <div className="innerpage_bg">
           <section className="section_pad">
             <div className="container">
@@ -391,6 +385,12 @@ const apply = (props) => {
               </div>
             </div>
           </div> : ''}
+        </section>
+
+        <section>
+          <div className="faqSetion">
+            <div style={{ textAlign: 'center', fontSize: '30px' }}><StarRating data={props.data[0]} /></div>
+          </div>
         </section>
 
       </div>
