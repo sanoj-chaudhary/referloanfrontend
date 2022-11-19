@@ -42,8 +42,8 @@ export default async function handler(req, res) {
         return await getAllDataByCatId(req, res);
       }
     case "POST":
-      if (req.query.component == 'insert_search_info_local') {
-        return await insertSearchInfoLocal(req, res);
+      if (req.query.component == 'add-rating') {
+        return await insertRating(req, res);
       }
 
     default:
@@ -200,6 +200,16 @@ const GetRatingByBankProductId = async (req, res) => {
 
     const results = await db.query("SELECT * FROM `view_rating` WHERE `bank_product_id` = '"+bank_product_id +"' ");
     return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const insertRating = async (req, res) => {
+  try {
+    const results = await db.query("INSERT INTO `ratings` SET `bank_product_id` = '"+ req.body.bank_product_id +"' ,`session_id` = '"+ req.body.session_id +"' ,`rating` = '"+ req.body.rating +"'  ");
+    return res.status(200).json(results);
+    // {"fieldCount":0,"affectedRows":1,"insertId":11,"serverStatus":2,"warningCount":2,"message":"","protocol41":true,"changedRows":0}
   } catch (error) {
     return res.status(500).json({ error });
   }
