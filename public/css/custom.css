@@ -486,6 +486,25 @@ color: white !important;
   .ratingWrapper {
     width: 100% !important;
   }
+  .section_pad ul{
+    display: grid !important;
+    grid-template-columns: auto auto !important;
+    grid-column-gap: 10px !important;
+  }
+  .section_pad ul li{
+    width: 100% !important;
+  }
+}
+@media only screen and (max-width:767px) {
+ 
+  .section_pad ul{
+    display: grid !important;
+    grid-template-columns: auto !important;
+    grid-column-gap: 10px !important;
+  }
+  .section_pad ul li{
+    width: 100% !important;
+  }
 }
 
 
