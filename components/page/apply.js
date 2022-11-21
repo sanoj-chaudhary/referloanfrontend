@@ -164,7 +164,7 @@ const apply = (props) => {
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
   }
-
+  
   return (
     <>
       {loading && <Loader loading={loading} />}
@@ -201,7 +201,10 @@ const apply = (props) => {
                     <h3>{item.section_name}</h3>
                     <div className="row">
                       {item.forms.map((elem, ind) => (
-                        <div key={ind} className=" col-lg-4 col-md-6 col-12 mt-2" data-type={elem.type}>
+
+                      <>
+
+                        <div key={ind} className={`col-lg-4 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : values[elem.dependency] == elem.dependency_value ? '' : 'd-none'}`} data-type={elem.type}>
 
                           <div className="d-none"> {paramName = elem.param_name.trim()}</div>
                           <div className="d-none">{(otpData[elem.global_name] !== undefined || elem.is_visible == false) ? '' : initialValues[elem.param_name] = ''}</div>
@@ -324,6 +327,7 @@ const apply = (props) => {
 
                           {elem.type == 'checkbox' && <FormControlLabel className={` ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
                         </div>
+                        </>
                       ))}
                     </div>
                     <div className="search-button">
@@ -347,7 +351,7 @@ const apply = (props) => {
               <table className="table_cards_Table margin">
                 <tbody>
                   {props.specification.map((item, key) => (
-                    <tr>
+                    <tr key={key} >
                       <td>{item.title}</td>
                       <td>{item.value}</td>
                     </tr>
@@ -382,6 +386,8 @@ const apply = (props) => {
                     </h2>
                     <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                       <div className="accordion-body" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+
+                     
                         <div itemProp="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
                       </div>
                     </div>
@@ -405,7 +411,9 @@ export default apply
 
 export function SelectField(props) {
 
-  const { values, name, label, ParamOptions, handleChange, param_name } = props
+  const { values, name, label, ParamOptions, handleChange, param_name, dependency, dependency_value } = props
+
+  
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
@@ -414,14 +422,15 @@ export function SelectField(props) {
         <InputLabel id="demo-simple-select-standard-label">{props.field_name}</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
+         
           name={props.param_name}
           label={props.field_name}
           required
+        
+      
           placeholder={props.field_name}
           value={values.param_name}
           onChange={(e) => {
-
             handleChange(e)
           }}
         >
@@ -435,5 +444,9 @@ export function SelectField(props) {
       </FormControl>
     </>
   )
+
+
+
+ 
 }
 
