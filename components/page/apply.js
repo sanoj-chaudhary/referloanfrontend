@@ -344,16 +344,9 @@ const apply = (props) => {
           </div>
           <div className="loanStep__wrapper">
             <div className="loanForm__Container">
-              <table className="table_cards_Table margin">
-                <tbody>
-                  {props.specification.map((item, key) => (
-                    <tr>
-                      <td>{item.title}</td>
-                      <td>{item.value}</td>
-                    </tr>
+              {props.specification.map((item1, key) => (
+                    <div dangerouslySetInnerHTML={{ __html: item1.description }}></div>
                   ))}
-                </tbody>
-              </table>
             </div>
           </div>
         </section>
