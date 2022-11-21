@@ -349,9 +349,12 @@ const apply = (props) => {
           </div>
         </section>
 
-        <section>
-          <div className="row">
-            <div className="col-md-6">
+        <section className="cardOffer_area">
+          <div className="dealStep__leftArea">
+            <div className="ratingcomponent"><StarRating data={props.data[0]} /></div> 
+          </div>
+          <div className="loanStep__wrapper">
+            <div className="loanForm__Container">
               <table className="table_cards_Table margin">
                 <tbody>
                   {props.specification.map((item, key) => (
@@ -362,12 +365,6 @@ const apply = (props) => {
                   ))}
                 </tbody>
               </table>
-            </div>
-            <div className="col-md-2" >
-              &nbsp;
-            </div>
-            <div className="col-md-4" >
-              <div className="ratingcomponent"><StarRating data={props.data[0]} /></div>
             </div>
           </div>
         </section>

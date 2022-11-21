@@ -414,8 +414,6 @@ color: white !important;
   width: 100%;
   display: flow-root;
   margin: auto;
-  box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
-  padding: 33px;
 }
 
 .ratingWrapper .heading {
