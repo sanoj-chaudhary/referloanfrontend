@@ -411,11 +411,9 @@ color: white !important;
 /* rating bar */
 
 .ratingWrapper{
-  width: 30%;
+  width: 100%;
   display: flow-root;
   margin: auto;
-  box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
-  padding: 33px;
 }
 
 .ratingWrapper .heading {
@@ -473,6 +471,15 @@ color: white !important;
   border-radius: 15px;
 }
 
+.ratingcomponent{
+  font-size: 30px;
+  text-align: center;
+}
+
+table.table_cards_Table.margin{
+  margin:0px;
+}
+
 /* Individual bars */
 .ratingWrapper .bar-5 { border-radius: 15px; width: 60%; height: 18px; background-color: #04AA6D;}
 .ratingWrapper .bar-4 { border-radius: 15px; width: 30%; height: 18px; background-color: #2196F3;}
@@ -484,6 +491,25 @@ color: white !important;
 
 @media only screen and (max-width:991px) {
   .ratingWrapper {
+    width: 100% !important;
+  }
+  .section_pad ul{
+    display: grid !important;
+    grid-template-columns: auto auto !important;
+    grid-column-gap: 10px !important;
+  }
+  .section_pad ul li{
+    width: 100% !important;
+  }
+}
+@media only screen and (max-width:767px) {
+ 
+  .section_pad ul{
+    display: grid !important;
+    grid-template-columns: auto !important;
+    grid-column-gap: 10px !important;
+  }
+  .section_pad ul li{
     width: 100% !important;
   }
 }

@@ -119,7 +119,7 @@ const apply = (props) => {
                   window.localStorage.removeItem("full_name");
                   window.localStorage.removeItem("phone");
                 }
-                
+
               }
 
             } else {
@@ -188,7 +188,7 @@ const apply = (props) => {
 
             </div>
             <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
-            <ul>
+            {/* <ul>
               {props.specification.map((item, key) => (
                 <li key={key}>
                   <div className="price_row">
@@ -198,7 +198,7 @@ const apply = (props) => {
                   <p>{item.short_description}</p>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </div>
           <div className="loanStep__wrapper">
             <div className="loanForm__Container">
@@ -349,9 +349,23 @@ const apply = (props) => {
           </div>
         </section>
 
-        <section>
-          <div className="faqSetion">
-            <div style={{ textAlign: 'center', fontSize: '30px' }}><StarRating data={props.data[0]} /></div>
+        <section className="cardOffer_area">
+          <div className="dealStep__leftArea">
+            <div className="ratingcomponent"><StarRating data={props.data[0]} /></div> 
+          </div>
+          <div className="loanStep__wrapper">
+            <div className="loanForm__Container">
+              <table className="table_cards_Table margin">
+                <tbody>
+                  {props.specification.map((item, key) => (
+                    <tr>
+                      <td>{item.title}</td>
+                      <td>{item.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
 

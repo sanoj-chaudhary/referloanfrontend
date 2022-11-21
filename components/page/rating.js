@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { db } from './../../config/db'
+import { useRouter } from 'next/router';
 
 const StarRating = ({ data }) => {
 
@@ -13,23 +13,27 @@ const StarRating = ({ data }) => {
 
   // Insert Rating
   const addRating = async (index) => {
-    let data1 = { 'bank_product_id': data.bank_product_id, 'rating': index, 'session_id': 'sdee2344' }
-    const res = await axios.post(`https://api.referloan.in/api/add-rating/`, data1);
+    let data1 = { 'bank_product_id': data.bank_product_id, 'rating': index, 'session_id': Math.random().toString(36).substring(2,8+2) }
+    const res = await axios.post(`${process.env.APIHOST}/api/add-rating/`, data1);
+    //const res = await axios.post(`${process.env.APP_URL}/add-rating/`, data1);
+    getRating()
   }
 
   // Get Rating
+  const router = useRouter()
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [ratinginfo, setRatinginfo] = useState(0);
 
-  const getRating = async (index) => {
-    const response1 = await axios.get(`${process.env.APP_URL}/get_rating_bybpid/` + data.bank_product_id);
-    setRatinginfo(response1.data[0]);
+  const getRating = async () => {
+    await axios.get(`${process.env.APP_URL}/get_rating_bybpid/` + data.bank_product_id).then((response1) => {
+      setRatinginfo(response1.data[0]);
+    });
   }
 
   useEffect(() => {
     getRating()
-  },[])
+  },[router])
 
   return (
     <>
