@@ -188,17 +188,6 @@ const apply = (props) => {
 
             </div>
             <h2 style={{ textTransform: 'capitalize' }}>{props.data[0].name}</h2>
-            {/* <ul>
-              {props.specification.map((item, key) => (
-                <li key={key}>
-                  <div className="price_row">
-                    <label >{item.title}</label>
-                    <span> {item.value}</span>
-                  </div>
-                  <p>{item.short_description}</p>
-                </li>
-              ))}
-            </ul> */}
           </div>
           <div className="loanStep__wrapper">
             <div className="loanForm__Container">
@@ -351,7 +340,7 @@ const apply = (props) => {
 
         <section className="cardOffer_area">
           <div className="dealStep__leftArea">
-            <div className="ratingcomponent"><StarRating data={props.data[0]} /></div> 
+            <div className="ratingcomponent"><StarRating data={props.data[0]} ratinginfo1={props.ratingg} /></div> 
           </div>
           <div className="loanStep__wrapper">
             <div className="loanForm__Container">

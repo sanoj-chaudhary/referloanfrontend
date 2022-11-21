@@ -7,14 +7,14 @@ import ContentPage from '../components/page/content_page';
 import Apply from '../components/page/apply';
 import Error from '../components/page/error';
 
-function contentPage({ url, refer, Component, data, form_schema, specification, faq }) {
+function contentPage({ url, refer, Component, data, form_schema, specification, faq,ratingg }) {
 
   const router = useRouter();
   return (
     <>
       {Component == 'ContentPage' && <ContentPage data={data} faq={faq} />}
       {Component == 'ProductBankList' && <ProductBankList url={url} refer={refer} data={data} />}
-      {Component == 'Apply' && <Apply data={data} form_schema={form_schema} specification={specification} faq={faq} />}
+      {Component == 'Apply' && <Apply data={data} form_schema={form_schema} specification={specification} faq={faq} ratingg={ratingg} />}
       {Component == 'Error' && <Error data={data} />}
     </>
   )
@@ -35,6 +35,8 @@ export async function getServerSideProps(context) {
   // Apply Page
   let apply_response;
   let specification = '1';
+  let rating_response;
+  let ratingg = 1;
 
   // Product Bank Page
   let bank_product_id;
@@ -66,6 +68,14 @@ export async function getServerSideProps(context) {
         {
            faq = JSON.parse(JSON.stringify(content_response))
         }
+
+        rating_response = await db.query(" SELECT * FROM `view_rating` WHERE `bank_product_id` = '"+bank_product_id +"'  ");
+        
+        if(rating_response)
+        {
+           ratingg = JSON.parse(JSON.stringify(rating_response))
+        }
+
 
       } catch (error) {
         console.log('bank product id missing - can not call apply page')
@@ -107,7 +117,7 @@ export async function getServerSideProps(context) {
 
   data = JSON.parse(JSON.stringify(res))
 
-  return { props: { url, refer, Component, data, form_schema, specification, faq } }
+  return { props: { url, refer, Component, data, form_schema, specification, faq,ratingg } }
 }
 
 export default contentPage
