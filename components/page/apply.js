@@ -358,7 +358,6 @@ const apply = (props) => {
                     <tr>
                       <td>{item.title}</td>
                       <td>{item.value}</td>
-                      <td>{item.short_description}</td>
                     </tr>
                   ))}
                 </tbody>
