@@ -31,7 +31,7 @@ const CustomApply = (props) => {
     marital_status: Yup.string().required('Please select marital status'),
     pan: Yup.string().min(10).max(10).required("Please fill the pan card").matches(/([A-Z]){5}([0-9]){4}([A-Z]){1}$/, "Invalid Pancard"),
     residence_type: Yup.string().required('Please select residence type'),
-    residence_pincode: Yup.string().min(6).max(6).required('Please enter pincode'),
+    residence_pincode: Yup.string().min(6).max(6).required('Please enter pincode').matches(/^[0-9]+$/, "Must be only digits"),
     qualification: Yup.string().required('Please select residence type'),
     occupation: Yup.string().required('Please select occupation'),
   });
