@@ -15,8 +15,8 @@ const StarRating = ({ data,ratinginfo1 }) => {
   // Insert Rating
   const addRating = async (index) => {
     let data1 = { 'bank_product_id': data.bank_product_id, 'rating': index, 'session_id': Math.random().toString(36).substring(2,8+2) }
-    //const res = await axios.post(`${process.env.APIHOST}/api/add-rating/`, data1);
-    const res = await axios.post(`${process.env.APP_URL}/add-rating/`, data1);
+    const res = await axios.post(`${process.env.APIHOST}/api/add-rating/`, data1);
+    //const res = await axios.post(`${process.env.APP_URL}/add-rating/`, data1);
     getRating()
   }
 
