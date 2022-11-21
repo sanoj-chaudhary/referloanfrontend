@@ -2,10 +2,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useRouter } from 'next/router';
 
-const StarRating = ({ data }) => {
+const StarRating = ({ data,ratinginfo1 }) => {
 
   const mySentence = data.name.trim();
   const productName = mySentence.split(" ");
+
 
   const newProductName = productName.map((word) => {
     return word[0].toUpperCase() + word.substring(1);
@@ -14,8 +15,8 @@ const StarRating = ({ data }) => {
   // Insert Rating
   const addRating = async (index) => {
     let data1 = { 'bank_product_id': data.bank_product_id, 'rating': index, 'session_id': Math.random().toString(36).substring(2,8+2) }
-    const res = await axios.post(`${process.env.APIHOST}/api/add-rating/`, data1);
-    //const res = await axios.post(`${process.env.APP_URL}/add-rating/`, data1);
+    //const res = await axios.post(`${process.env.APIHOST}/api/add-rating/`, data1);
+    const res = await axios.post(`${process.env.APP_URL}/add-rating/`, data1);
     getRating()
   }
 
@@ -23,11 +24,11 @@ const StarRating = ({ data }) => {
   const router = useRouter()
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
-  const [ratinginfo, setRatinginfo] = useState(0);
+  let [ratinginfo, setRatinginfo] = useState(ratinginfo1[0]);
 
   const getRating = async () => {
     await axios.get(`${process.env.APP_URL}/get_rating_bybpid/` + data.bank_product_id).then((response1) => {
-      setRatinginfo(response1.data[0]);
+    setRatinginfo(response1.data[0]);
     });
   }
 
