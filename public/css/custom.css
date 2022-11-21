@@ -411,7 +411,7 @@ color: white !important;
 /* rating bar */
 
 .ratingWrapper{
-  width: 30%;
+  width: 100%;
   display: flow-root;
   margin: auto;
   box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
@@ -471,6 +471,15 @@ color: white !important;
   text-align: center;
   color: white;
   border-radius: 15px;
+}
+
+.ratingcomponent{
+  font-size: 30px;
+  text-align: center;
+}
+
+table.table_cards_Table.margin{
+  margin:0px;
 }
 
 /* Individual bars */
