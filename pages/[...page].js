@@ -30,18 +30,18 @@ export async function getServerSideProps(context) {
 
   // Content Page
   let content_response;
-  let faq = '1';
+  let faq = [];
 
   // Apply Page
   let apply_response;
-  let specification = '1';
+  let specification = [];
   let rating_response;
   let ratingg = 1;
 
   // Product Bank Page
   let bank_product_id;
   let form;
-  let form_schema = '1';
+  let form_schema = [];
 
 
   url = url.join("/");
