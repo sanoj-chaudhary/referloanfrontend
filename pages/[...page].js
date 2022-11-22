@@ -45,14 +45,13 @@ export async function getServerSideProps(context) {
 
 
   url = url.join("/");
-  console.log(ref)
 
   const res = await db.query("SELECT * FROM `pages` WHERE `slug` =  '" + url + "' ");
   if (res.length != 0) {
     bank_product_id = res[0].bank_product_id;
     if (bank_product_id != null) {
       try {
-        form = await axios.get(`https://api.referloan.in/api/sections/form/` + bank_product_id);
+        form = await axios.get(`${process.env.APIHOST} /api/sections/form/` + bank_product_id);
         form_schema = form.data
 
         apply_response = await db.query("SELECT * FROM `product_bank_specifications` WHERE product_bank_specifications.bank_product_id =  '" + bank_product_id + "' ");
