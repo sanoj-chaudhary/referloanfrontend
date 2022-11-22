@@ -49,7 +49,7 @@ const apply = (props) => {
   let initialValues = {}
   let _validationSchema = {};
   let paramName;
-
+console.log(props)
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
     var phone = window.localStorage.getItem("phone");
@@ -351,7 +351,7 @@ const apply = (props) => {
 
               <table className="table_cards_Table margin">
                 <tbody>
-                  {props.specification.map((item, key) => (
+                  {props.specification.length !=0 && props.specification.map((item, key) => (
                     <tr key={key} >
                       <td>{item.title}</td>
                       <td>{item.value}</td>
@@ -373,7 +373,7 @@ const apply = (props) => {
         </div>
 
         <section>
-          {props.faq != '' ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
+          {props.faq.length != 0 ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
             <h3>FREQUENTLY ASKED QUESTIONS</h3>
             <h2>Have a question? We've got answers!</h2>
             <div className="faq_row">
