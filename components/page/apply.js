@@ -348,6 +348,7 @@ const apply = (props) => {
           </div>
           <div className="loanStep__wrapper">
             <div className="loanForm__Container">
+
               <table className="table_cards_Table margin">
                 <tbody>
                   {props.specification.map((item, key) => (
@@ -355,9 +356,10 @@ const apply = (props) => {
                       <td>{item.title}</td>
                       <td>{item.value}</td>
                     </tr>
+
                   ))}
-                </tbody>
-              </table>
+                  </tbody>
+                  </table>
             </div>
           </div>
         </section>

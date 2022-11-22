@@ -55,7 +55,7 @@ export async function getServerSideProps(context) {
         form = await axios.get(`https://api.referloan.in/api/sections/form/` + bank_product_id);
         form_schema = form.data
 
-        apply_response = await db.query("SELECT * FROM `bank_product_specifications` WHERE bank_product_specifications.bank_product_id =  '" + bank_product_id + "' AND `status` = '1' ORDER BY `order` ");
+        apply_response = await db.query("SELECT * FROM `product_bank_specifications` WHERE product_bank_specifications.bank_product_id =  '" + bank_product_id + "' ");
        
         if(apply_response)
         {
