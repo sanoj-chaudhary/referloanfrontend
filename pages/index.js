@@ -1,11 +1,17 @@
 import Home from './../components/home'
 import { db } from './../config/db'
+import { useState, useEffect } from "react";
+import Loader from "./../components/page/loader";
 
 export default function Index({ partner,testimonial,loanProduct,creditProduct }) {
 
-
+  const [loading, setLoading] = useState(true)
+ useEffect(() => {
+ setLoading(false)
+ }, [])
   return (
     <>
+      {loading && <Loader loading={loading} />}
       <Home partner={partner}  testimonial={testimonial}  loanProduct={loanProduct} creditProduct={creditProduct} />
     </>
   )
