@@ -37,7 +37,6 @@ const apply = (props) => {
   const [step, setStep] = useState(0)
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
-
   const [loading, setLoading] = useState(true)
   const [userValues, setUserValues] = useState({});
   const [serversidemsg, setServerSideMsg] = useState('')
@@ -49,7 +48,7 @@ const apply = (props) => {
   let initialValues = {}
   let _validationSchema = {};
   let paramName;
-console.log(props)
+
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
     var phone = window.localStorage.getItem("phone");
@@ -201,10 +200,9 @@ console.log(props)
                     <h3>{item.section_name}</h3>
                     <div className="row">
                       {item.forms.map((elem, ind) => (
-
                       <>
 
-                        <div key={ind} className={`col-lg-4 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : values[elem.dependency] == elem.dependency_value ? '' : 'd-none'}`} data-type={elem.type}>
+                        <div key={ind} className={`col-lg-6 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : values[elem.dependency] == elem.dependency_value ? '' : 'd-none'}`} data-type={elem.type}>
 
                           <div className="d-none"> {paramName = elem.param_name.trim()}</div>
                           <div className="d-none">{(otpData[elem.global_name] !== undefined || elem.is_visible == false) ? '' : initialValues[elem.param_name] = ''}</div>
@@ -447,8 +445,5 @@ export function SelectField(props) {
     </>
   )
 
-
-
- 
 }
 
