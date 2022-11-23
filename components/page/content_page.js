@@ -54,7 +54,7 @@ const midcontent = ({ data, faq }) => {
                   </div>
 
                   <div className="faqImg">
-                    <img src="/images/faq.png" alt="" />
+                    <img src="/images/faq.webp" alt="" />
                   </div>
                 </div>
               </div>:''}
