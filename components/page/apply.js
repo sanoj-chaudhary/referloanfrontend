@@ -381,7 +381,7 @@ const apply = (props) => {
             <div className="faq_row">
               <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
 
-                {/* {props.faq.map((item, key) => (
+                {props.faq.map((item, key) => (
                   <div key={key} className="accordion-item" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
                     <h2 className="accordion-header" id={'flush-heading' + key} itemProp="name">
                       <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse' + key} aria-expanded="false" aria-controls={'flush-collapse' + key}>
@@ -396,7 +396,7 @@ const apply = (props) => {
                       </div>
                     </div>
                   </div>
-                ))} */}
+                ))}
               </div>
 
               <div className="faqImg">
