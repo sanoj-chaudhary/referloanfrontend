@@ -65,7 +65,7 @@ const formElement = ({data}) => {
       </div>
       <div className="loanType" >
         <select onChange={handleChange} name="employemnt_type" value={values.employemnt_type} required>
-          <option defaultValue='' >Profession Type </option>
+          <option defaultValue='' disabled>Profession Type </option>
           <option value="Salaried">Salaried</option>
           <option value="Self employed">Self employed</option>
         </select>
