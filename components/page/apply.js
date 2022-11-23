@@ -49,7 +49,7 @@ const apply = (props) => {
   let initialValues = {}
   let _validationSchema = {};
   let paramName;
-console.log(props)
+
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
     var phone = window.localStorage.getItem("phone");
@@ -351,7 +351,7 @@ console.log(props)
 
               <table className="table_cards_Table margin">
                 <tbody>
-                  { props.specification.map((item, key) => (
+                  {props.specification !=1 &&  props.specification.map((item, key) => (
                     <tr key={key} >
                       <td>{item.title}</td>
                       <td>{item.value}</td>
@@ -373,13 +373,15 @@ console.log(props)
         </div>
 
         <section>
-          {props.faq ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
+
+          
+          {props.faq !=1 ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
             <h3>FREQUENTLY ASKED QUESTIONS</h3>
             <h2>Have a question? We've got answers!</h2>
             <div className="faq_row">
               <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
 
-                {props.faq.map((item, key) => (
+                {/* {props.faq.map((item, key) => (
                   <div key={key} className="accordion-item" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
                     <h2 className="accordion-header" id={'flush-heading' + key} itemProp="name">
                       <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={'#flush-collapse' + key} aria-expanded="false" aria-controls={'flush-collapse' + key}>
@@ -394,7 +396,7 @@ console.log(props)
                       </div>
                     </div>
                   </div>
-                ))}
+                ))} */}
               </div>
 
               <div className="faqImg">
