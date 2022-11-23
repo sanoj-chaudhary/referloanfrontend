@@ -34,7 +34,7 @@ const getToken = () => {
 }
 const apply = (props) => {
   const router = useRouter()
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(0)
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
 
@@ -375,8 +375,10 @@ const apply = (props) => {
         </div>
 
         <section>
-          {props.faq.length != 0 ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
-            <h3>FREQUENTLY ASKED QUESTIONS</h3>
+
+          
+          {props.faq !=1 ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
+            <h3>FREQUENTLY ASKED QUESTIONS</h3> 
             <h2>Have a question? We've got answers!</h2>
             <div className="faq_row">
               <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
