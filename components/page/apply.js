@@ -351,7 +351,7 @@ console.log(props)
 
               <table className="table_cards_Table margin">
                 <tbody>
-                  {props.specification.length !=0 && props.specification.map((item, key) => (
+                  { props.specification.map((item, key) => (
                     <tr key={key} >
                       <td>{item.title}</td>
                       <td>{item.value}</td>
@@ -373,7 +373,7 @@ console.log(props)
         </div>
 
         <section>
-          {props.faq.length != 0 ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
+          {props.faq ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
             <h3>FREQUENTLY ASKED QUESTIONS</h3>
             <h2>Have a question? We've got answers!</h2>
             <div className="faq_row">
