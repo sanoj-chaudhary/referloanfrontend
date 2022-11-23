@@ -376,7 +376,7 @@ const apply = (props) => {
 
           
           {props.faq !=1 ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
-            <h3>FREQUENTLY ASKED QUESTIONS</h3>
+            <h3>FREQUENTLY ASKED QUESTIONS</h3> 
             <h2>Have a question? We've got answers!</h2>
             <div className="faq_row">
               <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
