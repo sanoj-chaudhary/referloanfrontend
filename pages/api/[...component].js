@@ -233,15 +233,31 @@ const getAllDataByCatId = async (req, res) => {
     let hierarchy = result1[0]['hierarchy'];
     let results;
 
+    let query_product;
+    let query_bank_product;
+    let product_id;
+
     if(hierarchy=='Product_BankProduct')
     {
-      results = await db.query(" SELECT * FROM `view_product` WHERE `cat_id` = '" + catid + "' AND `status` = '1' ORDER BY `searial_by` ");
+        query_product = await db.query("SELECT * FROM `view_product` WHERE `cat_id` = '" + catid + "' AND `status` = '1' ORDER BY `searial_by` ");
+
+        if (query_product) {
+          for (let j in query_product) 
+          {
+             product_id = query_product[j].id;
+           
+             query_bank_product = await db.query("SELECT *, IF(searial_by IS NULL, 99999, searial_by) as order_by FROM `view_bank_product` WHERE `status`='1' and `product_id` = '" + product_id + "' ORDER BY order_by  ");
+             query_product[j]['bank_product'] = query_bank_product;
+          }
+        }
+        return res.status(200).json(query_product);
     }
     else
     {
       results = await db.query("SELECT * FROM `pages` WHERE `categories_id` = '" + catid + "' AND status = '1' ");
+      return res.status(200).json(results);
     }
-    return res.status(200).json(results);
+    
   } catch (error) {
     return res.status(500).json({ error });
   }
