@@ -162,7 +162,7 @@ const CustomApply = (props) => {
             <div className="search-button"><button className="mt-4" type="submit" >Save & Next</button></div>
           </>
         )}
-        {data.length != 0 && data.length == step ? <Thanks product={props.product} /> : ""}
+        {data.length != 0 && data.length == step ? <Thanks product={props.product} result={'custom'} /> : ""}
 
 
       </form>

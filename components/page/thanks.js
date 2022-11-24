@@ -18,7 +18,9 @@ const Thanks = ({product,result}) => {
     <div class="jumbotron text-center">
   <h1 class="display-3">Thank You!</h1>
   <p class="lead">Apply successfully for <span style={{ textTransform: 'capitalize' }}>{product}</span></p>
-  <div className="fw-bold">Your reference number : {!result?random:result} </div>
+
+  {result != 'custom' && <div className="fw-bold">Your reference number : {!result?random:result} </div> }
+
   <hr />
   
   <p>

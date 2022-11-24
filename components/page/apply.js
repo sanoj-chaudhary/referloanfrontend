@@ -46,12 +46,12 @@ const apply = (props) => {
   const [apiResponse, setApiResponse] = useState('')
 
   let preassignValue = {}
-  let initialValues = {}
   let _validationSchema = {};
   let paramName;
   let flag = 0;
   let dependency = []
   let dependency_value = []
+  let initialValues = {}
 
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
@@ -76,7 +76,7 @@ const apply = (props) => {
   const { values, handleBlur, setFieldValue, handleChange, handleSubmit, errors, touched, setFieldTouched } =
     useFormik({
       initialValues,
-      validationSchema: validationSchema,
+      validationSchema: '',
       onSubmit: async (values, actions) => {
         try {
 
@@ -143,17 +143,24 @@ const apply = (props) => {
     });
 
   useEffect(() => {
+    setData();
+    return () => {
+      setLoading()
+      setServerSideStatus(); // This worked for me
+      setServerSideMsg(); // This worked for me
+    };
+
+   
+  }, [token, router, step])
+
+  const setData = ()=>{
     setLoading(false)
     setServerSideStatus(false)
     setServerSideMsg('')
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
-    for (const property in initialValues) {
-      _validationSchema[property] = Yup.string().required('This is required field');
-    }
-    setValidationSchema(Yup.object().shape({ ..._validationSchema }));
-  }, [token, router, step])
+  }
 
   const mySentence = props.data[0].name.trim();
   const productName = mySentence.split(" ");
@@ -167,7 +174,6 @@ const apply = (props) => {
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
   }
-
 
   return (
     <>
@@ -219,10 +225,10 @@ const apply = (props) => {
                                 <div key={temp} className="d-none">{values[dependency[key]] !== dependency_value[key] ? flag = 1 : ''}</div>
                               ))
                             }
-                            <div  className={`col-lg-6 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : flag ? 'd-none' : ''}`}>
-                             
+                            <div className={`col-lg-6 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : flag ? `d-none  ` : ''}`}>
+                            
                               <div className="d-none"> {paramName = elem.param_name.trim()}</div>
-                              <div className="d-none">{(otpData[elem.global_name] !== undefined || elem.is_visible == false) ? '' : initialValues[elem.param_name] = ''}</div>
+                              
 
                               {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
                                 ? <>
@@ -376,9 +382,9 @@ const apply = (props) => {
 
         <section>
 
-          
-          {props.faq !=1 ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
-            <h3>FREQUENTLY ASKED QUESTIONS</h3> 
+
+          {props.faq != 1 ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
+            <h3>FREQUENTLY ASKED QUESTIONS</h3>
             <h2>Have a question? We've got answers!</h2>
             <div className="faq_row">
               <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">
@@ -415,7 +421,7 @@ export default apply
 
 export function SelectField(props) {
 
-  const { values, name, label, ParamOptions, handleChange, param_name, dependency, dependency_value } = props
+  const { values, name, label, ParamOptions, handleChange, param_name, dependency, dependency_value, is_required } = props
 
 
   return (
@@ -428,12 +434,12 @@ export function SelectField(props) {
           labelId="demo-simple-select-standard-label"
 
           name={props.param_name}
-          label={props.field_name}
-          required
+          label={props.field_name }
+          required={is_required}
 
 
           placeholder={props.field_name}
-          value={values.param_name}
+          value={'' || values.param_name}
           onChange={(e) => {
             handleChange(e)
           }}

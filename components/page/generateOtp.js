@@ -125,10 +125,17 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     });
 
   useEffect(() => {
-    setLoading(false)
-    setBankProductId(data.bank_product_id)
+    setState();
+    return () => {
+      setLoading()
+      setBankProductId(); // This worked for me
+    };
   }, [data])
 
+  const setState = () =>{
+    setLoading(false)
+    setBankProductId(data.bank_product_id)
+  }
 
   return (
     <>
