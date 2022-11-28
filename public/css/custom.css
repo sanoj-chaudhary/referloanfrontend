@@ -514,4 +514,8 @@ table.table_cards_Table.margin{
   }
 }
 
+@media only screen and (max-width:991px) {
+  #apply-banner{display: none;}
+}
+
 
