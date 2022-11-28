@@ -147,7 +147,7 @@ const deleteSession = () =>{
                         </li>
                         <li>             
                           <span>Fees</span>{JSON.parse(item.bankProductInfo)['fee']} {JSON.parse(item.bankProductInfo)['processing_fee'] == 'fixed'?" %":"" }
-                        </li>
+                        </li> 
                       </ul>
                     </div>}
 
