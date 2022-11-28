@@ -175,6 +175,14 @@ const apply = (props) => {
     document.getElementById("dynamicMyForm").reset();
   }
 
+  // Show Banner
+  let banner='';
+  if(props.data[0].slug=='loans/abhi-loans-against-mutual-fund' || props.data[0].slug=='loans/abhi-loans-against-shares')
+  {
+    banner = "/uploads/product_bank/"+newProductName+"_banner.webp";
+  }
+
+
   return (
     <>
       {loading && <Loader loading={loading} />}
@@ -184,6 +192,10 @@ const apply = (props) => {
           <h3>Start with <span style={{ textTransform: 'capitalize' }}>{props.data[0].name}</span> in few steps</h3>
           <p>Please Enter your mobile number and name to generate OTP</p>
         </div>
+
+        {banner && <div className="applyHeaderCard text-center p-4" id="apply-banner">
+        <img src={banner} />
+        </div>}
 
         <section className="cardOffer_area">
           <div className="dealStep__leftArea">
