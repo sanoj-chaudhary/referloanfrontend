@@ -15,7 +15,7 @@ import { TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 
 export default function ResponsiveDialog({ open, setOpen, data, response }) {
-    // console.log(response['forms']);s
+    console.log(data);
     // console.log("response",response.forms[0])
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
@@ -31,7 +31,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
     let initialValues = {}
 
     const { values, handleBlur, setFieldValue, handleChange, handleSubmit, errors, touched, setFieldTouched } =
-    useFormik({      initialValues,
+    useFormik({initialValues,
       validationSchema: '',
       onSubmit: async (values, actions) => {
         alert('product')
@@ -59,6 +59,9 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
                         <DialogTitle id="responsive-dialog-title" className='px-0'>
                           Fill  Basic information
                         </DialogTitle>
+                        <form>
+                          
+                        </form>
 
                         <form>
                         {response && response.forms.map((elem, key) => (

@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import ResponsiveDialog from './dialogBox'
 const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServerSideStatus, serversidemsg, serversideStatus, utmData }) => {
+  console.log("data", data);
   const router = useRouter()
   let utmId = '';
   const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
