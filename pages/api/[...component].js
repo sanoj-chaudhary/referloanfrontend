@@ -33,6 +33,9 @@ export default async function handler(req, res) {
       if (req.query.component[0] == 'get_rating_bybpid') {
         return await GetRatingByBankProductId(req, res);
       }
+      if (req.query.component[0] == 'get_product_bycatid') {
+        return await GetProductByCatId(req, res);
+      }
 
       // Mobile APP API
       if (req.query.component == 'allcategory') {
