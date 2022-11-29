@@ -390,11 +390,16 @@ const apply = (props) => {
               <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
             </div>
           </section>
+
+          {props.specification[0].contact_status=='1' &&
+            <section className="section_pad">
+              <div className="container">
+                <div dangerouslySetInnerHTML={{ __html: props.specification[0].contact_detail }}></div>
+              </div>
+            </section>}
         </div>
 
         <section>
-
-
           {props.faq != 1 ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
             <h3>FREQUENTLY ASKED QUESTIONS</h3>
             <h2>Have a question? We've got answers!</h2>
