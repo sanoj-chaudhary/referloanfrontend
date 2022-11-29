@@ -134,7 +134,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
 
     const checkEligibility =async()=>{
       try {
-        const res = await axios.get(`${process.env.APIHOST}/api/productsections/form/7`);
+        const res = await axios.get(`${process.env.APIHOST}/api/productsections/form/${data.bank_product_id}`);
         if(res.data[0]){
           setOpen(true)
           setResponse(res.data[0])
@@ -155,11 +155,11 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     }
   }, [data])
 
-  console.log("response1",response)
+ 
   return (
     <>
       {loading && <Loader />}
-{open && <ResponsiveDialog {...{setOpen,open,response}} />}
+{open && <ResponsiveDialog {...{setOpen,open,response,data}} />}
   
       {!otpStatus ?
         <form onSubmit={handleSubmit}>

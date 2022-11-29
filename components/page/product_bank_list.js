@@ -63,7 +63,7 @@ const deleteSession = () =>{
         setProducts(data2.data)
 
       } else {
-        alert('product bank list - failed')
+ 
       }
 
       const response3 = await axios.get(`${process.env.APP_URL}/get_product_by_catid/` + cat_id);
@@ -71,7 +71,7 @@ const deleteSession = () =>{
       setProductByCat(data3)
     }
     catch (error) {
-      alert('product info - failed')
+  
       setLoading(false)
     }
   }
