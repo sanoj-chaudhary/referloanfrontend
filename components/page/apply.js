@@ -166,6 +166,15 @@ const apply = (props) => {
     document.getElementById("dynamicMyForm").reset();
   }
   
+
+  // Show Banner
+  let banner='';
+  if(props.data[0].slug=='loans/abhi-loans-against-mutual-fund' || props.data[0].slug=='loans/abhi-loans-against-shares')
+  {
+    banner = "/uploads/product_bank/"+newProductName+"_banner.webp";
+  }
+
+
   return (
     <>
       {loading && <Loader loading={loading} />}
@@ -175,6 +184,10 @@ const apply = (props) => {
           <h3>Start with <span style={{ textTransform: 'capitalize' }}>{props.data[0].name}</span> in few steps</h3>
           <p>Please Enter your mobile number and name to generate OTP</p>
         </div>
+
+        {banner && <div className="applyHeaderCard text-center p-4" id="apply-banner">
+        <img src={banner} />
+        </div>}
 
         <section className="cardOffer_area">
           <div className="dealStep__leftArea">
@@ -371,13 +384,18 @@ const apply = (props) => {
               <div dangerouslySetInnerHTML={{ __html: props.data[0].description }}></div>
             </div>
           </section>
+
+          {props.specification[0].contact_status=='1' &&
+            <section className="section_pad">
+              <div className="container">
+                <div dangerouslySetInnerHTML={{ __html: props.specification[0].contact_detail }}></div>
+              </div>
+            </section>}
         </div>
 
         <section>
-
-          
-          {props.faq !=1 ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
-            <h3>FREQUENTLY ASKED QUESTIONS</h3> 
+          {props.faq != 1 ? <div className="faqSetion" itemScope itemType="https://schema.org/FAQPage">
+            <h3>FREQUENTLY ASKED QUESTIONS</h3>
             <h2>Have a question? We've got answers!</h2>
             <div className="faq_row">
               <div className="accordion accordion-flush faqAccordion " id="accordionFlushExample">

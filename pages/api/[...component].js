@@ -45,6 +45,9 @@ export default async function handler(req, res) {
       if (req.query.component == 'add-rating') {
         return await insertRating(req, res);
       }
+      if (req.query.component == 'get_ids_by_slug') {
+        return await GetIdsBySlug(req, res);
+      }
 
     default:
       return res.status(400).send("Method not allowed");
@@ -64,6 +67,19 @@ const GetProductBySlug = async (req, res) => {
        slug = req.query.component[1];
     }
     const results = await db.query("SELECT * FROM `view_product` WHERE `slug` = '"+slug +"' ");
+    return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const GetIdsBySlug = async (req, res) => {
+  try {
+    let slug;
+
+    slug = req.body.slug
+
+    const results = await db.query("SELECT id,name,slug,categories_id,product_id,bank_product_id,bank_id FROM `pages` WHERE `slug` = '"+slug +"' ");
     return res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ error });
