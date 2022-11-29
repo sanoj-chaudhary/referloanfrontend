@@ -24,7 +24,7 @@ export async function getServerSideProps() {
   const testimonialRes = await db.query("SELECT * FROM `testimonials` WHERE `is_active` = '1' ");
   const testimonial = JSON.parse(JSON.stringify(testimonialRes))
 
-  const res = await db.query("SELECT logo_path,name FROM `partners` WHERE `is_active` = '1' ");
+  const res = await db.query("SELECT logo_path,name,url FROM `partners` WHERE `is_active` = '1' ");
   const partner = JSON.parse(JSON.stringify(res))
 
   // / Loan - 2, CC - 1, Other - 7
