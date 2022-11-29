@@ -32,7 +32,7 @@ const formElement = ({data}) => {
 
     const searchProduct = async (e) =>{
       e.preventDefault()
-      
+
       let hit;
       try {
           if(values.employemnt_type=='Salaried')

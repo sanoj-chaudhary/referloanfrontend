@@ -12,9 +12,9 @@ function contentPage({ url, refer, Component, data, form_schema, specification, 
   const router = useRouter();
   return (
     <>
-      {Component == 'ContentPage' && <ContentPage data={data} faq={faq} />}
+      {Component == 'ContentPage' && <ContentPage {...{data,faq}}  />}
       {Component == 'ProductBankList' && <ProductBankList url={url} refer={refer} data={data} />}
-      {Component == 'Apply' && <Apply data={data} form_schema={form_schema} specification={specification} faq={faq} ratingg={ratingg} />}
+      {Component == 'Apply' && <Apply {...{data,form_schema,specification}} data={data} form_schema={form_schema} specification={specification} faq={faq} ratingg={ratingg} />}
       {Component == 'Error' && <Error data={data} />}
     </>
   )

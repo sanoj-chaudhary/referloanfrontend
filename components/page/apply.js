@@ -15,6 +15,7 @@ import Loader from "./loader";
 import Thanks from "./thanks";
 import { useRouter } from 'next/router';
 import CustomApply from './customApply';
+import DialogBox from "./dialogBox";
 //import $ from 'jQuery';
 import FormData from 'form-data'
 import StarRating from './rating';
@@ -46,12 +47,9 @@ const apply = (props) => {
   const [apiResponse, setApiResponse] = useState('')
 
   let preassignValue = {}
+  let initialValues = {}
   let _validationSchema = {};
   let paramName;
-  let flag = 0;
-  let dependency = []
-  let dependency_value = []
-  let initialValues = {}
 
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
@@ -76,7 +74,7 @@ const apply = (props) => {
   const { values, handleBlur, setFieldValue, handleChange, handleSubmit, errors, touched, setFieldTouched } =
     useFormik({
       initialValues,
-      validationSchema: '',
+      validationSchema: validationSchema,
       onSubmit: async (values, actions) => {
         try {
 
@@ -143,24 +141,17 @@ const apply = (props) => {
     });
 
   useEffect(() => {
-    setData();
-    return () => {
-      setLoading()
-      setServerSideStatus(); // This worked for me
-      setServerSideMsg(); // This worked for me
-    };
-
-   
-  }, [token, router, step])
-
-  const setData = ()=>{
     setLoading(false)
     setServerSideStatus(false)
     setServerSideMsg('')
     if (typeof window !== 'undefined') {
       setToken(window.localStorage.getItem("token"))
     }
-  }
+    for (const property in initialValues) {
+      _validationSchema[property] = Yup.string().required('This is required field');
+    }
+    setValidationSchema(Yup.object().shape({ ..._validationSchema }));
+  }, [token, router, step])
 
   const mySentence = props.data[0].name.trim();
   const productName = mySentence.split(" ");
@@ -174,6 +165,7 @@ const apply = (props) => {
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
   }
+  
 
   // Show Banner
   let banner='';
@@ -217,155 +209,148 @@ const apply = (props) => {
               {(token == '' || token == null) && <GenerateOtp utmData={props.form_schema.length != 0 ? props.form_schema[0].forms[0] : ''} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setToken={setToken} />
               }
 
-              {(token != null || token != undefined) &&
+              {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
+                {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
+                  <div key={index} className=" container">
+                    <h3>{item.section_name}</h3>
+                    <div className="row">
+                      {item.forms.map((elem, ind) => (
 
-                <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
-                  {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
+                      <>
 
-                    <div key={index} className=" container">
-                      <h3>{item.section_name}</h3>
-                      <div className="row">
+                        <div key={ind} className={`col-lg-4 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : values[elem.dependency] == elem.dependency_value ? '' : 'd-none'}`} data-type={elem.type}>
 
-                        {item.forms.map((elem, ind) => (
+                          <div className="d-none"> {paramName = elem.param_name.trim()}</div>
+                          <div className="d-none">{(otpData[elem.global_name] !== undefined || elem.is_visible == false) ? '' : initialValues[elem.param_name] = ''}</div>
 
-                          <>
-                            {<div className="d-none">{dependency = elem.dependency.split(',')}</div>}
-                            {<div className="d-none">{dependency_value = elem.dependency_value.split(',')}</div>}
-                            {<div className="d-none">{flag = 0}</div>}
-                            {
-                              dependency.map((temp, key) => (
-                                <div key={temp} className="d-none">{values[dependency[key]] !== dependency_value[key] ? flag = 1 : ''}</div>
-                              ))
-                            }
-                            <div className={`col-lg-6 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : flag ? `d-none  ` : ''}`}>
-                            
-                              <div className="d-none"> {paramName = elem.param_name.trim()}</div>
-                              
-
-                              {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
-                                ? <>
-                                  <div className="d-none">{otpData[elem.global_name] != '' ? preassignValue[elem.param_name] = otpData[elem.global_name] : ''}</div>
-                                  <TextField
-                                    fullWidth
-                                    inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
-                                    required={elem.is_required}
-                                    className={`${elem.is_visible ? '' : 'd-none'}`}
-                                    name={elem.param_name}
-                                    label={elem.field_name}
-                                    type={elem.type}
-                                    onBlur={handleBlur}
-                                    error={touched[elem.param_name] && errors[elem.param_name] && true}
-                                    onChange={handleChange}
-                                  />
-                                  {errors[elem.param_name] && touched[elem.param_name] ? (
-                                    <p className="form-error">{errors[elem.param_name]}</p>
-                                  ) : null}
-                                </>
-                                : ''
-                              }
-                              {elem.type === 'text' && elem.global_name === 'pan' &&
-                                <>
-                                  <TextField
-                                    fullWidth
-                                    inputProps={elem.patterns != '' ? { pattern: elem.patterns, value: values.paramName, title: "Please Fill Valid Pan Card", style: { textTransform: "uppercase" } } : {}}
-                                    required={elem.is_required}
-                                    className={`${elem.is_visible ? '' : 'd-none'}`}
-                                    name={elem.param_name}
-                                    label={elem.field_name}
-                                    type={elem.type}
-                                    onChange={(e) => {
-                                      setFieldTouched(elem.param_name);
-                                      setFieldValue([e.target.name], e.target.value.toUpperCase())
-                                    }}
-                                    error={touched[elem.param_name] && errors[elem.param_name] && true}
-                                  />
-                                  {errors[elem.param_name] && touched[elem.param_name] ? (
-                                    <p className="form-error">{errors[elem.param_name]}</p>
-                                  ) : null}
-                                </>
-                              }
-
-                              {elem.type == 'file' && <> <TextField
+                          {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
+                            ? <>
+                              <div className="d-none">{otpData[elem.global_name] != '' ? preassignValue[elem.param_name] = otpData[elem.global_name] : ''}</div>
+                              <TextField
                                 fullWidth
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
                                 required={elem.is_required}
-                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                                className={`${elem.is_visible ? '' : 'd-none'}`}
                                 name={elem.param_name}
-                                type={elem.type}
                                 label={elem.field_name}
-                                id={elem.param_name}
-                                autoComplete="off"
+                                type={elem.type}
+                                onBlur={handleBlur}
                                 error={touched[elem.param_name] && errors[elem.param_name] && true}
-                                onChange={(event) => {
-                                  setFieldValue(elem.param_name, event.currentTarget.files[0]);
-                                }}
+                                onChange={handleChange}
                               />
-                                {errors[elem.param_name] && touched[elem.param_name] ? (
-                                  <p className="form-error">{errors[elem.param_name]}</p>
-                                ) : null}
-                              </>
-                              }
+                              {errors[elem.param_name] && touched[elem.param_name] ? (
+                                <p className="form-error">{errors[elem.param_name]}</p>
+                              ) : null}
+                            </>
+                            : ''
+                          }
+                          {elem.type === 'text' && elem.global_name === 'pan' &&
+                            <>
+                              <TextField
+                                fullWidth
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, value: values.paramName, title: "Please Fill Valid Pan Card", style: { textTransform: "uppercase" } } : {}}
+                                required={elem.is_required}
+                                className={`${elem.is_visible ? '' : 'd-none'}`}
+                                name={elem.param_name}
+                                label={elem.field_name}
+                                type={elem.type}
+                                onChange={(e) => {
+                                  setFieldTouched(elem.param_name);
+                                  setFieldValue([e.target.name], e.target.value.toUpperCase())
+                                }}
+                                error={touched[elem.param_name] && errors[elem.param_name] && true}
 
-                              {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email') && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name' && elem.global_name != 'pan'
-                                ? <><TextField
-                                  fullWidth
-                                  inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                                  required={elem.is_required}
-                                  className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                                  name={elem.param_name}
-                                  label={elem.field_name}
-                                  id={elem.param_name}
-                                  type={elem.type}
-                                  error={touched[elem.param_name] && errors[elem.param_name] && true}
-                                  onWheel={(e) => e.target.blur()}
-                                  onChange={(e) => {
-                                    setFieldTouched(elem.param_name);
-                                    handleChange(e)
-                                  }}
-                                />
-                                  {errors[elem.param_name] && touched[elem.param_name] ? (
-                                    <p className="form-error">{errors[elem.param_name]}</p>
-                                  ) : null}
+                              />
+                              {errors[elem.param_name] && touched[elem.param_name] ? (
+                                <p className="form-error">{errors[elem.param_name]}</p>
+                              ) : null}
+                            </>
+                          }
 
-                                </>
-                                : ''
-                              }
-
-                              {elem.type == 'date' &&
-                                <>  <TextField
-                                  fullWidth
-                                  inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                                  required={elem.is_required}
-                                  className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                                  name={elem.param_name}
-                                  label={elem.field_name}
-                                  id={elem.param_name}
-                                  onFocus={(e) => (e.target.type = "date")}
-                                  onBlur={(e) => (e.target.type = "text")}
-                                  error={touched[elem.param_name] && errors[elem.param_name] && true}
-                                  onChange={(e) => {
-                                    setFieldTouched(elem.param_name);
-                                    handleChange(e)
-                                  }}
-                                />
-                                  {errors[elem.param_name] && touched[elem.param_name] ? (
-                                    <p className="form-error">{errors[elem.param_name]}</p>
-                                  ) : null}
-                                </>
-                              }
-                              {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
-
-                              {elem.type == 'checkbox' && <FormControlLabel className={` ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
-                            </div>
+                          {elem.type == 'file' && <> <TextField
+                            fullWidth
+                            required={elem.is_required}
+                            className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                            name={elem.param_name}
+                            type={elem.type}
+                            label={elem.field_name}
+                            id={elem.param_name}
+                            autoComplete="off"
+                            error={touched[elem.param_name] && errors[elem.param_name] && true}
+                            onChange={(event) => {
+                              setFieldValue(elem.param_name, event.currentTarget.files[0]);
+                            }}
+                          />
+                            {errors[elem.param_name] && touched[elem.param_name] ? (
+                              <p className="form-error">{errors[elem.param_name]}</p>
+                            ) : null}
                           </>
-                        ))}
-                      </div>
-                      <div className="search-button">
-                        <button className="mt-4" type="submit" disabled={active} >Save & Next {active ? <i className="fa fa-spinner fa-spin"></i> : ''}</button>
-                      </div>
+
+                          }
+
+                          {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email') && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name' && elem.global_name != 'pan'
+                            ? <><TextField
+                              fullWidth
+                              inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                              required={elem.is_required}
+                              className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                              name={elem.param_name}
+                              label={elem.field_name}
+                              id={elem.param_name}
+                              type={elem.type}
+                              error={touched[elem.param_name] && errors[elem.param_name] && true}
+                              onWheel={(e) => e.target.blur()}
+
+                              onChange={(e) => {
+                                setFieldTouched(elem.param_name);
+                                handleChange(e)
+                              }}
+                            />
+                              {errors[elem.param_name] && touched[elem.param_name] ? (
+                                <p className="form-error">{errors[elem.param_name]}</p>
+                              ) : null}
+
+                            </>
+                            : ''
+                          }
+
+                          {elem.type == 'date' &&
+                            <>  <TextField
+                              fullWidth
+                              inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                              required={elem.is_required}
+                              className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
+                              name={elem.param_name}
+                              label={elem.field_name}
+                              id={elem.param_name}
+                              onFocus={(e) => (e.target.type = "date")}
+                              onBlur={(e) => (e.target.type = "text")}
+                              //autoComplete="off"
+                              error={touched[elem.param_name] && errors[elem.param_name] && true}
+                              onChange={(e) => {
+                                setFieldTouched(elem.param_name);
+                                handleChange(e)
+                              }}
+                            />
+                              {errors[elem.param_name] && touched[elem.param_name] ? (
+                                <p className="form-error">{errors[elem.param_name]}</p>
+                              ) : null}
+                            </>
+                          }
+                          {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
+
+                          {elem.type == 'checkbox' && <FormControlLabel className={` ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
+                        </div>
+                        </>
+                      ))}
                     </div>
-                  )}
-                  {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} result={apiResponse} /> : ""}
-                </form>}
+                    <div className="search-button">
+                      <button className="mt-4" type="submit" disabled={active} >Save & Next {active ? <i className="fa fa-spinner fa-spin"></i> : ''}</button>
+                    </div>
+                  </div>
+                )}
+                {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} result={apiResponse} /> : ""}
+              </form>}
               {(token != null || token != undefined) && props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
             </div>
           </div>
@@ -373,13 +358,22 @@ const apply = (props) => {
 
         <section className="cardOffer_area">
           <div className="dealStep__leftArea">
-            <div className="ratingcomponent"><StarRating data={props.data[0]} ratinginfo1={props.ratingg} /></div>
+            <div className="ratingcomponent"><StarRating data={props.data[0]} ratinginfo1={props.ratingg} /></div> 
           </div>
           <div className="loanStep__wrapper">
             <div className="loanForm__Container">
-              {props.specification.length != 0 &&
-                <div dangerouslySetInnerHTML={{ __html: props.specification[0].description }}></div>
-              }
+
+              <table className="table_cards_Table margin">
+                <tbody>
+                  {props.specification !=1 &&  props.specification.map((item, key) => (
+                    <tr key={key} >
+                      <td>{item.title}</td>
+                      <td>{item.value}</td>
+                    </tr>
+
+                  ))}
+                  </tbody>
+                  </table>
             </div>
           </div>
         </section>
@@ -415,6 +409,8 @@ const apply = (props) => {
                     </h2>
                     <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                       <div className="accordion-body" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+
+                     
                         <div itemProp="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
                       </div>
                     </div>
@@ -438,9 +434,9 @@ export default apply
 
 export function SelectField(props) {
 
-  const { values, name, label, ParamOptions, handleChange, param_name, dependency, dependency_value, is_required } = props
+  const { values, name, label, ParamOptions, handleChange, param_name, dependency, dependency_value } = props
 
-
+  
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
@@ -449,14 +445,14 @@ export function SelectField(props) {
         <InputLabel id="demo-simple-select-standard-label">{props.field_name}</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
-
+         
           name={props.param_name}
-          label={props.field_name }
-          required={is_required}
-
-
+          label={props.field_name}
+          required
+        
+      
           placeholder={props.field_name}
-          value={'' || values.param_name}
+          value={values.param_name}
           onChange={(e) => {
             handleChange(e)
           }}
@@ -474,6 +470,6 @@ export function SelectField(props) {
 
 
 
-
+ 
 }
 
