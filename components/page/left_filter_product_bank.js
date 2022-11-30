@@ -62,7 +62,7 @@ const leftfilter = ({ content, ProductByCat }) => {
 
   useEffect(() => {
 
-    setSearchData({ ...searchData, salary: content.salary, pincode: content.pincode, prodeuct_id: content.p_name, turnover: content.salary })
+    setSearchData({ ...searchData, salary: content.salary, pincode: content.pincode, product_id: content.p_name, turnover: content.salary })
     setEmpType(content.label)
   }, [content])
 
