@@ -185,11 +185,12 @@ const apply = (props) => {
           <p>Please Enter your mobile number and name to generate OTP</p>
         </div>
 
-        <div className=" text-center p-4" id="apply-banner">
-        <img src={`/uploads/product_bank/${newProductName}_banner.webp`}
+        <div className="text-center" id="apply-banner">
+        <img className="p-4" src={`/uploads/product_bank/${newProductName}_banner.webp`}
         onError={({ currentTarget }) => {
           currentTarget.onerror = null;
           currentTarget.src = '/uploads/product_bank/default_banner.webp';
+          currentTarget.style = 'padding:0px !important';
         }} />
         </div>
 
