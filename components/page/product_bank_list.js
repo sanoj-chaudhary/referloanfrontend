@@ -50,6 +50,7 @@ const deleteSession = () =>{
 
       let content_data = data1[0];
 
+      let product_slug = content_data.slug;
       let product_id = content_data.id;
       let p_name = content_data.name;
       let cat_id = content_data.cat_id;
@@ -59,13 +60,13 @@ const deleteSession = () =>{
       const response2 = await axios.post(`${process.env.APIHOST}/api/banks/`, finaldata);
       if (response2) {
         const data2 = await response2.data;
-        setContent({ p_name, salary, pincode, label })
+        setContent({ product_slug ,p_name, salary, pincode, label })
         setProducts(data2.data)
 
       } else {
  
       }
-
+      
       const response3 = await axios.get(`${process.env.APP_URL}/get_product_by_catid/` + cat_id);
       const data3 = await response3.data;
       setProductByCat(data3)
@@ -75,6 +76,7 @@ const deleteSession = () =>{
       setLoading(false)
     }
   }
+ 
 
   useEffect(() => {
     searchProduct()
