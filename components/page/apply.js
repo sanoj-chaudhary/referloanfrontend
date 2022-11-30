@@ -185,9 +185,13 @@ const apply = (props) => {
           <p>Please Enter your mobile number and name to generate OTP</p>
         </div>
 
-        {banner && <div className="applyHeaderCard text-center p-4" id="apply-banner">
-        <img src={banner} />
-        </div>}
+        <div className=" text-center p-4" id="apply-banner">
+        <img src={`/uploads/product_bank/${newProductName}_banner.webp`}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src = '/uploads/product_bank/default_banner.webp';
+        }} />
+        </div>
 
         <section className="cardOffer_area">
           <div className="dealStep__leftArea">
