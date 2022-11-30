@@ -14,19 +14,6 @@ const leftfilter = ({ content, ProductByCat }) => {
     "pincode": "",
   })
 
-  // const signupSchema = Yup.object({
-  //   pincode: Yup.string().min(6).max(6),
-  // });
-
-  // const { searchData, errors, touched, handleBlur, handleChange, handleSubmit } =
-  //   useFormik({
-  //     initialsearchData: searchData,
-  //     validationSchema: signupSchema,
-  //     onSubmit: (searchData, actions) => {
-  //     }
-  //   });
-
-
   const handleChange = (e) => {
 
     if (e.target.value == "Salaried") {
@@ -51,7 +38,7 @@ const leftfilter = ({ content, ProductByCat }) => {
         hit = searchData.product_id + '/turnover/' + searchData.tenure + '/pincode/' + searchData.pincode + '?ref=web';
         await router.push(hit)
       }
-      console.log(hit);
+      // console.log(hit);
     }
     catch (err) {
       console.log(err)
@@ -62,7 +49,7 @@ const leftfilter = ({ content, ProductByCat }) => {
 
   useEffect(() => {
 
-    setSearchData({ ...searchData, salary: content.salary, pincode: content.pincode, product_id: content.p_name, turnover: content.salary })
+    setSearchData({ ...searchData, salary: content.salary, pincode: content.pincode, product_id: content.product_slug, turnover: content.tenure })
     setEmpType(content.label)
   }, [content])
 
