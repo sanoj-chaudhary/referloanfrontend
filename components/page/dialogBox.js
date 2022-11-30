@@ -29,21 +29,24 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
   const handleClose = () => {
     setOpen(false);
   };
+  const signupSchema = Yup.object({
+    pincode: Yup.string().min(6,'Invalid pincode').max(6,'Invalid pincode'),
+  });
 
   let initialValues = {}
 
-  if(!response){
-    initialValues.product_id='',
-    initialValues.employemnt_type='',
-    initialValues.salary='',
-    initialValues.pincode=''
+  if (!response) {
+    initialValues.product_id = '',
+      initialValues.employed_type = '',
+      initialValues.salary = '',
+      initialValues.pincode = ''
   }
 
 
   const { values, handleBlur, setFieldValue, handleChange, handleSubmit, errors, touched, setFieldTouched } =
     useFormik({
       initialValues,
-      validationSchema: '',
+      validationSchema: signupSchema,
       onSubmit: async (values, actions) => {
         searchProduct(e)
       },
@@ -51,10 +54,8 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
 
   const getprodcutName = async () => {
     try {
-
-
-      const res = await axios.get(`https://qa.referloan.in/api/get_product_bycatid/2`);
-
+      const res = await axios.get(`${process.env.APP_URL}/get_product_bycatid/`+data.categories_id);
+      
       setProduct(res.data)
     } catch (error) {
 
@@ -62,25 +63,23 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
     }
   }
 
-  const searchProduct = async (e) =>{
+  const searchProduct = async (e) => {
     e.preventDefault()
-alert('here')
+ 
     let hit;
     try {
-        if(values.employemnt_type=='Salaried')
-        {
-          hit = values.product_id+'/salary/'+values.salary+'/pincode/'+values.pincode+'?ref=web';
-          console.log(hit)
-        }
-        else
-        {
-         hit = values.product_id+'/turnover/'+values.tenure+'/pincode/'+values.pincode+'?ref=web';            
-        }
-        router.push(hit)
+      if (values.employed_type == 'Salaried') {
+        hit = values.product_id + '/salary/' + values.salary + '/pincode/' + values.pincode + '?ref=web';
+       
+      }
+      else {
+        hit = values.product_id + '/turnover/' + values.tenure + '/pincode/' + values.pincode + '?ref=web';
+      }
+      router.push(hit)
     }
-    
+
     catch (err) {
-        console.log(err)
+      console.log(err)
     }
   }
   useEffect(() => {
@@ -113,16 +112,15 @@ alert('here')
             {!response &&
               <form onSubmit={searchProduct}>
 
-                <FormControl variant="standard" className="" fullWidth>
-                  <InputLabel id="demo-simple-select-standard-label">Type of Loan</InputLabel>
+                <FormControl variant="standard" className="loanType" fullWidth>
+                  <InputLabel id="demo-simple-select-standard-label">Product name</InputLabel>
                   <Select
                     labelId="demo-simple-select-standard-label"
                     name='product_id'
                     label="Type of Loan"
                     required
                     value={values.product_id}
-                    placeholder="Type of Loan"
-                    onChange={(e) => {
+                    onChange={(e) => { 
                       handleChange(e)
                     }}
                   >
@@ -135,20 +133,20 @@ alert('here')
 
                   </Select>
                 </FormControl>
-                <FormControl variant="standard" className="" fullWidth>
+                <FormControl variant="standard" className="loanType" fullWidth>
                   <InputLabel id="demo-simple-select-standard-label">Profession Type</InputLabel>
                   <Select
                     labelId="demo-simple-select-standard-label"
-                    name='employemnt_type'
+                    name='employed_type'
                     label="Profession Type"
                     required
-                    value={values.employemnt_type}
+                    value={values.employed_type}
                     placeholder="Profession Type"
                     onChange={(e) => {
                       handleChange(e)
                     }}
                   >
-
+                    
                     <MenuItem value="Salaried">
                       <em>Salaried</em>
                     </MenuItem>
@@ -178,20 +176,24 @@ alert('here')
                   label="Pincode"
                   variant="standard"
                   type="number"
-              autoComplete="off"
-              name="tenure"
-              id="tenure"
-              placeholder="Turn Over"
-              value={values.tenure}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              required
+                  autoComplete="off"
+                  name="pincode"
+                  id="pincode"
+                  placeholder="Residential Pincode"
+                  value={values.pincode}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  pattern="[0-9]{6}" 
+                  title="Five digit zip code"
+                  required
                 />
- <div className="search-button"><button className="mt-4" type="submit" >Continue</button></div>
+                {errors.pincode && <p style={{ color: 'red', fontSize:'12px' }}>{errors.pincode}</p>}
+                <div className="search-button"><button className="mt-4" type="submit" >Continue</button></div>
               </form>}
 
 
-            <form>
+              {response &&
+              <form onSubmit={searchProduct}>
               {response && response.forms.map((elem, key) => (
                 <>
                   {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email')
@@ -227,8 +229,8 @@ alert('here')
                 </>
               ))}
 
-             
-            </form>
+
+            </form>}
           </div>
 
         </div>
@@ -248,7 +250,7 @@ export function SelectField(props) {
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
-      <FormControl variant="standard" className="" fullWidth>
+      <FormControl variant="standard" className="loanType" fullWidth>
 
         <InputLabel id="demo-simple-select-standard-label">{props.field_name}</InputLabel>
         <Select

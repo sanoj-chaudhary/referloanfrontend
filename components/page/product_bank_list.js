@@ -56,7 +56,7 @@ const deleteSession = () =>{
 
       const finaldata = { product_id, salary, pincode, label };
 
-      const response2 = await axios.post('https://api.referloan.in/api/banks', finaldata);
+      const response2 = await axios.post(`${process.env.APIHOST}/api/banks/`, finaldata);
       if (response2) {
         const data2 = await response2.data;
         setContent({ p_name, salary, pincode, label })
