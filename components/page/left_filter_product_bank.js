@@ -8,7 +8,7 @@ const leftfilter = ({ content, ProductByCat }) => {
   const [searchData, setSearchData] = useState({
     "cat_id": '1',
     "product_id": '',
-    "employemnt_type": 'Salaried',
+    "employed_type": 'Salaried',
     "salary": "",
     "turnover": "",
     "pincode": "",
@@ -71,7 +71,7 @@ const leftfilter = ({ content, ProductByCat }) => {
           </div>
           <div className="inputRow">
             <label>Profession Type</label>
-            <select className="form-select" name="employemnt_type" aria-label="Type of loan " onChange={handleChange} required>
+            <select className="form-select" name="employed_type" aria-label="Type of loan " onChange={handleChange} required>
               <option defaultValue='' value=''>Profession Type </option>
               <option selected value="Salaried">Salaried</option>
               <option value="Self employed">Self employed</option>
