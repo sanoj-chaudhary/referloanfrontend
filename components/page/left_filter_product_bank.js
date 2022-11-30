@@ -39,9 +39,19 @@ const leftfilter = ({ content, ProductByCat }) => {
 
   const searchBankProduct = async (e) => {
     e.preventDefault()
+    let hit;
     try {
-      const hit = searchData.product_id + '/salary/' + searchData.salary + '/pincode/' + searchData.pincode + '?ref=web';
-      const test = await router.push(hit)
+      if(searchData. employed_type=='Salaried')
+      {
+        hit = searchData.product_id + '/salary/' + searchData.salary + '/pincode/' + searchData.pincode + '?ref=web';
+        await router.push(hit)
+      }
+      else
+      {
+        hit = searchData.product_id + '/turnover/' + searchData.tenure + '/pincode/' + searchData.pincode + '?ref=web';
+        await router.push(hit)
+      }
+      console.log(hit);
     }
     catch (err) {
       console.log(err)
