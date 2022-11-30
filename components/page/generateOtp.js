@@ -6,9 +6,12 @@ import * as Yup from "yup";
 import Loader from "./loader";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import ResponsiveDialog from './dialogBox'
+import ResponsiveDialog from './dialogBox';
+
 const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServerSideStatus, serversidemsg, serversideStatus, utmData }) => {
-  console.log("data", data);
+
+ 
+ 
   const router = useRouter()
   let utmId = '';
   const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
@@ -27,7 +30,8 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
   const [bank_product_id, setBankProductId] = useState('');
   const [time, setTime] = useState(0)
   const [open, setOpen] = useState(false);
-  const [response, setResponse] = useState()
+  const [response, setResponse] = useState();
+  const [otpMessage, setOtpMessage] = useState(false);
   const [genOtpData, setGenOtpData] = useState({
     "full_name": '',
     "phone_no": '',
@@ -132,18 +136,46 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     });
 
 
-    const checkEligibility =async()=>{
-      try {
-        const res = await axios.get(`${process.env.APIHOST}/api/productsections/form/${data.bank_product_id}`);
-        if(res.data[0]){
-          setOpen(true)
-          setResponse(res.data[0])
-        }
-       
-      } catch (error) {
-        console.log('Message: ' + error.message);
+  const checkEligibility = async () => {
+    try {
+      const res = await axios.get(`${process.env.APIHOST}/api/productsections/form/${data.bank_product_id}`);
+      if (res.data[0]) {
+        setOpen(true)
+        setResponse(res.data[0])
       }
+
+    } catch (error) {
+      console.log('Message: ' + error.message);
     }
+  }
+
+  const resendOtp = async()=>{
+ try {
+  const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, values);
+  if (res.data.success) {
+    setOtpStatus(true)
+    setOtpMessage(true)
+    setTimeout(() => {
+      if (typeof window !== 'undefined') {
+        setResendActive(false)
+      }
+    }, 30000);
+
+    let timeleft = 30;
+    var downloadTimer = setInterval(function () {
+      timeleft--;
+      setTime(timeleft)
+      if (timeleft <= 0)
+        clearInterval(downloadTimer);
+    }, 1000);
+  } else {
+    setServerSideStatus(false)
+    setServerSideMsg(res.data.message)
+  }
+ } catch (error) {
+  console.log("Message : ", error.message)
+ }
+  }
 
   useEffect(() => {
     setLoading(false)
@@ -155,12 +187,13 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     }
   }, [data])
 
- 
+  
   return (
     <>
+     
       {loading && <Loader />}
-{open && <ResponsiveDialog {...{setOpen,open,response,data}} />}
-  
+      {open && <ResponsiveDialog {...{ setOpen, open, response, data }} />}
+
       {!otpStatus ?
         <form onSubmit={handleSubmit}>
           <TextField value={values.full_name} required name="full_name" fullWidth label="Full Name" variant="standard" onChange={handleChange} onBlur={handleBlur} />
@@ -188,12 +221,14 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
 
         <form onSubmit={verifyOtp}>
           <span> Enter the OTP sent to <span className='fw-bold'>+91-{values.phone_no}</span></span>
+          {otpMessage?<div className='text-success mt-2'>Resend OTP Successfully</div>:''}
           <TextField type='text' inputProps={{ pattern: "[0-9]{4}", title: "OTP must be 4 digit" }} value={values.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={handleChange} />
           {errors.otp && touched.otp ? (
             <p className="form-error">{errors.otp}</p>
           ) : null}
-
-          <div className='mt-4'> Dont receive the OTP ?  <a className={`resendBtn ${resendActive ? "active" : "inActive"}`} onClick={handleSubmit} >RESEND OTP</a> <span id="verifiBtn"> {time != 0 ? 'in ' + time + ' Seconds' : ''}  </span></div>
+          {(resendActive || time != 0) ? <div className='mt-4'> Dont receive the OTP ?   <span id="verifiBtn"> {time != 0 ? 'in ' + time + ' Seconds' : ''}  </span></div>
+            : <div className='mt-4'><a className={`resendBtn`} onClick={resendOtp} >RESEND OTP</a></div>
+          }
 
           <div className="search-button">
             <button className="mt-4" type="submit" >verify OTP</button>
