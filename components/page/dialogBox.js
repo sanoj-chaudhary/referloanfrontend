@@ -157,7 +157,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
 
                   </Select>
                 </FormControl>
-                <TextField
+                {values.employed_type === "Salaried" ?<TextField
                   fullWidth
                   label="Monthly Income "
                   variant="standard"
@@ -170,7 +170,20 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   required
-                />
+                />:<TextField
+                fullWidth
+                label="Turn Over "
+                variant="standard"
+                type="number"
+                autoComplete="off"
+                name="turnover"
+                id="turnover"
+                placeholder="Turn Over"
+                value={values.turnover}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                required
+              />}
                 <TextField
                   fullWidth
                   label="Pincode"
