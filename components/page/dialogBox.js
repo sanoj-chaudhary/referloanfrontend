@@ -106,7 +106,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
           <div className='register'>
 
             <DialogTitle id="responsive-dialog-title" className='px-0'>
-              Fill  Basic information
+              Fill  Basic Information Form
             </DialogTitle>
 
             {!response &&
@@ -157,7 +157,8 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
 
                   </Select>
                 </FormControl>
-                {values.employed_type === "Salaried" ?<TextField
+                
+                {values.employed_type === "Salaried" ?<TextField         // Add a Conditions
                   fullWidth
                   label="Monthly Income "
                   variant="standard"
@@ -192,7 +193,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
                   autoComplete="off"
                   name="pincode"
                   id="pincode"
-                  placeholder="Residential Pincode"
+                  placeholder="Fill your Pincode"
                   value={values.pincode}
                   onChange={handleChange}
                   onBlur={handleBlur}
