@@ -30,8 +30,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
   const [bank_product_id, setBankProductId] = useState('');
   const [time, setTime] = useState(0)
   const [open, setOpen] = useState(false);
-  const [response, setResponse] = useState();
-  const [otpMessage, setOtpMessage] = useState(false);
+  const [response, setResponse] = useState()
   const [genOtpData, setGenOtpData] = useState({
     "full_name": '',
     "phone_no": '',
@@ -154,7 +153,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
   const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, values);
   if (res.data.success) {
     setOtpStatus(true)
-    setOtpMessage(true)
+    
     setTimeout(() => {
       if (typeof window !== 'undefined') {
         setResendActive(false)
@@ -221,7 +220,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
 
         <form onSubmit={verifyOtp}>
           <span> Enter the OTP sent to <span className='fw-bold'>+91-{values.phone_no}</span></span>
-          {otpMessage?<div className='text-success mt-2'>Resend OTP Successfully</div>:''}
+          {resendActive?<div className='text-success mt-2'>Resend OTP Successfully</div>:''}
           <TextField type='text' inputProps={{ pattern: "[0-9]{4}", title: "OTP must be 4 digit" }} value={values.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={handleChange} />
           {errors.otp && touched.otp ? (
             <p className="form-error">{errors.otp}</p>
