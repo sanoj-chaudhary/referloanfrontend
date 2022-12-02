@@ -367,18 +367,9 @@ const apply = (props) => {
           </div>
           <div className="loanStep__wrapper">
             <div className="loanForm__Container">
-
-              <table className="table_cards_Table margin">
-                <tbody>
-                  {props.specification !=1 &&  props.specification.map((item, key) => (
-                    <tr key={key} >
-                      <td>{item.title}</td>
-                      <td>{item.value}</td>
-                    </tr>
-
-                  ))}
-                  </tbody>
-                  </table>
+             {props.specification.length != 0 &&
+                <div dangerouslySetInnerHTML={{ __html: props.specification[0].description }}></div>
+             }
             </div>
           </div>
         </section>
@@ -390,7 +381,7 @@ const apply = (props) => {
             </div>
           </section>
 
-          {props.specification[0] && props.specification[0].contact_status=='1' &&
+          {props.specification[0].contact_status=='1' &&
             <section className="section_pad">
               <div className="container">
                 <div dangerouslySetInnerHTML={{ __html: props.specification[0].contact_detail }}></div>
