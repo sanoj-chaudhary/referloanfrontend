@@ -14,6 +14,8 @@ const midcontent = ({ url, refer, data }) => {
   const [content, setContent] = useState([])
   const [ProductByCat, setProductByCat] = useState([])
   const [loading, setLoading] = useState(true);
+  const [catid, setCatid] = useState()
+  
 const deleteSession = () =>{
   if (typeof window !== 'undefined') {
     window.localStorage.removeItem("token");
@@ -54,6 +56,7 @@ const deleteSession = () =>{
       let product_id = content_data.id;
       let p_name = content_data.name;
       let cat_id = content_data.cat_id;
+      setCatid(cat_id)
 
       const finaldata = { product_id, salary, pincode, label };
 
@@ -119,7 +122,14 @@ const deleteSession = () =>{
               <div className="lstRow" key={key}>
                 <div className="topPnl">
                   <div className="cardImg">
-                    <Image src={'/uploads/product_bank/' + item.bankProductName.replace(/\s/g, '_') + '.webp'} height="214" width="340" />
+                    <img
+                      src={'/uploads/product_bank/' + item.bankProductName.replace(/\s/g, '_') + '.webp'} height="214" width="340"
+                      onError={({ currentTarget }) => {
+                        currentTarget.onerror = null;
+                        currentTarget.src = '/uploads/product_bank/'+catid+'.webp';
+                      }}
+                    />
+
                   </div>
                   <div className="cardDtl_pnl">
                     <div className="headingBar">
