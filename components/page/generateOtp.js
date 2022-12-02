@@ -35,6 +35,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     "full_name": '',
     "phone_no": '',
     "otp": '',
+    "bank_product_id": ''
   })
 
   const verifyOtp = async (e) => {
@@ -105,7 +106,11 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
         try {
 
           setUserValues(values)
-          const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, values);
+          const { phone_no, full_name } = values;
+          const data = {
+            phone_no, full_name, bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
+          }
+          const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, data);
           if (res.data.success) {
             setOtpStatus(true)
 
@@ -150,7 +155,11 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
 
   const resendOtp = async()=>{
  try {
-  const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, values);
+  const { phone_no, full_name } = values;
+  const data = {
+    phone_no, full_name, bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
+  }
+  const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, data);
   if (res.data.success) {
     setOtpStatus(true)
     
