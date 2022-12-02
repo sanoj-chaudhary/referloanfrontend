@@ -21,14 +21,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
   const [product, setProduct] = useState([])
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  console.log(data)
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
   const signupSchema = Yup.object({
     pincode: Yup.string().min(6, 'Invalid pincode').max(6, 'Invalid pincode'),
   });
@@ -85,7 +78,6 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
     setFieldValue(values.product_id, data.product_id)
   }, [])
 
-  console.log('product', product)
   return (
     <Dialog open={open}
       aria-labelledby="alert-dialog-slide-title"
