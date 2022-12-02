@@ -372,7 +372,7 @@ const apply = (props) => {
             </div>
           </section>
 
-          {props.specification[0].contact_status=='1' &&
+          {props.specification[0]&& props.specification[0].contact_status=='1' &&
             <section className="section_pad">
               <div className="container">
                 <div dangerouslySetInnerHTML={{ __html: props.specification[0].contact_detail }}></div>
