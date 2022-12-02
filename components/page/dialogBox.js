@@ -21,7 +21,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
   const [product, setProduct] = useState([])
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
+  console.log(data)
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -30,13 +30,13 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
     setOpen(false);
   };
   const signupSchema = Yup.object({
-    pincode: Yup.string().min(6,'Invalid pincode').max(6,'Invalid pincode'),
+    pincode: Yup.string().min(6, 'Invalid pincode').max(6, 'Invalid pincode'),
   });
 
   let initialValues = {}
 
   if (!response) {
-    initialValues.product_id = '',
+    initialValues.product_id = data.product_id,
       initialValues.employed_type = '',
       initialValues.salary = '',
       initialValues.pincode = ''
@@ -54,23 +54,21 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
 
   const getprodcutName = async () => {
     try {
-      const res = await axios.get(`${process.env.APP_URL}/get_product_bycatid/`+data.categories_id);
-      
+      const res = await axios.get(`${process.env.APP_URL}/get_product_bycatid/` + data.categories_id);
       setProduct(res.data)
     } catch (error) {
-
       console.log("message", error.message);
     }
   }
 
   const searchProduct = async (e) => {
     e.preventDefault()
- 
+
     let hit;
     try {
       if (values.employed_type == 'Salaried') {
         hit = values.product_id + '/salary/' + values.salary + '/pincode/' + values.pincode + '?ref=web';
-       
+
       }
       else {
         hit = values.product_id + '/turnover/' + values.tenure + '/pincode/' + values.pincode + '?ref=web';
@@ -84,11 +82,12 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
   }
   useEffect(() => {
     getprodcutName()
+    setFieldValue(values.product_id, data.product_id)
   }, [])
 
-
+  console.log('product', product)
   return (
-    <Dialog onClose={() => setOpen(false)} open={open}
+    <Dialog open={open}
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
       hideBackdrop
@@ -106,7 +105,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
           <div className='register'>
 
             <DialogTitle id="responsive-dialog-title" className='px-0'>
-              Fill  Basic Information Form
+              Fill  Basic information
             </DialogTitle>
 
             {!response &&
@@ -120,13 +119,12 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
                     label="Type of Loan"
                     required
                     value={values.product_id}
-                    onChange={(e) => { 
+                    onChange={(e) => {
                       handleChange(e)
                     }}
                   >
                     {product.map((optn, ind) => (
-                      <MenuItem key={optn.slug} value={optn.slug
-                      }>
+                      <MenuItem key={optn.slug} value={optn.id}>
                         <em>{optn.name}</em>
                       </MenuItem>
                     ))}
@@ -146,7 +144,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
                       handleChange(e)
                     }}
                   >
-                    
+
                     <MenuItem value="Salaried">
                       <em>Salaried</em>
                     </MenuItem>
@@ -157,8 +155,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
 
                   </Select>
                 </FormControl>
-                
-                {values.employed_type === "Salaried" ?<TextField         // Add a Conditions
+                <TextField
                   fullWidth
                   label="Monthly Income "
                   variant="standard"
@@ -171,20 +168,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   required
-                />:<TextField
-                fullWidth
-                label="Turn Over "
-                variant="standard"
-                type="number"
-                autoComplete="off"
-                name="turnover"
-                id="turnover"
-                placeholder="Turn Over"
-                value={values.turnover}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                required
-              />}
+                />
                 <TextField
                   fullWidth
                   label="Pincode"
@@ -193,58 +177,58 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
                   autoComplete="off"
                   name="pincode"
                   id="pincode"
-                  placeholder="Fill your Pincode"
+                  placeholder="Residential Pincode"
                   value={values.pincode}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  pattern="[0-9]{6}" 
+                  pattern="[0-9]{6}"
                   title="Five digit zip code"
                   required
                 />
-                {errors.pincode && <p style={{ color: 'red', fontSize:'12px' }}>{errors.pincode}</p>}
+                {errors.pincode && <p style={{ color: 'red', fontSize: '12px' }}>{errors.pincode}</p>}
                 <div className="search-button"><button className="mt-4" type="submit" >Continue</button></div>
               </form>}
 
 
-              {response &&
+            {response &&
               <form onSubmit={searchProduct}>
-              {response && response.forms.map((elem, key) => (
-                <>
-                  {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email')
-                    && <><TextField
-                      fullWidth
-                      inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
-                      required={elem.is_required}
-                      className={`mt-4 ${elem.is_visible ? '' : 'd-none'}`}
-                      name={elem.param_name}
-                      label={elem.field_name}
-                      id={elem.param_name}
-                      type={elem.type}
-                      error={touched[elem.param_name] && errors[elem.param_name] && true}
-                      onWheel={(e) => e.target.blur()}
-                      variant="standard"
-                      onChange={(e) => {
-                        setFieldTouched(elem.param_name);
-                        handleChange(e)
-                      }}
-                    />
-                      {errors[elem.param_name] && touched[elem.param_name] ? (
-                        <p className="form-error">{errors[elem.param_name]}</p>
-                      ) : null}
+                {response && response.forms.map((elem, key) => (
+                  <>
+                    {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email')
+                      && <><TextField
+                        fullWidth
+                        inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : {}}
+                        required={elem.is_required}
+                        className={`mt-4 ${elem.is_visible ? '' : 'd-none'}`}
+                        name={elem.param_name}
+                        label={elem.field_name}
+                        id={elem.param_name}
+                        type={elem.type}
+                        error={touched[elem.param_name] && errors[elem.param_name] && true}
+                        onWheel={(e) => e.target.blur()}
+                        variant="standard"
+                        onChange={(e) => {
+                          setFieldTouched(elem.param_name);
+                          handleChange(e)
+                        }}
+                      />
+                        {errors[elem.param_name] && touched[elem.param_name] ? (
+                          <p className="form-error">{errors[elem.param_name]}</p>
+                        ) : null}
 
-                    </>
+                      </>
 
-                  }
+                    }
 
-                  {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
-
-
-                  <div className="search-button"><button className="mt-4" type="submit" >Submit</button></div>
-                </>
-              ))}
+                    {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
 
 
-            </form>}
+                    <div className="search-button"><button className="mt-4" type="submit" >Submit</button></div>
+                  </>
+                ))}
+
+
+              </form>}
           </div>
 
         </div>
