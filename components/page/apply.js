@@ -165,15 +165,6 @@ const apply = (props) => {
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
   }
-  
-
-  // Show Banner
-  let banner='';
-  if(props.data[0].slug=='loans/abhi-loans-against-mutual-fund' || props.data[0].slug=='loans/abhi-loans-against-shares')
-  {
-    banner = "/uploads/product_bank/"+newProductName+"_banner.webp";
-  }
-
 
   return (
     <>
