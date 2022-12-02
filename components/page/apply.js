@@ -181,7 +181,6 @@ const apply = (props) => {
         onError={({ currentTarget }) => {
           currentTarget.onerror = null;
           currentTarget.src = '/uploads/product_bank/default_banner.webp';
-          currentTarget.style = 'padding:0px !important';
         }} />
         </div>
 
