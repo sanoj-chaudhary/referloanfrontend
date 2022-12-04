@@ -38,11 +38,9 @@ function contentPage({ ip, url, refer, Component, data, form_schema, specificati
     }
   }
 
-
   useEffect(() => {
-    if (!visitorId) {
+    if (!window.localStorage.getItem("visitorId")) {
       addVisitor()
-      console.log('visitorId', visitorId)
     }
   }, [visitorId])
 
