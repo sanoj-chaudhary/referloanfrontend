@@ -6,15 +6,49 @@ import ProductBankList from '../components/page/product_bank_list';
 import ContentPage from '../components/page/content_page';
 import Apply from '../components/page/apply';
 import Error from '../components/page/error';
+import { useState, useEffect } from 'react';
 
-function contentPage({ url, refer, Component, data, form_schema, specification, faq,ratingg }) {
+function contentPage({ ip, url, refer, Component, data, form_schema, specification, faq, ratingg }) {
+  const [visitorId, setVisitorId] = useState('')
+  const router = useRouter()
+  let utmId = '';
+  const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
+  if (utm_id === undefined) {
+    utmId = utm_campaign
+  } else {
+    utmId = utm_id;
+  }
 
-  const router = useRouter();
+  const addVisitor = async () => {
+    if (!visitorId) {
+      const jsonData = {
+        utm_campaign, utm_id, utm_medium, utm_source, utmId, ip, bank_product_id: data[0].bank_product_id
+      }
+      try {
+        const res = await axios.post(`${process.env.APIHOST}/api/add-visitors`, jsonData);
+        if (res.data.status) {
+          if (typeof window !== 'undefined') {
+            localStorage.setItem("visitorId", ip);
+          }
+          setVisitorId(window.localStorage.getItem("visitorId"))
+        }
+      } catch (error) {
+        console.log("Message : ", error.message)
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (!window.localStorage.getItem("visitorId")) {
+      addVisitor()
+    }
+  }, [visitorId])
+
   return (
     <>
-      {Component == 'ContentPage' && <ContentPage {...{data,faq}}  />}
+      {Component == 'ContentPage' && <ContentPage {...{ data, faq }} />}
       {Component == 'ProductBankList' && <ProductBankList url={url} refer={refer} data={data} />}
-      {Component == 'Apply' && <Apply {...{data,form_schema,specification}} data={data} form_schema={form_schema} specification={specification} faq={faq} ratingg={ratingg} />}
+      {Component == 'Apply' && <Apply {...{ data, form_schema, specification }} data={data} form_schema={form_schema} specification={specification} faq={faq} ratingg={ratingg} />}
       {Component == 'Error' && <Error data={data} />}
     </>
   )
@@ -56,24 +90,21 @@ export async function getServerSideProps(context) {
         form_schema = form.data
 
         apply_response = await db.query("SELECT * FROM `product_bank_specifications` WHERE product_bank_specifications.bank_product_id =  '" + bank_product_id + "' ");
-       
-        if(apply_response)
-        {
+
+        if (apply_response) {
           specification = JSON.parse(JSON.stringify(apply_response))
         }
 
         content_response = await db.query("SELECT * FROM `faqs` WHERE faqs.page_id =  '" + res[0].id + "' ORDER BY `order` ");
-        
-        if(content_response)
-        {
-           faq = JSON.parse(JSON.stringify(content_response))
+
+        if (content_response) {
+          faq = JSON.parse(JSON.stringify(content_response))
         }
 
-        rating_response = await db.query(" SELECT * FROM `view_rating` WHERE `bank_product_id` = '"+bank_product_id +"'  ");
-        
-        if(rating_response)
-        {
-           ratingg = JSON.parse(JSON.stringify(rating_response))
+        rating_response = await db.query(" SELECT * FROM `view_rating` WHERE `bank_product_id` = '" + bank_product_id + "'  ");
+
+        if (rating_response) {
+          ratingg = JSON.parse(JSON.stringify(rating_response))
         }
 
 
@@ -86,12 +117,11 @@ export async function getServerSideProps(context) {
     else {
 
       try {
-         content_response = await db.query("SELECT * FROM `faqs` WHERE faqs.page_id =  '" + res[0].id + "' ORDER BY `order` ");
-        
-         if(content_response)
-         {
-           faq = JSON.parse(JSON.stringify(content_response))
-         }
+        content_response = await db.query("SELECT * FROM `faqs` WHERE faqs.page_id =  '" + res[0].id + "' ORDER BY `order` ");
+
+        if (content_response) {
+          faq = JSON.parse(JSON.stringify(content_response))
+        }
 
       }
       catch (error) {
@@ -113,11 +143,18 @@ export async function getServerSideProps(context) {
       Component = 'Error'
     }
   }
-
-
+  const { req } = context;
+  let ip;
+  if (req.headers["x-forwarded-for"]) {
+    ip = req.headers["x-forwarded-for"].split(',')[0]
+  } else if (req.headers["x-real-ip"]) {
+    ip = req.connection.remoteAddress
+  } else {
+    ip = req.connection.remoteAddress
+  }
   data = JSON.parse(JSON.stringify(res))
 
-  return { props: { url, refer, Component, data, form_schema, specification, faq,ratingg } }
+  return { props: { url, refer, Component, ip, data, form_schema, specification, faq, ratingg } }
 }
 
 export default contentPage
