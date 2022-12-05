@@ -203,7 +203,13 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
         'Content-Type:application/json',
         'Accept:application/json'
     );
+    if(process.env.SITEHOST != 'referloan.in'){
+      const res = await axios.post(`https://crm.referloan.in/api/add-crm-lead`,apiData,{headers});
+    }else{
       const res = await axios.post(`https://testcrm.referloan.in/api/add-crm-lead`,apiData,{headers});
+    }
+      
+      
     } catch (error) {
       console.log("Message : ", error.message)
     }
