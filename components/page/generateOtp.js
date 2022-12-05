@@ -10,8 +10,8 @@ import ResponsiveDialog from './dialogBox';
 
 const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServerSideStatus, serversidemsg, serversideStatus, utmData }) => {
 
- 
- 
+
+
   const router = useRouter()
   let utmId = '';
   const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
@@ -31,6 +31,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
   const [time, setTime] = useState(0)
   const [open, setOpen] = useState(false);
   const [response, setResponse] = useState()
+  const [resendOtpMessage, setResendOtpMessage] = useState(false)
   const [genOtpData, setGenOtpData] = useState({
     "full_name": '',
     "phone_no": '',
@@ -52,7 +53,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
         if (res.data.status) {
 
           setServerSideStatus(true)
-
+          CrmSendUserInquiry()
           setTimeout(() => {
             if (typeof window !== 'undefined') {
               window.localStorage.removeItem("token");
@@ -153,52 +154,75 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     }
   }
 
-  const resendOtp = async()=>{
- try {
-  const { phone_no, full_name } = values;
-  const data = {
-    phone_no, full_name, bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
-  }
-  const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, data);
-  if (res.data.success) {
-    setOtpStatus(true)
-    
-    setTimeout(() => {
-      if (typeof window !== 'undefined') {
-        setResendActive(false)
+  const resendOtp = async () => {
+    try {
+      const { phone_no, full_name } = values;
+      const data = {
+        phone_no, full_name, bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
       }
-    }, 30000);
+      const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, data);
+      if (res.data.success) {
+        setOtpStatus(true)
+        setResendOtpMessage(true)
+        setTimeout(() => {
+          if (typeof window !== 'undefined') {
+            setResendActive(false)
+          }
+        }, 30000);
 
-    let timeleft = 30;
-    var downloadTimer = setInterval(function () {
-      timeleft--;
-      setTime(timeleft)
-      if (timeleft <= 0)
-        clearInterval(downloadTimer);
-    }, 1000);
-  } else {
-    setServerSideStatus(false)
-    setServerSideMsg(res.data.message)
+        let timeleft = 30;
+        var downloadTimer = setInterval(function () {
+          timeleft--;
+          setTime(timeleft)
+          if (timeleft <= 0)
+            clearInterval(downloadTimer);
+        }, 1000);
+      } else {
+        setServerSideStatus(false)
+        setServerSideMsg(res.data.message)
+      }
+    } catch (error) {
+      console.log("Message : ", error.message)
+    }
   }
- } catch (error) {
-  console.log("Message : ", error.message)
- }
+
+  const CrmSendUserInquiry = async() => {
+    try {
+      const { phone_no, full_name } = values;
+      const apiData = {
+        customer_name: full_name,
+        customer_mobile: phone_no,
+        customer_email: '',
+        address: '',
+        product_id:data.product_id,
+        remarks:data.name
+      }
+
+      const headers = (
+        'Accept: */*',                
+        'Content-Type:application/json',
+        'Accept:application/json'
+    );
+      const res = await axios.post(`https://testcrm.referloan.in/api/add-crm-lead`,apiData,{headers});
+    } catch (error) {
+      console.log("Message : ", error.message)
+    }
   }
 
   useEffect(() => {
     setLoading(false)
     setBankProductId(data.bank_product_id)
-
+    setResendOtpMessage(false)
     // if (utm_medium != 'self') {
     //   checkEligibility()
     //   setOpen(true)
     // }
   }, [data])
+console.log(data)
 
-  
   return (
     <>
-     
+
       {loading && <Loader />}
       {open && <ResponsiveDialog {...{ setOpen, open, response, data }} />}
 
@@ -229,7 +253,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
 
         <form onSubmit={verifyOtp}>
           <span> Enter the OTP sent to <span className='fw-bold'>+91-{values.phone_no}</span></span>
-          {resendActive?<div className='text-success mt-2'>Resend OTP Successfully</div>:''}
+          {resendOtpMessage ? <div className='text-success mt-2'>Resend OTP Successfully</div> : ''}
           <TextField type='text' inputProps={{ pattern: "[0-9]{4}", title: "OTP must be 4 digit" }} value={values.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={handleChange} />
           {errors.otp && touched.otp ? (
             <p className="form-error">{errors.otp}</p>
