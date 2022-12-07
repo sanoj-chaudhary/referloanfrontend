@@ -74,7 +74,7 @@ const apply = (props) => {
   const { values, handleBlur, setFieldValue, handleChange, handleSubmit, errors, touched, setFieldTouched } =
     useFormik({
       initialValues,
-      validationSchema: validationSchema,
+      validationSchema: '',
       onSubmit: async (values, actions) => {
         try {
 
