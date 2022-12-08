@@ -10,7 +10,7 @@ const Thanks = ({product,result}) => {
         utmData = `?utm_source=${utm_source}&utm_medium=${utm_medium}&utm_campaign=${utm_campaign}&utm_id=${utm_id}`
     }
 
-    console.log(product)
+   
   const random = Math.floor(Math.random() * (999999999 - 100000000 + 1)) + 100000000 ;
   return (
     <>

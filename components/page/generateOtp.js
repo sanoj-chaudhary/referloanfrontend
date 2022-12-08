@@ -224,7 +224,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     //   setOpen(true)
     // }
   }, [data])
-console.log(data)
+
 
   return (
     <>

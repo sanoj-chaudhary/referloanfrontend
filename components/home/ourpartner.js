@@ -13,7 +13,6 @@ function Partner(props) {
     utmData = `?utm_source=${utm_source}&utm_medium=${utm_medium}&utm_campaign=${utm_campaign}&utm_id=${utm_id}`
   }
 
-  // console.log(props)
   return (
     <section className="partnerArea">
       <div className="container">

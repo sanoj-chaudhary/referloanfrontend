@@ -160,8 +160,6 @@ const apply = (props) => {
     return word[0].toUpperCase() + word.substring(1);
   }).join("_");
 
-  console.log("formSchema", props.form_schema)
-
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
   }

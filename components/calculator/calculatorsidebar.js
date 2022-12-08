@@ -1,6 +1,6 @@
 import Link from 'next/link'
 const calcSidebar = ({setCalcName,calcName}) => {
-    console.log(calcName)
+    
     return (
 
         <div className="article_list" data-aos="fade-left">
