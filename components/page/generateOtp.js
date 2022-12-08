@@ -53,7 +53,6 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
         if (res.data.status) {
 
           setServerSideStatus(true)
-          CrmSendUserInquiry()
           setTimeout(() => {
             if (typeof window !== 'undefined') {
               window.localStorage.removeItem("token");
@@ -186,34 +185,6 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     }
   }
 
-  const CrmSendUserInquiry = async() => {
-    try {
-      const { phone_no, full_name } = values;
-      const apiData = {
-        customer_name: full_name,
-        customer_mobile: phone_no,
-        customer_email: '',
-        address: '',
-        product_id:data.product_id,
-        remarks:data.name
-      }
-
-      const headers = (
-        'Accept: */*',                
-        'Content-Type:application/json',
-        'Accept:application/json'
-    );
-    if(process.env.SITEHOST == 'referloan.in'){
-      const res = await axios.post(`https://crm.referloan.in/api/add-crm-lead`,apiData,{headers});
-    }else{
-      const res = await axios.post(`https://testcrm.referloan.in/api/add-crm-lead`,apiData,{headers});
-    }
-      
-      
-    } catch (error) {
-      console.log("Message : ", error.message)
-    }
-  }
 
   useEffect(() => {
     setLoading(false)
