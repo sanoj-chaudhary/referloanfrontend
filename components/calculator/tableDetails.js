@@ -1,7 +1,7 @@
 import { Table, TableCell, TableRow } from '@material-ui/core'
 import { TableHead } from '@mui/material'
 const tableDetails = (props) => {
-  console.log(props)
+  
   return (
     <Table style={{ width: "100%", border: "2px solid #ccc" }} area-lable="sample table" >
       <TableHead>

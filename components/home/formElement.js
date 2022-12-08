@@ -37,7 +37,7 @@ const formElement = ({ data }) => {
     try {
       if (values.employed_type == 'Salaried') {
         hit = values.product_id + '/salary/' + values.salary + '/pincode/' + values.pincode + '?ref=web';
-        console.log(hit)
+       
       }
       else {
         hit = values.product_id + '/turnover/' + values.tenure + '/pincode/' + values.pincode + '?ref=web';
