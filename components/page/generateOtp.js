@@ -190,10 +190,13 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     setLoading(false)
     setBankProductId(data.bank_product_id)
     setResendOtpMessage(false)
-    // if (utm_medium != 'self') {
-    //   checkEligibility()
-    //   setOpen(true)
-    // }
+    if(!window.localStorage.getItem("checkEligibility")){
+      if (utm_medium != 'self') {
+        checkEligibility()
+        setOpen(true)
+      }
+    }
+   
   }, [data])
 
 

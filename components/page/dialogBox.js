@@ -21,11 +21,24 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
   const [product, setProduct] = useState([])
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
+  const [searchData, setSearchData] = useState({
+    "cat_id": '1',
+    "product_id": '',
+    "employed_type": 'Salaried',
+    "salary": "",
+    "tenure": "",
+    "pincode": "",
+  })
   const signupSchema = Yup.object({
     pincode: Yup.string().min(6, 'Invalid pincode').max(6, 'Invalid pincode'),
   });
-
+  let utmData = '';
+  const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
+  if (!utm_campaign) {
+    utmData = `&utm_source=direct_visitors&utm_medium=self&utm_campaign=&utm_id=`
+  } else {
+    utmData = `&utm_source=${utm_source}&utm_medium=${utm_medium}&utm_campaign=${utm_campaign}&utm_id=${utm_id}`
+  }
   let initialValues = {}
 
   if (!response) {
@@ -38,12 +51,51 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
 
   const { values, handleBlur, setFieldValue, handleChange, handleSubmit, errors, touched, setFieldTouched } =
     useFormik({
-      initialValues,
+      initialValues:searchData,
       validationSchema: signupSchema,
       onSubmit: async (values, actions) => {
-        searchProduct(e)
+        const finaldata = {
+
+          product_id: data.product_id, salary: values.salary, pincode: values.pincode
+        };
+
+        const res = await axios.post(`${process.env.APIHOST}/api/banks/`, finaldata);
+        console.log(res)
+        if (!res.data.critariamatch) {
+          searchProduct()
+          if (typeof window !== 'undefined') {
+            localStorage.setItem("checkEligibility", 'yes');
+
+          }
+        }
       },
     });
+
+ 
+  let productUrl;
+  product.map((item, index) => (
+  item.id == data.product_id?productUrl=item.slug:''
+  ))
+  
+  const searchProduct = async (e) => {
+
+
+    let hit;
+    try {
+      if (values.employed_type == 'Salaried') {
+        hit = productUrl + '/salary/' + values.salary + '/pincode/' + values.pincode + '?ref=web' + utmData;
+
+      }
+      else {
+        hit = productUrl + '/turnover/' + values.tenure + '/pincode/' + values.pincode + '?ref=web' + utmData;
+      }
+      router.push(hit)
+    }
+
+    catch (err) {
+      console.log(err)
+    }
+  }
 
   const getprodcutName = async () => {
     try {
@@ -53,30 +105,11 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
       console.log("message", error.message);
     }
   }
-
-  const searchProduct = async (e) => {
-    e.preventDefault()
-
-    let hit;
-    try {
-      if (values.employed_type == 'Salaried') {
-        hit = values.product_id + '/salary/' + values.salary + '/pincode/' + values.pincode + '?ref=web';
-
-      }
-      else {
-        hit = values.product_id + '/turnover/' + values.tenure + '/pincode/' + values.pincode + '?ref=web';
-      }
-      router.push(hit)
-    }
-
-    catch (err) {
-      console.log(err)
-    }
-  }
   useEffect(() => {
     getprodcutName()
     setFieldValue(values.product_id, data.product_id)
   }, [])
+
 
   return (
     <Dialog open={open}
@@ -101,28 +134,8 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
             </DialogTitle>
 
             {!response &&
-              <form onSubmit={searchProduct}>
+              <form onSubmit={handleSubmit}>
 
-                <FormControl variant="standard" className="loanType" fullWidth>
-                  <InputLabel id="demo-simple-select-standard-label">Product name</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-standard-label"
-                    name='product_id'
-                    label="Type of Loan"
-                    required
-                    value={values.product_id}
-                    onChange={(e) => {
-                      handleChange(e)
-                    }}
-                  >
-                    {product.map((optn, ind) => (
-                      <MenuItem key={optn.slug} value={optn.id}>
-                        <em>{optn.name}</em>
-                      </MenuItem>
-                    ))}
-
-                  </Select>
-                </FormControl>
                 <FormControl variant="standard" className="loanType" fullWidth>
                   <InputLabel id="demo-simple-select-standard-label">Profession Type</InputLabel>
                   <Select
@@ -147,20 +160,44 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
 
                   </Select>
                 </FormControl>
-                <TextField
-                  fullWidth
-                  label="Monthly Income "
-                  variant="standard"
-                  type="number"
-                  autoComplete="off"
-                  name="salary"
-                  id="salary"
-                  placeholder="Monthly income"
-                  value={values.salary}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  required
-                />
+
+
+                {values.employed_type && values.employed_type === 'Salaried' &&
+                  <TextField
+                    fullWidth
+                    label="Monthly Income "
+                    variant="standard"
+                    type="number"
+                    autoComplete="off"
+                    name="salary"
+                    id="salary"
+                    placeholder="Monthly income"
+                    value={values.salary}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                  />
+                }
+                {values.employed_type && values.employed_type === 'Self employed' &&
+
+                  <TextField
+                    fullWidth
+                    label="Turn Over"
+                    variant="standard"
+                    type="number"
+                    autoComplete="off"
+                    name="tenure"
+                    id="tenure"
+                    placeholder="Turn Over"
+                    value={values.tenure}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                  />
+
+                }
+
+
                 <TextField
                   fullWidth
                   label="Pincode"
