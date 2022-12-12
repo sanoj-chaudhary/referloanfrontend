@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 const StarRating = ({ data,ratinginfo1 }) => {
   const [ratingStatus, setratingStatus] = useState()
+  const [status, setStatus] = useState(true)
   const mySentence = data.name.trim();
   const productName = mySentence.split(" ");
 
@@ -39,7 +40,6 @@ const StarRating = ({ data,ratinginfo1 }) => {
     await axios.get(`${process.env.APP_URL}/get_rating_bybpid/` + data.bank_product_id).then((response1) => {
     setRatinginfo(response1.data[0]);
 
-    console.log(response1.data[0])
     });
   }
 
@@ -48,7 +48,7 @@ const StarRating = ({ data,ratinginfo1 }) => {
     setHover(window.localStorage.getItem("addratingvalue"))
     getRating()
   },[router])
-console.log(ratinginfo['total_rating_3'])
+
   return (
     <>
         <div className="ratingWrapper">
@@ -65,8 +65,8 @@ console.log(ratinginfo['total_rating_3'])
                 disabled={ratingStatus?true:false}
                 className={index <= (hover || rating) ? "on" : "off" }
                 onClick={() => addRating(index)}
-                onMouseEnter={!ratingStatus?() => setHover(index):()=>{}}
-                onMouseLeave={!ratingStatus?() => setHover(rating):()=>{}}
+                onMouseEnter={ !ratingStatus ? () => setHover(index):() => setStatus(false)}
+                onMouseLeave={ !ratingStatus ? () => setHover(rating):() => setStatus(false)}
               >
                 <span className="star">&#9733;</span>
               </button>
