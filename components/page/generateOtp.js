@@ -44,8 +44,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     setServerSideStatus(true)
     try {
 
-      const { otp } = values;
-      const { phone_no } = genOtpData;
+      const { phone_no, otp } = values;
       const data = {
         phone_no, otp, bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
       }
@@ -115,7 +114,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
             setOtpStatus(true)
             setGenOtpData({...genOtpData,full_name:values.full_name,phone_no:values.phone_no})
         
-            action.resetForm()
+            // action.resetForm()
             setTimeout(() => {
               if (typeof window !== 'undefined') {
                 setResendActive(false)
@@ -157,7 +156,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
 
   const resendOtp = async () => {
     try {
-      const { phone_no, full_name } = genOtpData;
+      const { phone_no, full_name } = values;
       const data = {
         phone_no, full_name, bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
       }
@@ -230,7 +229,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
         </form> :
 
         <form onSubmit={verifyOtp}>
-          <span> Enter the OTP sent to <span className='fw-bold'>+91-{genOtpData.phone_no}</span></span>
+          <span> Enter the OTP sent to <span className='fw-bold'>+91-{values.phone_no}</span></span>
           {resendOtpMessage ? <div className='text-success mt-2'>Resend OTP Successfully</div> : ''}
           <TextField type='text' inputProps={{ pattern: "[0-9]{4}", title: "OTP must be 4 digit" }} value={values.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={handleChange} />
           {errors.otp && touched.otp ? (
