@@ -219,7 +219,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
                   required
                 />
                 {errors.pincode && <p style={{ color: 'red', fontSize: '12px' }}>{errors.pincode}</p>}
-                <div className="search-button"><button className="mt-4" disabled={active} type="submit" >{active ?<> Processing <i className="fa fa-spinner fa-spin"></i> </> : "Continue"}</button></div>
+                <div className="search-button"><button className="mt-4" disabled={active} type="submit" >{active ?<> Processing <i className="fa fa-spinner fa-spin"></i> </> : "Submit"}</button></div>
               </form>}
 
 
