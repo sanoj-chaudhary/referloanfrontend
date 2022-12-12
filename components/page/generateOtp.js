@@ -96,13 +96,14 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     phone_no: Yup.string().min(10, 'Invalid phonenumber').max(10, 'Invalid phone number').required("Please enter your phone number").matches(/^\+?[6-9][0-9]{7,14}$/, "Invalid phone number"),
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  const { values, errors, touched, setFieldValue, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: genOtpData,
       validationSchema: OtpSchema,
-      onSubmit: async (values) => {
+      onSubmit: async (values,action) => {
         setServerSideStatus(true)
-
+       
+       
         try {
 
           setUserValues(values)
@@ -113,7 +114,9 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
           const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, data);
           if (res.data.success) {
             setOtpStatus(true)
-
+            setGenOtpData({...genOtpData,full_name:values.full_name,phone_no:values.phone_no})
+        
+            action.resetForm()
             setTimeout(() => {
               if (typeof window !== 'undefined') {
                 setResendActive(false)
@@ -155,7 +158,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
 
   const resendOtp = async () => {
     try {
-      const { phone_no, full_name } = values;
+      const { phone_no, full_name } = genOtpData;
       const data = {
         phone_no, full_name, bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
       }
@@ -190,16 +193,17 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     setLoading(false)
     setBankProductId(data.bank_product_id)
     setResendOtpMessage(false)
+    setOtpStatus(false)
+    
     if(!window.localStorage.getItem("checkEligibility")){
       if (utm_medium != 'self') {
         checkEligibility()
         setOpen(true)
       }
     }
-   
   }, [data])
 
-
+console.log(genOtpData)
   return (
     <>
 
@@ -217,10 +221,6 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
           {errors.phone_no && touched.phone_no ? (
             <p className="form-error">{errors.phone_no}</p>
           ) : null}
-          {/* <TextField value={values.pan_card.toUpperCase()} required name="pan_card" fullWidth label="Pan Card" variant="standard" onChange={handleChange} onBlur={handleBlur} />
-          {errors.pan_card && touched.pan_card ? (
-            <p className="form-error">{errors.pan_card}</p>
-          ) : null} */}
 
           <div className="chkbox-area">
             <input id="otpCheckbox" type="checkbox" required /> By submitting this form, you have read and agree to the Credit Report
@@ -232,7 +232,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
         </form> :
 
         <form onSubmit={verifyOtp}>
-          <span> Enter the OTP sent to <span className='fw-bold'>+91-{values.phone_no}</span></span>
+          <span> Enter the OTP sent to <span className='fw-bold'>+91-{genOtpData.phone_no}</span></span>
           {resendOtpMessage ? <div className='text-success mt-2'>Resend OTP Successfully</div> : ''}
           <TextField type='text' inputProps={{ pattern: "[0-9]{4}", title: "OTP must be 4 digit" }} value={values.otp} required name="otp" fullWidth label="OTP" variant="standard" onChange={handleChange} />
           {errors.otp && touched.otp ? (
@@ -247,8 +247,6 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
           </div>
         </form>
       }
-
-
     </>
   )
 }
