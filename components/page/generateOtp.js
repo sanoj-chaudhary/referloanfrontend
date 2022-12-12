@@ -44,7 +44,8 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     setServerSideStatus(true)
     try {
 
-      const { phone_no, otp } = values;
+      const { otp } = values;
+      const { phone_no } = genOtpData;
       const data = {
         phone_no, otp, bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
       }
