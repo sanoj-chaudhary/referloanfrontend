@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from 'next/router';
 
 const StarRating = ({ data,ratinginfo1 }) => {
-
+  const [ratingStatus, setratingStatus] = useState()
   const mySentence = data.name.trim();
   const productName = mySentence.split(" ");
 
@@ -16,6 +16,15 @@ const StarRating = ({ data,ratinginfo1 }) => {
   const addRating = async (index) => {
     let data1 = { 'bank_product_id': data.bank_product_id, 'rating': index, 'session_id': Math.random().toString(36).substring(2,8+2) }
     const res = await axios.post(`${process.env.APIHOST}/api/add-rating/`, data1);
+  if(res.data.status){
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("addrating", 'yes');
+      localStorage.setItem("addratingvalue", index);
+    }
+    setHover(index)
+    setratingStatus(window.localStorage.getItem("addrating"))
+    setHover(window.localStorage.getItem("addratingvalue"))
+  }
     //const res = await axios.post(`${process.env.APP_URL}/add-rating/`, data1);
     getRating()
   }
@@ -29,13 +38,17 @@ const StarRating = ({ data,ratinginfo1 }) => {
   const getRating = async () => {
     await axios.get(`${process.env.APP_URL}/get_rating_bybpid/` + data.bank_product_id).then((response1) => {
     setRatinginfo(response1.data[0]);
+
+    console.log(response1.data[0])
     });
   }
 
   useEffect(() => {
+    setratingStatus(window.localStorage.getItem("addrating"))
+    setHover(window.localStorage.getItem("addratingvalue"))
     getRating()
   },[router])
-
+console.log(ratinginfo['total_rating_3'])
   return (
     <>
         <div className="ratingWrapper">
@@ -49,10 +62,11 @@ const StarRating = ({ data,ratinginfo1 }) => {
               <button
                 type="button"
                 key={index}
-                className={index <= (hover || rating) ? "on" : "off"}
+                disabled={ratingStatus?true:false}
+                className={index <= (hover || rating) ? "on" : "off" }
                 onClick={() => addRating(index)}
-                onMouseEnter={() => setHover(index)}
-                onMouseLeave={() => setHover(rating)}
+                onMouseEnter={!ratingStatus?() => setHover(index):()=>{}}
+                onMouseLeave={!ratingStatus?() => setHover(rating):()=>{}}
               >
                 <span className="star">&#9733;</span>
               </button>
