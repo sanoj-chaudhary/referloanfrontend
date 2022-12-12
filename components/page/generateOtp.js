@@ -102,8 +102,6 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
       validationSchema: OtpSchema,
       onSubmit: async (values,action) => {
         setServerSideStatus(true)
-       
-       
         try {
 
           setUserValues(values)
@@ -203,7 +201,6 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
     }
   }, [data])
 
-console.log(genOtpData)
   return (
     <>
 
