@@ -492,7 +492,7 @@ table.table_cards_Table.margin{
 /* Filter form */
 .dialogwrapper {
   display: flex;
-  width: 500px;
+  max-width: 500px;
   min-height: 350px;
   height: auto;
   position: relative;
