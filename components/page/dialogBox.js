@@ -19,6 +19,7 @@ import { useRouter } from 'next/router';
 export default function ResponsiveDialog({ open, setOpen, data, response }) {
   const router = useRouter()
   const [product, setProduct] = useState([])
+  const [active, setActive] = useState(false)
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [searchData, setSearchData] = useState({
@@ -58,15 +59,18 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
 
           product_id: data.product_id, salary: values.salary, pincode: values.pincode
         };
-
+        setActive(true)
         const res = await axios.post(`${process.env.APIHOST}/api/banks/`, finaldata);
         console.log(res)
         if (!res.data.critariamatch) {
           searchProduct()
+          setActive(false)
           if (typeof window !== 'undefined') {
             localStorage.setItem("checkEligibility", 'yes');
 
           }
+        }else{
+          setActive(false)
         }
       },
     });
@@ -215,7 +219,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
                   required
                 />
                 {errors.pincode && <p style={{ color: 'red', fontSize: '12px' }}>{errors.pincode}</p>}
-                <div className="search-button"><button className="mt-4" type="submit" >Continue</button></div>
+                <div className="search-button"><button className="mt-4" disabled={active} type="submit" >{active ?<> Processing <i className="fa fa-spinner fa-spin"></i> </> : "Continue"}</button></div>
               </form>}
 
 
@@ -252,7 +256,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
                     {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
 
 
-                    <div className="search-button"><button className="mt-4" type="submit" >Submit</button></div>
+                    <div className="search-button"><button className="mt-4" disabled={active} type="submit" >{active ?<> Processing <i className="fa fa-spinner fa-spin"></i> </> : "Submit"}</button></div>
                   </>
                 ))}
 
