@@ -17,15 +17,6 @@ const StarRating = ({ data,ratinginfo1 }) => {
   const addRating = async (index) => {
     let data1 = { 'bank_product_id': data.bank_product_id, 'rating': index, 'session_id': Math.random().toString(36).substring(2,8+2) }
     const res = await axios.post(`${process.env.APIHOST}/api/add-rating/`, data1);
-  if(res.data.status){
-    if (typeof window !== 'undefined') {
-      localStorage.setItem("addrating", 'yes');
-      localStorage.setItem("addratingvalue", index);
-    }
-    setHover(index)
-    setratingStatus(window.localStorage.getItem("addrating"))
-    setHover(window.localStorage.getItem("addratingvalue"))
-  }
     //const res = await axios.post(`${process.env.APP_URL}/add-rating/`, data1);
     getRating()
   }
@@ -39,13 +30,10 @@ const StarRating = ({ data,ratinginfo1 }) => {
   const getRating = async () => {
     await axios.get(`${process.env.APP_URL}/get_rating_bybpid/` + data.bank_product_id).then((response1) => {
     setRatinginfo(response1.data[0]);
-
     });
   }
 
   useEffect(() => {
-    setratingStatus(window.localStorage.getItem("addrating"))
-    setHover(window.localStorage.getItem("addratingvalue"))
     getRating()
   },[router])
 
@@ -61,8 +49,7 @@ const StarRating = ({ data,ratinginfo1 }) => {
               <button
                 type="button"
                 key={index}
-                disabled={ratingStatus?true:false}
-                className={index <= (hover || rating) ? "on" : "off" }
+                className={index <= (hover || rating) ? "on" : "off"}
                 onClick={() => addRating(index)}
                 onMouseEnter={ !ratingStatus ? () => setHover(index):() => setStatus(false)}
                 onMouseLeave={ !ratingStatus ? () => setHover(rating):() => setStatus(false)}
