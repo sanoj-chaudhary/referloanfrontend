@@ -67,7 +67,6 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
           setActive(false)
           if (typeof window !== 'undefined') {
             localStorage.setItem("checkEligibility", 'yes');
-
           }
         }else{
           setActive(false)
