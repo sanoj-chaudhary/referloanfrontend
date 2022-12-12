@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 const StarRating = ({ data,ratinginfo1 }) => {
   const [ratingStatus, setratingStatus] = useState()
-  const [status, setStatus] = useState(true)
   const mySentence = data.name.trim();
   const productName = mySentence.split(" ");
 
@@ -51,8 +50,8 @@ const StarRating = ({ data,ratinginfo1 }) => {
                 key={index}
                 className={index <= (hover || rating) ? "on" : "off"}
                 onClick={() => addRating(index)}
-                onMouseEnter={ !ratingStatus ? () => setHover(index):() => setStatus(false)}
-                onMouseLeave={ !ratingStatus ? () => setHover(rating):() => setStatus(false)}
+                onMouseEnter={ () => setHover(index)}
+                onMouseLeave={ () => setHover(rating)}
               >
                 <span className="star">&#9733;</span>
               </button>
