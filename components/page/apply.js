@@ -164,6 +164,7 @@ const apply = (props) => {
     document.getElementById("dynamicMyForm").reset();
   }
 
+  
   return (
     <>
       {loading && <Loader loading={loading} />}
@@ -211,7 +212,7 @@ const apply = (props) => {
 
                       <>
 
-                        <div key={ind} className={`col-lg-4 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : values[elem.dependency] == elem.dependency_value ? '' : 'd-none'}`} data-type={elem.type}>
+                        <div key={ind} className={`col-lg-6 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : values[elem.dependency] == elem.dependency_value ? '' : 'd-none'}`} data-type={elem.type}>
 
                           <div className="d-none"> {paramName = elem.param_name.trim()}</div>
                           <div className="d-none">{(otpData[elem.global_name] !== undefined || elem.is_visible == false) ? '' : initialValues[elem.param_name] = ''}</div>
@@ -418,7 +419,7 @@ export default apply
 
 export function SelectField(props) {
 
-  const { values, name, label, ParamOptions, handleChange, param_name, dependency, dependency_value } = props
+  const { values, name, label, ParamOptions, handleChange, param_name, dependency, dependency_value,is_required } = props
 
   
   return (
@@ -429,12 +430,9 @@ export function SelectField(props) {
         <InputLabel id="demo-simple-select-standard-label">{props.field_name}</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
-         
           name={props.param_name}
           label={props.field_name}
-          required
-        
-      
+          required={is_required}
           placeholder={props.field_name}
           value={values.param_name}
           onChange={(e) => {
