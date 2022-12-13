@@ -222,7 +222,7 @@ const apply = (props) => {
                               <div className="d-none">{otpData[elem.global_name] != '' ? preassignValue[elem.param_name] = otpData[elem.global_name] : ''}</div>
                               <TextField
                                 fullWidth
-                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!" } : otpData[elem.global_name] != '' ? { value: otpData[elem.global_name] } : {}}
+                                inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!",value: otpData[elem.global_name] }  : {value: otpData[elem.global_name]} }
                                 required={elem.is_required}
                                 className={`${elem.is_visible ? '' : 'd-none'}`}
                                 name={elem.param_name}
