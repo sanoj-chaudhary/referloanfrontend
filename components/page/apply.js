@@ -164,7 +164,6 @@ const apply = (props) => {
     document.getElementById("dynamicMyForm").reset();
   }
 
-
   return (
     <>
       {loading && <Loader loading={loading} />}
