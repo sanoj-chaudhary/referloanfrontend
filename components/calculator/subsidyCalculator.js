@@ -125,7 +125,13 @@ const subsidyCalculator = () => {
           <h2>Loan Amount</h2>
           <small>(Up to 1 Crore)</small>
           <div className="outputArea">
-            <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} maxlength="8"/> <span className="emi-icon"> <i className="fa fa-rupee"></i> </span>
+            <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} maxlength="8"
+            onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }}
+            /> <span className="emi-icon"> <i className="fa fa-rupee"></i> </span>
           </div>
 
         </div>
@@ -139,7 +145,11 @@ const subsidyCalculator = () => {
           <h2>Loan Tenure</h2>
           <small>(1 year - 30 years)</small>
           <div className="outputArea">
-            <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} min="1" max="30"/> <span className="emi-icon" >
+            <input type="text" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} maxLength='2' onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} /> <span className="emi-icon" >
             </span></div>
 
         </div>

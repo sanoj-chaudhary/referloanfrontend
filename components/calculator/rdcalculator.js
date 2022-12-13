@@ -116,7 +116,13 @@ const emiCalculator = () => {
         <div className="rangeHead">
           <h2>Monthly Invest</h2>
           <div className="outputArea">
-            <input type="text" value={monthlyinvest} name="loan_amount" id="loan_amount" className="emi_check outline-none" onChange={(e) => { setMonthlyInvest(e.target.value) }} maxlength="8" /> <span className="emi-icon"> ₹ </span>
+            <input type="text" value={monthlyinvest} name="loan_amount" id="loan_amount" className="emi_check outline-none" onChange={(e) => { setMonthlyInvest(e.target.value) }} maxlength="8" 
+            onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }}
+            /> <span className="emi-icon"> ₹ </span>
           </div>
         </div>
 
@@ -128,7 +134,11 @@ const emiCalculator = () => {
           <h2>Interest Rate</h2>
           <small>(9.50% to 19.55%)</small>
           <div className="outputArea">
-            <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} min="1" max="20"/> <span className="emi-icon"> % </span>
+            <input type="text" onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} maxLength='3' /> <span className="emi-icon"> % </span>
           </div>
         </div>
         <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
@@ -139,7 +149,11 @@ const emiCalculator = () => {
           <h2>Investment Tenure </h2>
           <small>(1 year - 30 years)</small>
           <div className="outputArea">
-            <input type="number" value={year} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setYear(e.target.value) }} min="1" max="30" /> <span className="emi-icon" >Yr
+            <input type="text" onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} value={year} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setYear(e.target.value) }} maxLength='2' /> <span className="emi-icon" >Yr
             </span></div>
 
         </div>
@@ -181,8 +195,8 @@ const emiCalculator = () => {
                   }],
                   labels: ['Total Interest', 'Total Invest']
                 }}
-                width={300}
-                height={300}
+                width={200}
+                height={200}
                 options={{ maintainAspectRatio: false }}
               />
             </TableCell>

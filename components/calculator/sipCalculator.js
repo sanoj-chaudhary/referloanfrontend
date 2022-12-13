@@ -143,7 +143,11 @@ const sipCalculator = () => {
               <h2>Expected Return Rate (p.a)</h2>
               <small>(9.50% to 19.55%)</small>
               <div className="outputArea">
-                <input type="number" min="1" max="30" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
+                <input type="text" onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} maxLength='3' value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
               </div>
             </div>
             <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
@@ -153,7 +157,11 @@ const sipCalculator = () => {
               <h2>SIP Period</h2>
               <small>(1 year - 30 years)</small>
               <div className="outputArea">
-                <input type="number" min="1" max="30" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" > Years
+                <input type="text" onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} maxLength='2'  value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" > Years
                 </span></div>
 
             </div>
