@@ -50,8 +50,9 @@ const apply = (props) => {
   let initialValues = {}
   let _validationSchema = {};
   let paramName;
-  let dependency = {};
-  let dependency_value = {};
+  let flag = false;
+  let dependency = []
+  let dependency_value = []
   if (typeof window !== 'undefined') {
     var full_name = window.localStorage.getItem("full_name");
     var phone = window.localStorage.getItem("phone");
@@ -73,7 +74,7 @@ const apply = (props) => {
     full_name, first_name, last_name, phone
   }
 
-  console.log(otpData)
+  
   const { values, handleBlur, setFieldValue, handleChange, handleSubmit, errors, touched, setFieldTouched } =
     useFormik({
       initialValues,
@@ -162,20 +163,6 @@ const apply = (props) => {
     document.getElementById("dynamicMyForm").reset();
   }
 
-console.log("formSchema",props.form_schema)
-let temp = 0;
-const checkDependency = (depend,dependValue) =>{
-  (depend.length !== 'undefined' || depend != '') && depend.map((t,i)=>{
-   
-    return (
-      depend[i] == dependValue[i]?temp=1:temp=0
-    // console.log("depend",depend[i],"depend",dependValue[i])
-    // console.log()
-    );
-  })
-}
-console.log(temp)
-
   return (
     <>
       {loading && <Loader loading={loading} />}
@@ -199,10 +186,7 @@ console.log(temp)
             <div className="CardImg_box">
               <img
                 src={`/uploads/product_bank/${newProductName}.webp`}
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null; // prevents looping
-                  currentTarget.src = '/uploads/product_bank/' + props.data[0].categories_id + '.webp';
-                }}
+                onError={(e) => (e.currentTarget.src = '/uploads/product_bank/' + props.data[0].categories_id + '.webp')}
               />
 
             </div>
@@ -222,17 +206,17 @@ console.log(temp)
                       {item.forms.map((elem, ind) => {
 
                         return (
-<>
-                          
-{<div className="d-none"> { elem.dependency != ''? dependency = elem.dependency.split(','):"" }</div>}
-{<div className="d-none">{ elem.dependency_value != ''? dependency_value = elem.dependency_value.split(','):"" } </div> }
+                          <>
+                            {<div className="d-none">{dependency = elem.dependency.split(',')}</div>}
+                            {<div className="d-none">{dependency_value = elem.dependency_value.split(',')}</div>}
+                            {<div className="d-none">{flag = false}</div>}
+                            {
+                              dependency.map((temp, key) => (
+                                <div key={temp} className="d-none">{values[dependency[key]] !== dependency_value[key] ? flag = true : ''}</div>
+                              ))
+                            }
 
-    {
-<div className="d-none">{elem.dependency != '' ? checkDependency(dependency,dependency_value):''} </div>
-    }
-
-    
-                            <div key={ind} className={`col-lg-6 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : temp == 1 ? '' : 'd-none'}`} data-type={elem.type}>
+                            <div className={`col-lg-6 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : flag ? 'd-none' : ''}`}>
 
                               <div className="d-none"> {paramName = elem.param_name.trim()}</div>
                               <div className="d-none">{(otpData[elem.global_name] !== undefined || elem.is_visible == false) ? '' : initialValues[elem.param_name] = ''}</div>
@@ -242,7 +226,7 @@ console.log(temp)
                                   <div className="d-none">{otpData[elem.global_name] != '' ? preassignValue[elem.param_name] = otpData[elem.global_name] : ''}</div>
                                   <TextField
                                     fullWidth
-                                    inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!",value: otpData[elem.global_name] }  : {value: otpData[elem.global_name]} }
+                                    inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!", value: otpData[elem.global_name] } : { value: otpData[elem.global_name] }}
                                     required={elem.is_required}
                                     className={`${elem.is_visible ? '' : 'd-none'}`}
                                     name={elem.param_name}
@@ -355,7 +339,7 @@ console.log(temp)
 
                               {elem.type == 'checkbox' && <FormControlLabel className={` ${elem.is_visible ? '' : 'd-none'}`} control={<Checkbox />} label={elem.field_name} required />}
                             </div>
-                            </>
+                          </>
                         );
                       })}
                     </div>

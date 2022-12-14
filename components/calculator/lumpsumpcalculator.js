@@ -3,17 +3,11 @@ import { withStyles } from '@material-ui/styles'
 import Slider from '@mui/material/Slider';
 import { Typography } from '@material-ui/core'
 import { Table, TableCell, TableRow, TableHead } from '@material-ui/core'
-// import { Chart } from 'react-chartjs-2';
 import { styled } from '@mui/material/styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
-// export const PretoSlider = withStyles({
-//   color: { color: "#ff9302", height: 10 },
-//   thumb: { height: 20, width: 20, backgroundColor: 'ff9302', marginTop: -1, marginLeft: -9 },
-//   track: { height: 20, borderRadius: 4 },
-//   rail: { height: 40, color:"red", borderRadius: 4 }
-// })(Slider);
+
 import TableDetails from './tableDetails';
 
 const PrettoSlider = styled(Slider)({
@@ -64,41 +58,6 @@ const PrettoSlider = styled(Slider)({
   },
 });
 
-const marks = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1',
-  },
-  {
-    value: 2000000,
-    label: '20',
-  },
-  {
-    value: 100,
-    label: '100',
-  },
-];
-
-const marksss = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1 Lac',
-  },
-  {
-    value: 2000000,
-    label: '20 Lac',
-  }
-
-];
-
 const lumpsumpcalculator = () => {
   const [pAmount, setpAmount] = useState(100000);
   const [interest, setInterest] = useState(6);
@@ -118,9 +77,6 @@ const lumpsumpcalculator = () => {
     return `${value} Lac`;
   }
 
-
-  
-  
   return (
     <>
 
@@ -131,7 +87,12 @@ const lumpsumpcalculator = () => {
               <h2>Investment Amount</h2>
               <small>(Up to 1 Crore)</small>
               <div className="outputArea">
-                <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} maxlength="8" /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
+                <input type="text" onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} 
+            value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} maxlength="8" /> <span className="emi-icon"> ₹<i className="fa fa-rupee"></i> </span>
               </div>
 
             </div>
@@ -144,7 +105,11 @@ const lumpsumpcalculator = () => {
               <h2>Expected Return Rate (p.a)</h2>
               <small>(9.50% to 19.55%)</small>
               <div className="outputArea">
-                <input type="number" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} min="1" max="30"/> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
+                <input type="text" onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} maxLength="3" /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
               </div>
             </div>
             <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
@@ -154,7 +119,11 @@ const lumpsumpcalculator = () => {
               <h2>Investment Period (in Years)</h2>
               <small>(1 year - 30 years)</small>
               <div className="outputArea">
-                <input type="number" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} min="1" max="30" required ="true" /> years <span className="emi-icon" >
+                <input type="text" onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} maxLength="2" required ="true" /> years <span className="emi-icon" >
                 </span></div>
 
             </div>

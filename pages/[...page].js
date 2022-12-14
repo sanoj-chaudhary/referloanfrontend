@@ -79,7 +79,7 @@ export async function getServerSideProps(context) {
 
 
   url = url.join("/");
-  console.log(ref)
+  
 
   const res = await db.query("SELECT * FROM `pages` WHERE `slug` =  '" + url + "' ");
   if (res.length != 0) {

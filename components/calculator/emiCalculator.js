@@ -3,18 +3,12 @@ import { withStyles } from '@material-ui/styles'
 import Slider from '@mui/material/Slider';
 import { Typography } from '@material-ui/core'
 import { Table, TableCell, TableRow } from '@material-ui/core'
-// import { Chart } from 'react-chartjs-2';
 import { styled } from '@mui/material/styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-// export const PretoSlider = withStyles({
-//   color: { color: "#ff9302", height: 10 },
-//   thumb: { height: 20, width: 20, backgroundColor: 'ff9302', marginTop: -1, marginLeft: -9 },
-//   track: { height: 20, borderRadius: 4 },
-//   rail: { height: 40, color:"red", borderRadius: 4 }
-// })(Slider);
+
 import TableDetails from './tableDetails';
 
 const PrettoSlider = styled(Slider)({
@@ -65,41 +59,6 @@ const PrettoSlider = styled(Slider)({
   },
 });
 
-const marks = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1',
-  },
-  {
-    value: 2000000,
-    label: '20',
-  },
-  {
-    value: 100,
-    label: '100',
-  },
-];
-
-const marksss = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1 Lac',
-  },
-  {
-    value: 2000000,
-    label: '20 Lac',
-  }
-
-];
-
 const emiCalculator = () => {
   const [pAmount, setpAmount] = useState(100000);
   const [interest, setInterest] = useState(9.56);
@@ -117,6 +76,15 @@ const emiCalculator = () => {
   function valuetext(value) {
     return `${value} Lac`;
   }
+
+  function onlyNumberKey(evt) {
+
+    // Only ASCII character in that range allowed
+    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+      return false;
+    return true;
+  }
   return (
     <>
 
@@ -125,12 +93,16 @@ const emiCalculator = () => {
           <h2>Loan Amount</h2>
           <small>(Up to 1 Crore)</small>
           <div className="outputArea">
-            <input type="text" value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} maxlength="8" /> <span className="emi-icon"> ₹ </span>
+            <input type="text" onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} value={pAmount} name="loan_amount" id="loan_amount" className="emi_check" onChange={(e) => { setpAmount(e.target.value) }} maxLength="8" /> <span className="emi-icon"> ₹ </span>
           </div>
 
         </div>
 
-        <PrettoSlider value={pAmount} aria-label ="Default" valueLabelDisplay="auto" onChange={(e) => { setpAmount(e.target.value) }} max={maxvalue} getAriaValueText={valuetext}
+        <PrettoSlider value={pAmount} aria-label="Default" valueLabelDisplay="auto" onChange={(e) => { setpAmount(e.target.value) }} max={maxvalue} getAriaValueText={valuetext}
         ></PrettoSlider>
       </div>
       <div className="rangeArea">
@@ -138,7 +110,11 @@ const emiCalculator = () => {
           <h2>Interest Rate</h2>
           <small>(9.50% to 19.55%)</small>
           <div className="outputArea">
-            <input type="number" value={interest} name="intrest_rate" id="intrest_rate" min="1" max="30" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> % </span>
+            <input onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} type="number" value={interest} name="intrest_rate" id="intrest_rate" min="1" max="30" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> % </span>
           </div>
         </div>
         <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
@@ -149,7 +125,12 @@ const emiCalculator = () => {
           <h2>Loan Tenure</h2>
           <small>(1 year - 30 years)</small>
           <div className="outputArea">
-            <input type="number" value={duration} name="tenure" id="tenure" min="1" max="30" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" >Mo
+            <input type="text" onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} 
+            value={duration} name="tenure" id="tenure" maxLength="5" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" >Mo
             </span></div>
 
         </div>
@@ -164,39 +145,39 @@ const emiCalculator = () => {
         <div className='container'>
           <div className='row gy-1'>
             <div className='col-md-6 col-12'>
-            <Table className="mb-1">
-          <TableRow style={{ borderBottom: "2px solid white" }}>
-            <TableCell>
-              <TableDetails emi={emi} loanamt={pAmount} interest={interest} tenure={duration} totalIntrest={totalAmountofInterest} tatalpayment={payableAmt} />
-            </TableCell>
-          </TableRow>
-        </Table>
+              <Table className="mb-1">
+                <TableRow style={{ borderBottom: "2px solid white" }}>
+                  <TableCell>
+                    <TableDetails emi={emi} loanamt={pAmount} interest={interest} tenure={duration} totalIntrest={totalAmountofInterest} tatalpayment={payableAmt} />
+                  </TableCell>
+                </TableRow>
+              </Table>
             </div>
             <div className='col-md-6 col-12 ' style={{ borderBottom: "2px solid white" }}>
-            <Table className="mt-5">
-          <TableRow  >
-            
-            <TableCell>
-              <Pie className='clChart'
-                data={{
+              <Table className="mt-5">
+                <TableRow  >
 
-                  datasets: [{
-                    data: [totalAmountofInterest, pAmount],
-                    backgroundColor: ['rgb(0, 121, 106)', 'rgb(255, 147, 2)']
-                  }],
-                  labels: ['Total Interest', 'Total Amount']
-                }}
-                width={150}
-                height={150}
-                options={{ maintainAspectRatio: false }}
-              />
-            </TableCell>
-          </TableRow>
-        </Table>
+                  <TableCell>
+                    <Pie className='clChart'
+                      data={{
+
+                        datasets: [{
+                          data: [totalAmountofInterest, pAmount],
+                          backgroundColor: ['rgb(0, 121, 106)', 'rgb(255, 147, 2)']
+                        }],
+                        labels: ['Total Interest', 'Total Amount']
+                      }}
+                      width={150}
+                      height={150}
+                      options={{ maintainAspectRatio: false }}
+                    />
+                  </TableCell>
+                </TableRow>
+              </Table>
             </div>
           </div>
         </div>
-       
+
       </div>
 
 

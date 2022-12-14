@@ -3,18 +3,11 @@ import { withStyles } from '@material-ui/styles'
 import Slider from '@mui/material/Slider';
 import { Typography } from '@material-ui/core'
 import { Table, TableCell, TableRow } from '@material-ui/core'
-// import { Chart } from 'react-chartjs-2';
 import { styled } from '@mui/material/styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-// export const PretoSlider = withStyles({
-//   color: { color: "#ff9302", height: 10 },
-//   thumb: { height: 20, width: 20, backgroundColor: 'ff9302', marginTop: -1, marginLeft: -9 },
-//   track: { height: 20, borderRadius: 4 },
-//   rail: { height: 40, color:"red", borderRadius: 4 }
-// })(Slider);
 import TableDetails from './tableDetails';
 import TableSipDetails from './tableSipDetails';
 
@@ -66,41 +59,6 @@ const PrettoSlider = styled(Slider)({
   },
 });
 
-const marks = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1',
-  },
-  {
-    value: 2000000,
-    label: '20',
-  },
-  {
-    value: 100,
-    label: '100',
-  },
-];
-
-const marksss = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1 Lac',
-  },
-  {
-    value: 2000000,
-    label: '20 Lac',
-  }
-
-];
-
 const sipCalculator = () => {
   const [pAmount, setpAmount] = useState(100000);
   const [interest, setInterest] = useState(9.56);
@@ -114,7 +72,7 @@ const sipCalculator = () => {
   var futureValue = 0;
   var total_investment = (pAmount*months);
   futureValue = Math.round(pAmount * (1+monthlyRate) * ((Math.pow((1+monthlyRate),months)) - 1)/monthlyRate);
-  /*var total_interest = ((pAmount*duration*interest));*/
+
   var total_interest = ((futureValue-total_investment));
 
   function valuetext(value) {
@@ -143,7 +101,11 @@ const sipCalculator = () => {
               <h2>Expected Return Rate (p.a)</h2>
               <small>(9.50% to 19.55%)</small>
               <div className="outputArea">
-                <input type="number" min="1" max="30" value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
+                <input type="text" onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} maxLength='3' value={interest} name="intrest_rate" id="intrest_rate" className="emi_check" onChange={(e) => { setInterest(e.target.value) }} /> <span className="emi-icon"> <i className="fa fa-percent" ></i> </span>
               </div>
             </div>
             <PrettoSlider value={interest} aria-label="Default" valueLabelDisplay="auto" onChange={(e, vamt) => { setInterest(vamt) }} max={maxint} ></PrettoSlider>
@@ -153,7 +115,11 @@ const sipCalculator = () => {
               <h2>SIP Period</h2>
               <small>(1 year - 30 years)</small>
               <div className="outputArea">
-                <input type="number" min="1" max="30" value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" > Years
+                <input type="text" onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }} maxLength='2'  value={duration} name="tenure" id="tenure" className="emi_check" onChange={(e) => { setDuration(e.target.value) }} /> <span className="emi-icon" > Years
                 </span></div>
 
             </div>
