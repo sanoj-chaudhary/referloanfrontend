@@ -3,18 +3,11 @@ import { withStyles } from '@material-ui/styles'
 import Slider from '@mui/material/Slider';
 import { Typography } from '@material-ui/core'
 import { Table, TableCell, TableRow } from '@material-ui/core'
-// import { Chart } from 'react-chartjs-2';
 import { styled } from '@mui/material/styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-// export const PretoSlider = withStyles({
-//   color: { color: "#ff9302", height: 10 },
-//   thumb: { height: 20, width: 20, backgroundColor: 'ff9302', marginTop: -1, marginLeft: -9 },
-//   track: { height: 20, borderRadius: 4 },
-//   rail: { height: 40, color:"red", borderRadius: 4 }
-// })(Slider);
 import TableDetails from './tableDetails';
 import TableEpfDetails from './tableEpfDetails';
 
@@ -66,41 +59,6 @@ const PrettoSlider = styled(Slider)({
   },
 });
 
-const marks = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1',
-  },
-  {
-    value: 2000000,
-    label: '20',
-  },
-  {
-    value: 100,
-    label: '100',
-  },
-];
-
-const marksss = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1 Lac',
-  },
-  {
-    value: 2000000,
-    label: '20 Lac',
-  }
-
-];
-
 const ppfCalculator = () => {
   const [pAmount, setpAmount] = useState(500);
   const [interest, setInterest] = useState(8.1);
@@ -119,27 +77,13 @@ const ppfCalculator = () => {
   const maxEPFAmount = 150000;
   const maxYearlyGrowth = 20;
 
-  // F = P[{(1+i)n-1}/i]
   var monthlyRate = interest / 12 / 100;
   var months = duration * 12;
 
   var total_investment = (pAmount*duration);
-  //var futureValue = Math.round(pAmount*(((1+interest)*duration-1)/interest));
-  //var maturityAmount = Math.round(Math.pow(pAmount*(1+interest),duration));
-  // 120000[({(1+7.1)15}-1)/7.1]
   var maturityAmount = Math.round( pAmount*( (((1+interest)*duration)-1)/interest ) );
   var total_interest = (maturityAmount-total_investment);
   var futureValue = (maturityAmount+total_investment);
-
-  /*
-  var monthlyRate = interest / 12 / 100;
-  var months = duration * 12;
-  var futureValue = 0;
-  var total_investment = (pAmount*duration);
-  futureValue = Math.round(pAmount * (1+monthlyRate) * ((Math.pow((1+monthlyRate),months)) - 1)/monthlyRate);
-  var total_interest = ((futureValue-pAmount));
-  //var total_interest = ((pAmount*duration*interest));
-  */
 
   function valuetext(value) {
     return `${value} Lac`;
