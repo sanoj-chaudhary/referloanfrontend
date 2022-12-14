@@ -35,7 +35,7 @@ const getToken = () => {
 }
 const apply = (props) => {
   const router = useRouter()
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(0)
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
 
