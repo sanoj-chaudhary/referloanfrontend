@@ -62,6 +62,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
           }, 1200000);
           if (utmData && utmData.param_name == 'redirect') {
             setTimeout(() => {
+              alert("Hello");
               router.push('/')
             }, 3000);
             const newWindow = window.open(utmData.live_default, '_blank', 'noopener,noreferrer')
