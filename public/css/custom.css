@@ -899,10 +899,8 @@ justify-content: center;
   font-size: 44px;
   color: var(--secondryColor);
   font-weight: 600;
-  display: flex;
-  justify-content: space-between;
   padding: 20px 0 0;
-  align-items: center;
+  
 }
 
 .franchiseModel .modelInner_Section li {
@@ -920,11 +918,14 @@ justify-content: center;
 }
 
 .franchiseModel .modelInner_Section .franchiseModel-img {
-  text-align: center;
-  max-width: 480px;
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.franchiseModel .modelInner_Section .franchiseModel-img  ul{
+  list-style: none !important;
+}
 .franchiseModel-img img {
   max-width: 400px;
   width: 100%;
