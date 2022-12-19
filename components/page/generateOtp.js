@@ -189,18 +189,30 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
 
 
   useEffect(() => {
-    setLoading(false)
-    setBankProductId(data.bank_product_id)
-    setResendOtpMessage(false)
-    setOtpStatus(false)
-    
+    setStateProperty()
     if(!window.localStorage.getItem("checkEligibility")){
       if (utm_medium != 'self') {
         checkEligibility()
         setOpen(true)
       }
     }
+    return () => {
+      setLoading({}); 
+      setBankProductId({}); 
+      setResendOtpMessage({}); 
+      setOtpStatus({}); 
+     
+    };
   }, [data])
+
+    const setStateProperty = () =>{
+      setLoading(false)
+      setBankProductId(data.bank_product_id)
+      setResendOtpMessage(false)
+      setOtpStatus(false)
+
+      
+    }
 
   return (
     <>

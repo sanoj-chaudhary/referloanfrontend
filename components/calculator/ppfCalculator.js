@@ -3,18 +3,11 @@ import { withStyles } from '@material-ui/styles'
 import Slider from '@mui/material/Slider';
 import { Typography } from '@material-ui/core'
 import { Table, TableCell, TableRow } from '@material-ui/core'
-// import { Chart } from 'react-chartjs-2';
 import { styled } from '@mui/material/styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-// export const PretoSlider = withStyles({
-//   color: { color: "#ff9302", height: 10 },
-//   thumb: { height: 20, width: 20, backgroundColor: 'ff9302', marginTop: -1, marginLeft: -9 },
-//   track: { height: 20, borderRadius: 4 },
-//   rail: { height: 40, color:"red", borderRadius: 4 }
-// })(Slider);
 import TableDetails from './tableDetails';
 import TablePpfDetails from './tablePpfDetails';
 
@@ -66,41 +59,6 @@ const PrettoSlider = styled(Slider)({
   },
 });
 
-const marks = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1',
-  },
-  {
-    value: 2000000,
-    label: '20',
-  },
-  {
-    value: 100,
-    label: '100',
-  },
-];
-
-const marksss = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1 Lac',
-  },
-  {
-    value: 2000000,
-    label: '20 Lac',
-  }
-
-];
-
 const ppfCalculator = () => {
   const [pAmount, setpAmount] = useState(500);
   const [interest, setInterest] = useState(7.1);
@@ -108,27 +66,13 @@ const ppfCalculator = () => {
   const maxvalue = 150000;
   const maxint = 20;
   const maxduration = 50;
-  // F = P[{(1+i)n-1}/i]
 
   var monthlyRate = interest / 12 / 100;
   var months = duration * 12;
   var maturityAmount = 0;
   var total_investment = (pAmount*months);
-  //maturityAmount = Math.round(pAmount * (1+monthlyRate) * ((Math.pow((1+monthlyRate),months)) - 1)/monthlyRate);
+ 
   maturityAmount = Math.round(pAmount * (1+monthlyRate) * ((Math.pow((1+monthlyRate),months)) - 1)/monthlyRate);
-  // count
-  /*var p = pAmount;
-  var x = 0;
-  for (var i = 1; i <= months; i++) {
-    x += (p * (interest/12))/100;
-    if (i%12==0) {
-      p = p+x;
-      x=0;
-    }
-  }
-  maturityAmount = Math.round(x);
-  var total_interest = (x);*/
-  // end
   var total_interest = (maturityAmount-total_investment);
 
   function valuetext(value) {

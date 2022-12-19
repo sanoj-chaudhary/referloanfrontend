@@ -65,40 +65,6 @@ const PrettoSlider = styled(Slider)({
   },
 });
 
-const marks = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1',
-  },
-  {
-    value: 2000000,
-    label: '20',
-  },
-  {
-    value: 100,
-    label: '100',
-  },
-];
-
-const marksss = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 100000,
-    label: '1 Lac',
-  },
-  {
-    value: 2000000,
-    label: '20 Lac',
-  }
-
-];
 
 const mfcalculator = () => {
   const [pAmount, setpAmount] = useState(100000);
