@@ -564,6 +564,413 @@ justify-content: center;
   padding: 14px 40px;
 }
 
+/* Franchise css */
+
+
+/* startedArea */
+
+.startedArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.startedArea .leftarea {
+  max-width: 525px;
+  color: var(--darkGrey)
+}
+
+.startedArea .leftarea h1 {
+  font-size: 76px;
+  color: var(--darkGrey);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.startedArea .leftarea h1 span {
+  font-size: 76px;
+  color: var(--secondryColor);
+}
+
+.startedArea .leftarea p {
+  font-size: 21px;
+}
+
+.startedArea .getForm {
+  max-width: 350px;
+  background: #fff;
+  -webkit-box-shadow: 0px 0px 26px 0px rgb(189 226 223 / 37%);
+  -moz-box-shadow: 0px 0px 26px 0px rgba(189, 226, 223, 0.37);
+  box-shadow: 0px 0px 26px 0px rgb(189 226 223 / 37%);
+  width: 100%;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  padding: 25px;
+}
+
+.startedArea .getForm h2 {
+  font-size: 35px;
+}
+
+.startedArea .getForm h2 img {
+  height: 57px;
+  width: auto;
+}
+
+.startedArea .getForm form {
+  padding: 30px 0 0px;
+}
+
+.startedArea .getForm input {
+  border: none;
+  border-bottom: 1px solid #ddf1ee;
+  border-radius: 0;
+  height: auto;
+  padding-top: 15px!important;
+}
+
+.startedArea .getForm input:focus {
+  box-shadow: none;
+}
+
+.startedArea .getForm .form-floating>label {
+  padding: 0;
+  font-size: 12px;
+  color: var(--secondryLight);
+  font-weight: 400;
+  opacity: 1;
+}
+
+.startedArea .getForm a {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.startedArea .getForm a {
+  margin-top: 15px;
+  width: 100%;
+}
+
+
+/* fintechArea */
+
+.countArea ul {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+
+.countArea p {
+  font-size: 10px;
+}
+
+
+.countArea ul li {
+  max-width: 250px;
+  width: 100%;
+  box-shadow: rgb(205 233 239 / 32%) 0px 0px 4px 0px, rgb(0 0 0 / 6%) 0px 2px 4px -1px;
+  padding: 20px 30px;
+  text-align: center;
+  font-size: 19px;
+  background-color: #fff;
+}
+
+.countArea ul li h2 {
+  font-size: 41px;
+  font-weight: 700;
+  color: var(--secondryColor);
+  padding-bottom: 10px;
+}
+
+.countArea ul li h2 span {
+  color: var(--darkGrey);
+}
+
+
+/* productArea */
+
+.productArea {
+  padding: 30px 60px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.productArea .proBox {
+  max-width: 33%;
+  width: 100%;
+  background: #fff;
+}
+
+.productArea .proBox .inner {
+  padding: 30px;
+  max-width: 100%;
+  box-shadow: 0px 0px 26px 0px rgb(189 226 223 / 48%);
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+.productArea .proBox .inner h2 {
+  font-size: 26px;
+  color: var(--darkGrey);
+  padding-bottom: 15px;
+  padding-top: 20px;
+  font-weight: 500;
+}
+
+.productArea .proBox .inner .imgBox {
+  width: 100%;
+  height: 140px;
+}
+
+.productArea .proBox .inner .imgBox img {
+  max-width: 100%;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.productArea .proBox .inner ul li {
+  font-size: 17px;
+  padding: 3px 0;
+  font-weight: 400;
+  color: #333;
+}
+
+.productArea .proBox .inner ul li::before {
+  content: '\f1df';
+  font-family: 'Material Icons';
+  color: #71c3b49e;
+  margin-right: 8px;
+}
+
+.productArea .proBox .inner .moreBtn {
+  width: max-content;
+  height: 50px;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  background-color: var(--secondryLight);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0 25px;
+  display: flex;
+  align-self: end;
+  align-items: center;
+}
+
+.productArea .proBox .inner .moreBtn:hover {
+  background-color: var(--primaryColor);
+}
+
+
+/* Do You want to Become Section */
+
+.becomeHeading {
+  background-color: var(--secondryColor);
+  width: max-content;
+  padding: 20px 40px;
+  color: #fff;
+  font-size: 44px;
+  font-weight: 500;
+  border-radius: 60px;
+  margin: auto;
+}
+
+.becomeSection .contentRow {
+  display: flex;
+  padding: 50px 0 0px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -20px;
+}
+
+.becomeSection .contentRow .contentBox {
+  max-width: 560px;
+}
+
+.becomeSection .contentRow .contentBox span {
+  font-size: 19px;
+  color: var(--primaryColor);
+}
+
+.becomeSection .contentRow .contentBox h3 {
+  color: var(--darkGrey);
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.becomeSection .contentRow .contentBox p {
+  color: var(--lightGrey);
+  font-size: 19px;
+  font-weight: 400;
+  margin-top: 15px;
+}
+
+.becomeSection .contentRow .imgBox {
+  max-width: 560px;
+}
+
+.butImg {
+  text-align: center;
+  padding: 20px 0;
+  height:auto;
+  width:10px
+}
+
+
+/*  invest Area  */
+
+.investArea {
+  display: flex;
+  column-gap: 20px;
+}
+
+.investArea .box {
+  flex: 1;
+  border: 1px solid #f1f1f1;
+  box-shadow: rgb(205 233 239 / 32%) 0px 0px 4px 0px, rgb(0 0 0 / 6%) 0px 2px 4px -1px;
+  border-radius: 6px;
+  display: flex;
+  padding: 0;
+  align-items: center
+}
+
+.investArea .box img {
+  margin-right: 40px;
+}
+
+.investArea .box h2 {
+  font-size: 28px;
+  color: var(--darkGrey);
+  font-weight: 600;
+  padding-right: 25px;
+}
+
+
+/* franchiseModel */
+
+.contactArea span.subtitle {
+  font-size: 19px;
+  color: var(--darkGrey);
+  padding-left: 35px;
+}
+
+.contactArea h2 {
+  font-size: 76px;
+  font-weight: 700;
+  color: var(--darkGrey);
+  margin-bottom: 20px;
+}
+
+.contactArea h2 span {
+  font-size: 31px;
+  margin-right: 3px;
+  float: left;
+}
+
+
+.franchiseModel {
+  background-color: #eaf8f6;
+  padding-bottom: 20px;
+}
+
+.franchiseModel h2 {
+  background-color: #eaf8f6;
+  font-size: 44px;
+  color: var(--secondryColor);
+  font-weight: 600;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.franchiseModel .modelInner_Section {
+  background-color: #eaf8f6;
+  font-size: 44px;
+  color: var(--secondryColor);
+  font-weight: 600;
+  padding: 20px 0 0;
+  
+}
+
+.franchiseModel .modelInner_Section li {
+  font-size:  20px;   
+  color: var(--darkGrey);
+  padding-bottom: 8px;
+  font-weight:300;
+}
+
+.franchiseModel .modelInner_Section li::before {
+  content: '\e876';
+  font-family: 'Material Icons';
+  color: #71c3b49e;
+  margin-right: 8px;
+}
+
+.franchiseModel .modelInner_Section .franchiseModel-img {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.franchiseModel .modelInner_Section .franchiseModel-img  ul{
+  list-style: none !important;
+}
+.franchiseModel-img img {
+  max-width: 400px;
+  width: 100%;
+}
+
+
+/* .faqSection */
+
+.faqSection {
+  display: flex;
+}
+
+.faqSection .imgBox {
+  min-width: 494px;
+  margin-right: 25px;
+}
+
+.faqSection .imgBox img {
+  max-width: 100%;
+  height: auto;
+}
+
+.faqSection .faqBox {
+  width: 100%;
+  flex: 1;
+}
+
+.faqSection .faqBox h2.heading {
+  width: max-content;
+  padding-bottom: 2px;
+  border-bottom: 5px solid var(--primaryColor);
+  margin-bottom: 20px;
+  font-size: 44px;
+  font-weight: 600;
+}
+
+.amaze .h2.head {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 600;
+
+
+}
+
+
 
 @media only screen and (max-width:991px) {
   .ratingWrapper {

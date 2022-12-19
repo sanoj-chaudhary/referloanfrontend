@@ -163,6 +163,7 @@ const apply = (props) => {
     document.getElementById("dynamicMyForm").reset();
   }
 
+  
   return (
     <>
       {loading && <Loader loading={loading} />}
@@ -188,7 +189,10 @@ const apply = (props) => {
             <div className="CardImg_box">
               <img
                 src={`/uploads/product_bank/${newProductName}.webp`}
-                onError={(e) => (e.currentTarget.src = '/uploads/product_bank/' + props.data[0].categories_id + '.webp')}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.src = '/uploads/product_bank/' + props.data[0].categories_id + '.webp';
+                }}
               />
 
             </div>
@@ -359,13 +363,13 @@ const apply = (props) => {
 
         <section className="cardOffer_area">
           <div className="dealStep__leftArea">
-            <div className="ratingcomponent"><StarRating data={props.data[0]} ratinginfo1={props.ratingg} /></div>
+            <div className="ratingcomponent"><StarRating data={props.data[0]} ratinginfo1={props.ratingg} /></div> 
           </div>
           <div className="loanStep__wrapper">
             <div className="loanForm__Container">
-              {props.specification[0] &&
+             {props.specification[0] &&
                 <div dangerouslySetInnerHTML={{ __html: props.specification[0].description }}></div>
-              }
+             }
             </div>
           </div>
         </section>
@@ -377,7 +381,7 @@ const apply = (props) => {
             </div>
           </section>
 
-          {props.specification[0] && props.specification[0].contact_status == '1' &&
+          {props.specification[0] && props.specification[0].contact_status=='1' &&
             <section className="section_pad">
               <div className="container">
                 <div dangerouslySetInnerHTML={{ __html: props.specification[0].contact_detail }}></div>
@@ -402,7 +406,7 @@ const apply = (props) => {
                     <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                       <div className="accordion-body" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
 
-
+                     
                         <div itemProp="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
                       </div>
                     </div>
@@ -426,9 +430,9 @@ export default apply
 
 export function SelectField(props) {
 
-  const { values, name, label, ParamOptions, handleChange, param_name, dependency, dependency_value, is_required } = props
+  const { values, name, label, ParamOptions, handleChange, param_name, dependency, dependency_value,is_required } = props
 
-
+  
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
@@ -459,6 +463,6 @@ export function SelectField(props) {
 
 
 
-
+ 
 }
 

@@ -65,7 +65,8 @@ export default function Header(children) {
             <script async src="https://cdn.ampproject.org/v0.js"></script>
         </Head>
         { process.env.SITEHOST == 'referloan.in'?<>
-        <Script src="https://www.googletagmanager.com/gtag/js?id=AW-513485835" />
+       
+
         <Script>
             {` window.dataLayer = window.dataLayer || [];
                 function gtag() {
@@ -89,6 +90,8 @@ export default function Header(children) {
         </>:'' }
         
         <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous" />
+
+      
         </>
     )
 }
