@@ -1001,5 +1001,56 @@ justify-content: center;
   #apply-banner{display: none;}
 }
 
+.franchise_listing_area .feature_area {
+  margin-top: 25px;
+}
+.franchise_listing_area .feature_area h3 {
+  font-weight: 500;
+}
 
+.map_container .franchise_listing_area ul {
+  width: 100%;
+  display: flex;
+  padding: 20px 0;
+  column-gap: 10px;
+}
+
+.map_container .franchise_listing_area ul li {
+  width: 100%;
+  background-color: #ffffff;
+  margin-bottom: 18px;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #aef1e9;
+  text-align: center;
+}
+.franchise_listing_area .feature_area ul li .icon_box {
+  width: 100%;
+  height: 50px;
+  font-size: 35px;
+  font-weight: 700;
+  text-align: center;
+  color: #0db7a2;
+}
+.franchise_listing_area .feature_area ul li h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.map_container .franchise_listing_area .heading {
+  width: 100%;
+  padding: 20px 0px 10px;
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+font-family: 'Poppins', sans-serif;
+    font-weight: 300;
 
