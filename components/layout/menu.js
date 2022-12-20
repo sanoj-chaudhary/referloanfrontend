@@ -147,7 +147,7 @@ const Menu = () => {
                                     ))
                                 }
                                
-                                <li><Link href="/zero-investment-franchise"><a title="Franchise">Partners</a></Link></li>
+                                <li><Link href="/franchise-investment"><a title="Franchise">Partners</a></Link></li>
                                 <li><Link href="/contact"><a title="Contact">Contact</a></Link></li>
                             </ul>
                         </nav>
@@ -184,7 +184,7 @@ const Menu = () => {
                     <div className="container">
                         <ul id="mainNavUl">
                             {items}
-                            <li><Link href="/zero-investment-franchise"><a title="Franchise">Partners</a></Link></li>
+                            <li><Link href="/franchise-investment"><a title="Franchise">Partners</a></Link></li>
                             <li><Link href="/contact"><a title="Contact">Contact</a></Link></li>
                         </ul>
                     </div>

@@ -1,35 +1,18 @@
-import React, { useState } from "react";
-// import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api'
-import { GoogleMap, LoadScript,Marker } from '@react-google-maps/api';
-const markers = [
-  {
-    id: 1,
-    name: "Chicago, Illinois",
-    position: { lat: 41.881832, lng: -87.623177 }
-  },
-  {
-    id: 2,
-    name: "Denver, Colorado",
-    position: { lat: 39.739235, lng: -104.99025 }
-  },
-  {
-    id: 3,
-    name: "Los Angeles, California",
-    position: { lat: 34.052235, lng: -118.243683 }
-  },
-  {
-    id: 4,
-    name: "New York, New York",
-    position: { lat: 40.712776, lng: -74.005974 }
-  }
-];
+import React, { useState, useEffect } from "react";
+import Geocode from "react-geocode";
+import { GoogleMap, LoadScript, Marker,InfoWindow } from '@react-google-maps/api';
 
 function Map() {
+
+  const markers = [];
   const [activeMarker, setActiveMarker] = useState(null);
+  const [status, setStatus] = useState(false);
+  const [employees, setEmployees] = useState(markers);
   const containerStyle = {
     width: '100%',
-    height: '400px'
+    height: '700px'
   };
+
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {
       return;
@@ -37,37 +20,85 @@ function Map() {
     setActiveMarker(marker);
   };
 
-  const handleOnLoad = (map) => {
-    const bounds = new google.maps.LatLngBounds();
-    markers.forEach(({ position }) => bounds.extend(position));
-    map.fitBounds(bounds);
-  };
+  Geocode.setApiKey("AIzaSyC5vJg6Zs-nho_xeQgpVJXJsm8rWN1wovU");
 
-  return (
-    <LoadScript
-    googleMapsApiKey="AIzaSyC5vJg6Zs-nho_xeQgpVJXJsm8rWN1wovU"
-  >
-    <GoogleMap
-      onLoad={handleOnLoad}
-      onClick={() => setActiveMarker(null)}
-      mapContainerStyle={containerStyle}
-    >
-      {markers.map(({ id, name, position }) => (
-        <Marker
-          key={id}
-          position={position}
-          onClick={() => handleActiveMarker(id)}
+  // set response language. Defaults to english.
+  Geocode.setLanguage("en");
+
+  // And according to the below google docs in description, ROOFTOP param returns the most accurate result.
+  Geocode.setLocationType("ROOFTOP");
+
+  // Enable or disable logs. Its optional.
+  Geocode.enableDebug();
+
+    let markerss =[];
+    useEffect(() => {
+    
+      var initialMarkers = ["noida sector 2", "noida sector 15", "ambedker park lucknow", "new ashok nagar"];
+      initialMarkers.map((place, indx) => (
+        Geocode.fromAddress(place).then(
+          (response) => {
+            const { lat, lng } = response.results[0].geometry.location;
+            const markData = {
+              id: indx+1,
+              name: response.results[0].formatted_address,
+              position: { lat: lat, lng: lng }
+            }
+            markerss.push(markData);
+            setEmployees([...employees, ...markerss]);
+          },
+          (error) => {
+            console.error(error);
+          }
+        )
+      ))
+
+      setTimeout(() => {
+        setStatus(true)
+      }, 1000);
+    }, [])
+    const handleOnLoad = (map) => {
+      const bounds = new google.maps.LatLngBounds();
+      employees.forEach(({ position }) => bounds.extend(position));
+      map.fitBounds(bounds);
+  
+    };
+
+  if (status) {
+
+    return (
+      <LoadScript
+        googleMapsApiKey="AIzaSyC5vJg6Zs-nho_xeQgpVJXJsm8rWN1wovU"
+      >
+        <GoogleMap
+          onLoad={handleOnLoad}
+          onClick={() => setActiveMarker(null)}
+          mapContainerStyle={containerStyle}
         >
-          {activeMarker === id ? (
-            <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>{name}</div>
-            </InfoWindow>
-          ) : null}
-        </Marker>
-      ))}
-    </GoogleMap>
-    </LoadScript>
-  );
+          {
+            employees.map(({ id, name, position }) => (
+              <Marker
+                key={id}
+                position={position}
+                onClick={() => handleActiveMarker(id)}
+              >
+                {activeMarker === id ? (
+                  <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                    <div>{name}</div>
+                  </InfoWindow>
+                ) : null}
+              </Marker>
+            ))}
+        </GoogleMap>
+      </LoadScript>
+    );
+  } else {
+    return (
+      <span>Loading.....</span>
+    )
+  }
+
+
 }
 
 export default Map;
