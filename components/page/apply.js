@@ -34,8 +34,9 @@ const getToken = () => {
   }
 }
 const apply = (props) => {
+  const [fileList, setFileList] = useState([]);
   const router = useRouter()
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(6)
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
 
@@ -45,6 +46,7 @@ const apply = (props) => {
   const [serversideStatus, setServerSideStatus] = useState(false)
   const [active, setActive] = useState(false)
   const [apiResponse, setApiResponse] = useState('')
+  const [files, setFiles] = useState([]);
 
   let preassignValue = {}
   let initialValues = {}
@@ -74,7 +76,6 @@ const apply = (props) => {
     full_name, first_name, last_name, phone
   }
 
-  
   const { values, handleBlur, setFieldValue, handleChange, handleSubmit, errors, touched, setFieldTouched } =
     useFormik({
       initialValues,
@@ -88,6 +89,7 @@ const apply = (props) => {
           for (const property in preassignValue) {
             data.append(property, preassignValue[property])
           }
+          
 
           const headers = {
             'Authorization': "Bearer " + token.slice(1, -1) + ""
@@ -162,7 +164,6 @@ const apply = (props) => {
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
   }
-
   
   return (
     <>
@@ -176,12 +177,12 @@ const apply = (props) => {
 
         <div className="text-center" id="apply-banner">
           <img className="p-4" src={`/uploads/product_bank/${newProductName}_banner.webp`}
-           /* onError={({ currentTarget }) => {
-              currentTarget.onerror = null;
-              currentTarget.src = '/uploads/product_bank/default_banner.webp';
-            }} 
-            */
-            />
+          /* onError={({ currentTarget }) => {
+             currentTarget.onerror = null;
+             currentTarget.src = '/uploads/product_bank/default_banner.webp';
+           }} 
+           */
+          />
         </div>
 
         <section className="cardOffer_area">
@@ -263,7 +264,6 @@ const apply = (props) => {
                                       setFieldValue([e.target.name], e.target.value.toUpperCase())
                                     }}
                                     error={touched[elem.param_name] && errors[elem.param_name] && true}
-
                                   />
                                   {errors[elem.param_name] && touched[elem.param_name] ? (
                                     <p className="form-error">{errors[elem.param_name]}</p>
@@ -271,23 +271,28 @@ const apply = (props) => {
                                 </>
                               }
 
-                              {elem.type == 'file' && <> <TextField
-                                fullWidth
-                                required={elem.is_required}
-                                className={`"mt-2" ${elem.is_visible ? '' : 'd-none'}`}
-                                name={elem.param_name}
-                                type={elem.type}
-                                label={elem.field_name}
-                                id={elem.param_name}
-                                autoComplete="off"
-                                error={touched[elem.param_name] && errors[elem.param_name] && true}
-                                onChange={(event) => {
-                                  setFieldValue(elem.param_name, event.currentTarget.files[0]);
-                                }}
-                              />
-                                {errors[elem.param_name] && touched[elem.param_name] ? (
-                                  <p className="form-error">{errors[elem.param_name]}</p>
-                                ) : null}
+                              {elem.type == 'file' && <>
+                                <label class="form-label fw-bold">{elem.field_name}</label>
+                                <input
+                                  type="file"
+                                  name={elem.param_name}
+                                  className={`mt-2 form-control  ${elem.is_visible ? '' : 'd-none'}`}
+                                  onChange={(event) => {
+                                    setFieldValue(elem.param_name, event.currentTarget.files[0]);
+                                  }}
+                                />
+                              </>
+                              }
+                              {elem.type == 'multiselect' && <>
+                                <label class="form-label fw-bold">{elem.field_name}</label>
+                                <input
+                                  type="file"
+                                  name={elem.param_name}
+                                  className={`mt-2 form-control ${elem.is_visible ? '' : 'd-none'}`}
+                                  onChange={(event) => {
+                                    setFieldValue(elem.param_name, event.currentTarget.files);
+                                  }}
+                                  multiple />
                               </>
 
                               }
@@ -310,10 +315,7 @@ const apply = (props) => {
                                     handleChange(e)
                                   }}
                                 />
-                                  {errors[elem.param_name] && touched[elem.param_name] ? (
-                                    <p className="form-error">{errors[elem.param_name]}</p>
-                                  ) : null}
-
+                                  
                                 </>
                                 : ''
                               }
@@ -329,16 +331,12 @@ const apply = (props) => {
                                   id={elem.param_name}
                                   onFocus={(e) => (e.target.type = "date")}
                                   onBlur={(e) => (e.target.type = "text")}
-                                  //autoComplete="off"
                                   error={touched[elem.param_name] && errors[elem.param_name] && true}
                                   onChange={(e) => {
                                     setFieldTouched(elem.param_name);
                                     handleChange(e)
                                   }}
                                 />
-                                  {errors[elem.param_name] && touched[elem.param_name] ? (
-                                    <p className="form-error">{errors[elem.param_name]}</p>
-                                  ) : null}
                                 </>
                               }
                               {elem.type == 'select' && <SelectField {...elem} values={values} handleChange={handleChange} />}
@@ -363,13 +361,13 @@ const apply = (props) => {
 
         <section className="cardOffer_area">
           <div className="dealStep__leftArea">
-            <div className="ratingcomponent"><StarRating data={props.data[0]} ratinginfo1={props.ratingg} /></div> 
+            <div className="ratingcomponent"><StarRating data={props.data[0]} ratinginfo1={props.ratingg} /></div>
           </div>
           <div className="loanStep__wrapper">
             <div className="loanForm__Container">
-             {props.specification[0] &&
+              {props.specification[0] &&
                 <div dangerouslySetInnerHTML={{ __html: props.specification[0].description }}></div>
-             }
+              }
             </div>
           </div>
         </section>
@@ -381,7 +379,7 @@ const apply = (props) => {
             </div>
           </section>
 
-          {props.specification[0] && props.specification[0].contact_status=='1' &&
+          {props.specification[0] && props.specification[0].contact_status == '1' &&
             <section className="section_pad">
               <div className="container">
                 <div dangerouslySetInnerHTML={{ __html: props.specification[0].contact_detail }}></div>
@@ -406,7 +404,7 @@ const apply = (props) => {
                     <div id={'flush-collapse' + key} className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                       <div className="accordion-body" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
 
-                     
+
                         <div itemProp="text" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
                       </div>
                     </div>
@@ -430,9 +428,9 @@ export default apply
 
 export function SelectField(props) {
 
-  const { values, name, label, ParamOptions, handleChange, param_name, dependency, dependency_value,is_required } = props
+  const { values, name, label, ParamOptions, handleChange, param_name, dependency, dependency_value, is_required } = props
 
-  
+
   return (
     <>
       {/* {label && <label for={name}>{label}</label>} */}
@@ -463,6 +461,6 @@ export function SelectField(props) {
 
 
 
- 
+
 }
 
