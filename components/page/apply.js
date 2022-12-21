@@ -36,7 +36,7 @@ const getToken = () => {
 const apply = (props) => {
   const [fileList, setFileList] = useState([]);
   const router = useRouter()
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(3)
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
 
@@ -274,10 +274,11 @@ const apply = (props) => {
                               {elem.type == 'file' && <>
                                 <label className="form-label fw-bold">{elem.field_name}</label>
                                 <input
+                                 accept={ props.data && props.data[0].bank_product_id === 41?"image/png, image/jpeg, .pdf":'image/*,.pdf,.doc,.docx'}
                                   type="file"
                                   required={elem.is_required}
                                   name={elem.param_name}
-                                  className={`mt-2 form-control  ${elem.is_visible ? '' : 'd-none'}`}
+                                  className={`mt-2 form-control shadow-none  ${elem.is_visible ? '' : 'd-none'}`}
                                   onChange={(event) => {
                                     setFieldValue(elem.param_name, event.currentTarget.files[0]);
                                   }}
