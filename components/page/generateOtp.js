@@ -62,7 +62,6 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
           }, 1200000);
           if (utmData && utmData.param_name == 'redirect') {
             setTimeout(() => {
-              alert("Hello");
               router.push('/')
             }, 3000);
             const newWindow = window.open(utmData.live_default, '_blank', 'noopener,noreferrer')
@@ -111,7 +110,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
             phone_no, full_name, bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
           }
           const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, data);
-          if (res.data.status) {
+          if (res.data.success) {
             setOtpStatus(true)
             setGenOtpData({...genOtpData,full_name:values.full_name,phone_no:values.phone_no})
         
