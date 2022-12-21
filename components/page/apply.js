@@ -164,7 +164,6 @@ const apply = (props) => {
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
   }
-
   return (
     <>
       {loading && <Loader loading={loading} />}
@@ -211,22 +210,20 @@ const apply = (props) => {
                     <h3>{item.section_name}</h3>
                     <div className="row">
                       {item.forms.map((elem, ind) => {
-
+                        paramName = elem.param_name.trim();
+                        (otpData[elem.global_name] !== undefined || elem.is_visible == false) ? '' : initialValues[elem.param_name] = '';
+                        dependency = elem.dependency.split(',').filter((a) => a);
+                        dependency_value = elem.dependency_value.split(',').filter((a) => a);
+                        flag = false;
+                        dependency.forEach((dependency_name, key) => {
+                          const dependency_exists_values = dependency_value[key].split('|').filter((a) => a==values[dependency_name]);
+                          if(dependency_exists_values.length === 0){
+                            flag = true;
+                          }
+                        });
                         return (
                           <>
-                            {<div className="d-none">{dependency = elem.dependency.split(',')}</div>}
-                            {<div className="d-none">{dependency_value = elem.dependency_value.split(',')}</div>}
-                            {<div className="d-none">{flag = false}</div>}
-                            {
-                              dependency.map((temp, key) => (
-                                <div key={temp} className="d-none">{values[dependency[key]] !== dependency_value[key] ? flag = true : ''}</div>
-                              ))
-                            }
-
-                            <div className={`col-lg-6 col-md-6 col-12 mt-2 ${elem.dependency == '' ? '' : flag ? 'd-none' : ''}`}>
-
-                              <div className="d-none"> {paramName = elem.param_name.trim()}</div>
-                              <div className="d-none">{(otpData[elem.global_name] !== undefined || elem.is_visible == false) ? '' : initialValues[elem.param_name] = ''}</div>
+                            <div className={`col-lg-6 col-md-6 col-12 mt-2 ${flag ? 'd-none' : ''}`}>
 
                               {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
                                 ? <>
@@ -447,9 +444,6 @@ export function SelectField(props) {
       </FormControl>
     </>
   )
-
-
-
 
 }
 
