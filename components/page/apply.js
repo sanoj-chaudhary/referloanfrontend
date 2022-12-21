@@ -36,7 +36,7 @@ const getToken = () => {
 const apply = (props) => {
   const [fileList, setFileList] = useState([]);
   const router = useRouter()
-  const [step, setStep] = useState(3)
+  const [step, setStep] = useState(0)
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
 
