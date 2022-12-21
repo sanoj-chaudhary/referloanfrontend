@@ -164,7 +164,7 @@ const apply = (props) => {
   function submitForm(e) {
     document.getElementById("dynamicMyForm").reset();
   }
-  
+
   return (
     <>
       {loading && <Loader loading={loading} />}
@@ -272,9 +272,10 @@ const apply = (props) => {
                               }
 
                               {elem.type == 'file' && <>
-                                <label class="form-label fw-bold">{elem.field_name}</label>
+                                <label className="form-label fw-bold">{elem.field_name}</label>
                                 <input
                                   type="file"
+                                  required={elem.is_required}
                                   name={elem.param_name}
                                   className={`mt-2 form-control  ${elem.is_visible ? '' : 'd-none'}`}
                                   onChange={(event) => {
@@ -283,20 +284,7 @@ const apply = (props) => {
                                 />
                               </>
                               }
-                              {elem.type == 'multiselect' && <>
-                                <label class="form-label fw-bold">{elem.field_name}</label>
-                                <input
-                                  type="file"
-                                  name={elem.param_name}
-                                  className={`mt-2 form-control ${elem.is_visible ? '' : 'd-none'}`}
-                                  onChange={(event) => {
-                                    setFieldValue(elem.param_name, event.currentTarget.files);
-                                  }}
-                                  multiple />
-                              </>
-
-                              }
-
+                              
                               {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email') && elem.global_name != 'phone' && elem.global_name != 'first_name' && elem.global_name != 'last_name' && elem.global_name != 'full_name' && elem.global_name != 'pan'
                                 ? <><TextField
                                   fullWidth
