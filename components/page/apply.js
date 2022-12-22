@@ -230,12 +230,13 @@ const apply = (props) => {
                                   <div className="d-none">{otpData[elem.global_name] != '' ? preassignValue[elem.param_name] = otpData[elem.global_name] : ''}</div>
                                   <TextField
                                     fullWidth
-                                    inputProps={elem.patterns != '' ? { pattern: elem.patterns, title: "Please Fill Valid Data!", value: otpData[elem.global_name] } : { value: otpData[elem.global_name] }}
+                                    inputProps={(elem.patterns != '' || otpData[elem.global_name] != '') ? { pattern: elem.patterns, title: "Please Fill Valid Data!",  value: otpData[elem.global_name],readOnly: true } : {  value: otpData[elem.global_name],readOnly: true }}
                                     required={elem.is_required}
                                     className={`${elem.is_visible ? '' : 'd-none'}`}
                                     name={elem.param_name}
                                     label={elem.field_name}
                                     type={elem.type}
+                                    
                                     onBlur={handleBlur}
                                     error={touched[elem.param_name] && errors[elem.param_name] && true}
                                     onChange={handleChange}
