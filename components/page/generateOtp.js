@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import ResponsiveDialog from './dialogBox';
 
-const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServerSideStatus, serversidemsg, serversideStatus, utmData }) => {
+const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServerSideStatus, serversidemsg, serversideStatus, utmData, setUtmForm }) => {
 
 
 
@@ -25,6 +25,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(false)
   const [errmsg, setErrmsg] = useState('')
+  
   const [loading, setLoading] = useState(true)
   const [resendActive, setResendActive] = useState(true)
   const [bank_product_id, setBankProductId] = useState('');
@@ -51,7 +52,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
       if (otp) {
         const res = await axios.post(`${process.env.APIHOST}/api/verify-otp`, data);
         if (res.data.status) {
-
+         
           setServerSideStatus(true)
           setTimeout(() => {
             if (typeof window !== 'undefined') {
@@ -60,20 +61,31 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
               window.localStorage.removeItem("phone");
             }
           }, 1200000);
+
           if (utmData && utmData.param_name == 'redirect') {
-            setTimeout(() => {
-              router.push('/')
-            }, 3000);
-            const newWindow = window.open(utmData.live_default, '_blank', 'noopener,noreferrer')
-            if (newWindow) newWindow.opener = null
+            if(data.bank_product_id == 113 || data.bank_product_id == 112){
+              setTimeout(() => {
+                router.push('/')
+              }, 3000);
+              const newWindow = window.open(utmData.live_default, '_blank', 'noopener,noreferrer')
+              if (newWindow) newWindow.opener = null
+            }else{
+              if (typeof window !== 'undefined') {
+                localStorage.setItem("full_name", values.full_name);
+                localStorage.setItem("phone", values.phone_no);
+                localStorage.setItem("token", JSON.stringify(res.data.token));
+              }
+              setToken(window.localStorage.getItem("token"))
+              setUtmForm(true)
 
-          } else {
+            }
+           
 
+          }else{
             if (typeof window !== 'undefined') {
               localStorage.setItem("full_name", values.full_name);
               localStorage.setItem("phone", values.phone_no);
               localStorage.setItem("token", JSON.stringify(res.data.token));
-
             }
             setToken(window.localStorage.getItem("token"))
           }
