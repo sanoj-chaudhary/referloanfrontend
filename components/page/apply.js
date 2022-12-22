@@ -19,7 +19,7 @@ import DialogBox from "./dialogBox";
 //import $ from 'jQuery';
 import FormData from 'form-data'
 import StarRating from './rating';
-
+import UtmForm from "./utmForm";
 export const config = { amp: 'hybrid' };
 const getToken = () => {
 
@@ -39,7 +39,7 @@ const apply = (props) => {
   const [step, setStep] = useState(0)
   const [token, setToken] = useState(getToken());
   const [validationSchema, setValidationSchema] = useState({});
-
+  const [utmForms, setUtmForm] = useState(false)
   const [loading, setLoading] = useState(true)
   const [userValues, setUserValues] = useState({});
   const [serversidemsg, setServerSideMsg] = useState('')
@@ -201,10 +201,10 @@ const apply = (props) => {
           <div className="loanStep__wrapper">
             <div className="loanForm__Container">
               {!serversideStatus && <p className='form-error'>{serversidemsg}</p>}
-              {(token == '' || token == null) && <GenerateOtp utmData={props.form_schema.length != 0 ? props.form_schema[0].forms[0] : ''} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setToken={setToken} />
+              {(token == '' || token == null) && <GenerateOtp setUtmForm={setUtmForm} utmData={props.form_schema.length != 0 ? props.form_schema[0].forms[0] : ''} serversideStatus={serversideStatus} serversidemsg={serversidemsg} setServerSideStatus={setServerSideStatus} setServerSideMsg={setServerSideMsg} data={props.data[0]} setUserValues={setUserValues} setToken={setToken} />
               }
 
-              {(token != null || token != undefined) && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
+              {(token != null || token != undefined) && !utmForms && <form id="dynamicMyForm" onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }} >
                 {props.form_schema && props.form_schema.slice(step, step + 1).map((item, index) =>
                   <div key={index} className=" container">
                     <h3>{item.section_name}</h3>
@@ -342,6 +342,8 @@ const apply = (props) => {
                 {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} result={apiResponse} /> : ""}
               </form>}
               {(token != null || token != undefined) && props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
+
+              {(token != null || token != undefined) && props.form_schema.length != 0 && utmForms == true ? <UtmForm data={props.data[0]} token={token} utmData={props.form_schema.length != 0 ? props.form_schema[0].forms[0] : ''}  /> : ''}
             </div>
           </div>
         </section>
