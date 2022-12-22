@@ -81,6 +81,13 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
             }
            
 
+          }else{
+            if (typeof window !== 'undefined') {
+              localStorage.setItem("full_name", values.full_name);
+              localStorage.setItem("phone", values.phone_no);
+              localStorage.setItem("token", JSON.stringify(res.data.token));
+            }
+            setToken(window.localStorage.getItem("token"))
           }
 
         } else {
