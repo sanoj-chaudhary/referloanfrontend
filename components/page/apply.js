@@ -181,11 +181,8 @@ const apply = (props) => {
 
         <div className="text-center" id="apply-banner">
           <img className="p-4" src={`/uploads/product_bank/${newProductName}_banner.webp`}
-          /* onError={({ currentTarget }) => {
-             currentTarget.onerror = null;
-             currentTarget.src = '/uploads/product_bank/default_banner.webp';
-           }} 
-           */
+         
+          alt=""
           />
         </div>
 
@@ -197,7 +194,9 @@ const apply = (props) => {
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null; // prevents looping
                   currentTarget.src = '/uploads/product_bank/' + props.data[0].categories_id + '.webp';
+                  
                 }}
+                alt=""
               />
 
             </div>
