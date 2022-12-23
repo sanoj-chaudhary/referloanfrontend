@@ -47,6 +47,7 @@ const apply = (props) => {
   const [active, setActive] = useState(false)
   const [apiResponse, setApiResponse] = useState('')
   const [files, setFiles] = useState([]);
+  const [redirectUrl, setRedirectUrl] = useState('');
 
   let preassignValue = {}
   let initialValues = {}
@@ -109,6 +110,10 @@ const apply = (props) => {
                 if (resData.data.status) {
                   if (typeof resData.data.data.reference_key !== 'undefined') {
                     setApiResponse(resData.data.data.reference_key);
+                  }
+                  if (typeof resData.data.data.redirectionUrl !== 'undefined') {
+                    setRedirectUrl(resData.data.data.redirectionUrl);
+
                   }
                   setStep(step + 1)
                   if (typeof window !== 'undefined') {
@@ -223,7 +228,7 @@ const apply = (props) => {
                         });
                         return (
                           <>
-                            <div className={`col-lg-6 col-md-6 col-12 mt-2 ${flag ? 'd-none' : ''}`}>
+                            <div key={ind} className={`col-lg-6 col-md-6 col-12 mt-2 ${flag ? 'd-none' : ''}`}>
 
                               {(elem.type === 'text' || elem.type === 'number') && (elem.global_name === 'phone' || elem.global_name === 'first_name' || elem.global_name === 'last_name' || elem.global_name === 'full_name')
                                 ? <>
@@ -339,7 +344,7 @@ const apply = (props) => {
                     </div>
                   </div>
                 )}
-                {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} result={apiResponse} /> : ""}
+                {props.form_schema.length != 0 && props.form_schema.length == step ? <Thanks product={props.data[0].name} result={apiResponse} redirectUrl={redirectUrl} /> : ""}
               </form>}
               {(token != null || token != undefined) && props.form_schema.length == 0 ? <CustomApply product={props.data[0].name} /> : ''}
 
