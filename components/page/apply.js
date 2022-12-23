@@ -255,7 +255,7 @@ const apply = (props) => {
                                 <>
                                   <TextField
                                     fullWidth
-                                    inputProps={elem.patterns != '' ? { pattern: elem.patterns, value: values.paramName, title: "Please Fill Valid Pan Card", style: { textTransform: "uppercase" } } : {}}
+                                    inputProps={elem.patterns != '' ? { pattern: "[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}", value: values.paramName, title: "Please Fill Valid Pan Card", style: { textTransform: "uppercase" } } : {}}    
                                     required={elem.is_required}
                                     className={`${elem.is_visible ? '' : 'd-none'}`}
                                     name={elem.param_name}
