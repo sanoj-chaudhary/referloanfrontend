@@ -201,12 +201,12 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
 
   useEffect(() => {
     setStateProperty()
-    if(!window.localStorage.getItem("checkEligibility")){
-      if (utm_medium != 'self') {
-        checkEligibility()
-        setOpen(true)
-      }
-    }
+    // if(!window.localStorage.getItem("checkEligibility")){
+    //   if (utm_medium != 'self') {
+    //     checkEligibility()
+    //     setOpen(true)
+    //   }
+    // }
     return () => {
       setLoading({}); 
       setBankProductId({}); 
