@@ -2174,3 +2174,17 @@ p:empty {
     align-items: flex-end;
     display: flex;
 }
+
+
+/* news item css made  */
+
+.newshighlight{
+    border: 1px solid #D3D3D3;
+    display: flex;
+    justify-content: center;
+    width: initial;
+    margin: 0px 6px 16px;
+    text-align: center;
+    padding: 15px;
+  }
+

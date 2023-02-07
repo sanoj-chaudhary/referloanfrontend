@@ -1,8 +1,11 @@
 import Layout from '../components/layout';
+import AuthLayout from '../components/authLayout'
 import { useEffect, useState } from 'react'
 import Loader from '../components/page/loader';
-// export const config = { amp: true }
+import 'bootstrap/dist/css/bootstrap.css'
+import { useRouter } from 'next/router';
 function MyApp({ Component, pageProps, data }) {
+  const router = useRouter()
 
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -10,16 +13,38 @@ function MyApp({ Component, pageProps, data }) {
 
   }, []);
 
-  return (
-    <>
-      {loading && <Loader />}
-      <Layout {...Component}>
-        <Component {...pageProps} />
-      </Layout>
 
-    </>
+let url = router.asPath.split('/')
 
-  )
+  if (url[1] === "user-auth") {
+    return (
+      <>
+        {loading && <Loader />}
+        <style jsx global>{`
+        body {
+          background: #F8F8F8};
+        }
+      `}</style>
+        <AuthLayout {...Component}>
+          <Component {...pageProps} />
+        </AuthLayout>
+
+      </>
+
+    )
+  } else {
+    return (
+      <>
+        {loading && <Loader />}
+        <Layout {...Component}>
+          <Component {...pageProps} />
+        </Layout>
+
+      </>
+
+    )
+  }
+
 }
 
 export default MyApp

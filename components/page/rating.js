@@ -15,7 +15,7 @@ const StarRating = ({ data, ratinginfo1 }) => {
 
   // Insert Rating
   const addRating = async (index) => {
-    let data1 = { 'bank_product_id': data.bank_product_id, 'rating': index, 'session_id': Math.random().toString(36).substring(2, 8 + 2) }
+    let data1 = { 'bank_product_id': data.bank_product_id, 'rating': index, 'session_id': 'Rf-'+mySentence.slice(0, 3)+'-'+Math.random().toString(36).substring(2, 8 + 2) }
     const res = await axios.post(`${process.env.APIHOST}/api/add-rating/`, data1);
     if (res.data.status) {
       if (typeof window !== 'undefined') {
@@ -49,8 +49,8 @@ const StarRating = ({ data, ratinginfo1 }) => {
 
   return (
     <>
-      <div className="ratingWrapper">
-        <span className="heading">Product Rating</span>
+      <div className="pro-rating">
+        <h5 className="heading">Product Rating</h5>
         <p>{ratinginfo ? ratinginfo['average_rating'] : 0} /5</p>
 
         {[...Array(5)].map((star, index) => {
@@ -72,10 +72,9 @@ const StarRating = ({ data, ratinginfo1 }) => {
         })}
 
         <p>Total - {ratinginfo ? ratinginfo['total_ratings'] : 0} ratings</p>
-
+{/* 
         <div className="row">
 
-          {/* Rating 5 */}
           <div className="side">
             5 <span className="star fafa">&#9733;</span>
           </div>
@@ -88,7 +87,6 @@ const StarRating = ({ data, ratinginfo1 }) => {
             <div>{ratinginfo ? ratinginfo['total_rating_5'] : 0}</div>
           </div>
 
-          {/* Rating 4 */}
           <div className="side">
             4 <span className="star fafa">&#9733;</span>
           </div>
@@ -101,7 +99,6 @@ const StarRating = ({ data, ratinginfo1 }) => {
             <div>{ratinginfo ? ratinginfo['total_rating_4'] : 0}</div>
           </div>
 
-          {/* Rating 3 */}
           <div className="side">
             3 <span className="star fafa">&#9733;</span>
           </div>
@@ -114,7 +111,6 @@ const StarRating = ({ data, ratinginfo1 }) => {
             <div>{ratinginfo ? ratinginfo['total_rating_3'] : 0}</div>
           </div>
 
-          {/* Rating 2 */}
           <div className="side">
             2 <span className="star fafa">&#9733;</span>
           </div>
@@ -127,7 +123,6 @@ const StarRating = ({ data, ratinginfo1 }) => {
             <div>{ratinginfo ? ratinginfo['total_rating_2'] : 0}</div>
           </div>
 
-          {/* Rating 1 */}
           <div className="side">
             1 <span className="star fafa">&#9733;</span>
           </div>
@@ -140,7 +135,7 @@ const StarRating = ({ data, ratinginfo1 }) => {
             <div>{ratinginfo ? ratinginfo['total_rating_1'] : 0}</div>
           </div>
 
-        </div>
+        </div> */}
 
       </div>
 

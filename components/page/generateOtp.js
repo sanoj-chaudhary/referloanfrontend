@@ -7,10 +7,12 @@ import Loader from "./loader";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import ResponsiveDialog from './dialogBox';
-
+import { setAccessToken, getAccessToken, generateOtpSchema } from './../../utils'
+import Router from 'next/router';
 const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServerSideStatus, serversidemsg, serversideStatus, utmData, setUtmForm }) => {
 
 
+  
 
   const router = useRouter()
   let utmId = '';
@@ -25,7 +27,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
   const [otpStatus, setOtpStatus] = useState(false);
   const [otpfieldval, setOtpfieldval] = useState(false)
   const [errmsg, setErrmsg] = useState('')
-  
+  const [active, setActive] = useState(false)
   const [loading, setLoading] = useState(true)
   const [resendActive, setResendActive] = useState(true)
   const [bank_product_id, setBankProductId] = useState('');
@@ -62,14 +64,10 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
             }
           }, 1200000);
 
-          if (utmData && utmData.param_name == 'redirect') {
-            if(data.bank_product_id == 113 || data.bank_product_id == 112){
-              setTimeout(() => {
-                router.push('/')
-              }, 3000);
-              const newWindow = window.open(utmData.live_default, '_blank', 'noopener,noreferrer')
-              if (newWindow) newWindow.opener = null
-            }else{
+          if (utmData && utmData[0].param_name == 'redirect') {
+            
+            
+           
               if (typeof window !== 'undefined') {
                 localStorage.setItem("full_name", values.full_name);
                 localStorage.setItem("phone", values.phone_no);
@@ -78,7 +76,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
               setToken(window.localStorage.getItem("token"))
               setUtmForm(true)
 
-            }
+         
            
 
           }else{
@@ -111,8 +109,8 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
   const { values, errors, touched, setFieldValue, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: genOtpData,
-      validationSchema: OtpSchema,
-      onSubmit: async (values,action) => {
+      validationSchema: generateOtpSchema,
+      onSubmit: async (values, action) => {
         setServerSideStatus(true)
         try {
 
@@ -121,11 +119,12 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
           const data = {
             phone_no, full_name, bank_product_id, utm_campaign, utm_id: utmId, utm_medium, utm_source, offer: ""
           }
+          setActive(true)
           const res = await axios.post(`${process.env.APIHOST}/api/generate-otp`, data);
           if (res.data.success) {
             setOtpStatus(true)
             setGenOtpData({...genOtpData,full_name:values.full_name,phone_no:values.phone_no})
-        
+            setActive(false)
             // action.resetForm()
             setTimeout(() => {
               if (typeof window !== 'undefined') {
@@ -145,6 +144,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
             setServerSideMsg(res.data.message)
           }
         } catch (error) {
+          setActive(false)
           setServerSideStatus(false)
           setServerSideMsg('Something went wrong!')
           console.log("message", error.message);
@@ -232,7 +232,7 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
       {open && <ResponsiveDialog {...{ setOpen, open, response, data }} />}
 
       {!otpStatus ?
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id="formdata">
           <TextField value={values.full_name} required name="full_name" fullWidth label="Full Name" variant="standard" onChange={handleChange} onBlur={handleBlur} />
           {errors.full_name && touched.full_name ? (
             <p className="form-error">{errors.full_name}</p>
@@ -244,11 +244,22 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
           ) : null}
 
           <div className="chkbox-area">
-            <input id="otpCheckbox" type="checkbox" required /> By submitting this form, you have read and agree to the Credit Report
-            Terms of Use,<Link href="terms-and-conditions"><a target="_blank"> Terms of Use  </a></Link>&amp; <Link href="privacy-policy"><a target="_blank"> Privacy Policy </a></Link>
+            <input id="otpCheckbox" type="checkbox" required /> 
+            <div className='check-privacy'>
+                  <span>
+                    By submitting this form, you have read and agree to the Credit Report
+                    Terms of Use,
+                  </span>
+                  <a href="terms-and-conditions" target="_blank"> Terms of Use  </a>
+                  <a href="privacy-policy" target="_blank"> Privacy Policy </a>
+            </div>
+            
+             
+              
+              
           </div>
-          <div className="search-button">
-            <button className="mt-4" type="submit" >Generate OTP</button>
+          <div className="feature-four__top-btn-box">
+            <button className="thm-btn feature-four__top-btn" type="submit" disabled={active} >Generate OTP {active ? <i className="fa fa-spinner fa-spin"></i> : ''}</button>
           </div>
         </form> :
 
@@ -260,11 +271,11 @@ const GenerateOtp = ({ setToken, setUserValues, data, setServerSideMsg, setServe
             <p className="form-error">{errors.otp}</p>
           ) : null}
           {(resendActive || time != 0) ? <div className='mt-4'> Dont receive the OTP ?   <span id="verifiBtn"> {time != 0 ? 'in ' + time + ' Seconds' : ''}  </span></div>
-            : <div className='mt-4'><a className={`resendBtn`} onClick={resendOtp} >RESEND OTP</a></div>
+            : <div className='mt-4 mb-4'><a className={`resendBtn`} onClick={resendOtp} >RESEND OTP</a></div>
           }
 
-          <div className="search-button">
-            <button className="mt-4" type="submit" >verify OTP</button>
+          <div className="feature-four__top-btn-box mt-4">
+            <button className="thm-btn feature-four__top-btn" type="submit" >verify OTP</button>
           </div>
         </form>
       }

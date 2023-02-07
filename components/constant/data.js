@@ -554,3 +554,101 @@ export const data = [
     ]
   }
 ];
+
+export const newsdata = [
+  {
+    "name": "ANI",
+    "image": "ani.png",
+    "url": "https://aninews.in/news/business/business/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105426/"
+  },
+  {
+    "name": "The Print",
+    "image": "the_print.png",
+    "url": "https://theprint.in/ani-press-releases/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry/1336042/"
+  }, {
+    "name": "Zee5",
+    "image": "zee5.png",
+    "url": "https://www.zee5.com/articles/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry"
+  }, {
+    "name": "DailyHunt",
+    "image": "dailyhunt.png",
+    "url": "https://m.dailyhunt.in/news/india/english/ani67917250816496966-epaper-anieng/referloan+all+set+to+launch+revolutionary+refer+and+earn+model+setting+new+standards+in+fintech+industry-newsid-n465627170?listname=newspaperLanding&index=24&topicIndex=4mode=pwaaction=click"
+  }, {
+    "name": "World News Network",
+    "image": "world_news_network.png",
+    "url": "https://www.worldnewsnetwork.net/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  }, {
+    "name": "Australia Morning Tribune",
+    "image": "australia_morning_tribune.png",
+    "url": "https://www.australiamorningtribune.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-"
+  }, {
+    "name": "Birmingham All News Network",
+    "image": "birmingham_all_news_network.png",
+    "url": "https://www.birminghamallnewsnetwork.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "British Columbia Times",
+    "image": "british_colombia_times.png",
+    "url": "https://www.britishcolumbiatimes.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "British News Network",
+    "image": "british_news_network.png",
+    "url": "https://www.britishnewsnetwork.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "Buffalo Despatch",
+    "image": "buffalo_despatch.png",
+    "url": "https://www.buffalodespatch.com/news/referloan-all"
+  },
+  {
+    "name": "Capitol Hill Reporter",
+    "image": "capitol_hill_reporter.png",
+    "url": "https://www.capitolhillreporter.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "Dubai City Reporter",
+    "image": "dubai_city_reporter.png",
+    "url": "https://www.dubaicityreporter.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "East Coast America News",
+    "image": "ecn.png",
+    "url": "https://www.eastcoastamericannews.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "England News Portal",
+    "image": "england_news_portal.png",
+    "url": "https://www.englandnewsportal.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "European Sun Times",
+    "image": "european_suntimes.png",
+    "url": "https://www.europeansuntimes.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "Florida Breaking News",
+    "image": "florida_breaking_news.png",
+    "url": "https://www.floridabreakingnews.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "France Network Times",
+    "image": "france_network_times.png",
+    "url": "https://www.francenetworktimes.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "Japan Times Today",
+    "image": "the_japan_times.png",
+    "url": "https://www.japantimestoday.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "London Channel News",
+    "image": "london_channel_news.png",
+    "url": "https://www.londonchannelnews.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+  {
+    "name": "Los Angeles Evening Despatch",
+    "image": "los_angles_evening_despatch.png",
+    "url": "https://www.losangeleseveningdespatch.com/news/referloan-all-set-to-launch-revolutionary-refer-and-earn-model-setting-new-standards-in-fintech-industry20230126105422/"
+  },
+]

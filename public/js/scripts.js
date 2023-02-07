@@ -123,3 +123,39 @@ $(document).click(e => {
 })
 
 
+
+
+
+
+
+// inner pages js
+
+
+
+
+ 
+var testVideo = document.querySelector("#testVideo");
+  //testVideo.currentTime = 5;
+  testVideo.addEventListener("timeupdate", function () {
+    document.querySelector(".playButton").classList.add('hide');;
+   this.removeEventListener("timeupdate",arguments.callee);
+   console.log('test');
+  });
+ 
+ 
+ 
+      $(document).ready(function() {
+     $('#how-to-play').on('show.bs.modal', function () {
+        $('#testVideo')[0].play();
+        })
+        $('#how-to-play').on('hidden.bs.modal', function () {
+        $('#testVideo')[0].pause();
+    })
+})
+ 
+    $(document).ready(function() {
+    $('.lq-toggle-btn').click(function() {
+    $('.leave-question').toggleClass('lq-height');
+    });
+});
+ 

@@ -80,10 +80,10 @@ const CustomApply = (props) => {
       <form onSubmit={(e) => { handleSubmit(e) }} >
         {data && data.slice(step, step + 1).map((item, index) =>
           <>
-            <div key={index} className="row">
+            <div key={index} className="row custome-form">
               <h3>{item.section_name}</h3>
               {item.forms.map((elem, ind) => (
-                <div key={ind} className="col-lg-4 col-md-6 col-12 mt-2">
+                <div key={ind} className="col-lg-6 col-md-6 col-12 mt-2">
 
                   {elem.param_name == 'pan_card' ? initialValues[elem.param_name] = panCard : initialValues[elem.param_name] = ''}
 
@@ -159,7 +159,9 @@ const CustomApply = (props) => {
               ))}
 
             </div>
-            <div className="search-button"><button className="mt-4" type="submit" >Save & Next</button></div>
+            <div className="feature-four__top-btn-box mt-4">
+              <button className="thm-btn feature-four__top-btn" type="submit" >Save & Next</button>
+              </div>
           </>
         )}
         {data.length != 0 && data.length == step ? <Thanks product={props.product} result={'custom'} /> : ""}

@@ -226,7 +226,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
             {response &&
               <form onSubmit={searchProduct}>
                 {response && response.forms.map((elem, key) => (
-                  <>
+                  <div key={key}>
                     {(elem.type === 'text' || elem.type === 'number' || elem.type === 'email')
                       && <><TextField
                         fullWidth
@@ -257,7 +257,7 @@ export default function ResponsiveDialog({ open, setOpen, data, response }) {
 
 
                     <div className="search-button"><button className="mt-4" disabled={active} type="submit" >{active ?<> Processing <i className="fa fa-spinner fa-spin"></i> </> : "Submit"}</button></div>
-                  </>
+                  </div>
                 ))}
 
 

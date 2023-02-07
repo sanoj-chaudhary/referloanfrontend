@@ -76,7 +76,7 @@ export async function getServerSideProps(context) {
   let bank_product_id;
   let form;
   let form_schema = '1';
-
+  let ip = null;
 
   url = url.join("/");
   
@@ -144,7 +144,7 @@ export async function getServerSideProps(context) {
     }
   }
   const { req } = context;
-  let ip;
+
   if (req.headers["x-forwarded-for"]) {
     ip = req.headers["x-forwarded-for"].split(',')[0]
   } else if (req.headers["x-real-ip"]) {

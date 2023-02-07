@@ -1,0 +1,407 @@
+
+::selection {
+  background: #fa4299;
+  color: #fff;
+}
+.wrapper {
+  overflow: hidden;
+  width: 83%;
+  max-width: 1366px;
+}
+.wrapper .title-text {
+  display: flex;
+  width: 200%;
+  color: #034452;
+}
+.wrapper .title {
+  width: 50%;
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.wrapper .slide-controls {
+  position: relative;
+  display: flex;
+  height: 50px;
+  overflow: hidden;
+  justify-content: space-between;
+  max-width: 320px;
+}
+.slide-controls .slide {
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 48px;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.6s ease;
+}
+.slide-controls label.signup {
+  color: #000;
+}
+.slide-controls .slider-tab {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 0;
+  z-index: 0;
+  border-radius: 0;
+  background: #ffff;
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 2px 5px 7px #7fe5eb4a;
+}
+input[type="radio"] {
+  display: none;
+}
+#signup:checked ~ .slider-tab {
+  left: 50%;
+}
+#signup:checked ~ label.signup {
+  color: #034452;
+  cursor: default;
+  user-select: none;
+}
+#signup:checked ~ label.login {
+  color: #034452;
+}
+#login:checked ~ label.signup {
+  color: #000;
+}
+#login:checked ~ label.login {
+  cursor: default;
+  user-select: none;
+  color: #034452;
+}
+.wrapper .form-container {
+  width: 100%;
+  overflow: hidden;
+}
+.form-container .form-inner {
+  display: flex;
+  width: 200%;
+}
+.form-container .form-inner form {
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  width: 100%;
+  background: #fff;
+  box-shadow: 1px -9px 7px -8px #7fe5eb4a;
+  justify-content: space-between;
+}
+ 
+.form-inner form .field input:focus {
+  border-color: #fc83bb;
+  /* box-shadow: inset 0 0 3px #fb6aae; */
+}
+.form-inner form .field input::placeholder {
+  color: #999;
+  transition: all 0.3s ease;
+}
+form .field input:focus::placeholder {
+  color: #b3b3b3;
+}
+.form-inner form .pass-link {
+  margin: 0px 5px 15px;
+}
+.form-inner form .signup-link {
+  margin-top: 21px;
+}
+.form-inner form .pass-link a,
+.form-inner form .signup-link a {
+  color: #fa4299;
+  text-decoration: none;
+}
+.form-inner form .pass-link a:hover,
+.form-inner form .signup-link a:hover {
+  text-decoration: underline;
+}
+ 
+.password-box {
+    display: flex;
+    gap: 13px;
+}
+
+
+
+
+
+.group {
+    position: relative;
+    margin-bottom: 25px;
+    padding-top: 15px;
+}
+
+.group input {
+    font-size: 13px;
+    padding: 4px 8px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #034452;
+    height: 36px;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+}
+
+.group input:focus {
+    outline: none;
+}
+
+/* LABEL ======================================= */
+.group label {
+    color: #052f5f;
+    font-size: 12px;
+    font-weight: normal;
+    font-weight: 500;
+    position: absolute;
+    left: 5px;
+    top: 0;
+    letter-spacing: .5px;
+    transition: 0.2s ease all;
+  moz-transition: 0.2s ease all;
+  webkit-transition: 0.2s ease all;
+    z-index: 0;
+}
+
+/* active state */
+.group input:focus~label,
+.group input:valid~label {
+    
+    font-size: 13px;
+    color: #052f5f;
+    font-weight: 700;
+}
+
+/* BOTTOM BARS ================================= */
+.bar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.bar:before,
+.bar:after {
+    content: '';
+    height: 1px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #5264AE;
+    transition: 0.2s ease all;
+  moz-transition: 0.2s ease all;
+  webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%;
+}
+
+/* active state */
+.group input:focus~.bar:before,
+.group input:focus~.bar:after {
+    width: 50%;
+}
+
+.group input::placeholder {
+    color: #052f5f69;
+    font-size: 12px;
+    line-height: 20px;
+    background: transparent;
+    font-weight: 400;
+}
+
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* active state */
+.group input:focus~.highlight {
+  webkit-animation: inputHighlighter 0.3s ease;
+  moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+
+
+
+/* Aylen */
+
+.button {
+  min-width: 136px;
+  display: block;
+  padding: 8px 32px;
+  border: none;
+  background: none;
+  color: inherit;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 1px;
+webkit-backface-visibility: hidden;
+moz-osx-font-smoothing: grayscale;
+  border-radius: 4px;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button>span {
+  vertical-align: middle;
+}
+
+.button.button--aylen {
+  background: #F5A623;
+  overflow: hidden;
+webkit-transition: color 0.3s;
+  transition: color 0.3s;
+  color: #fff;
+  font-size: 15px;
+  text-shadow: 2px 5px 7px #2f2f2f2f;
+}
+
+.button--aylen.button--inverted {
+  background: none;
+  color: #fff;
+}
+
+.button--aylen::before,
+.button--aylen::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: 100%;
+  left: 0;
+  z-index: -1;
+webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+  transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+
+.button--aylen::before {
+  background: #052f5f8c;
+}
+.form-outer {
+    width: 50%;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.button--aylen::after {
+  background: #052f5f;
+}
+
+.button--aylen:hover {
+  color: #fff;
+}
+
+.button--aylen:hover::before,
+.button--aylen:hover::after {
+webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
+}
+
+.button--aylen:hover::after {
+webkit-transition-delay: 0.175s;
+  transition-delay: 0.175s;
+}
+
+
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from {
+        background: #5264AE;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@-moz-keyframes inputHighlighter {
+    from {
+        background: #5264AE;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #5264AE;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+.password-box {
+    display: flex;
+    gap: 13px;
+}
+.login-img {
+  width: 50%;
+  padding: 20px;
+}
+.login-img img {
+    width: 100%;
+}
+.loginlooing-box,.signup-box {
+  width: 50%;
+  max-width: 400px;
+}
+.form-input-box {
+    border-radius: 6px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-title h2 {
+    margin-bottom: 20px;
+    color: #034452;
+    border-left: 5px solid #034452;
+    padding-left: 15px;
+}
+
+
+@media screen and (max-width:767px){
+
+.login-img {
+  display: none;
+}
+
+.loginlooing-box, .signup-box {
+  max-width: 100%;
+  width: 100%;
+  padding: 30px;
+}
+}
+@media screen and (max-width:500px){
+  .loginlooing-box, .signup-box{padding:15px;}
+}
+

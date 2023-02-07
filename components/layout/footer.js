@@ -202,13 +202,16 @@ const Footer = () => {
                             <Link href="/terms-and-conditions"><a title="Terms and Conditions" target="_blank">Terms and Conditions</a></Link>
                             <Link href="/app-privacy-policy"><a title="App Privacy Policy" target="_blank">App Privacy Policy</a></Link>
                             <Link href="/our-franchise"><a title="Our Franchises" target="_blank">Our Franchises</a></Link>
+                            <Link href="/referloanapp-privacy-policy"><a title="ReferLoan App privacy Policy" target="_blank">ReferLoan App privacy Policy</a></Link>
+
+                           
                         </span>
                     </div>
                 </div>
             </div>
             </div>
         </footer>
-        
+  
     )
 }
 

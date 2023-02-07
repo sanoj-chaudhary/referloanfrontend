@@ -6,8 +6,11 @@ import { useRouter } from 'next/router';
 import $ from 'jquery'
 import Image from "next/image";
 
+
+import { logoutUser, getCustomerAccessToken, getUserProfile } from '../../utils';
 const Menu = () => {
     const router = useRouter()
+    const [user, setUser] = useState(getUserProfile() ? JSON.parse(getUserProfile()) : null)
     let utmData = '';
     const { utm_campaign, utm_id, utm_medium, utm_source } = router.query
     if (!utm_campaign) {
@@ -18,7 +21,7 @@ const Menu = () => {
 
     const [headermenu, setHeaderMenu] = useState([]);
     const [isHovering, setIsHovering] = useState(false);
-    const [active,setActive] = useState('')
+    const [active, setActive] = useState('')
     const handleMouseOver = () => {
         setIsHovering(true);
     };
@@ -47,10 +50,10 @@ const Menu = () => {
                             className={Indexkey ? "activeSubMenu" : "activeSubMenu menu-active" && isHovering ? 'activeSubMenu' : 'activeSubMenu menu-active'}
                             onMouseOver={handleMouseOver}
                             onMouseOut={handleMouseOut}
-                        > <Link href={'/' + value.slug + utmData}  ><a title={value.name}>{value.name}</a></Link>
+                        > <Link href={'/' + value.slug + utmData}  ><a title={value.name} >{value.name}</a></Link>
                             <div className="submenuContainer">
                                 <ul className="secondLevelUl">
-                                    {value.bank_product && <SubMenu setActive={setActive}  data={value.bank_product} />}
+                                    {value.bank_product && <SubMenu setActive={setActive} data={value.bank_product} />}
                                 </ul>
                             </div>
 
@@ -80,7 +83,7 @@ const Menu = () => {
             window.localStorage.removeItem("full_name");
             window.localStorage.removeItem("pan");
             window.localStorage.removeItem("phone");
-          }
+        }
 
     }, []);
 
@@ -95,8 +98,8 @@ const Menu = () => {
         })
     }
 
-    const activeFunction = ()=>{
-      active !=''?setActive(''):setActive('active')
+    const activeFunction = () => {
+        active != '' ? setActive('') : setActive('active')
     }
     return (
         <>
@@ -108,7 +111,7 @@ const Menu = () => {
                     </div>
                     <div className="header_right">
                         <label htmlFor="menuTrigger" className="nav_ico"><i className="fa fa-bars"></i></label>
-                        <input id="menuTrigger" onClick={()=>{activeFunction()}} type="checkbox" name="" />
+                        <input id="menuTrigger" onClick={() => { activeFunction() }} type="checkbox" name="" />
                         <nav id="firstLevelUlMobile" className={`main_nav ${active} `} >
                             <ul className="_firtlevelul">
                                 {
@@ -120,7 +123,7 @@ const Menu = () => {
                                                 {
                                                     item1.product && item1.product.map((value1, key) => (
 
-                                                        <li key={key} ><Link href={'/' + value1.slug + utmData} ><a >{value1.name}</a></Link>
+                                                        <li key={key} ><Link href={'/' + value1.slug + utmData} ><a>{value1.name}</a></Link>
                                                             <i className="fa fa-caret-down"></i>
 
                                                             <ul className="thirdLevelUl">
@@ -138,7 +141,7 @@ const Menu = () => {
                                                 <ul className="thirdLevelUl">
                                                     {
                                                         item1.page && item1.page.map((value1, key) => (
-                                                            <li key={key} ><Link href={'/' + value1.slug + utmData}><a >{value1.name}</a></Link>
+                                                            <li key={key} ><Link href={'/' + value1.slug + utmData}><a>{value1.name}</a></Link>
                                                             </li>
                                                         ))
                                                     }
@@ -146,7 +149,7 @@ const Menu = () => {
                                             </li>
                                     ))
                                 }
-                               
+
                                 <li><Link href="/franchise-investment"><a title="Franchise">Partners</a></Link></li>
                                 <li><Link href="/contact"><a title="Contact">Contact</a></Link></li>
                             </ul>
@@ -172,7 +175,18 @@ const Menu = () => {
                                         <Link href="tel:0124-4847123"><a > <i className="fas fa-phone-square-alt"></i>  0124-4847123</a></Link>
                                     </li>
                                 </ul>
-                                <Link href="/"><a aria-label="Cibil"><Image src="/images/CIBIL Score.gif" alt=""  width="156" height="40" loading='lazy' /></a></Link>
+                                <Link href="/"><a aria-label="Cibil"><Image src="/images/CIBIL Score.gif" alt="" width="156" height="40" loading='lazy' /></a></Link>
+                                {
+                                    getCustomerAccessToken() ?
+
+                                        <>
+                                             <button onClick={logoutUser}><a className="loginBtn">Logout</a></button>
+                                             <button><Link href={'/user-auth'} className="loginBtn">My Account</Link></button>
+                                        </>
+                                       
+                                        :
+                                        <Link href={'/auth'}><a className="loginBtn">Login</a></Link>
+                                }
                             </div>
 
                         </div>

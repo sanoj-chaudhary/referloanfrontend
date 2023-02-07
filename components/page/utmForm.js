@@ -75,9 +75,9 @@ const UtmForm = ({utmData,token,data}) => {
 
   return (
     <form onSubmit={(e) => { e.preventDefault(), handleSubmit() }}>
-      <div className="col-12 mt-2">
+      <div className="input-wrappers mb-3">
 
-        <div className="inputRow">
+        <div className="inputRow mb-2 mt-2">
           <label>Profession Type</label>
           <select className="form-control shadow-none" name="employed_type" aria-label="Type of loan " onChange={handleChange} defaultValue={searchData.employed_type} required>
             <option defaultValue='' value=''>Profession Type </option>
@@ -88,7 +88,7 @@ const UtmForm = ({utmData,token,data}) => {
 
         {
           searchData.employed_type === 'Salaried' &&
-          <div className="inputRow">
+          <div className="inputRow mb-2 mt-2">
             <label>Salary</label>
             <input type="number"
               autoComplete="off"
@@ -104,7 +104,7 @@ const UtmForm = ({utmData,token,data}) => {
         }
         {
           searchData.employed_type === 'Self employed' &&
-          <div className="inputRow">
+          <div className="inputRow mb-2 mt-2">
             <label>Turn Over</label>
             <input type="number"
               autoComplete="off"
@@ -118,7 +118,7 @@ const UtmForm = ({utmData,token,data}) => {
           </div>
         }
 
-        <div className="inputRow">
+        <div className="inputRow mb-2 mt-2">
           <label>Pan Number </label>
           <input type="text"
             autoComplete="off"
@@ -132,7 +132,7 @@ const UtmForm = ({utmData,token,data}) => {
           {touched.pan && errors.pan && <p style={{ color: 'red', fontSize: '12px' }}>{errors.pan}</p>}
         </div>
 
-        <div className="inputRow">
+        <div className="inputRow mb-2 mt-2">
           <label>Pincode</label>
           <input type="number"
           className="form-control shadow-none"

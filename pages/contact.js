@@ -64,19 +64,16 @@ const contact = () => {
                     <div className="contact_map_area">
                         <div className="addressArea">
                             <h2>Our Location</h2>
-                            <p>Address: B-13, 2nd floor, Sector 2, Noida, Uttar Pradesh 201301 Noida, Uttar Pradesh, India
-                                201301</p>
+                            <p>Address: 1/25, Lalita Park, Laxmi Nagar, New Delhi, Delhi 110092 </p>
                         </div>
-                        <div className="mapPnl">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m24!1m12!1m3!1d224366.89525405192!2d77.01768018941108!3d28.517687659492143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m9!3e6!4m3!3m2!1d28.4117876!2d77.0449321!4m3!3m2!1d28.63062!2d77.27507!5e0!3m2!1sen!2sin!4v1662549044069!5m2!1sen!2sin"
-                                width="600"
-                                height="450"
-                                style={{ border: 0 }}
-                                allowFullScreen=""
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade">
+                        <div className="">
+                            <div className="mapouter">
+                                <div className="gmap_canvas">
+                                    <iframe className="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=1118&amp;height=621&amp;hl=en&amp;q=1/25, Lalita Park, Laxmi Nagar, New Delhi, Delhi 110092&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                                    </div></div>
 
-                            </iframe>
+
+
                         </div>
                     </div>
                 </div>
